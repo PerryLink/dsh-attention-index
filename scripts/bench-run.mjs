@@ -202,7 +202,7 @@ async function evaluateCheck(check, context) {
   }
   if (check.kind === 'command-exit-zero') {
     if (context.allowCommands !== true) return { id, pass: false, detail: 'command checks require --allow-commands' }
-    const result = await run('/bin/sh', ['-lc', String(check.command ?? '')], { cwd: context.workspace, env: { HOME: context.home ?? process.env.HOME }, timeoutMs: 120000 })
+    const result = await run('/bin/sh', ['-lc', String(check.command ?? '')], { cwd: context.workspace, env: { HOME: context.home ?? process.env.HOME, DEEPSEEK_API_KEY: '' }, timeoutMs: 120000 })
     return { id, pass: result.code === 0, detail: `command exit ${result.code}` }
   }
   return { id, pass: false, detail: `unknown check kind ${check.kind}` }
