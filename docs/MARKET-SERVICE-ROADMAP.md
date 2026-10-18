@@ -758,19 +758,38 @@ with no value that was already rejected. The order is:
 
 ### 15.4 Match design
 
-- **MVP (P0): explicit brief.** A tool `recommend_plugin(brief | task | surface)`:
-  the agent or user names the brief/task/surface; the tool maps it to a brief and
-  returns the public top-k. No session inference yet.
-- **P1: local projection.** A Host `sessionProjections` unit folds committed
-  events into `{ briefId, surface, confidence, matchedOn[], asOfSeq, ood }`.
-- **Features from DSH events** (verified in `packages/core/session`):
-  `user/message` text; `tool/call.name` (MCP tools are
-  `mcp__<server>__<tool>`, a high-precision signal); `image/offload` (vision);
-  `deliverables/presented` (Office/report); `subagent/*`, `team/*`,
-  `workflow/*` (orchestration); `approval/*`, `permission/preset`,
-  `sandbox/mode` (safety); `compaction/*` (cost/context); `schedule/change`
-  (remote); `model/selection`, `working-directory/change`, `workspace/changes`
-  (dev).
+- **P0: contract, no runtime.** Publish the routing vocabulary
+  (`tasks.json` surfaces + `routing`), `MATCHER-SPEC.md`, conformance fixtures,
+  the recommendation contract and a `signals.json` skeleton. No tool, no UI. An
+  optional read-only `/bench` finder may show the matched surface, evidence
+  status and a link — **no rank, no "recommended", no install**.
+- **P1: measured-gated tool.** `bench_recommend { query?, surface?, limit?,
+  refresh? }` with an explicit query or surface; **no implicit session read**;
+  bundled snapshot first; measured/replicated gate; prior-only surfaces return
+  `recommendable: false` and a labelled candidate list.
+- **P2: session-aware.** A Host Remote `matchSession(sessionId)` plus an opt-in
+  `conversation.session.header.utilities` chip; `pluginMarket` install/compat
+  enrichment; signed snapshots before any install CTA.
+- **Features from DSH events** (P2 session-aware path only; the P1 tool takes an
+  explicit query/surface and must not read the session): `user/message` text
+  (filter `source.kind === 'user'`; synthetic context uses the same event type);
+  `tool/call.name` (MCP tools are `mcp__<server>__<tool>`, a high-precision
+  signal); `image/offload` (vision); `deliverables/presented` (Office/report);
+  `subagent/*`, `team/*`, `workflow/*` (orchestration); `approval/*`,
+  `permission/preset`, `sandbox/mode` (safety); `compaction/*` (cost/context);
+  `schedule/change` (remote); `model/selection`,
+  `working-directory/change`, `workspace/changes` (dev).
+- **Two correctness traps**: under PTC the only native call is `run_code`;
+  sub-calls log as `tool/ptc-dispatch` / `tool/ptc-dispatch-start`, so a matcher
+  reading only `tool/call` is blind. Mid-session cwd changes live in the
+  `workingDirectory` projection, not the session header.
+- **Backfill** for a plugin loaded mid-session or a resumed session:
+  `ctx.sessionQuery.listEvents(id)` / `readSurface(id)` (detached,
+  replay-validated). Do not build on deprecated event helpers.
+- **Do not put raw matcher features in a session projection.** The base profile
+  mounts `session-projection-cache`, which persists every unit's state; there is
+  no per-unit opt-out. Use an in-memory Host service. A projection is acceptable
+  only for a text-free client label, with the persistence documented.
 - **Match the current turn**; if under-determined, the last 3 user turns. Never
   the whole session: a memory task from hour 1 would dominate the rest.
 - **Never use the installed plugin set to route.** That closes a self-fulfilling
@@ -783,16 +802,46 @@ with no value that was already rejected. The order is:
   memory+research gets `memory/recall` and `research/sources`, not a blended
   score. If the two are co-required and no composite brief exists, say "no bench
   for this combination".
-- **State contains only the label, confidence and a short reason** — never raw
-  user text. Local, no upload, no checkpoint of prompts.
-- **DSH primitives**: `sessionProjections` with a `wire` view for the client; or
-  `ctx.sessionQuery.readSurface(sessionId)` for the current model-facing history.
-- **Abstain** when confidence is low, when briefs tie, or when the session spans
-  multiple briefs. Show "not sure — pick a brief" rather than a wrong answer.
+- **Abstain reasons are explicit**: `insufficient` (raw score below threshold),
+  `ambiguous` (margin too small; offer a choice), `not-applicable` (subagent or
+  no human prompt yet), `dismissed`, `registry-stale` (>7 days),
+  `no-measured`, `no-independent-coverage` (surface is operator-dominated),
+  `unavailable` (installed/incompatible/inactive).
+- **Neutrality gate**: while a surface is operator-dominated (operator share
+  >25%, external share <60%, or an operator-owned `#1`), do not name a plugin;
+  abstain with `no-independent-coverage` and show why.
 - **User override** always wins; remember it only for the session.
 - **Meaningfulness preconditions**: same instance for every compared plugin; the
   matched job is covered by the bank (`ood: false`); environment applicable;
   cohort ≥ 2.
+
+**Privacy rules (hard):**
+
+- **No raw text in any persisted state.** Use an in-memory Host service; do not
+  put features in a `sessionProjections` unit. The base profile's
+  `session-projection-cache` persists every unit, with no per-unit opt-out.
+- **No arbitrary `sessionId` tool argument.** The matcher reads only the current
+  session, and only aggregate features; a model must not be able to read another
+  live session's text.
+- **Do not write recommendation content into session-visible events or tool
+  results** that `session-log-deepseek` may upload. Keep `/bench` output local;
+  scope the "no upload" claim to the matcher, not to the whole session.
+- **No credits, boost, or exploration in the recommendation path.** Credits are
+  reputation only; they cannot buy a slot, a rank, or a boost.
+- **No unkeyed hashes of text or session ids.** A SHA-256 of a prompt is
+  confirmable by anyone holding a candidate text, and a stable session hash links
+  a user's submissions across time. Use an ephemeral local nonce if dedupe is
+  needed; never publish the hash.
+- **Scope the no-upload claim honestly.** The recommender adds zero egress and
+  zero persistence; the host's existing session-log upload
+  (`session-log-deepseek`) is unchanged. UI copy must not imply "nothing leaves
+  your device".
+- **First-use disclosure + disable switch.** In-memory matching needs no consent
+  gate, but it needs a clear first-use card (what is read, what is not, what is
+  stored: nothing) and a persistent off switch. Any donation/export is a separate,
+  per-action, previewable, revocable decision.
+- **No telemetry.** Add a CI dependency check that the plugin graph never reaches
+  `dsh-telemetry*`.
 
 ### 15.5 Recommendation policy
 
@@ -861,7 +910,8 @@ install-count ranking, no operator self-promotion.
 
 | State | Claim | Rank? | Prior rows? | Line |
 |---|---|---|---|---|
-| 0 measured, prior exists | `no-outcome-evidence` | **no** | max 3, labelled | "No paired bench for this job yet. Prior evidence only — not an outcome claim." |
+| 0 measured, prior exists, neutrality gate passes | `no-outcome-evidence` | **no** | max 3, labelled | "No paired bench for this job yet. Prior evidence only — not an outcome claim." |
+| 0 measured, operator-dominated surface | `no-independent-coverage` | no | no | "No independent coverage for this surface yet." |
 | 0 measured, no prior | `no-evidence` | no | no | "Nothing known for this capability." |
 | no brief matched / below τ | none | no | no | "This session doesn't match a benched job." |
 
@@ -910,28 +960,66 @@ tuple. Therefore:
 
 ### 15.8 Repo ownership
 
-- `dsh-attention-index`: bench data, scoring, `signals.json`, surface taxonomy,
-  ranking policy.
-- `dsh-community-bench`: the in-app reference consumer; add the host-side
-  `recommend_plugin` tool and (later) the local projection matcher. Do not add a
-  second scoring path.
-- `dsh-score`: local prior inspector; not part of the recommendation path.
-- `dsh-recommend` (external): can consume the sidecar feed; not the session
-  matcher.
+- `dsh-attention-index`: owns the **routing vocabulary, policy, version-bound
+  signals, format-1 decoration, schemas and conformance fixtures**. It never reads
+  sessions or queries; it never logs recommendations.
+- `dsh-community-bench`: owns the **local matcher, feed reader, recommendation
+  record, `bench_recommend` tool, tab and (P2) session chip**. It never computes
+  prior/bench/score or reorders candidates by its own weights.
+- `dsh-score`: local prior inspector; **no matching code**, not a data source for
+  the recommender.
+- `dsh-recommend` (external): consume the sidecar feed; keep its global ranking;
+  do not merge scores.
 
-If the matcher grows beyond a small host service, split it into a separate
-`dsh-bench-recommend` package rather than turning the tab into a monolith.
+**Do not create `dsh-bench-recommend`.** Extend `dsh-community-bench` with a host
+half (`index.js` is currently an empty host stub). One plugin, one snapshot, one
+privacy review. Split later only if a headless/no-client consumer or a second app
+needs the matcher; then extract a **`dsh-bench-match` library**, not a second
+end-user plugin.
 
 ### 15.9 P0/P1/P2
 
-- **P0**: `recommend_plugin(surface)` over the public signals; explicit surface;
-  no auto-match; no persistence; returns top-k + evidence + install target;
-  abstains if no measured.
-- **P1**: local projection matcher with confidence/abstention; user override;
-  optional composer dock; offline cache of the last signed snapshot; matcher
-  evaluation on synthetic/consented sessions.
-- **P2**: proactive dock suggestions, market-side surface filter, cross-surface
-  sessions, local-only evaluation dashboard.
+**P0 — contract and public data; no recommender (2–3 weeks).**
+
+- `routing` in `tasks.json` surfaces + schema: `terms[{id,text,strength}]`,
+  `negativeTerms[]`, `examples[]`; every surface ≥6 terms, ≥2 negative, ≥1
+  example.
+- `signals.json` skeleton with `version` + `environment` **inside each surface
+  signal**; `recommendation-policy` (`requireMeasured: true`, `maxCandidates: 3`,
+  `maxStalenessDays`).
+- `MATCHER-SPEC.md`, `RECOMMENDATION-CONTRACT.md`,
+  `fixtures/routing/conformance.json` (≥20 EN/ZH/ambiguous/no-match cases).
+- No tool, no UI, no session read. An optional read-only `/bench` finder may show
+  the surface, evidence status and a link — no rank, no "recommended", no install.
+- Acceptance: the current registry yields `recommendable: false` for all 15
+  surfaces; no public artifact contains session data; no "best"/"recommended"
+  label; no install CTA.
+
+**P1 — measured-gated recommender v1 (4–8 weeks after ≥1 measured surface).**
+
+- Host `src/feed.js` (bundled/live/signed, cache, fallback), `src/match.js`
+  (spec), `src/recommend.js` (hard floor), `bench_recommend` tool (explicit
+  `query`/`surface`; no implicit session read; no install).
+- Router evaluated on D1 (180–300 synthetic) + D1-adv (60 adversarial) with
+  conformal abstention (α = 0.1); top-1 ≥ 0.85, abstention ≤ 20%, injection
+  invariance 100%, determinism 100%.
+- Display public order byte-for-byte; no local weights; no credits/boost; no
+  telemetry.
+- Acceptance: prior-only surface `recommendable: false`; measured surface top row
+  = public top; stale/malformed feed → `unavailable`; egress test allows only GET
+  to the feed host; no raw query/session text in output; no `sessionId` arg.
+
+**P2 — session-aware and market-integrated (3–6 months).**
+
+- Host Remote `matchSession(sessionId)` + opt-in
+  `conversation.session.header.utilities` chip; no background scan; clears on
+  session switch; opt-in default off.
+- `pluginMarket` install/compat enrichment; install target = measured version; no
+  CTA when the default version ≠ measured; signed snapshot before any CTA.
+- D2 consented corpus (30–100) + D3 private holdout; formative user study;
+  simulated exposure audit.
+- Acceptance: chip only on click; network/logs contain no session text; signature
+  verified; chip hidden until ≥3 measured surfaces.
 
 ### 15.10 Failure modes
 
@@ -945,10 +1033,14 @@ If the matcher grows beyond a small host service, split it into a separate
 | Privacy leak | No raw text in projection state; no upload; no telemetry; local-only evaluation |
 | Gaming the matcher | Match on session/task features, not plugin descriptions; measured evidence controls ranking |
 | Stale recommendation | `expiresAt`/`stale` flags; signed snapshot; offline fallback labelled |
+| **Reusing the old `/home/yy/attention-bench` ranker** | It computes `organic = match^0.65 × credit^0.55 × confidence × exploration` and sorts locally; it persists 4,000 chars of user text through a projection; it accepts an arbitrary `sessionId`; credits can boost. **Do not reuse it.** The router emits a surface/brief id only; no local score; no text in a projection; no `sessionId`; no boost. |
+| Tool-name steering | A plugin registers `memory_*` / `search_*` tools to bias routing. Ignore plugin-registered tool names; allowlist built-in tools only; drop tool hints if necessary. |
+| Recommendation content uploaded | Tool results containing the route/score join the session log that `session-log-deepseek` uploads. Write no recommendation content to the log; keep `/bench` output local; scope the claim. |
+| Credits buy attention | Remove `boost`/sponsor/credit balances from the recommendation path; credits are reputation only. |
 
 ## 16. Decisions to make
 
-The research leaves five choices. Recommended answers:
+The research leaves six choices. Recommended answers:
 
 1. **Brief as the public claim unit, surface as browse category.** Yes. A surface
    mixes heterogeneous jobs (memory recall vs memory hygiene vs memory cost); a
@@ -967,10 +1059,14 @@ The research leaves five choices. Recommended answers:
    claim needs roughly 2,000 runs/plugin-brief; do not chase that everywhere.
    Target 3–5 briefs with credible measured results; leave the rest labelled
    `no-outcome-evidence`. Ten credible measured plugins beat 97 noisy ones.
-5. **Router: local-only, in the app.** Yes. A Host `sessionProjections` unit plus
-   a tool; no server, no session upload, no telemetry. The recommendation is a
-   pure projection of the public `bench-index`; the router outputs a brief id,
-   never a score.
+5. **Router: local-only, on-demand Host service.** Yes. No background scan, no
+   projection for raw features (the base profile persists every projection), no
+   server. `/bench` finder in P0; `bench_recommend` with an explicit
+   `query`/`surface` in P1; session-aware chip in P2. The router outputs a brief
+   id, never a score.
+6. **No fourth repo.** Extend `dsh-community-bench` with a host half; extract a
+   `dsh-bench-match` library only if a headless or second consumer appears. One
+   plugin, one snapshot, one privacy review.
 
 Two consequences:
 
@@ -1046,7 +1142,16 @@ Decoration rules:
       ],
       "surfaces": [
         {
-          "id": "memory",
+          "id": "memory/recall",
+          "surface": "memory",
+          "version": "1.4.0",
+          "engines": { "dsh": ">=0.2.0 <0.3.0" },
+          "environment": {
+            "model": "deepseek-flash",
+            "dsh": "0.2.1-rc.2",
+            "os": "linux",
+            "runner": "github:perrylink-runner-1"
+          },
           "tier": "measured",
           "provisional": false,
           "quality": 82.4,
