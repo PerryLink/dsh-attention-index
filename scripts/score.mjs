@@ -252,12 +252,15 @@ export function aggregateBench(results, tasks, options = {}) {
     const surface = aggregate.tasks[0]?.surface
     const surfaceTasks = tasks.filter(task => task.surface === surface).length
     const coverage = surfaceTasks > 0 ? Math.min(1, aggregate.tasks.length / surfaceTasks) : 0
+    const taskReviewed = aggregate.tasks.length > 0
+      && aggregate.tasks.every(row => taskById.get(row.taskId)?.reviewed === true)
     output.set(pluginId, {
       benchScore: benchScore === null ? null : round(benchScore, 1),
       coverage: round(coverage, 3),
       coverageScore: round(coverage * 100, 1),
       runners: aggregate.runners.size,
       runs: aggregate.runs,
+      taskReviewed,
       tasks: aggregate.tasks.sort((left, right) => left.taskId.localeCompare(right.taskId)),
     })
   }
@@ -513,6 +516,7 @@ export function scorePlugin(plugin, bench, contribution, today) {
     selfRun: false,
     versionMatch: 'unknown',
     holdout: false,
+    taskReviewed: bench?.taskReviewed === true,
     evidence: {
       installs: plugin.evidence?.installs ?? null,
       npm7d: plugin.evidence?.npm7d ?? null,
@@ -566,6 +570,7 @@ export function publicEntry(entry) {
     unrated: entry.unrated,
     operatorOwned: entry.operatorOwned,
     missing: entry.missing,
+    taskReviewed: entry.taskReviewed,
     discovery: entry.discovery,
     discoveryPosition: entry.discoveryPosition ?? null,
     runners: entry.runners,

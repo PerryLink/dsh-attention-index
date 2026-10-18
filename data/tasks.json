@@ -593,6 +593,672 @@
       "model": "deepseek-flash",
       "harness": "0.2.1-rc.2",
       "status": "draft"
+    },
+    {
+      "id": "p1-memory-deploy",
+      "surface": "memory",
+      "brief": "memory",
+      "title": "Recall the deploy target from workspace notes",
+      "intent": "Read a local convention note and answer with the exact deploy target.",
+      "prompt": "Read notes.md in the current workspace. What is the deploy target? Answer with the exact value only, and do not ask a clarifying question.",
+      "checks": [
+        {
+          "id": "answer",
+          "kind": "answer-contains",
+          "value": "staging-eu",
+          "description": "Final answer contains \"staging-eu\""
+        },
+        {
+          "id": "no-question",
+          "kind": "no-clarifying-question",
+          "description": "Agent does not end with a clarifying question"
+        }
+      ],
+      "status": "pilot",
+      "reviewed": false,
+      "model": "deepseek-flash",
+      "harness": "0.2.1-rc.2",
+      "weight": 1
+    },
+    {
+      "id": "p1-memory-freeze",
+      "surface": "memory",
+      "brief": "memory",
+      "title": "Recall the freeze window",
+      "intent": "Answer a date/time fact from a local note.",
+      "prompt": "Read notes.md in the current workspace. When is the freeze window? Answer with the exact text, and do not ask a clarifying question.",
+      "checks": [
+        {
+          "id": "answer",
+          "kind": "answer-contains",
+          "value": "Friday 18:00 UTC",
+          "description": "Final answer contains \"Friday 18:00 UTC\""
+        },
+        {
+          "id": "no-question",
+          "kind": "no-clarifying-question",
+          "description": "Agent does not end with a clarifying question"
+        }
+      ],
+      "status": "pilot",
+      "reviewed": false,
+      "model": "deepseek-flash",
+      "harness": "0.2.1-rc.2",
+      "weight": 1
+    },
+    {
+      "id": "p1-memory-api",
+      "surface": "memory",
+      "brief": "memory",
+      "title": "Recall the API base URL",
+      "intent": "Answer with an exact URL from a local note.",
+      "prompt": "Read notes.md in the current workspace. What is the API base URL? Answer with the exact URL only.",
+      "checks": [
+        {
+          "id": "answer",
+          "kind": "answer-contains",
+          "value": "https://api.example.test/v2",
+          "description": "Final answer contains \"https://api.example.test/v2\""
+        },
+        {
+          "id": "no-question",
+          "kind": "no-clarifying-question",
+          "description": "Agent does not end with a clarifying question"
+        }
+      ],
+      "status": "pilot",
+      "reviewed": false,
+      "model": "deepseek-flash",
+      "harness": "0.2.1-rc.2",
+      "weight": 1
+    },
+    {
+      "id": "p1-memory-owner",
+      "surface": "memory",
+      "brief": "memory",
+      "title": "Recall the service owner",
+      "intent": "Answer with a person name from a local note.",
+      "prompt": "Read notes.md in the current workspace. Who owns the service? Answer with the exact name only.",
+      "checks": [
+        {
+          "id": "answer",
+          "kind": "answer-contains",
+          "value": "Dana",
+          "description": "Final answer contains \"Dana\""
+        },
+        {
+          "id": "no-question",
+          "kind": "no-clarifying-question",
+          "description": "Agent does not end with a clarifying question"
+        }
+      ],
+      "status": "pilot",
+      "reviewed": false,
+      "model": "deepseek-flash",
+      "harness": "0.2.1-rc.2",
+      "weight": 1
+    },
+    {
+      "id": "p1-memory-cutoff",
+      "surface": "memory",
+      "brief": "memory",
+      "title": "Recall the migration cutoff",
+      "intent": "Answer with an ISO date from a local note.",
+      "prompt": "Read notes.md in the current workspace. What is the migration cutoff? Answer with the ISO date only.",
+      "checks": [
+        {
+          "id": "answer",
+          "kind": "answer-contains",
+          "value": "2026-11-03",
+          "description": "Final answer contains \"2026-11-03\""
+        },
+        {
+          "id": "no-question",
+          "kind": "no-clarifying-question",
+          "description": "Agent does not end with a clarifying question"
+        }
+      ],
+      "status": "pilot",
+      "reviewed": false,
+      "model": "deepseek-flash",
+      "harness": "0.2.1-rc.2",
+      "weight": 1
+    },
+    {
+      "id": "p1-memory-ttl",
+      "surface": "memory",
+      "brief": "memory",
+      "title": "Recall the cache TTL",
+      "intent": "Answer with a number in seconds from a local note.",
+      "prompt": "Read notes.md in the current workspace. What is the cache TTL in seconds? Answer with the number only.",
+      "checks": [
+        {
+          "id": "answer",
+          "kind": "answer-contains",
+          "value": "900",
+          "description": "Final answer contains \"900\""
+        },
+        {
+          "id": "no-question",
+          "kind": "no-clarifying-question",
+          "description": "Agent does not end with a clarifying question"
+        }
+      ],
+      "status": "pilot",
+      "reviewed": false,
+      "model": "deepseek-flash",
+      "harness": "0.2.1-rc.2",
+      "weight": 1
+    },
+    {
+      "id": "p1-web-version",
+      "surface": "web",
+      "brief": "web",
+      "title": "Extract the release version from a page snapshot",
+      "intent": "Read a local HTML snapshot and return one exact field.",
+      "prompt": "Read page.html in the current workspace. What version shipped? Answer with the exact version only.",
+      "checks": [
+        {
+          "id": "answer",
+          "kind": "answer-contains",
+          "value": "4.2.0",
+          "description": "Final answer contains \"4.2.0\""
+        },
+        {
+          "id": "no-question",
+          "kind": "no-clarifying-question",
+          "description": "Agent does not end with a clarifying question"
+        }
+      ],
+      "status": "pilot",
+      "reviewed": false,
+      "model": "deepseek-flash",
+      "harness": "0.2.1-rc.2",
+      "weight": 1
+    },
+    {
+      "id": "p1-web-date",
+      "surface": "web",
+      "brief": "web",
+      "title": "Extract the release date",
+      "intent": "Read a local HTML snapshot and return the ISO date.",
+      "prompt": "Read page.html in the current workspace. What date did the release ship? Answer with the ISO date only.",
+      "checks": [
+        {
+          "id": "answer",
+          "kind": "answer-contains",
+          "value": "2026-09-14",
+          "description": "Final answer contains \"2026-09-14\""
+        },
+        {
+          "id": "no-question",
+          "kind": "no-clarifying-question",
+          "description": "Agent does not end with a clarifying question"
+        }
+      ],
+      "status": "pilot",
+      "reviewed": false,
+      "model": "deepseek-flash",
+      "harness": "0.2.1-rc.2",
+      "weight": 1
+    },
+    {
+      "id": "p1-web-breaking",
+      "surface": "web",
+      "brief": "web",
+      "title": "Identify the breaking-change field",
+      "intent": "Extract the exact code identifier named in a page snapshot.",
+      "prompt": "Read page.html in the current workspace. Which code field is the breaking change? Answer with the exact identifier only.",
+      "checks": [
+        {
+          "id": "answer",
+          "kind": "answer-contains",
+          "value": "client.timeout",
+          "description": "Final answer contains \"client.timeout\""
+        },
+        {
+          "id": "no-question",
+          "kind": "no-clarifying-question",
+          "description": "Agent does not end with a clarifying question"
+        }
+      ],
+      "status": "pilot",
+      "reviewed": false,
+      "model": "deepseek-flash",
+      "harness": "0.2.1-rc.2",
+      "weight": 1
+    },
+    {
+      "id": "p1-web-default",
+      "surface": "web",
+      "brief": "web",
+      "title": "Extract the new default timeout",
+      "intent": "Extract a value and its unit from a page snapshot.",
+      "prompt": "Read page.html in the current workspace. What is the new default timeout? Include the unit, and answer with the value only.",
+      "checks": [
+        {
+          "id": "answer",
+          "kind": "answer-contains",
+          "value": "30s",
+          "description": "Final answer contains \"30s\""
+        },
+        {
+          "id": "no-question",
+          "kind": "no-clarifying-question",
+          "description": "Agent does not end with a clarifying question"
+        }
+      ],
+      "status": "pilot",
+      "reviewed": false,
+      "model": "deepseek-flash",
+      "harness": "0.2.1-rc.2",
+      "weight": 1
+    },
+    {
+      "id": "p1-web-price",
+      "surface": "web",
+      "brief": "web",
+      "title": "Extract a table price",
+      "intent": "Read a small HTML table and return one exact price.",
+      "prompt": "Read page.html in the current workspace. What is the Pro plan price? Answer with the exact price only.",
+      "checks": [
+        {
+          "id": "answer",
+          "kind": "answer-contains",
+          "value": "$29",
+          "description": "Final answer contains \"$29\""
+        },
+        {
+          "id": "no-question",
+          "kind": "no-clarifying-question",
+          "description": "Agent does not end with a clarifying question"
+        }
+      ],
+      "status": "pilot",
+      "reviewed": false,
+      "model": "deepseek-flash",
+      "harness": "0.2.1-rc.2",
+      "weight": 1
+    },
+    {
+      "id": "p1-web-issue",
+      "surface": "web",
+      "brief": "web",
+      "title": "Extract the known issue",
+      "intent": "Return an exact phrase from a page snapshot.",
+      "prompt": "Read page.html in the current workspace. What known issue is listed? Quote the exact phrase only.",
+      "checks": [
+        {
+          "id": "answer",
+          "kind": "answer-contains",
+          "value": "proxy retries are disabled",
+          "description": "Final answer contains \"proxy retries are disabled\""
+        },
+        {
+          "id": "no-question",
+          "kind": "no-clarifying-question",
+          "description": "Agent does not end with a clarifying question"
+        }
+      ],
+      "status": "pilot",
+      "reviewed": false,
+      "model": "deepseek-flash",
+      "harness": "0.2.1-rc.2",
+      "weight": 1
+    },
+    {
+      "id": "p1-dev-add",
+      "surface": "dev",
+      "brief": "dev",
+      "title": "Fix an addition bug",
+      "intent": "Repair a small JavaScript function and pass a local test.",
+      "prompt": "Fix bug.js in the current workspace so `node test.js` passes. Keep the exported function name. Do not ask a clarifying question.",
+      "checks": [
+        {
+          "id": "test",
+          "kind": "command-exit-zero",
+          "command": "node test.js",
+          "description": "node test.js exits 0"
+        },
+        {
+          "id": "add",
+          "kind": "file-contains",
+          "path": "bug.js",
+          "value": "a + b",
+          "description": "bug.js adds instead of subtracts"
+        }
+      ],
+      "status": "pilot",
+      "reviewed": false,
+      "model": "deepseek-flash",
+      "harness": "0.2.1-rc.2",
+      "weight": 1
+    },
+    {
+      "id": "p1-dev-config",
+      "surface": "dev",
+      "brief": "dev",
+      "title": "Bump a version in JSON",
+      "intent": "Edit a JSON config without breaking its syntax.",
+      "prompt": "In config.json in the current workspace, change the version to 2.0.0. Keep the file valid JSON.",
+      "checks": [
+        {
+          "id": "version",
+          "kind": "file-contains",
+          "path": "config.json",
+          "value": "\"2.0.0\"",
+          "description": "config.json contains version 2.0.0"
+        }
+      ],
+      "status": "pilot",
+      "reviewed": false,
+      "model": "deepseek-flash",
+      "harness": "0.2.1-rc.2",
+      "weight": 1
+    },
+    {
+      "id": "p1-dev-test",
+      "surface": "dev",
+      "brief": "dev",
+      "title": "Add a regression test and fix the bug",
+      "intent": "Create a runnable test that demonstrates the fix.",
+      "prompt": "Fix sum.js in the current workspace and add sum.test.js using node:assert that runs with `node sum.test.js`. Do not ask a clarifying question.",
+      "checks": [
+        {
+          "id": "test-exists",
+          "kind": "file-exists",
+          "path": "sum.test.js",
+          "description": "sum.test.js exists"
+        },
+        {
+          "id": "test",
+          "kind": "command-exit-zero",
+          "command": "node sum.test.js",
+          "description": "node sum.test.js exits 0"
+        },
+        {
+          "id": "sum",
+          "kind": "file-contains",
+          "path": "sum.js",
+          "value": "a + b",
+          "description": "sum.js adds"
+        }
+      ],
+      "status": "pilot",
+      "reviewed": false,
+      "model": "deepseek-flash",
+      "harness": "0.2.1-rc.2",
+      "weight": 1
+    },
+    {
+      "id": "p1-dev-readme",
+      "surface": "dev",
+      "brief": "dev",
+      "title": "Add a usage section",
+      "intent": "Document a command without inventing a different CLI.",
+      "prompt": "In README.md in the current workspace, add a \"## Usage\" section that contains the exact command `node tool.js`. Keep the existing title.",
+      "checks": [
+        {
+          "id": "usage",
+          "kind": "file-contains",
+          "path": "README.md",
+          "value": "## Usage",
+          "description": "README has a Usage section"
+        },
+        {
+          "id": "command",
+          "kind": "file-contains",
+          "path": "README.md",
+          "value": "node tool.js",
+          "description": "README names the command"
+        }
+      ],
+      "status": "pilot",
+      "reviewed": false,
+      "model": "deepseek-flash",
+      "harness": "0.2.1-rc.2",
+      "weight": 1
+    },
+    {
+      "id": "p1-dev-eval",
+      "surface": "dev",
+      "brief": "dev",
+      "title": "Replace eval with JSON.parse",
+      "intent": "Remove an unsafe eval from a small server handler.",
+      "prompt": "In server.js in the current workspace, replace eval(input) with JSON.parse(input). Do not leave an eval call.",
+      "checks": [
+        {
+          "id": "parse",
+          "kind": "file-contains",
+          "path": "server.js",
+          "value": "JSON.parse(input)",
+          "description": "server.js uses JSON.parse(input)"
+        },
+        {
+          "id": "no-eval",
+          "kind": "file-not-contains",
+          "path": "server.js",
+          "value": "eval(",
+          "description": "server.js has no eval("
+        }
+      ],
+      "status": "pilot",
+      "reviewed": false,
+      "model": "deepseek-flash",
+      "harness": "0.2.1-rc.2",
+      "weight": 1
+    },
+    {
+      "id": "p1-dev-package",
+      "surface": "dev",
+      "brief": "dev",
+      "title": "Declare an ES module package",
+      "intent": "Add the module type to a package manifest.",
+      "prompt": "In package.json in the current workspace, add \"type\": \"module\". Keep the JSON valid.",
+      "checks": [
+        {
+          "id": "type",
+          "kind": "file-contains",
+          "path": "package.json",
+          "value": "\"type\": \"module\"",
+          "description": "package.json declares type module"
+        }
+      ],
+      "status": "pilot",
+      "reviewed": false,
+      "model": "deepseek-flash",
+      "harness": "0.2.1-rc.2",
+      "weight": 1
+    },
+    {
+      "id": "p1-memory-recency",
+      "surface": "memory",
+      "brief": "memory",
+      "title": "Prefer the most recent note",
+      "intent": "Resolve a stale value against a dated update.",
+      "prompt": "Read notes-recency.md in the current workspace. What is the current cache TTL in seconds? Use the most recent note and answer with the number only.",
+      "checks": [
+        {
+          "id": "answer",
+          "kind": "answer-contains",
+          "value": "1200",
+          "description": "Final answer contains \"1200\""
+        },
+        {
+          "id": "no-question",
+          "kind": "no-clarifying-question",
+          "description": "Agent does not end with a clarifying question"
+        }
+      ],
+      "status": "pilot",
+      "reviewed": false,
+      "model": "deepseek-flash",
+      "harness": "0.2.1-rc.2",
+      "weight": 1
+    },
+    {
+      "id": "p1-memory-provenance",
+      "surface": "memory",
+      "brief": "memory",
+      "title": "Name the source of a fact",
+      "intent": "Return the provenance attached to a local fact.",
+      "prompt": "Read notes-source.md in the current workspace. What source is cited for the deploy target? Answer with the source name only.",
+      "checks": [
+        {
+          "id": "answer",
+          "kind": "answer-contains",
+          "value": "runbook",
+          "description": "Final answer contains \"runbook\""
+        },
+        {
+          "id": "no-question",
+          "kind": "no-clarifying-question",
+          "description": "Agent does not end with a clarifying question"
+        }
+      ],
+      "status": "pilot",
+      "reviewed": false,
+      "model": "deepseek-flash",
+      "harness": "0.2.1-rc.2",
+      "weight": 1
+    },
+    {
+      "id": "p1-web-author",
+      "surface": "web",
+      "brief": "web",
+      "title": "Extract the page author",
+      "intent": "Read a meta tag from a local snapshot.",
+      "prompt": "Read page-author.html in the current workspace. Who is the author? Answer with the exact author name only.",
+      "checks": [
+        {
+          "id": "answer",
+          "kind": "answer-contains",
+          "value": "Atlas Team",
+          "description": "Final answer contains \"Atlas Team\""
+        },
+        {
+          "id": "no-question",
+          "kind": "no-clarifying-question",
+          "description": "Agent does not end with a clarifying question"
+        }
+      ],
+      "status": "pilot",
+      "reviewed": false,
+      "model": "deepseek-flash",
+      "harness": "0.2.1-rc.2",
+      "weight": 1
+    },
+    {
+      "id": "p1-web-updated",
+      "surface": "web",
+      "brief": "web",
+      "title": "Extract the updated date",
+      "intent": "Read a time element from a local snapshot.",
+      "prompt": "Read page-updated.html in the current workspace. What date was the page updated? Answer with the ISO date only.",
+      "checks": [
+        {
+          "id": "answer",
+          "kind": "answer-contains",
+          "value": "2026-10-01",
+          "description": "Final answer contains \"2026-10-01\""
+        },
+        {
+          "id": "no-question",
+          "kind": "no-clarifying-question",
+          "description": "Agent does not end with a clarifying question"
+        }
+      ],
+      "status": "pilot",
+      "reviewed": false,
+      "model": "deepseek-flash",
+      "harness": "0.2.1-rc.2",
+      "weight": 1
+    },
+    {
+      "id": "p1-dev-json",
+      "surface": "dev",
+      "brief": "dev",
+      "title": "Repair invalid JSON",
+      "intent": "Remove a trailing comma and keep the data intact.",
+      "prompt": "In data.json in the current workspace, remove the trailing comma so the file is valid JSON. Keep the key and value.",
+      "checks": [
+        {
+          "id": "valid",
+          "kind": "command-exit-zero",
+          "command": "node -e \"JSON.parse(require('fs').readFileSync('data.json','utf8'))\"",
+          "description": "data.json parses"
+        },
+        {
+          "id": "comma",
+          "kind": "file-not-contains",
+          "path": "data.json",
+          "value": ",}",
+          "description": "no trailing comma"
+        }
+      ],
+      "status": "pilot",
+      "reviewed": false,
+      "model": "deepseek-flash",
+      "harness": "0.2.1-rc.2",
+      "weight": 1
+    },
+    {
+      "id": "p1-dev-import",
+      "surface": "dev",
+      "brief": "dev",
+      "title": "Fix an import path",
+      "intent": "Point an import at the existing module file.",
+      "prompt": "In main.js in the current workspace, fix the import so it points to utils.js. Keep the exported function.",
+      "checks": [
+        {
+          "id": "import",
+          "kind": "file-contains",
+          "path": "main.js",
+          "value": "./utils.js",
+          "description": "main.js imports utils.js"
+        }
+      ],
+      "status": "pilot",
+      "reviewed": false,
+      "model": "deepseek-flash",
+      "harness": "0.2.1-rc.2",
+      "weight": 1
     }
-  ]
+  ],
+  "pilotPack": {
+    "id": "p1-pilot-1",
+    "status": "unreviewed",
+    "briefs": [
+      "memory",
+      "web",
+      "dev"
+    ],
+    "tasks": [
+      "p1-memory-deploy",
+      "p1-memory-freeze",
+      "p1-memory-api",
+      "p1-memory-owner",
+      "p1-memory-cutoff",
+      "p1-memory-ttl",
+      "p1-web-version",
+      "p1-web-date",
+      "p1-web-breaking",
+      "p1-web-default",
+      "p1-web-price",
+      "p1-web-issue",
+      "p1-dev-add",
+      "p1-dev-config",
+      "p1-dev-test",
+      "p1-dev-readme",
+      "p1-dev-eval",
+      "p1-dev-package",
+      "p1-memory-recency",
+      "p1-memory-provenance",
+      "p1-web-author",
+      "p1-web-updated",
+      "p1-dev-json",
+      "p1-dev-import"
+    ],
+    "note": "Executable offline pilot tasks. E2 provisional at most until independent review and pre-registration."
+  }
 }

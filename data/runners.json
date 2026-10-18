@@ -1,0 +1,5 @@
+{
+  "schema": "dsh-attention/runners/v1",
+  "note": "Public Ed25519 keys for signed bench results. A key is added only after the runner is named and the private key stays outside this repository.",
+  "runners": []
+}

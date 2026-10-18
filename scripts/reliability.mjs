@@ -90,6 +90,7 @@ function measuredSoe(entry, missing, operatorOwned) {
   if (!entry.signatureVerified) notes.push('signature-unverified')
   if (entry.selfRun) notes.push('self-run')
   if (entry.versionMatch !== 'exact') notes.push('version-mismatch')
+  if (!entry.taskReviewed) notes.push('task-unreviewed')
 
   return {
     design: dim(taskCount >= 8 ? 4 : taskCount >= 5 ? 3 : taskCount >= 3 ? 2 : taskCount >= 1 ? 1 : 0),
@@ -102,7 +103,7 @@ function measuredSoe(entry, missing, operatorOwned) {
 }
 
 /** Ordinal grade from SOE and bias checks. */
-function gradeFromSoe(soe, { measured, operatorOwned, missing }) {
+function gradeFromSoe(soe, { measured, operatorOwned, missing, taskReviewed, audited, environmentBound }) {
   if (!measured) {
     return {
       grade: 'E0',
@@ -119,11 +120,11 @@ function gradeFromSoe(soe, { measured, operatorOwned, missing }) {
 
   const floor = Math.min(soe.design, soe.execution, soe.precision, soe.independence, soe.directness)
   let grade = 'E2'
-  if (soe.independence >= 4 && soe.design >= 4 && soe.precision >= 3 && floor >= 3) grade = 'E5'
+  if (audited && soe.independence >= 4 && soe.design >= 4 && soe.precision >= 3 && floor >= 3) grade = 'E5'
   else if (soe.independence >= 3 && soe.design >= 4 && floor >= 3) grade = 'E4'
   else if (soe.independence >= 2 && soe.design >= 3 && soe.precision >= 2) grade = 'E3'
 
-  const certainty = floor >= 4 ? 'high' : floor >= 3 ? 'moderate' : floor >= 2 ? 'low' : 'very-low'
+  let certainty = floor >= 4 ? 'high' : floor >= 3 ? 'moderate' : floor >= 2 ? 'low' : 'very-low'
   const downgrades = []
   if (operatorOwned) downgrades.push('operator-owned')
   if (missingChannels(missing) > 0) downgrades.push('missing-adoption-channels')
@@ -131,8 +132,25 @@ function gradeFromSoe(soe, { measured, operatorOwned, missing }) {
   if (soe.independence < 3) downgrades.push('single-or-self-run')
   if (soe.precision < 2) downgrades.push('small-sample')
   if (soe.directness < 3) downgrades.push('version-or-environment-mismatch')
+  if (taskReviewed && !audited && grade === 'E5') downgrades.push('audit-missing')
+  if (!taskReviewed) {
+    grade = 'E2'
+    certainty = certainty === 'very-low' ? 'very-low' : 'low'
+    downgrades.push('task-unreviewed')
+  }
+  if (!environmentBound) {
+    grade = 'E2'
+    certainty = certainty === 'very-low' ? 'very-low' : 'low'
+    downgrades.push('sandbox-missing')
+  }
 
-  return { grade, certainty, positive: false, reasons: ['paired-result'], downgrades }
+  return {
+    grade,
+    certainty,
+    positive: false,
+    reasons: taskReviewed ? ['paired-result'] : ['paired-result', 'task-unreviewed'],
+    downgrades,
+  }
 }
 
 /**
@@ -144,8 +162,11 @@ export function evaluateReliability(entry) {
   const measured = entry?.tier === 'measured'
   const operatorOwned = isOperatorOwned(entry)
   const missing = missingOf(entry)
+  const taskReviewed = entry?.taskReviewed === true
+  const audited = entry?.audited === true
+  const environmentBound = entry?.environmentBound === true
   const soe = measured ? measuredSoe(entry, missing, operatorOwned) : priorSoe(entry, missing, operatorOwned)
-  const goe = gradeFromSoe(soe, { measured, operatorOwned, missing })
+  const goe = gradeFromSoe(soe, { measured, operatorOwned, missing, taskReviewed, audited, environmentBound })
   const positive = measured && goe.grade !== 'E2' && Array.isArray(entry.benchTasks)
     && entry.benchTasks.some(task => Number(task.liftLowerBound) > 0)
   if (measured) goe.positive = positive
@@ -156,5 +177,8 @@ export function evaluateReliability(entry) {
     unrated: !measured,
     operatorOwned,
     missing,
+    taskReviewed,
+    audited,
+    environmentBound,
   }
 }

@@ -1,0 +1,9 @@
+{
+  "schema": "dsh-score/api-index/v1",
+  "apiVersion": "v1",
+  "generatedAt": "2026-10-18T00:00:00.000Z",
+  "registry": "registry.json",
+  "sha256": "registry.sha256",
+  "etag": "sha256:724ecce88ff1bb8bc6a9a4f86fbeb521aff7a340c588309e32e3c6cc7e1e477a",
+  "note": "Static, cacheable snapshot. Scores are evidence grades, not a quality guarantee."
+}

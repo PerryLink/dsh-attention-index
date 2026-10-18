@@ -12,7 +12,8 @@
 > is [`dsh-community-bench`](https://github.com/PerryLink/dsh-community-bench).
 >
 > Status: **v0.1 · E0 / unrated**. 42 candidate plugins, 15 capability surfaces,
-> **0 paired bench results**, **0 public contributions**. All 42 rows are
+> **0 paired bench results**, **0 public contributions**, **24 executable pilot
+> tasks** (unreviewed). All 42 rows are
 > `E0 / unrated`; there is **no quality #1**. The legacy discovery number is
 > `60 × prior / 100` and is not a task-outcome claim.
 >
@@ -26,6 +27,12 @@
 - **Scoring:** [SCORING.md](SCORING.md)
 - **Reliability (SOE / GOE):** [docs/SOE-GOE.md](docs/SOE-GOE.md)
 - **P0–P3 implementation:** [docs/P0-P3-PLAN.md](docs/P0-P3-PLAN.md)
+- **P1 measured-evidence runbook:** [docs/P1-RUNBOOK.md](docs/P1-RUNBOOK.md) · [sandbox requirements](docs/SANDBOX.md)
+- **P2 integration contract:** [docs/P2-INTEGRATION.md](docs/P2-INTEGRATION.md)
+- **Versioned API:** [`api/v1/index.json`](api/v1/index.json)
+- **Market signals:** [`integrations/market/signals.json`](integrations/market/signals.json)
+- **Audit / E5:** [docs/AUDIT-CHECKLIST.md](docs/AUDIT-CHECKLIST.md)
+- **SLA / official market:** [docs/SLA.md](docs/SLA.md) · [docs/OFFICIAL-MARKET.md](docs/OFFICIAL-MARKET.md)
 - **Contribute:** [CONTRIBUTING.md](CONTRIBUTING.md)
 - **Governance:** [GOVERNANCE.md](GOVERNANCE.md)
 

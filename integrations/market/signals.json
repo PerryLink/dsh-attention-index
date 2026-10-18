@@ -1,0 +1,1312 @@
+{
+  "schema": "dsh-score/signals/v1",
+  "generatedAt": "2026-10-18T00:00:00.000Z",
+  "source": {
+    "registry": "data/registry.json",
+    "inputHash": "sha256:ac0b4b8ec693410e962277de29e31603ab9bea7a8b753496d11033116c378c75",
+    "reliabilityVersion": "soe-goe/v1"
+  },
+  "note": "Decoration only: E0/unrated means no outcome evidence. A market must not use this file as its default ranking.",
+  "entries": [
+    {
+      "id": "volcengine/openviking",
+      "aliases": [
+        "volcengine/openviking",
+        "https://github.com/volcengine/OpenViking"
+      ],
+      "surface": "memory",
+      "evidenceGrade": "E0",
+      "unrated": true,
+      "goe": {
+        "grade": "E0",
+        "certainty": "very-low",
+        "positive": false,
+        "reasons": [
+          "no-outcome-evidence",
+          "metadata-only"
+        ],
+        "downgrades": [
+          "missing-adoption-channels",
+          "docs-unknown"
+        ]
+      },
+      "versionBound": false,
+      "measured": false,
+      "rank": null,
+      "score": 41,
+      "scoreScale": 60,
+      "scoreLabel": "legacy discovery — not a quality score",
+      "badge": "badges/volcengine-openviking.svg"
+    },
+    {
+      "id": "vectorize-io/hindsight",
+      "aliases": [
+        "vectorize-io/hindsight",
+        "https://github.com/vectorize-io/hindsight"
+      ],
+      "surface": "memory",
+      "evidenceGrade": "E0",
+      "unrated": true,
+      "goe": {
+        "grade": "E0",
+        "certainty": "very-low",
+        "positive": false,
+        "reasons": [
+          "no-outcome-evidence",
+          "metadata-only"
+        ],
+        "downgrades": [
+          "missing-adoption-channels",
+          "docs-unknown"
+        ]
+      },
+      "versionBound": false,
+      "measured": false,
+      "rank": null,
+      "score": 38.2,
+      "scoreScale": 60,
+      "scoreLabel": "legacy discovery — not a quality score",
+      "badge": "badges/vectorize-io-hindsight.svg"
+    },
+    {
+      "id": "perrylink/dsh-memento",
+      "aliases": [
+        "perrylink/dsh-memento",
+        "dsh-memento",
+        "https://github.com/PerryLink/dsh-memento"
+      ],
+      "surface": "memory",
+      "evidenceGrade": "E0",
+      "unrated": true,
+      "goe": {
+        "grade": "E0",
+        "certainty": "very-low",
+        "positive": false,
+        "reasons": [
+          "no-outcome-evidence",
+          "metadata-only"
+        ],
+        "downgrades": [
+          "operator-owned",
+          "missing-adoption-channels",
+          "docs-unknown"
+        ]
+      },
+      "versionBound": false,
+      "measured": false,
+      "rank": null,
+      "score": 30,
+      "scoreScale": 60,
+      "scoreLabel": "legacy discovery — not a quality score",
+      "badge": "badges/perrylink-dsh-memento.svg"
+    },
+    {
+      "id": "bowenliang123/dsh-context",
+      "aliases": [
+        "bowenliang123/dsh-context",
+        "dsh-context",
+        "https://github.com/bowenliang123/dsh-context"
+      ],
+      "surface": "cost",
+      "evidenceGrade": "E0",
+      "unrated": true,
+      "goe": {
+        "grade": "E0",
+        "certainty": "very-low",
+        "positive": false,
+        "reasons": [
+          "no-outcome-evidence",
+          "metadata-only"
+        ],
+        "downgrades": [
+          "missing-adoption-channels",
+          "docs-unknown"
+        ]
+      },
+      "versionBound": false,
+      "measured": false,
+      "rank": null,
+      "score": 42.4,
+      "scoreScale": 60,
+      "scoreLabel": "legacy discovery — not a quality score",
+      "badge": "badges/bowenliang123-dsh-context.svg"
+    },
+    {
+      "id": "han-1413141/dsh-cost-meter",
+      "aliases": [
+        "han-1413141/dsh-cost-meter",
+        "dsh-cost-meter",
+        "https://github.com/Han-1413141/dsh-cost-meter"
+      ],
+      "surface": "cost",
+      "evidenceGrade": "E0",
+      "unrated": true,
+      "goe": {
+        "grade": "E0",
+        "certainty": "very-low",
+        "positive": false,
+        "reasons": [
+          "no-outcome-evidence",
+          "metadata-only"
+        ],
+        "downgrades": [
+          "missing-adoption-channels",
+          "docs-unknown"
+        ]
+      },
+      "versionBound": false,
+      "measured": false,
+      "rank": null,
+      "score": 42.4,
+      "scoreScale": 60,
+      "scoreLabel": "legacy discovery — not a quality score",
+      "badge": "badges/han-1413141-dsh-cost-meter.svg"
+    },
+    {
+      "id": "perrylink/dsh-budget",
+      "aliases": [
+        "perrylink/dsh-budget",
+        "dsh-budget",
+        "https://github.com/PerryLink/dsh-budget"
+      ],
+      "surface": "cost",
+      "evidenceGrade": "E0",
+      "unrated": true,
+      "goe": {
+        "grade": "E0",
+        "certainty": "very-low",
+        "positive": false,
+        "reasons": [
+          "no-outcome-evidence",
+          "metadata-only"
+        ],
+        "downgrades": [
+          "operator-owned",
+          "missing-adoption-channels",
+          "docs-unknown"
+        ]
+      },
+      "versionBound": false,
+      "measured": false,
+      "rank": null,
+      "score": 29.1,
+      "scoreScale": 60,
+      "scoreLabel": "legacy discovery — not a quality score",
+      "badge": "badges/perrylink-dsh-budget.svg"
+    },
+    {
+      "id": "liustack/modlens",
+      "aliases": [
+        "liustack/modlens",
+        "https://github.com/liustack/modlens"
+      ],
+      "surface": "vision",
+      "evidenceGrade": "E0",
+      "unrated": true,
+      "goe": {
+        "grade": "E0",
+        "certainty": "very-low",
+        "positive": false,
+        "reasons": [
+          "no-outcome-evidence",
+          "metadata-only"
+        ],
+        "downgrades": [
+          "missing-adoption-channels",
+          "docs-unknown"
+        ]
+      },
+      "versionBound": false,
+      "measured": false,
+      "rank": null,
+      "score": 38.3,
+      "scoreScale": 60,
+      "scoreLabel": "legacy discovery — not a quality score",
+      "badge": "badges/liustack-modlens.svg"
+    },
+    {
+      "id": "ysr666/dsh-vision-router",
+      "aliases": [
+        "ysr666/dsh-vision-router",
+        "https://github.com/ysr666/dsh-vision-router"
+      ],
+      "surface": "vision",
+      "evidenceGrade": "E0",
+      "unrated": true,
+      "goe": {
+        "grade": "E0",
+        "certainty": "very-low",
+        "positive": false,
+        "reasons": [
+          "no-outcome-evidence",
+          "metadata-only"
+        ],
+        "downgrades": [
+          "missing-adoption-channels",
+          "docs-unknown"
+        ]
+      },
+      "versionBound": false,
+      "measured": false,
+      "rank": null,
+      "score": 34.1,
+      "scoreScale": 60,
+      "scoreLabel": "legacy discovery — not a quality score",
+      "badge": "badges/ysr666-dsh-vision-router.svg"
+    },
+    {
+      "id": "anionex/dsh-vision-toolkit",
+      "aliases": [
+        "anionex/dsh-vision-toolkit",
+        "https://github.com/Anionex/dsh-vision-toolkit"
+      ],
+      "surface": "vision",
+      "evidenceGrade": "E0",
+      "unrated": true,
+      "goe": {
+        "grade": "E0",
+        "certainty": "very-low",
+        "positive": false,
+        "reasons": [
+          "no-outcome-evidence",
+          "metadata-only"
+        ],
+        "downgrades": [
+          "missing-adoption-channels",
+          "docs-unknown"
+        ]
+      },
+      "versionBound": false,
+      "measured": false,
+      "rank": null,
+      "score": 33.1,
+      "scoreScale": 60,
+      "scoreLabel": "legacy discovery — not a quality score",
+      "badge": "badges/anionex-dsh-vision-toolkit.svg"
+    },
+    {
+      "id": "anysearch-team/anysearch-dsh",
+      "aliases": [
+        "anysearch-team/anysearch-dsh",
+        "https://github.com/anysearch-team/anysearch-dsh"
+      ],
+      "surface": "web",
+      "evidenceGrade": "E0",
+      "unrated": true,
+      "goe": {
+        "grade": "E0",
+        "certainty": "very-low",
+        "positive": false,
+        "reasons": [
+          "no-outcome-evidence",
+          "metadata-only"
+        ],
+        "downgrades": [
+          "missing-adoption-channels",
+          "docs-unknown"
+        ]
+      },
+      "versionBound": false,
+      "measured": false,
+      "rank": null,
+      "score": 32.5,
+      "scoreScale": 60,
+      "scoreLabel": "legacy discovery — not a quality score",
+      "badge": "badges/anysearch-team-anysearch-dsh.svg"
+    },
+    {
+      "id": "liustack/modsearch",
+      "aliases": [
+        "liustack/modsearch",
+        "https://github.com/liustack/modsearch"
+      ],
+      "surface": "web",
+      "evidenceGrade": "E0",
+      "unrated": true,
+      "goe": {
+        "grade": "E0",
+        "certainty": "very-low",
+        "positive": false,
+        "reasons": [
+          "no-outcome-evidence",
+          "metadata-only"
+        ],
+        "downgrades": [
+          "missing-adoption-channels",
+          "docs-unknown"
+        ]
+      },
+      "versionBound": false,
+      "measured": false,
+      "rank": null,
+      "score": 32.5,
+      "scoreScale": 60,
+      "scoreLabel": "legacy discovery — not a quality score",
+      "badge": "badges/liustack-modsearch.svg"
+    },
+    {
+      "id": "dddmuc/dsh-free-search",
+      "aliases": [
+        "dddmuc/dsh-free-search",
+        "https://github.com/DDDMUC/dsh-free-search"
+      ],
+      "surface": "web",
+      "evidenceGrade": "E0",
+      "unrated": true,
+      "goe": {
+        "grade": "E0",
+        "certainty": "very-low",
+        "positive": false,
+        "reasons": [
+          "no-outcome-evidence",
+          "metadata-only"
+        ],
+        "downgrades": [
+          "missing-adoption-channels",
+          "docs-unknown"
+        ]
+      },
+      "versionBound": false,
+      "measured": false,
+      "rank": null,
+      "score": 30.9,
+      "scoreScale": 60,
+      "scoreLabel": "legacy discovery — not a quality score",
+      "badge": "badges/dddmuc-dsh-free-search.svg"
+    },
+    {
+      "id": "tencent/browserskill",
+      "aliases": [
+        "tencent/browserskill",
+        "https://github.com/Tencent/BrowserSkill"
+      ],
+      "surface": "browser",
+      "evidenceGrade": "E0",
+      "unrated": true,
+      "goe": {
+        "grade": "E0",
+        "certainty": "very-low",
+        "positive": false,
+        "reasons": [
+          "no-outcome-evidence",
+          "metadata-only"
+        ],
+        "downgrades": [
+          "missing-adoption-channels",
+          "docs-unknown"
+        ]
+      },
+      "versionBound": false,
+      "measured": false,
+      "rank": null,
+      "score": 36.3,
+      "scoreScale": 60,
+      "scoreLabel": "legacy discovery — not a quality score",
+      "badge": "badges/tencent-browserskill.svg"
+    },
+    {
+      "id": "perrylink/dsh-click",
+      "aliases": [
+        "perrylink/dsh-click",
+        "dsh-click",
+        "https://github.com/PerryLink/dsh-click"
+      ],
+      "surface": "browser",
+      "evidenceGrade": "E0",
+      "unrated": true,
+      "goe": {
+        "grade": "E0",
+        "certainty": "very-low",
+        "positive": false,
+        "reasons": [
+          "no-outcome-evidence",
+          "metadata-only"
+        ],
+        "downgrades": [
+          "operator-owned",
+          "missing-adoption-channels",
+          "docs-unknown"
+        ]
+      },
+      "versionBound": false,
+      "measured": false,
+      "rank": null,
+      "score": 31.1,
+      "scoreScale": 60,
+      "scoreLabel": "legacy discovery — not a quality score",
+      "badge": "badges/perrylink-dsh-click.svg"
+    },
+    {
+      "id": "lum1104/dsh-browser",
+      "aliases": [
+        "lum1104/dsh-browser",
+        "https://github.com/Lum1104/dsh-browser"
+      ],
+      "surface": "browser",
+      "evidenceGrade": "E0",
+      "unrated": true,
+      "goe": {
+        "grade": "E0",
+        "certainty": "very-low",
+        "positive": false,
+        "reasons": [
+          "no-outcome-evidence",
+          "metadata-only"
+        ],
+        "downgrades": [
+          "missing-adoption-channels",
+          "docs-unknown"
+        ]
+      },
+      "versionBound": false,
+      "measured": false,
+      "rank": null,
+      "score": 27.1,
+      "scoreScale": 60,
+      "scoreLabel": "legacy discovery — not a quality score",
+      "badge": "badges/lum1104-dsh-browser.svg"
+    },
+    {
+      "id": "tencent/weknora",
+      "aliases": [
+        "tencent/weknora-dsh",
+        "https://github.com/Tencent/WeKnora"
+      ],
+      "surface": "office",
+      "evidenceGrade": "E0",
+      "unrated": true,
+      "goe": {
+        "grade": "E0",
+        "certainty": "very-low",
+        "positive": false,
+        "reasons": [
+          "no-outcome-evidence",
+          "metadata-only"
+        ],
+        "downgrades": [
+          "missing-adoption-channels",
+          "docs-unknown"
+        ]
+      },
+      "versionBound": false,
+      "measured": false,
+      "rank": null,
+      "score": 35.5,
+      "scoreScale": 60,
+      "scoreLabel": "legacy discovery — not a quality score",
+      "badge": "badges/tencent-weknora-dsh.svg"
+    },
+    {
+      "id": "devin-axis/ipollowork",
+      "aliases": [
+        "devin-axis/ppt-studio",
+        "https://github.com/Devin-AXIS/iPolloWork"
+      ],
+      "surface": "office",
+      "evidenceGrade": "E0",
+      "unrated": true,
+      "goe": {
+        "grade": "E0",
+        "certainty": "very-low",
+        "positive": false,
+        "reasons": [
+          "no-outcome-evidence",
+          "metadata-only"
+        ],
+        "downgrades": [
+          "missing-adoption-channels",
+          "docs-unknown"
+        ]
+      },
+      "versionBound": false,
+      "measured": false,
+      "rank": null,
+      "score": 31.9,
+      "scoreScale": 60,
+      "scoreLabel": "legacy discovery — not a quality score",
+      "badge": "badges/devin-axis-ppt-studio.svg"
+    },
+    {
+      "id": "dream-num/dsh-univer-office",
+      "aliases": [
+        "dream-num/dsh-univer-office",
+        "https://github.com/dream-num/dsh-univer-office"
+      ],
+      "surface": "office",
+      "evidenceGrade": "E0",
+      "unrated": true,
+      "goe": {
+        "grade": "E0",
+        "certainty": "very-low",
+        "positive": false,
+        "reasons": [
+          "no-outcome-evidence",
+          "metadata-only"
+        ],
+        "downgrades": [
+          "missing-adoption-channels",
+          "docs-unknown"
+        ]
+      },
+      "versionBound": false,
+      "measured": false,
+      "rank": null,
+      "score": 31.1,
+      "scoreScale": 60,
+      "scoreLabel": "legacy discovery — not a quality score",
+      "badge": "badges/dream-num-dsh-univer-office.svg"
+    },
+    {
+      "id": "nanmicoder/dsh-agent-teams",
+      "aliases": [
+        "nanmicoder/dsh-agent-teams",
+        "https://github.com/NanmiCoder/dsh-agent-teams"
+      ],
+      "surface": "orchestration",
+      "evidenceGrade": "E0",
+      "unrated": true,
+      "goe": {
+        "grade": "E0",
+        "certainty": "very-low",
+        "positive": false,
+        "reasons": [
+          "no-outcome-evidence",
+          "metadata-only"
+        ],
+        "downgrades": [
+          "missing-adoption-channels",
+          "docs-unknown"
+        ]
+      },
+      "versionBound": false,
+      "measured": false,
+      "rank": null,
+      "score": 36.7,
+      "scoreScale": 60,
+      "scoreLabel": "legacy discovery — not a quality score",
+      "badge": "badges/nanmicoder-dsh-agent-teams.svg"
+    },
+    {
+      "id": "q00/ouroboros",
+      "aliases": [
+        "q00/ouroboros",
+        "https://github.com/Q00/ouroboros"
+      ],
+      "surface": "orchestration",
+      "evidenceGrade": "E0",
+      "unrated": true,
+      "goe": {
+        "grade": "E0",
+        "certainty": "very-low",
+        "positive": false,
+        "reasons": [
+          "no-outcome-evidence",
+          "metadata-only"
+        ],
+        "downgrades": [
+          "missing-adoption-channels",
+          "docs-unknown"
+        ]
+      },
+      "versionBound": false,
+      "measured": false,
+      "rank": null,
+      "score": 28.4,
+      "scoreScale": 60,
+      "scoreLabel": "legacy discovery — not a quality score",
+      "badge": "badges/q00-ouroboros.svg"
+    },
+    {
+      "id": "perrylink/dsh-autotier",
+      "aliases": [
+        "perrylink/dsh-autotier",
+        "dsh-autotier",
+        "https://github.com/PerryLink/dsh-autotier"
+      ],
+      "surface": "orchestration",
+      "evidenceGrade": "E0",
+      "unrated": true,
+      "goe": {
+        "grade": "E0",
+        "certainty": "very-low",
+        "positive": false,
+        "reasons": [
+          "no-outcome-evidence",
+          "metadata-only"
+        ],
+        "downgrades": [
+          "operator-owned",
+          "missing-adoption-channels",
+          "docs-unknown"
+        ]
+      },
+      "versionBound": false,
+      "measured": false,
+      "rank": null,
+      "score": 23.5,
+      "scoreScale": 60,
+      "scoreLabel": "legacy discovery — not a quality score",
+      "badge": "badges/perrylink-dsh-autotier.svg"
+    },
+    {
+      "id": "perrylink/dsh-auto-review",
+      "aliases": [
+        "perrylink/dsh-auto-review",
+        "dsh-auto-review",
+        "https://github.com/PerryLink/dsh-auto-review"
+      ],
+      "surface": "safety",
+      "evidenceGrade": "E0",
+      "unrated": true,
+      "goe": {
+        "grade": "E0",
+        "certainty": "very-low",
+        "positive": false,
+        "reasons": [
+          "no-outcome-evidence",
+          "metadata-only"
+        ],
+        "downgrades": [
+          "operator-owned",
+          "missing-adoption-channels",
+          "docs-unknown"
+        ]
+      },
+      "versionBound": false,
+      "measured": false,
+      "rank": null,
+      "score": 39.2,
+      "scoreScale": 60,
+      "scoreLabel": "legacy discovery — not a quality score",
+      "badge": "badges/perrylink-dsh-auto-review.svg"
+    },
+    {
+      "id": "perrylink/dsh-permission-rules",
+      "aliases": [
+        "perrylink/dsh-permission-rules",
+        "dsh-permission-rules",
+        "https://github.com/PerryLink/dsh-permission-rules"
+      ],
+      "surface": "safety",
+      "evidenceGrade": "E0",
+      "unrated": true,
+      "goe": {
+        "grade": "E0",
+        "certainty": "very-low",
+        "positive": false,
+        "reasons": [
+          "no-outcome-evidence",
+          "metadata-only"
+        ],
+        "downgrades": [
+          "operator-owned",
+          "docs-unknown"
+        ]
+      },
+      "versionBound": false,
+      "measured": false,
+      "rank": null,
+      "score": 34.6,
+      "scoreScale": 60,
+      "scoreLabel": "legacy discovery — not a quality score",
+      "badge": "badges/perrylink-dsh-permission-rules.svg"
+    },
+    {
+      "id": "nanmicoder/dsh-auto-mode",
+      "aliases": [
+        "nanmicoder/dsh-auto-mode",
+        "https://github.com/NanmiCoder/dsh-auto-mode"
+      ],
+      "surface": "safety",
+      "evidenceGrade": "E0",
+      "unrated": true,
+      "goe": {
+        "grade": "E0",
+        "certainty": "very-low",
+        "positive": false,
+        "reasons": [
+          "no-outcome-evidence",
+          "metadata-only"
+        ],
+        "downgrades": [
+          "missing-adoption-channels",
+          "docs-unknown"
+        ]
+      },
+      "versionBound": false,
+      "measured": false,
+      "rank": null,
+      "score": 18,
+      "scoreScale": 60,
+      "scoreLabel": "legacy discovery — not a quality score",
+      "badge": "badges/nanmicoder-dsh-auto-mode.svg"
+    },
+    {
+      "id": "perrylink/dsh-mcp-panel",
+      "aliases": [
+        "perrylink/dsh-mcp-panel",
+        "dsh-mcp-panel",
+        "https://github.com/PerryLink/dsh-mcp-panel"
+      ],
+      "surface": "mcp",
+      "evidenceGrade": "E0",
+      "unrated": true,
+      "goe": {
+        "grade": "E0",
+        "certainty": "very-low",
+        "positive": false,
+        "reasons": [
+          "no-outcome-evidence",
+          "metadata-only"
+        ],
+        "downgrades": [
+          "operator-owned",
+          "docs-unknown"
+        ]
+      },
+      "versionBound": false,
+      "measured": false,
+      "rank": null,
+      "score": 37.2,
+      "scoreScale": 60,
+      "scoreLabel": "legacy discovery — not a quality score",
+      "badge": "badges/perrylink-dsh-mcp-panel.svg"
+    },
+    {
+      "id": "duhu2000/dsh-mcp-connector",
+      "aliases": [
+        "duhu2000/dsh-mcp-connector",
+        "https://github.com/duhu2000/dsh-mcp-connector"
+      ],
+      "surface": "mcp",
+      "evidenceGrade": "E0",
+      "unrated": true,
+      "goe": {
+        "grade": "E0",
+        "certainty": "very-low",
+        "positive": false,
+        "reasons": [
+          "no-outcome-evidence",
+          "metadata-only"
+        ],
+        "downgrades": [
+          "missing-adoption-channels",
+          "docs-unknown"
+        ]
+      },
+      "versionBound": false,
+      "measured": false,
+      "rank": null,
+      "score": 27.1,
+      "scoreScale": 60,
+      "scoreLabel": "legacy discovery — not a quality score",
+      "badge": "badges/duhu2000-dsh-mcp-connector.svg"
+    },
+    {
+      "id": "shaobeichen/dsh-pocket",
+      "aliases": [
+        "shaobeichen/dsh-pocket",
+        "dsh-pocket",
+        "https://github.com/shaobeichen/dsh-pocket"
+      ],
+      "surface": "remote",
+      "evidenceGrade": "E0",
+      "unrated": true,
+      "goe": {
+        "grade": "E0",
+        "certainty": "very-low",
+        "positive": false,
+        "reasons": [
+          "no-outcome-evidence",
+          "metadata-only"
+        ],
+        "downgrades": [
+          "missing-adoption-channels",
+          "docs-unknown"
+        ]
+      },
+      "versionBound": false,
+      "measured": false,
+      "rank": null,
+      "score": 37,
+      "scoreScale": 60,
+      "scoreLabel": "legacy discovery — not a quality score",
+      "badge": "badges/shaobeichen-dsh-pocket.svg"
+    },
+    {
+      "id": "xmanrui/dsh-im",
+      "aliases": [
+        "xmanrui/dsh-im",
+        "https://github.com/xmanrui/dsh-im"
+      ],
+      "surface": "remote",
+      "evidenceGrade": "E0",
+      "unrated": true,
+      "goe": {
+        "grade": "E0",
+        "certainty": "very-low",
+        "positive": false,
+        "reasons": [
+          "no-outcome-evidence",
+          "metadata-only"
+        ],
+        "downgrades": [
+          "missing-adoption-channels",
+          "docs-unknown"
+        ]
+      },
+      "versionBound": false,
+      "measured": false,
+      "rank": null,
+      "score": 35.4,
+      "scoreScale": 60,
+      "scoreLabel": "legacy discovery — not a quality score",
+      "badge": "badges/xmanrui-dsh-im.svg"
+    },
+    {
+      "id": "perrylink/dsh-reach",
+      "aliases": [
+        "perrylink/dsh-reach",
+        "dsh-reach",
+        "https://github.com/PerryLink/dsh-reach"
+      ],
+      "surface": "remote",
+      "evidenceGrade": "E0",
+      "unrated": true,
+      "goe": {
+        "grade": "E0",
+        "certainty": "very-low",
+        "positive": false,
+        "reasons": [
+          "no-outcome-evidence",
+          "metadata-only"
+        ],
+        "downgrades": [
+          "operator-owned",
+          "missing-adoption-channels",
+          "docs-unknown"
+        ]
+      },
+      "versionBound": false,
+      "measured": false,
+      "rank": null,
+      "score": 24.8,
+      "scoreScale": 60,
+      "scoreLabel": "legacy discovery — not a quality score",
+      "badge": "badges/perrylink-dsh-reach.svg"
+    },
+    {
+      "id": "perrylink/dsh-plugin-guide",
+      "aliases": [
+        "perrylink/dsh-plugin-guide",
+        "dsh-plugin-guide",
+        "https://github.com/PerryLink/dsh-plugin-guide"
+      ],
+      "surface": "dev",
+      "evidenceGrade": "E0",
+      "unrated": true,
+      "goe": {
+        "grade": "E0",
+        "certainty": "very-low",
+        "positive": false,
+        "reasons": [
+          "no-outcome-evidence",
+          "metadata-only"
+        ],
+        "downgrades": [
+          "operator-owned",
+          "docs-unknown"
+        ]
+      },
+      "versionBound": false,
+      "measured": false,
+      "rank": null,
+      "score": 34.7,
+      "scoreScale": 60,
+      "scoreLabel": "legacy discovery — not a quality score",
+      "badge": "badges/perrylink-dsh-plugin-guide.svg"
+    },
+    {
+      "id": "perrylink/dsh-score",
+      "aliases": [
+        "perrylink/dsh-score",
+        "dsh-score",
+        "https://github.com/PerryLink/dsh-score"
+      ],
+      "surface": "dev",
+      "evidenceGrade": "E0",
+      "unrated": true,
+      "goe": {
+        "grade": "E0",
+        "certainty": "very-low",
+        "positive": false,
+        "reasons": [
+          "no-outcome-evidence",
+          "metadata-only"
+        ],
+        "downgrades": [
+          "operator-owned",
+          "missing-adoption-channels",
+          "docs-unknown"
+        ]
+      },
+      "versionBound": false,
+      "measured": false,
+      "rank": null,
+      "score": 29.6,
+      "scoreScale": 60,
+      "scoreLabel": "legacy discovery — not a quality score",
+      "badge": "badges/perrylink-dsh-score.svg"
+    },
+    {
+      "id": "perrylink/dsh-test-drive",
+      "aliases": [
+        "perrylink/dsh-test-drive",
+        "dsh-test-drive",
+        "https://github.com/PerryLink/dsh-test-drive"
+      ],
+      "surface": "dev",
+      "evidenceGrade": "E0",
+      "unrated": true,
+      "goe": {
+        "grade": "E0",
+        "certainty": "very-low",
+        "positive": false,
+        "reasons": [
+          "no-outcome-evidence",
+          "metadata-only"
+        ],
+        "downgrades": [
+          "operator-owned",
+          "missing-adoption-channels",
+          "docs-unknown"
+        ]
+      },
+      "versionBound": false,
+      "measured": false,
+      "rank": null,
+      "score": 29.6,
+      "scoreScale": 60,
+      "scoreLabel": "legacy discovery — not a quality score",
+      "badge": "badges/perrylink-dsh-test-drive.svg"
+    },
+    {
+      "id": "micromilo/upstream-radar",
+      "aliases": [
+        "micromilo/upstream-radar",
+        "https://github.com/MicroMilo/upstream-radar"
+      ],
+      "surface": "dev",
+      "evidenceGrade": "E0",
+      "unrated": true,
+      "goe": {
+        "grade": "E0",
+        "certainty": "very-low",
+        "positive": false,
+        "reasons": [
+          "no-outcome-evidence",
+          "metadata-only"
+        ],
+        "downgrades": [
+          "missing-adoption-channels",
+          "docs-unknown"
+        ]
+      },
+      "versionBound": false,
+      "measured": false,
+      "rank": null,
+      "score": 24.8,
+      "scoreScale": 60,
+      "scoreLabel": "legacy discovery — not a quality score",
+      "badge": "badges/micromilo-upstream-radar.svg"
+    },
+    {
+      "id": "perrylink/dsh-talk",
+      "aliases": [
+        "perrylink/dsh-talk",
+        "dsh-talk",
+        "https://github.com/PerryLink/dsh-talk"
+      ],
+      "surface": "voice",
+      "evidenceGrade": "E0",
+      "unrated": true,
+      "goe": {
+        "grade": "E0",
+        "certainty": "very-low",
+        "positive": false,
+        "reasons": [
+          "no-outcome-evidence",
+          "metadata-only"
+        ],
+        "downgrades": [
+          "operator-owned",
+          "missing-adoption-channels",
+          "docs-unknown"
+        ]
+      },
+      "versionBound": false,
+      "measured": false,
+      "rank": null,
+      "score": 30.4,
+      "scoreScale": 60,
+      "scoreLabel": "legacy discovery — not a quality score",
+      "badge": "badges/perrylink-dsh-talk.svg"
+    },
+    {
+      "id": "perrylink/dsh-industry-research",
+      "aliases": [
+        "perrylink/dsh-industry-research",
+        "dsh-industry-research",
+        "https://github.com/PerryLink/dsh-industry-research"
+      ],
+      "surface": "research",
+      "evidenceGrade": "E0",
+      "unrated": true,
+      "goe": {
+        "grade": "E0",
+        "certainty": "very-low",
+        "positive": false,
+        "reasons": [
+          "no-outcome-evidence",
+          "metadata-only"
+        ],
+        "downgrades": [
+          "operator-owned",
+          "missing-adoption-channels",
+          "docs-unknown"
+        ]
+      },
+      "versionBound": false,
+      "measured": false,
+      "rank": null,
+      "score": 38.9,
+      "scoreScale": 60,
+      "scoreLabel": "legacy discovery — not a quality score",
+      "badge": "badges/perrylink-dsh-industry-research.svg"
+    },
+    {
+      "id": "perrylink/dsh-research-report",
+      "aliases": [
+        "perrylink/dsh-research-report",
+        "dsh-research-report",
+        "https://github.com/PerryLink/dsh-research-report"
+      ],
+      "surface": "research",
+      "evidenceGrade": "E0",
+      "unrated": true,
+      "goe": {
+        "grade": "E0",
+        "certainty": "very-low",
+        "positive": false,
+        "reasons": [
+          "no-outcome-evidence",
+          "metadata-only"
+        ],
+        "downgrades": [
+          "operator-owned",
+          "missing-adoption-channels",
+          "docs-unknown"
+        ]
+      },
+      "versionBound": false,
+      "measured": false,
+      "rank": null,
+      "score": 38.9,
+      "scoreScale": 60,
+      "scoreLabel": "legacy discovery — not a quality score",
+      "badge": "badges/perrylink-dsh-research-report.svg"
+    },
+    {
+      "id": "perrylink/dsh-fund-research",
+      "aliases": [
+        "perrylink/dsh-fund-research",
+        "dsh-fund-research",
+        "https://github.com/PerryLink/dsh-fund-research"
+      ],
+      "surface": "research",
+      "evidenceGrade": "E0",
+      "unrated": true,
+      "goe": {
+        "grade": "E0",
+        "certainty": "very-low",
+        "positive": false,
+        "reasons": [
+          "no-outcome-evidence",
+          "metadata-only"
+        ],
+        "downgrades": [
+          "operator-owned",
+          "missing-adoption-channels",
+          "docs-unknown"
+        ]
+      },
+      "versionBound": false,
+      "measured": false,
+      "rank": null,
+      "score": 35.2,
+      "scoreScale": 60,
+      "scoreLabel": "legacy discovery — not a quality score",
+      "badge": "badges/perrylink-dsh-fund-research.svg"
+    },
+    {
+      "id": "omdsh-dev/dsh-better-sidebar",
+      "aliases": [
+        "omdsh-dev/dsh-better-sidebar",
+        "https://github.com/omdsh-dev/DSH-better-sidebar"
+      ],
+      "surface": "ui",
+      "evidenceGrade": "E0",
+      "unrated": true,
+      "goe": {
+        "grade": "E0",
+        "certainty": "very-low",
+        "positive": false,
+        "reasons": [
+          "no-outcome-evidence",
+          "metadata-only"
+        ],
+        "downgrades": [
+          "docs-unknown"
+        ]
+      },
+      "versionBound": false,
+      "measured": false,
+      "rank": null,
+      "score": 39.3,
+      "scoreScale": 60,
+      "scoreLabel": "legacy discovery — not a quality score",
+      "badge": "badges/omdsh-dev-dsh-better-sidebar.svg"
+    },
+    {
+      "id": "omdsh-dev/dsh-genui",
+      "aliases": [
+        "omdsh-dev/dsh-genui",
+        "https://github.com/omdsh-dev/dsh-genui"
+      ],
+      "surface": "ui",
+      "evidenceGrade": "E0",
+      "unrated": true,
+      "goe": {
+        "grade": "E0",
+        "certainty": "very-low",
+        "positive": false,
+        "reasons": [
+          "no-outcome-evidence",
+          "metadata-only"
+        ],
+        "downgrades": [
+          "missing-adoption-channels",
+          "docs-unknown"
+        ]
+      },
+      "versionBound": false,
+      "measured": false,
+      "rank": null,
+      "score": 32.1,
+      "scoreScale": 60,
+      "scoreLabel": "legacy discovery — not a quality score",
+      "badge": "badges/omdsh-dev-dsh-genui.svg"
+    },
+    {
+      "id": "perrylink/dsh-composer-history",
+      "aliases": [
+        "perrylink/dsh-composer-history",
+        "dsh-composer-history",
+        "https://github.com/PerryLink/dsh-composer-history"
+      ],
+      "surface": "ui",
+      "evidenceGrade": "E0",
+      "unrated": true,
+      "goe": {
+        "grade": "E0",
+        "certainty": "very-low",
+        "positive": false,
+        "reasons": [
+          "no-outcome-evidence",
+          "metadata-only"
+        ],
+        "downgrades": [
+          "operator-owned",
+          "missing-adoption-channels",
+          "docs-unknown"
+        ]
+      },
+      "versionBound": false,
+      "measured": false,
+      "rank": null,
+      "score": 30.7,
+      "scoreScale": 60,
+      "scoreLabel": "legacy discovery — not a quality score",
+      "badge": "badges/perrylink-dsh-composer-history.svg"
+    },
+    {
+      "id": "anywhere-labs/deepseek-harness-desktop",
+      "aliases": [
+        "anywhere-labs/dsh-desktop",
+        "https://github.com/anywhere-labs/deepseek-harness-desktop"
+      ],
+      "surface": "desktop",
+      "evidenceGrade": "E0",
+      "unrated": true,
+      "goe": {
+        "grade": "E0",
+        "certainty": "very-low",
+        "positive": false,
+        "reasons": [
+          "no-outcome-evidence",
+          "metadata-only"
+        ],
+        "downgrades": [
+          "missing-adoption-channels",
+          "docs-unknown"
+        ]
+      },
+      "versionBound": false,
+      "measured": false,
+      "rank": null,
+      "score": 35.7,
+      "scoreScale": 60,
+      "scoreLabel": "legacy discovery — not a quality score",
+      "badge": "badges/anywhere-labs-dsh-desktop.svg"
+    },
+    {
+      "id": "dsh-tauri-desk/deepseek-harness-desktop",
+      "aliases": [
+        "dsh-tauri-desk/deepseek-harness-desktop",
+        "https://github.com/dsh-tauri-desk/deepseek-harness-desktop"
+      ],
+      "surface": "desktop",
+      "evidenceGrade": "E0",
+      "unrated": true,
+      "goe": {
+        "grade": "E0",
+        "certainty": "very-low",
+        "positive": false,
+        "reasons": [
+          "no-outcome-evidence",
+          "metadata-only"
+        ],
+        "downgrades": [
+          "missing-adoption-channels",
+          "docs-unknown"
+        ]
+      },
+      "versionBound": false,
+      "measured": false,
+      "rank": null,
+      "score": 23.5,
+      "scoreScale": 60,
+      "scoreLabel": "legacy discovery — not a quality score",
+      "badge": "badges/dsh-tauri-desk-deepseek-harness-desktop.svg"
+    }
+  ],
+  "stats": {
+    "entries": 42,
+    "measured": 0,
+    "unrated": 42,
+    "grades": {
+      "E0": 42
+    }
+  },
+  "identityIndexSize": 106
+}

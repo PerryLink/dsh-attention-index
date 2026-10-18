@@ -28,47 +28,50 @@ P0 is a **truth fix**, not a measurement. It does not create measured evidence.
 
 | # | Task | Status | Depends on |
 |---|---|---|---|
-| P1.1 | 3–5 briefs × ≥8 executable tasks with fixtures/checks | blocked | task authoring, API key, compute |
-| P1.2 | Sandboxed runner (no host FS/env, egress allowlist, cgroups) | blocked | container runtime |
-| P1.3 | Signed results + environment manifest + dedupe | blocked | runner keys |
-| P1.4 | Newcombe/paired bootstrap at task level; FDR; holdout | partial | method in place; no results |
-| P1.5 | First measured pilot; E2/E3 grades | blocked | P1.1–P1.3 |
-| P1.6 | `signals.json` + format-1 decorator + reference index | pending | version-bound results |
-| P1.7 | `bench_recommend` explicit-surface tool (no session read) | pending | measured coverage |
-| P1.8 | Publish `dsh-community-bench` 0.2.0 | pending | GitHub/registry deploy |
+| P1.1 | 3–5 briefs × ≥8 executable tasks with fixtures/checks | done (pilot) | 24 offline tasks, 3 briefs × 8; `reviewed:false` caps E2 |
+| P1.2 | Sandboxed runner (no host FS/env, egress allowlist, cgroups) | partial | env scrub + temp home + fixture hash + `--sandbox` refusal; no bwrap backend or egress control yet |
+| P1.3 | Signed results + environment manifest + dedupe | done | `runner-keygen.mjs`, `verify-result.mjs`, `ingest-result.mjs`; tests |
+| P1.4 | Newcombe/paired bootstrap at task level; FDR; holdout | partial | Newcombe + task cap in place; FDR/bootstrap/holdout pending |
+| P1.5 | First measured pilot; E2/E3 grades | blocked | needs a bench-scoped model key + real bwrap sandbox; not fabricated |
+| P1.6 | `signals.json` + format-1 decorator + reference index | done | `integrations/market/signals.json` + API; not a third-party market claim |
+| P1.7 | `bench_recommend` explicit-surface tool (no session read) | done (pure) | `scripts/recommend.mjs`; Host tool wiring is P2 |
+| P1.8 | Publish `dsh-community-bench` 0.2.0 | done | npm `latest`, with provenance |
 
 **Exit criteria:** ≥3 briefs with ≥5 tasks/arm, ≥2 independent runners for one
-surface, all results signed; no fabricated data; E2/E3 visible with CI.
+surface, all results signed; no fabricated data; E2/E3 visible with CI. The code
+is ready; the measured result is still blocked by the key/sandbox gate.
 
 ## P2 — multi-market and session-aware
 
 | # | Task | Status | Depends on |
 |---|---|---|---|
-| P2.1 | Identity graph (npm/repo/bundle/aliases, `unrated`) | pending | P1 data |
-| P2.2 | Versioned API + signed snapshots + history | pending | hosting/network |
-| P2.3 | Ingestion + attestation + moderation | pending | runner keys |
-| P2.4 | Market decorator/sidecar pilot (dsh-catalog/1024Store/dshfind) | pending | P1.6 |
-| P2.5 | Local session→brief matcher + opt-in chip | pending | measured coverage, privacy review |
-| P2.6 | Full COI/governance (external reviewers, appeals, transparency log) | pending | people |
+| P2.1 | Identity graph (npm/repo/bundle/aliases, `unrated`) | done (module) | `scripts/identity.mjs` + tests; alias data can grow |
+| P2.2 | Versioned API + signed snapshots + history | partial | `api/v1` + etag/sha; history and signatures pending |
+| P2.3 | Ingestion + attestation + moderation | done | signature, fixture hash, duplicate checks; moderation is manual |
+| P2.4 | Market decorator/sidecar pilot (dsh-catalog/1024Store/dshfind) | partial | signals sidecar ready; no partner installed |
+| P2.5 | Local session→brief matcher + opt-in chip | done (module) | `scripts/match-brief.mjs` + tests; no session storage read |
+| P2.6 | Explicit-surface recommendation + governance | done (module) | `scripts/recommend.mjs`; COI/appeal process still human |
 
 ## P3 — reference-grade / official
 
 | # | Task | Status | Depends on |
 |---|---|---|---|
-| P3.1 | Independent audit of method and first results | pending | P1–P2 |
-| P3.2 | Pre-registration + all-results publication | pending | process |
-| P3.3 | Federation/mirrors, 99.9% SLA, status page | pending | hosting |
-| P3.4 | E5 audited grade + conformance suite | pending | audit |
-| P3.5 | Official-market partnership (attribution, no default/exclusive) | pending | P3.1–P3.4 |
+| P3.1 | Independent audit of method and first results | pending | no auditor engaged; cannot self-audit |
+| P3.2 | Pre-registration + all-results publication | done (unreviewed) | `data/preregistration.json`, hash-checked; independent review still false |
+| P3.3 | Federation/mirrors, 99.9% SLA, status page | partial | Gitee/GitCode sync + SLA target; no hosted 99.9% claim |
+| P3.4 | E5 audited grade + conformance suite | partial | E5 audit gate, checklist, conformance; no E5 row |
+| P3.5 | Official-market partnership (attribution, no default/exclusive) | pending | requirements drafted in `docs/OFFICIAL-MARKET.md`; no signed partner |
 
 ## Current honest state
 
-- 42 plugins, 15 surfaces, 15 draft tasks, **0 measured**, **0 contributions**.
+- 42 plugins, 15 surfaces, **39 tasks** (24 executable pilot + 15 draft),
+  **0 measured**, **0 contributions**.
 - 42/42 rows are **E0 / unrated**. No quality #1 exists.
 - The legacy `score` remains as `discovery.score` for compatibility; it is not a
   quality claim.
-- P1–P3 cannot be truthfully completed without measured runs, signing keys and
-  network access. They are not marked done.
+- P1–P3 **code/artifacts are implemented where they do not require an external
+  signer**; actual measured results, independent audit and market partnership
+  remain external gates and are not marked done.
 
 ## Publication status (2026-10-18)
 

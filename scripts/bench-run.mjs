@@ -23,11 +23,11 @@
 
 import { spawn } from 'node:child_process'
 import { createHash, createPrivateKey, sign } from 'node:crypto'
-import { cp, mkdir, mkdtemp, readFile, rm, stat, writeFile } from 'node:fs/promises'
+import { cp, mkdir, mkdtemp, readdir, readFile, rm, stat, writeFile } from 'node:fs/promises'
 import { existsSync, readFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
-import { dirname, join, resolve } from 'node:path'
-import { fileURLToPath } from 'node:url'
+import { dirname, join, relative, resolve } from 'node:path'
+import { fileURLToPath, pathToFileURL } from 'node:url'
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..')
 
@@ -38,7 +38,7 @@ function parseArgs(argv) {
     const token = argv[index]
     if (!token.startsWith('--')) { args._.push(token); continue }
     const key = token.slice(2)
-    if (key === 'dry-run' || key === 'keep' || key === 'allow-commands') { args[key] = true; continue }
+    if (key === 'dry-run' || key === 'keep' || key === 'allow-commands' || key === 'sandbox') { args[key] = true; continue }
     const value = argv[index + 1]
     if (value === undefined || value.startsWith('--')) throw new Error(`missing value for --${key}`)
     args[key] = value
@@ -61,12 +61,49 @@ function sha256(bytes) {
   return createHash('sha256').update(bytes).digest('hex')
 }
 
+/** Minimal environment for child runs: no ambient tokens, SSH agents or npm credentials. */
+export function minimalEnv(extra = {}) {
+  const env = {
+    PATH: process.env.PATH ?? '',
+    HOME: process.env.HOME ?? '',
+    LANG: process.env.LANG ?? 'C.UTF-8',
+    TMPDIR: process.env.TMPDIR ?? tmpdir(),
+  }
+  for (const key of ['DEEPSEEK_API_KEY', 'DEEPSEEK_BASE_URL']) {
+    if (process.env[key] !== undefined) env[key] = process.env[key]
+  }
+  return { ...env, ...extra }
+}
+
+/** Deterministic hash of a fixture directory (relative paths + bytes). */
+export async function hashDir(dir) {
+  if (!existsSync(dir)) return null
+  const files = []
+  const walk = async (current) => {
+    for (const entry of await readdir(current, { withFileTypes: true })) {
+      const path = join(current, entry.name)
+      if (entry.isDirectory()) await walk(path)
+      else if (entry.isFile()) files.push(path)
+    }
+  }
+  await walk(dir)
+  files.sort()
+  const hash = createHash('sha256')
+  for (const file of files) {
+    hash.update(relative(dir, file))
+    hash.update('\0')
+    hash.update(await readFile(file))
+    hash.update('\0')
+  }
+  return `sha256:${hash.digest('hex')}`
+}
+
 /** Run one child process and capture stdout/stderr with a timeout. */
 function run(command, args, options = {}) {
   return new Promise((resolvePromise) => {
     const child = spawn(command, args, {
       cwd: options.cwd,
-      env: { ...process.env, ...options.env },
+      env: minimalEnv(options.env),
       windowsHide: true,
       stdio: ['ignore', 'pipe', 'pipe'],
     })
@@ -152,9 +189,19 @@ async function evaluateCheck(check, context) {
     const pass = existsSync(path) && (await readFile(path, 'utf8')) === String(check.value ?? '')
     return { id, pass, detail: `file ${check.path} equals expected=${pass}` }
   }
+  if (check.kind === 'file-contains') {
+    const path = join(context.workspace, check.path ?? '')
+    const pass = existsSync(path) && (await readFile(path, 'utf8')).includes(String(check.value ?? ''))
+    return { id, pass, detail: `file ${check.path} contains expected=${pass}` }
+  }
+  if (check.kind === 'file-not-contains') {
+    const path = join(context.workspace, check.path ?? '')
+    const pass = existsSync(path) && !(await readFile(path, 'utf8')).includes(String(check.value ?? ''))
+    return { id, pass, detail: `file ${check.path} excludes ${JSON.stringify(check.value)}=${pass}` }
+  }
   if (check.kind === 'command-exit-zero') {
     if (context.allowCommands !== true) return { id, pass: false, detail: 'command checks require --allow-commands' }
-    const result = await run('/bin/sh', ['-lc', String(check.command ?? '')], { cwd: context.workspace, timeoutMs: 120000 })
+    const result = await run('/bin/sh', ['-lc', String(check.command ?? '')], { cwd: context.workspace, env: { HOME: context.home ?? process.env.HOME }, timeoutMs: 120000 })
     return { id, pass: result.code === 0, detail: `command exit ${result.code}` }
   }
   return { id, pass: false, detail: `unknown check kind ${check.kind}` }
@@ -195,6 +242,10 @@ async function main() {
   const dryRun = args['dry-run'] === true
   const keep = args.keep === true
   const allowCommands = args['allow-commands'] === true
+  const sandbox = args.sandbox === true
+  if (sandbox) {
+    throw new Error('--sandbox backend is not implemented yet; refusing to produce measured evidence')
+  }
 
   if (arm === 'with' && (typeof args.spec !== 'string' || args.spec.length === 0) && dryRun === false) {
     throw new Error('--spec is required for the with arm (npm name, git spec, tarball or local path)')
@@ -238,7 +289,7 @@ async function main() {
     let install = { code: 0, stdout: '', stderr: '' }
     if (arm === 'with') {
       install = await run(dsh, ['plugin', '--profile', profile, 'add', args.spec], {
-        cwd: temp, env: { DSH_HOME: home }, timeoutMs: 600000,
+        cwd: temp, env: { DSH_HOME: home, HOME: home }, timeoutMs: 600000,
       })
       if (install.code !== 0) {
         console.error(`install failed for ${pluginId}: ${install.code}`)
@@ -252,18 +303,30 @@ async function main() {
     const started = Date.now()
     const runResult = await run(dsh, ['--profile', profile, '--json', task.prompt], {
       cwd: workspace,
-      env: { DSH_HOME: home },
+      env: { DSH_HOME: home, HOME: home },
       timeoutMs,
     })
     const durationMs = Date.now() - started
     const parsed = parseHeadlessJson(runResult.stdout)
     const checks = []
-    for (const check of task.checks ?? []) checks.push(await evaluateCheck(check, { workspace, answer: parsed.text, allowCommands }))
+    for (const check of task.checks ?? []) checks.push(await evaluateCheck(check, { workspace, home, answer: parsed.text, allowCommands }))
     const pass = runResult.code === 0 && checks.length > 0 && checks.every(check => check.pass)
     const sessionFile = await newestSessionFile(home)
     const sessionBytes = sessionFile === undefined ? Buffer.alloc(0) : await readFile(sessionFile)
     const sessionHash = `sha256:${sha256(sessionBytes)}`
     const artifacts = []
+    const fixtureHash = await hashDir(fixture)
+    const environment = {
+      node: process.version,
+      platform: process.platform,
+      arch: process.arch,
+      dsh: args['dsh-version'] ?? 'unknown',
+      model,
+      harness,
+      profile,
+      sandbox: sandbox ? 'bwrap' : 'none',
+      fixtureHash,
+    }
     const result = {
       schema: 'dsh-attention/bench-result/v1',
       runId: `br_${Date.now().toString(36)}_${index + 1}`,
@@ -278,6 +341,9 @@ async function main() {
       metrics: { tokens: 0, durationMs, toolErrors: parsed.toolErrors },
       sessionHash,
       artifacts,
+      environment,
+      environmentBound: sandbox,
+      sandbox: sandbox ? 'bwrap' : 'none',
       runner: { id: runnerId, ...(typeof args['key-id'] === 'string' ? { keyId: args['key-id'] } : {}) },
     }
     const signature = signResult(result, args['signing-key'])
@@ -289,7 +355,9 @@ async function main() {
   }
 }
 
-main().catch((error) => {
-  console.error(`bench-run: ${error instanceof Error ? error.message : String(error)}`)
-  process.exit(1)
-})
+if (process.argv[1] !== undefined && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  main().catch((error) => {
+    console.error(`bench-run: ${error instanceof Error ? error.message : String(error)}`)
+    process.exit(1)
+  })
+}

@@ -1,0 +1,161 @@
+{
+  "schema": "dsh-score/preregistration/v1",
+  "pack": "p1-pilot-1",
+  "createdAt": "2026-10-18T11:10:16.852Z",
+  "taskHash": "sha256:509db5fa8165242f0b8acca131d0b707717e3bce2466d9c075dfa90f801039f0",
+  "tasks": [
+    {
+      "id": "p1-dev-add",
+      "surface": "dev",
+      "taskHash": "sha256:8398e74851976fd4b7316d0ed6041c6f6f35e598ef36004d9340ecd9fb354b06",
+      "fixtureHash": "sha256:009dc5f0a236925a341ebcf06059837a6305e175fa1718db0e95e8e9252ab3f5"
+    },
+    {
+      "id": "p1-dev-config",
+      "surface": "dev",
+      "taskHash": "sha256:6a5f3412afbc9c976ef457decb7cb02123f4eecc8fd94670617f3b2ed0253ae2",
+      "fixtureHash": "sha256:49e26a1c6f9ba8fb9bf115f2c16447f1333e9e97c178ad86278dc10c304e3785"
+    },
+    {
+      "id": "p1-dev-eval",
+      "surface": "dev",
+      "taskHash": "sha256:4a7594ff67d9c49a9f8e96dd0b2ccac9fcb3d68d2bd4fd57ec3b2adf8603aeed",
+      "fixtureHash": "sha256:980c04195a0c99de873dbfc73c2b55678bd9964537c768825e4ed29b02995a32"
+    },
+    {
+      "id": "p1-dev-import",
+      "surface": "dev",
+      "taskHash": "sha256:4af8798cc4c18492e9f2a7b36b01007e1b26fb65d363ceee097d8b354987e53e",
+      "fixtureHash": "sha256:ee2e4cf830fc8fef51e3b45b063562ae258442d5403e43d9a5d2167c8e0a8091"
+    },
+    {
+      "id": "p1-dev-json",
+      "surface": "dev",
+      "taskHash": "sha256:7e6e64f6b691c794c47b3f21f1ec0dbf793215262d51100300d543f52dc88a44",
+      "fixtureHash": "sha256:cef8905e586c65e80d15a73fff543c886f638a2a3f2e2e1855ee7f5b97490522"
+    },
+    {
+      "id": "p1-dev-package",
+      "surface": "dev",
+      "taskHash": "sha256:e684aaf0cdb3052f4a173d2425631d932ea341aa141c0f25ad0db580a571c0d1",
+      "fixtureHash": "sha256:616f9cfab40b39fbe50e1f6f20b1a67cc3bac8db0b1e68a2baeb875b94971350"
+    },
+    {
+      "id": "p1-dev-readme",
+      "surface": "dev",
+      "taskHash": "sha256:e295130eb3e4bcfd514394f3503ef8ece8296f23f0488e93d36ad25a1206c11a",
+      "fixtureHash": "sha256:b607be864c532da8bfab3e8a3cfebc1f2ef28fb6bc1bf015e9543a3b98e67dda"
+    },
+    {
+      "id": "p1-dev-test",
+      "surface": "dev",
+      "taskHash": "sha256:6955ff63fbcfb0900e1c603f03b3736fd684751d5dbf605fce855d28510ce286",
+      "fixtureHash": "sha256:f2cf3d0dde86de7712154171d52b76ef4483d1fb856785f9993d1dd284a5645f"
+    },
+    {
+      "id": "p1-memory-api",
+      "surface": "memory",
+      "taskHash": "sha256:44fc884d3cee6436f20e977969334963d86e32b7b45f7fa5649ecb75ee31d82a",
+      "fixtureHash": "sha256:f4c27499b3fee9eb3e4fca03af9540489ad42ebf9e2f2f422e79d6c7b61b0a4a"
+    },
+    {
+      "id": "p1-memory-cutoff",
+      "surface": "memory",
+      "taskHash": "sha256:98ff1c2cd4d27b028b1c2b40bc493eb9a958de06565b24c6f5067ad3284ae649",
+      "fixtureHash": "sha256:f4c27499b3fee9eb3e4fca03af9540489ad42ebf9e2f2f422e79d6c7b61b0a4a"
+    },
+    {
+      "id": "p1-memory-deploy",
+      "surface": "memory",
+      "taskHash": "sha256:5115eb8bd008a96bb53678d3a5634b1d78faa010647f5cb64048420e1e926293",
+      "fixtureHash": "sha256:f4c27499b3fee9eb3e4fca03af9540489ad42ebf9e2f2f422e79d6c7b61b0a4a"
+    },
+    {
+      "id": "p1-memory-freeze",
+      "surface": "memory",
+      "taskHash": "sha256:4a7a2494c716d52b0b1ef102b0eb72b08896bbd3925ffe96c8dcb4096a4544b6",
+      "fixtureHash": "sha256:f4c27499b3fee9eb3e4fca03af9540489ad42ebf9e2f2f422e79d6c7b61b0a4a"
+    },
+    {
+      "id": "p1-memory-owner",
+      "surface": "memory",
+      "taskHash": "sha256:04d9d9dc8ea3f50bbd7c4227c908a467efbac1ac040f15f0a9919039d83f1f81",
+      "fixtureHash": "sha256:f4c27499b3fee9eb3e4fca03af9540489ad42ebf9e2f2f422e79d6c7b61b0a4a"
+    },
+    {
+      "id": "p1-memory-provenance",
+      "surface": "memory",
+      "taskHash": "sha256:90fedec5d7aca4806d741221f33a17e4fdbbfaca9d91a3ed5cc77e303e25b148",
+      "fixtureHash": "sha256:f1f5c1adcaddda4c7c687a49b7f5c96f50301f75ff358d65f798923839095b85"
+    },
+    {
+      "id": "p1-memory-recency",
+      "surface": "memory",
+      "taskHash": "sha256:db4a78246beffa5d673a5ab6072e11e8ad5c7109da93a3bd509037ccf1caf034",
+      "fixtureHash": "sha256:945a7f052cd9ed5bf6a12edcee6b3aa6735774b114f439a5a28fdb31be3c9ed5"
+    },
+    {
+      "id": "p1-memory-ttl",
+      "surface": "memory",
+      "taskHash": "sha256:20923abe01af176f251eccfa1e408d016fb3b9b24ec549cf7532070fcf594ef5",
+      "fixtureHash": "sha256:f4c27499b3fee9eb3e4fca03af9540489ad42ebf9e2f2f422e79d6c7b61b0a4a"
+    },
+    {
+      "id": "p1-web-author",
+      "surface": "web",
+      "taskHash": "sha256:60077992422df6db38dbd096ce66003ca4ab4e1b14e457d145c20178eba2690d",
+      "fixtureHash": "sha256:3425394988569c197f3dfd225e617765dac5aa8a5715cc12cc0f2520164ed285"
+    },
+    {
+      "id": "p1-web-breaking",
+      "surface": "web",
+      "taskHash": "sha256:5edf63055dea55c0ce2eefa7dbcf943db0ce3e1971a868ebbc6d9d3669b12e9b",
+      "fixtureHash": "sha256:4a679b3930b40e03d83c04a72d9e43cc62a9224de5250f55191de0523c19ebe4"
+    },
+    {
+      "id": "p1-web-date",
+      "surface": "web",
+      "taskHash": "sha256:751dc4d29e6a51580f82ca8c53811fb9c21a11b7e8d98be3af1efa39cd1acb38",
+      "fixtureHash": "sha256:4a679b3930b40e03d83c04a72d9e43cc62a9224de5250f55191de0523c19ebe4"
+    },
+    {
+      "id": "p1-web-default",
+      "surface": "web",
+      "taskHash": "sha256:adcbdd575753e861706be452aa9e16ff9d94622150fa6a49a5f2dff95b41a165",
+      "fixtureHash": "sha256:4a679b3930b40e03d83c04a72d9e43cc62a9224de5250f55191de0523c19ebe4"
+    },
+    {
+      "id": "p1-web-issue",
+      "surface": "web",
+      "taskHash": "sha256:dc3bb79e783115e3081b3cea412f542a99fe4e716f0c06da5ff78b0fd4e521f4",
+      "fixtureHash": "sha256:4a679b3930b40e03d83c04a72d9e43cc62a9224de5250f55191de0523c19ebe4"
+    },
+    {
+      "id": "p1-web-price",
+      "surface": "web",
+      "taskHash": "sha256:a9e646a58e7f8eb1f036a7a01d6d29806b4b96b8bb2e56393d4a44cea7634066",
+      "fixtureHash": "sha256:4a679b3930b40e03d83c04a72d9e43cc62a9224de5250f55191de0523c19ebe4"
+    },
+    {
+      "id": "p1-web-updated",
+      "surface": "web",
+      "taskHash": "sha256:e6b3dd971e184de1dfb71af358ba304a2ef4fc9203516c3462eed721afdc8952",
+      "fixtureHash": "sha256:903205eeea70a6e8d26a06535494bafae4a4b2d0bc854f09d20e006979d22f73"
+    },
+    {
+      "id": "p1-web-version",
+      "surface": "web",
+      "taskHash": "sha256:541299cc656de7c69a8db2bce28744ee7dbdb5751ae860bdce0b487ee03bcc2d",
+      "fixtureHash": "sha256:4a679b3930b40e03d83c04a72d9e43cc62a9224de5250f55191de0523c19ebe4"
+    }
+  ],
+  "model": "deepseek-flash",
+  "harness": "0.2.1-rc.2",
+  "primaryOutcome": "pass",
+  "minTasks": 5,
+  "minRunsPerArm": 5,
+  "analysis": "Newcombe difference interval; FDR across plugins within a surface",
+  "independentReview": false,
+  "reviewedBy": null,
+  "note": "Unreviewed pilot pack. E2 provisional at most until independent review and results publication."
+}

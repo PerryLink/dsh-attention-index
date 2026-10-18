@@ -20,12 +20,29 @@ jobs:
         run: node scripts/aggregate.mjs --today 2026-10-18
       - name: Export the dsh-recommend sidecar
         run: node scripts/export-recommend.mjs
+      - name: Build versioned API and market signals
+        run: |
+          node scripts/build-api.mjs
+          node scripts/build-signals.mjs
+      - name: Pre-registration hash must match
+        run: node scripts/preregister.mjs --check
+      - name: P2/P3 conformance
+        run: node scripts/conformance.mjs
       - name: P0 invariants (unrated, no prior #1, formula)
         run: node scripts/check-invariants.mjs
       - name: Syntax-check site and reliability layer
         run: |
           node --check site/app.js
           node --check scripts/reliability.mjs
+          node --check scripts/bench-run.mjs
+          node --check scripts/verify-result.mjs
+          node --check scripts/ingest-result.mjs
+          node --check scripts/identity.mjs
+          node --check scripts/match-brief.mjs
+          node --check scripts/recommend.mjs
+          node --check scripts/preregister.mjs
+          node --check scripts/audit-check.mjs
+          node --check scripts/conformance.mjs
       - name: Generated files must be committed
         run: git diff --exit-code
       - name: Check generated JSON parses

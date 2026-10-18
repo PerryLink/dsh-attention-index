@@ -49,18 +49,19 @@ A claim upgrades only when the evidence supports it:
 
 1. **E0 → E1**: an executable task with hashed fixture and environment manifest.
 2. **E1 → E2**: a paired with/without result, signed, deduped.
-3. **E2 → E3**: ≥5 tasks, ≥5 runs/arm, ≥1 independent runner, positive
-   multiplicity-adjusted lower bound, no open dispute.
+3. **E2 → E3**: ≥5 reviewed tasks, ≥5 runs/arm, ≥1 independent runner,
+   positive multiplicity-adjusted lower bound, no open dispute.
 4. **E3 → E4**: ≥2 independent runners with different keys, consistent direction,
    holdout passed.
-5. **E4 → E5**: independent audit, pre-registration, all-results publication,
-   COI register clean.
+5. **E4 → E5**: independent audit attestation (`data/audits/index.json`),
+   pre-registration, all-results publication, COI register clean.
 
 ## 4. Downgrade rules
 
 Any of these demotes one grade or blocks a quality slot:
 
 - self-run or operator-owned runner;
+- an unreviewed pilot task pack (hard cap at E2);
 - self-asserted `certified` / `docs` without certifier or URL;
 - missing adoption channels treated as zero;
 - cross-version or cross-model borrowing;

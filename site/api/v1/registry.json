@@ -1,0 +1,4322 @@
+{
+  "schema": "dsh-attention/registry/v1",
+  "generatedAt": "2026-10-18T00:00:00.000Z",
+  "scoring": {
+    "version": "v1",
+    "reliabilityVersion": "soe-goe/v1",
+    "weights": {
+      "measured": {
+        "bench": 0.55,
+        "prior": 0.3,
+        "coverage": 0.1,
+        "community": 0.05
+      },
+      "prior": {
+        "prior": 1
+      }
+    },
+    "priorCap": 60,
+    "minSamples": 3,
+    "formula": "measured: 0.55*bench + 0.30*prior + 0.10*coverage + 0.05*community; prior-only: 60*prior/100",
+    "priorOnlyFormula": "60*prior/100",
+    "note": "Prior-only rows are E0/unrated: metadata is not outcome evidence. Only a positive, adequately powered measured result can occupy a quality slot. Contributions do not substitute for a bench."
+  },
+  "source": {
+    "plugins": 42,
+    "tasks": 39,
+    "surfaces": 15,
+    "benchResults": 0,
+    "contributions": 0,
+    "inputHash": "sha256:ac0b4b8ec693410e962277de29e31603ab9bea7a8b753496d11033116c378c75"
+  },
+  "stats": {
+    "plugins": 42,
+    "surfaces": 15,
+    "tasks": 39,
+    "measuredPlugins": 0,
+    "positiveMeasured": 0,
+    "unratedPlugins": 42,
+    "gradeCounts": {
+      "E0": 42
+    },
+    "contributors": 0,
+    "contributions": 0,
+    "benchResults": 0
+  },
+  "surfaces": [
+    {
+      "id": "memory",
+      "label": "Cross-session memory",
+      "zh": "跨会话记忆",
+      "tasks": [
+        "memory-recall",
+        "p1-memory-deploy",
+        "p1-memory-freeze",
+        "p1-memory-api",
+        "p1-memory-owner",
+        "p1-memory-cutoff",
+        "p1-memory-ttl",
+        "p1-memory-recency",
+        "p1-memory-provenance"
+      ],
+      "leaderboard": [
+        {
+          "pluginId": "volcengine/openviking",
+          "name": "OpenViking memory",
+          "author": "volcengine",
+          "surface": "memory",
+          "summary": "Long-term memory, retrieval and skills over a client/server memory service.",
+          "status": "active",
+          "license": "AGPL-3.0",
+          "repo": "https://github.com/volcengine/OpenViking",
+          "npm": null,
+          "score": 41,
+          "scoreScale": 60,
+          "prior": 68.4,
+          "priorDimensions": {
+            "maintenance": 100,
+            "adoption": 93.8,
+            "verification": 0,
+            "documentation": null
+          },
+          "bench": null,
+          "coverage": 0,
+          "coverageScore": 0,
+          "community": 0,
+          "confidence": 0.6,
+          "tier": "prior",
+          "evidenceGrade": "E0",
+          "soe": {
+            "design": 0,
+            "execution": 0,
+            "precision": 0,
+            "independence": 0,
+            "directness": 0,
+            "notes": [
+              "no-paired-result",
+              "metadata-only",
+              "missing-adoption-channels",
+              "docs-unknown",
+              "npm-identity-missing"
+            ]
+          },
+          "goe": {
+            "grade": "E0",
+            "certainty": "very-low",
+            "positive": false,
+            "reasons": [
+              "no-outcome-evidence",
+              "metadata-only"
+            ],
+            "downgrades": [
+              "missing-adoption-channels",
+              "docs-unknown"
+            ]
+          },
+          "unrated": true,
+          "operatorOwned": false,
+          "missing": {
+            "installs": false,
+            "npm7d": false,
+            "stars": true,
+            "docs": true,
+            "npmName": true
+          },
+          "taskReviewed": false,
+          "discovery": {
+            "score": 41,
+            "scale": 60,
+            "label": "legacy discovery — not a quality score",
+            "basis": [
+              "maintenance",
+              "adoption",
+              "verification",
+              "documentation"
+            ]
+          },
+          "discoveryPosition": 1,
+          "runners": 0,
+          "runs": 0,
+          "benchTasks": [],
+          "evidence": {
+            "installs": 401,
+            "npm7d": 10160,
+            "stars": null,
+            "lastPush": "2026-10-06",
+            "verification": "none",
+            "observedAt": "2026-10-06",
+            "repo": "https://github.com/volcengine/OpenViking"
+          },
+          "rank": null
+        },
+        {
+          "pluginId": "vectorize-io/hindsight",
+          "name": "hindsight",
+          "author": "vectorize-io",
+          "surface": "memory",
+          "summary": "Learnable project memory with automatic recall and per-repo isolation.",
+          "status": "active",
+          "license": "MIT",
+          "repo": "https://github.com/vectorize-io/hindsight",
+          "npm": null,
+          "score": 38.2,
+          "scoreScale": 60,
+          "prior": 63.6,
+          "priorDimensions": {
+            "maintenance": 100,
+            "adoption": 80.3,
+            "verification": 0,
+            "documentation": null
+          },
+          "bench": null,
+          "coverage": 0,
+          "coverageScore": 0,
+          "community": 0,
+          "confidence": 0.6,
+          "tier": "prior",
+          "evidenceGrade": "E0",
+          "soe": {
+            "design": 0,
+            "execution": 0,
+            "precision": 0,
+            "independence": 0,
+            "directness": 0,
+            "notes": [
+              "no-paired-result",
+              "metadata-only",
+              "missing-adoption-channels",
+              "docs-unknown",
+              "npm-identity-missing"
+            ]
+          },
+          "goe": {
+            "grade": "E0",
+            "certainty": "very-low",
+            "positive": false,
+            "reasons": [
+              "no-outcome-evidence",
+              "metadata-only"
+            ],
+            "downgrades": [
+              "missing-adoption-channels",
+              "docs-unknown"
+            ]
+          },
+          "unrated": true,
+          "operatorOwned": false,
+          "missing": {
+            "installs": false,
+            "npm7d": false,
+            "stars": true,
+            "docs": true,
+            "npmName": true
+          },
+          "taskReviewed": false,
+          "discovery": {
+            "score": 38.2,
+            "scale": 60,
+            "label": "legacy discovery — not a quality score",
+            "basis": [
+              "maintenance",
+              "adoption",
+              "verification",
+              "documentation"
+            ]
+          },
+          "discoveryPosition": 2,
+          "runners": 0,
+          "runs": 0,
+          "benchTasks": [],
+          "evidence": {
+            "installs": 169,
+            "npm7d": 19056,
+            "stars": null,
+            "lastPush": "2026-10-05",
+            "verification": "none",
+            "observedAt": "2026-10-06",
+            "repo": "https://github.com/vectorize-io/hindsight"
+          },
+          "rank": null
+        },
+        {
+          "pluginId": "perrylink/dsh-memento",
+          "name": "dsh-memento",
+          "author": "PerryLink",
+          "surface": "memory",
+          "summary": "Bounded, approval-gated cross-session memory with a ctx.memory seam and SQLite provider.",
+          "status": "frozen",
+          "license": "Apache-2.0",
+          "repo": "https://github.com/PerryLink/dsh-memento",
+          "npm": "dsh-memento",
+          "score": 30,
+          "scoreScale": 60,
+          "prior": 50,
+          "priorDimensions": {
+            "maintenance": 100,
+            "adoption": 76.9,
+            "verification": 0,
+            "documentation": null
+          },
+          "bench": null,
+          "coverage": 0,
+          "coverageScore": 0,
+          "community": 0,
+          "confidence": 0.4,
+          "tier": "prior",
+          "evidenceGrade": "E0",
+          "soe": {
+            "design": 0,
+            "execution": 0,
+            "precision": 0,
+            "independence": 0,
+            "directness": 0,
+            "notes": [
+              "no-paired-result",
+              "metadata-only",
+              "operator-owned",
+              "missing-adoption-channels",
+              "docs-unknown"
+            ]
+          },
+          "goe": {
+            "grade": "E0",
+            "certainty": "very-low",
+            "positive": false,
+            "reasons": [
+              "no-outcome-evidence",
+              "metadata-only"
+            ],
+            "downgrades": [
+              "operator-owned",
+              "missing-adoption-channels",
+              "docs-unknown"
+            ]
+          },
+          "unrated": true,
+          "operatorOwned": true,
+          "missing": {
+            "installs": true,
+            "npm7d": true,
+            "stars": false,
+            "docs": true,
+            "npmName": false
+          },
+          "taskReviewed": false,
+          "discovery": {
+            "score": 30,
+            "scale": 60,
+            "label": "legacy discovery — not a quality score",
+            "basis": [
+              "maintenance",
+              "adoption",
+              "verification",
+              "documentation"
+            ]
+          },
+          "discoveryPosition": 3,
+          "runners": 0,
+          "runs": 0,
+          "benchTasks": [],
+          "evidence": {
+            "installs": null,
+            "npm7d": null,
+            "stars": 136,
+            "lastPush": "2026-10-18",
+            "verification": "doctor",
+            "observedAt": "2026-10-18",
+            "repo": "https://github.com/PerryLink/dsh-memento"
+          },
+          "rank": null
+        }
+      ],
+      "top3": [],
+      "featured": null,
+      "measured": 0,
+      "positive": 0,
+      "note": "Prior-only: no paired with/without bench result meets the minimum evidence gate. Rows are unrated; the legacy discovery order is not a quality rank."
+    },
+    {
+      "id": "cost",
+      "label": "Cost and context accounting",
+      "zh": "成本与上下文",
+      "tasks": [
+        "cost-guard"
+      ],
+      "leaderboard": [
+        {
+          "pluginId": "bowenliang123/dsh-context",
+          "name": "dsh-context",
+          "author": "bowenliang123",
+          "surface": "cost",
+          "summary": "Context-window composition, per-request history, compaction and injection events.",
+          "status": "active",
+          "license": "MIT",
+          "repo": "https://github.com/bowenliang123/dsh-context",
+          "npm": "dsh-context",
+          "score": 42.4,
+          "scoreScale": 60,
+          "prior": 70.6,
+          "priorDimensions": {
+            "maintenance": 100,
+            "adoption": 100,
+            "verification": 0,
+            "documentation": null
+          },
+          "bench": null,
+          "coverage": 0,
+          "coverageScore": 0,
+          "community": 0,
+          "confidence": 0.6,
+          "tier": "prior",
+          "evidenceGrade": "E0",
+          "soe": {
+            "design": 0,
+            "execution": 0,
+            "precision": 0,
+            "independence": 0,
+            "directness": 0,
+            "notes": [
+              "no-paired-result",
+              "metadata-only",
+              "missing-adoption-channels",
+              "docs-unknown"
+            ]
+          },
+          "goe": {
+            "grade": "E0",
+            "certainty": "very-low",
+            "positive": false,
+            "reasons": [
+              "no-outcome-evidence",
+              "metadata-only"
+            ],
+            "downgrades": [
+              "missing-adoption-channels",
+              "docs-unknown"
+            ]
+          },
+          "unrated": true,
+          "operatorOwned": false,
+          "missing": {
+            "installs": false,
+            "npm7d": false,
+            "stars": true,
+            "docs": true,
+            "npmName": false
+          },
+          "taskReviewed": false,
+          "discovery": {
+            "score": 42.4,
+            "scale": 60,
+            "label": "legacy discovery — not a quality score",
+            "basis": [
+              "maintenance",
+              "adoption",
+              "verification",
+              "documentation"
+            ]
+          },
+          "discoveryPosition": 1,
+          "runners": 0,
+          "runs": 0,
+          "benchTasks": [],
+          "evidence": {
+            "installs": 50,
+            "npm7d": 38839,
+            "stars": null,
+            "lastPush": "2026-10-05",
+            "verification": "none",
+            "observedAt": "2026-10-06",
+            "repo": "https://github.com/bowenliang123/dsh-context"
+          },
+          "rank": null
+        },
+        {
+          "pluginId": "han-1413141/dsh-cost-meter",
+          "name": "dsh-cost-meter",
+          "author": "Han-1413141",
+          "surface": "cost",
+          "summary": "Session and daily cost stats, budget gauge, balance and peak/off-peak pricing.",
+          "status": "active",
+          "license": "MIT",
+          "repo": "https://github.com/Han-1413141/dsh-cost-meter",
+          "npm": "dsh-cost-meter",
+          "score": 42.4,
+          "scoreScale": 60,
+          "prior": 70.6,
+          "priorDimensions": {
+            "maintenance": 100,
+            "adoption": 100,
+            "verification": 0,
+            "documentation": null
+          },
+          "bench": null,
+          "coverage": 0,
+          "coverageScore": 0,
+          "community": 0,
+          "confidence": 0.6,
+          "tier": "prior",
+          "evidenceGrade": "E0",
+          "soe": {
+            "design": 0,
+            "execution": 0,
+            "precision": 0,
+            "independence": 0,
+            "directness": 0,
+            "notes": [
+              "no-paired-result",
+              "metadata-only",
+              "missing-adoption-channels",
+              "docs-unknown"
+            ]
+          },
+          "goe": {
+            "grade": "E0",
+            "certainty": "very-low",
+            "positive": false,
+            "reasons": [
+              "no-outcome-evidence",
+              "metadata-only"
+            ],
+            "downgrades": [
+              "missing-adoption-channels",
+              "docs-unknown"
+            ]
+          },
+          "unrated": true,
+          "operatorOwned": false,
+          "missing": {
+            "installs": false,
+            "npm7d": false,
+            "stars": true,
+            "docs": true,
+            "npmName": false
+          },
+          "taskReviewed": false,
+          "discovery": {
+            "score": 42.4,
+            "scale": 60,
+            "label": "legacy discovery — not a quality score",
+            "basis": [
+              "maintenance",
+              "adoption",
+              "verification",
+              "documentation"
+            ]
+          },
+          "discoveryPosition": 2,
+          "runners": 0,
+          "runs": 0,
+          "benchTasks": [],
+          "evidence": {
+            "installs": 72,
+            "npm7d": 31807,
+            "stars": null,
+            "lastPush": "2026-10-05",
+            "verification": "none",
+            "observedAt": "2026-10-06",
+            "repo": "https://github.com/Han-1413141/dsh-cost-meter"
+          },
+          "rank": null
+        },
+        {
+          "pluginId": "perrylink/dsh-budget",
+          "name": "dsh-budget",
+          "author": "PerryLink",
+          "surface": "cost",
+          "summary": "Token and cost governance with caps, alerts, carbon estimates and latency benchmarks.",
+          "status": "frozen",
+          "license": "Apache-2.0",
+          "repo": "https://github.com/PerryLink/dsh-budget",
+          "npm": "dsh-budget",
+          "score": 29.1,
+          "scoreScale": 60,
+          "prior": 48.5,
+          "priorDimensions": {
+            "maintenance": 100,
+            "adoption": 37.5,
+            "verification": 0,
+            "documentation": null
+          },
+          "bench": null,
+          "coverage": 0,
+          "coverageScore": 0,
+          "community": 0,
+          "confidence": 0.4,
+          "tier": "prior",
+          "evidenceGrade": "E0",
+          "soe": {
+            "design": 0,
+            "execution": 0,
+            "precision": 0,
+            "independence": 0,
+            "directness": 0,
+            "notes": [
+              "no-paired-result",
+              "metadata-only",
+              "operator-owned",
+              "missing-adoption-channels",
+              "docs-unknown"
+            ]
+          },
+          "goe": {
+            "grade": "E0",
+            "certainty": "very-low",
+            "positive": false,
+            "reasons": [
+              "no-outcome-evidence",
+              "metadata-only"
+            ],
+            "downgrades": [
+              "operator-owned",
+              "missing-adoption-channels",
+              "docs-unknown"
+            ]
+          },
+          "unrated": true,
+          "operatorOwned": true,
+          "missing": {
+            "installs": true,
+            "npm7d": true,
+            "stars": false,
+            "docs": true,
+            "npmName": false
+          },
+          "taskReviewed": false,
+          "discovery": {
+            "score": 29.1,
+            "scale": 60,
+            "label": "legacy discovery — not a quality score",
+            "basis": [
+              "maintenance",
+              "adoption",
+              "verification",
+              "documentation"
+            ]
+          },
+          "discoveryPosition": 3,
+          "runners": 0,
+          "runs": 0,
+          "benchTasks": [],
+          "evidence": {
+            "installs": null,
+            "npm7d": null,
+            "stars": 10,
+            "lastPush": "2026-10-18",
+            "verification": "doctor",
+            "observedAt": "2026-10-18",
+            "repo": "https://github.com/PerryLink/dsh-budget"
+          },
+          "rank": null
+        }
+      ],
+      "top3": [],
+      "featured": null,
+      "measured": 0,
+      "positive": 0,
+      "note": "Prior-only: no paired with/without bench result meets the minimum evidence gate. Rows are unrated; the legacy discovery order is not a quality rank."
+    },
+    {
+      "id": "vision",
+      "label": "Image understanding",
+      "zh": "图像理解",
+      "tasks": [
+        "vision-invoice"
+      ],
+      "leaderboard": [
+        {
+          "pluginId": "liustack/modlens",
+          "name": "modlens",
+          "author": "liustack",
+          "surface": "vision",
+          "summary": "Vision bridge for text-only models: structured JSON evidence from an image.",
+          "status": "active",
+          "license": "MIT",
+          "repo": "https://github.com/liustack/modlens",
+          "npm": null,
+          "score": 38.3,
+          "scoreScale": 60,
+          "prior": 63.8,
+          "priorDimensions": {
+            "maintenance": 100,
+            "adoption": 80.7,
+            "verification": 0,
+            "documentation": null
+          },
+          "bench": null,
+          "coverage": 0,
+          "coverageScore": 0,
+          "community": 0,
+          "confidence": 0.6,
+          "tier": "prior",
+          "evidenceGrade": "E0",
+          "soe": {
+            "design": 0,
+            "execution": 0,
+            "precision": 0,
+            "independence": 0,
+            "directness": 0,
+            "notes": [
+              "no-paired-result",
+              "metadata-only",
+              "missing-adoption-channels",
+              "docs-unknown",
+              "npm-identity-missing"
+            ]
+          },
+          "goe": {
+            "grade": "E0",
+            "certainty": "very-low",
+            "positive": false,
+            "reasons": [
+              "no-outcome-evidence",
+              "metadata-only"
+            ],
+            "downgrades": [
+              "missing-adoption-channels",
+              "docs-unknown"
+            ]
+          },
+          "unrated": true,
+          "operatorOwned": false,
+          "missing": {
+            "installs": false,
+            "npm7d": false,
+            "stars": true,
+            "docs": true,
+            "npmName": true
+          },
+          "taskReviewed": false,
+          "discovery": {
+            "score": 38.3,
+            "scale": 60,
+            "label": "legacy discovery — not a quality score",
+            "basis": [
+              "maintenance",
+              "adoption",
+              "verification",
+              "documentation"
+            ]
+          },
+          "discoveryPosition": 1,
+          "runners": 0,
+          "runs": 0,
+          "benchTasks": [],
+          "evidence": {
+            "installs": 173,
+            "npm7d": 16691,
+            "stars": null,
+            "lastPush": "2026-10-04",
+            "verification": "none",
+            "observedAt": "2026-10-06",
+            "repo": "https://github.com/liustack/modlens"
+          },
+          "rank": null
+        },
+        {
+          "pluginId": "ysr666/dsh-vision-router",
+          "name": "dsh-vision-router",
+          "author": "ysr666",
+          "surface": "vision",
+          "summary": "Keyless vision chain plus pixel-level tools.",
+          "status": "active",
+          "license": "MIT",
+          "repo": "https://github.com/ysr666/dsh-vision-router",
+          "npm": null,
+          "score": 34.1,
+          "scoreScale": 60,
+          "prior": 56.8,
+          "priorDimensions": {
+            "maintenance": 100,
+            "adoption": 60.8,
+            "verification": 0,
+            "documentation": null
+          },
+          "bench": null,
+          "coverage": 0,
+          "coverageScore": 0,
+          "community": 0,
+          "confidence": 0.6,
+          "tier": "prior",
+          "evidenceGrade": "E0",
+          "soe": {
+            "design": 0,
+            "execution": 0,
+            "precision": 0,
+            "independence": 0,
+            "directness": 0,
+            "notes": [
+              "no-paired-result",
+              "metadata-only",
+              "missing-adoption-channels",
+              "docs-unknown",
+              "npm-identity-missing"
+            ]
+          },
+          "goe": {
+            "grade": "E0",
+            "certainty": "very-low",
+            "positive": false,
+            "reasons": [
+              "no-outcome-evidence",
+              "metadata-only"
+            ],
+            "downgrades": [
+              "missing-adoption-channels",
+              "docs-unknown"
+            ]
+          },
+          "unrated": true,
+          "operatorOwned": false,
+          "missing": {
+            "installs": false,
+            "npm7d": false,
+            "stars": true,
+            "docs": true,
+            "npmName": true
+          },
+          "taskReviewed": false,
+          "discovery": {
+            "score": 34.1,
+            "scale": 60,
+            "label": "legacy discovery — not a quality score",
+            "basis": [
+              "maintenance",
+              "adoption",
+              "verification",
+              "documentation"
+            ]
+          },
+          "discoveryPosition": 2,
+          "runners": 0,
+          "runs": 0,
+          "benchTasks": [],
+          "evidence": {
+            "installs": 48,
+            "npm7d": 10168,
+            "stars": null,
+            "lastPush": "2026-10-05",
+            "verification": "none",
+            "observedAt": "2026-10-06",
+            "repo": "https://github.com/ysr666/dsh-vision-router"
+          },
+          "rank": null
+        },
+        {
+          "pluginId": "anionex/dsh-vision-toolkit",
+          "name": "dsh-vision-toolkit",
+          "author": "Anionex",
+          "surface": "vision",
+          "summary": "Image Q&A, multi-image comparison and screenshot OCR.",
+          "status": "active",
+          "license": "MIT",
+          "repo": "https://github.com/Anionex/dsh-vision-toolkit",
+          "npm": null,
+          "score": 33.1,
+          "scoreScale": 60,
+          "prior": 55.1,
+          "priorDimensions": {
+            "maintenance": 100,
+            "adoption": 56,
+            "verification": 0,
+            "documentation": null
+          },
+          "bench": null,
+          "coverage": 0,
+          "coverageScore": 0,
+          "community": 0,
+          "confidence": 0.6,
+          "tier": "prior",
+          "evidenceGrade": "E0",
+          "soe": {
+            "design": 0,
+            "execution": 0,
+            "precision": 0,
+            "independence": 0,
+            "directness": 0,
+            "notes": [
+              "no-paired-result",
+              "metadata-only",
+              "missing-adoption-channels",
+              "docs-unknown",
+              "npm-identity-missing"
+            ]
+          },
+          "goe": {
+            "grade": "E0",
+            "certainty": "very-low",
+            "positive": false,
+            "reasons": [
+              "no-outcome-evidence",
+              "metadata-only"
+            ],
+            "downgrades": [
+              "missing-adoption-channels",
+              "docs-unknown"
+            ]
+          },
+          "unrated": true,
+          "operatorOwned": false,
+          "missing": {
+            "installs": false,
+            "npm7d": false,
+            "stars": true,
+            "docs": true,
+            "npmName": true
+          },
+          "taskReviewed": false,
+          "discovery": {
+            "score": 33.1,
+            "scale": 60,
+            "label": "legacy discovery — not a quality score",
+            "basis": [
+              "maintenance",
+              "adoption",
+              "verification",
+              "documentation"
+            ]
+          },
+          "discoveryPosition": 3,
+          "runners": 0,
+          "runs": 0,
+          "benchTasks": [],
+          "evidence": {
+            "installs": 35,
+            "npm7d": 3652,
+            "stars": null,
+            "lastPush": "2026-10-05",
+            "verification": "none",
+            "observedAt": "2026-10-06",
+            "repo": "https://github.com/Anionex/dsh-vision-toolkit"
+          },
+          "rank": null
+        }
+      ],
+      "top3": [],
+      "featured": null,
+      "measured": 0,
+      "positive": 0,
+      "note": "Prior-only: no paired with/without bench result meets the minimum evidence gate. Rows are unrated; the legacy discovery order is not a quality rank."
+    },
+    {
+      "id": "web",
+      "label": "Web search and fetch",
+      "zh": "联网搜索",
+      "tasks": [
+        "web-current",
+        "p1-web-version",
+        "p1-web-date",
+        "p1-web-breaking",
+        "p1-web-default",
+        "p1-web-price",
+        "p1-web-issue",
+        "p1-web-author",
+        "p1-web-updated"
+      ],
+      "leaderboard": [
+        {
+          "pluginId": "anysearch-team/anysearch-dsh",
+          "name": "anysearch-dsh",
+          "author": "anysearch-team",
+          "surface": "web",
+          "summary": "Web search and advanced search tools.",
+          "status": "active",
+          "license": "MIT",
+          "repo": "https://github.com/anysearch-team/anysearch-dsh",
+          "npm": null,
+          "score": 32.5,
+          "scoreScale": 60,
+          "prior": 54.2,
+          "priorDimensions": {
+            "maintenance": 100,
+            "adoption": 53.7,
+            "verification": 0,
+            "documentation": null
+          },
+          "bench": null,
+          "coverage": 0,
+          "coverageScore": 0,
+          "community": 0,
+          "confidence": 0.6,
+          "tier": "prior",
+          "evidenceGrade": "E0",
+          "soe": {
+            "design": 0,
+            "execution": 0,
+            "precision": 0,
+            "independence": 0,
+            "directness": 0,
+            "notes": [
+              "no-paired-result",
+              "metadata-only",
+              "missing-adoption-channels",
+              "docs-unknown",
+              "npm-identity-missing"
+            ]
+          },
+          "goe": {
+            "grade": "E0",
+            "certainty": "very-low",
+            "positive": false,
+            "reasons": [
+              "no-outcome-evidence",
+              "metadata-only"
+            ],
+            "downgrades": [
+              "missing-adoption-channels",
+              "docs-unknown"
+            ]
+          },
+          "unrated": true,
+          "operatorOwned": false,
+          "missing": {
+            "installs": false,
+            "npm7d": false,
+            "stars": true,
+            "docs": true,
+            "npmName": true
+          },
+          "taskReviewed": false,
+          "discovery": {
+            "score": 32.5,
+            "scale": 60,
+            "label": "legacy discovery — not a quality score",
+            "basis": [
+              "maintenance",
+              "adoption",
+              "verification",
+              "documentation"
+            ]
+          },
+          "discoveryPosition": 1,
+          "runners": 0,
+          "runs": 0,
+          "benchTasks": [],
+          "evidence": {
+            "installs": 30,
+            "npm7d": 1749,
+            "stars": null,
+            "lastPush": "2026-10-05",
+            "verification": "none",
+            "observedAt": "2026-10-06",
+            "repo": "https://github.com/anysearch-team/anysearch-dsh"
+          },
+          "rank": null
+        },
+        {
+          "pluginId": "liustack/modsearch",
+          "name": "modsearch",
+          "author": "liustack",
+          "surface": "web",
+          "summary": "Search the web and X, returning structured JSON evidence with citations.",
+          "status": "active",
+          "license": "MIT",
+          "repo": "https://github.com/liustack/modsearch",
+          "npm": null,
+          "score": 32.5,
+          "scoreScale": 60,
+          "prior": 54.2,
+          "priorDimensions": {
+            "maintenance": 100,
+            "adoption": 53.7,
+            "verification": 0,
+            "documentation": null
+          },
+          "bench": null,
+          "coverage": 0,
+          "coverageScore": 0,
+          "community": 0,
+          "confidence": 0.6,
+          "tier": "prior",
+          "evidenceGrade": "E0",
+          "soe": {
+            "design": 0,
+            "execution": 0,
+            "precision": 0,
+            "independence": 0,
+            "directness": 0,
+            "notes": [
+              "no-paired-result",
+              "metadata-only",
+              "missing-adoption-channels",
+              "docs-unknown",
+              "npm-identity-missing"
+            ]
+          },
+          "goe": {
+            "grade": "E0",
+            "certainty": "very-low",
+            "positive": false,
+            "reasons": [
+              "no-outcome-evidence",
+              "metadata-only"
+            ],
+            "downgrades": [
+              "missing-adoption-channels",
+              "docs-unknown"
+            ]
+          },
+          "unrated": true,
+          "operatorOwned": false,
+          "missing": {
+            "installs": false,
+            "npm7d": false,
+            "stars": true,
+            "docs": true,
+            "npmName": true
+          },
+          "taskReviewed": false,
+          "discovery": {
+            "score": 32.5,
+            "scale": 60,
+            "label": "legacy discovery — not a quality score",
+            "basis": [
+              "maintenance",
+              "adoption",
+              "verification",
+              "documentation"
+            ]
+          },
+          "discoveryPosition": 2,
+          "runners": 0,
+          "runs": 0,
+          "benchTasks": [],
+          "evidence": {
+            "installs": 30,
+            "npm7d": 7347,
+            "stars": null,
+            "lastPush": "2026-10-05",
+            "verification": "none",
+            "observedAt": "2026-10-06",
+            "repo": "https://github.com/liustack/modsearch"
+          },
+          "rank": null
+        },
+        {
+          "pluginId": "dddmuc/dsh-free-search",
+          "name": "dsh-free-search",
+          "author": "DDDMUC",
+          "surface": "web",
+          "summary": "Keyless free web search over DuckDuckGo.",
+          "status": "active",
+          "license": "MIT",
+          "repo": "https://github.com/DDDMUC/dsh-free-search",
+          "npm": null,
+          "score": 30.9,
+          "scoreScale": 60,
+          "prior": 51.5,
+          "priorDimensions": {
+            "maintenance": 100,
+            "adoption": 46,
+            "verification": 0,
+            "documentation": null
+          },
+          "bench": null,
+          "coverage": 0,
+          "coverageScore": 0,
+          "community": 0,
+          "confidence": 0.6,
+          "tier": "prior",
+          "evidenceGrade": "E0",
+          "soe": {
+            "design": 0,
+            "execution": 0,
+            "precision": 0,
+            "independence": 0,
+            "directness": 0,
+            "notes": [
+              "no-paired-result",
+              "metadata-only",
+              "missing-adoption-channels",
+              "docs-unknown",
+              "npm-identity-missing"
+            ]
+          },
+          "goe": {
+            "grade": "E0",
+            "certainty": "very-low",
+            "positive": false,
+            "reasons": [
+              "no-outcome-evidence",
+              "metadata-only"
+            ],
+            "downgrades": [
+              "missing-adoption-channels",
+              "docs-unknown"
+            ]
+          },
+          "unrated": true,
+          "operatorOwned": false,
+          "missing": {
+            "installs": false,
+            "npm7d": false,
+            "stars": true,
+            "docs": true,
+            "npmName": true
+          },
+          "taskReviewed": false,
+          "discovery": {
+            "score": 30.9,
+            "scale": 60,
+            "label": "legacy discovery — not a quality score",
+            "basis": [
+              "maintenance",
+              "adoption",
+              "verification",
+              "documentation"
+            ]
+          },
+          "discoveryPosition": 3,
+          "runners": 0,
+          "runs": 0,
+          "benchTasks": [],
+          "evidence": {
+            "installs": 18,
+            "npm7d": 14568,
+            "stars": null,
+            "lastPush": "2026-10-05",
+            "verification": "none",
+            "observedAt": "2026-10-06",
+            "repo": "https://github.com/DDDMUC/dsh-free-search"
+          },
+          "rank": null
+        }
+      ],
+      "top3": [],
+      "featured": null,
+      "measured": 0,
+      "positive": 0,
+      "note": "Prior-only: no paired with/without bench result meets the minimum evidence gate. Rows are unrated; the legacy discovery order is not a quality rank."
+    },
+    {
+      "id": "browser",
+      "label": "Browser and desktop control",
+      "zh": "浏览器与桌面控制",
+      "tasks": [
+        "browser-task"
+      ],
+      "leaderboard": [
+        {
+          "pluginId": "tencent/browserskill",
+          "name": "BrowserSkill",
+          "author": "Tencent",
+          "surface": "browser",
+          "summary": "Drive a real logged-in browser through a CLI plus extension.",
+          "status": "active",
+          "license": "MIT",
+          "repo": "https://github.com/Tencent/BrowserSkill",
+          "npm": null,
+          "score": 36.3,
+          "scoreScale": 60,
+          "prior": 60.5,
+          "priorDimensions": {
+            "maintenance": 100,
+            "adoption": 71.4,
+            "verification": 0,
+            "documentation": null
+          },
+          "bench": null,
+          "coverage": 0,
+          "coverageScore": 0,
+          "community": 0,
+          "confidence": 0.6,
+          "tier": "prior",
+          "evidenceGrade": "E0",
+          "soe": {
+            "design": 0,
+            "execution": 0,
+            "precision": 0,
+            "independence": 0,
+            "directness": 0,
+            "notes": [
+              "no-paired-result",
+              "metadata-only",
+              "missing-adoption-channels",
+              "docs-unknown",
+              "npm-identity-missing"
+            ]
+          },
+          "goe": {
+            "grade": "E0",
+            "certainty": "very-low",
+            "positive": false,
+            "reasons": [
+              "no-outcome-evidence",
+              "metadata-only"
+            ],
+            "downgrades": [
+              "missing-adoption-channels",
+              "docs-unknown"
+            ]
+          },
+          "unrated": true,
+          "operatorOwned": false,
+          "missing": {
+            "installs": false,
+            "npm7d": false,
+            "stars": true,
+            "docs": true,
+            "npmName": true
+          },
+          "taskReviewed": false,
+          "discovery": {
+            "score": 36.3,
+            "scale": 60,
+            "label": "legacy discovery — not a quality score",
+            "basis": [
+              "maintenance",
+              "adoption",
+              "verification",
+              "documentation"
+            ]
+          },
+          "discoveryPosition": 1,
+          "runners": 0,
+          "runs": 0,
+          "benchTasks": [],
+          "evidence": {
+            "installs": 95,
+            "npm7d": 7455,
+            "stars": null,
+            "lastPush": "2026-09-30",
+            "verification": "none",
+            "observedAt": "2026-10-06",
+            "repo": "https://github.com/Tencent/BrowserSkill"
+          },
+          "rank": null
+        },
+        {
+          "pluginId": "perrylink/dsh-click",
+          "name": "dsh-click",
+          "author": "PerryLink",
+          "surface": "browser",
+          "summary": "Cross-platform native desktop control: screenshot, read, click, type, launch.",
+          "status": "active",
+          "license": "Apache-2.0",
+          "repo": "https://github.com/PerryLink/dsh-click",
+          "npm": "dsh-click",
+          "score": 31.1,
+          "scoreScale": 60,
+          "prior": 51.8,
+          "priorDimensions": {
+            "maintenance": 100,
+            "adoption": 46.8,
+            "verification": 0,
+            "documentation": null
+          },
+          "bench": null,
+          "coverage": 0,
+          "coverageScore": 0,
+          "community": 0,
+          "confidence": 0.4,
+          "tier": "prior",
+          "evidenceGrade": "E0",
+          "soe": {
+            "design": 0,
+            "execution": 0,
+            "precision": 0,
+            "independence": 0,
+            "directness": 0,
+            "notes": [
+              "no-paired-result",
+              "metadata-only",
+              "operator-owned",
+              "missing-adoption-channels",
+              "docs-unknown"
+            ]
+          },
+          "goe": {
+            "grade": "E0",
+            "certainty": "very-low",
+            "positive": false,
+            "reasons": [
+              "no-outcome-evidence",
+              "metadata-only"
+            ],
+            "downgrades": [
+              "operator-owned",
+              "missing-adoption-channels",
+              "docs-unknown"
+            ]
+          },
+          "unrated": true,
+          "operatorOwned": true,
+          "missing": {
+            "installs": true,
+            "npm7d": true,
+            "stars": false,
+            "docs": true,
+            "npmName": false
+          },
+          "taskReviewed": false,
+          "discovery": {
+            "score": 31.1,
+            "scale": 60,
+            "label": "legacy discovery — not a quality score",
+            "basis": [
+              "maintenance",
+              "adoption",
+              "verification",
+              "documentation"
+            ]
+          },
+          "discoveryPosition": 2,
+          "runners": 0,
+          "runs": 0,
+          "benchTasks": [],
+          "evidence": {
+            "installs": null,
+            "npm7d": null,
+            "stars": 19,
+            "lastPush": "2026-10-18",
+            "verification": "doctor",
+            "observedAt": "2026-10-18",
+            "repo": "https://github.com/PerryLink/dsh-click"
+          },
+          "rank": null
+        },
+        {
+          "pluginId": "lum1104/dsh-browser",
+          "name": "dsh-browser",
+          "author": "Lum1104",
+          "surface": "browser",
+          "summary": "Chrome sidebar extension that needs no vision.",
+          "status": "active",
+          "license": "MIT",
+          "repo": "https://github.com/Lum1104/dsh-browser",
+          "npm": null,
+          "score": 27.1,
+          "scoreScale": 60,
+          "prior": 45.2,
+          "priorDimensions": {
+            "maintenance": 100,
+            "adoption": 28,
+            "verification": 0,
+            "documentation": null
+          },
+          "bench": null,
+          "coverage": 0,
+          "coverageScore": 0,
+          "community": 0,
+          "confidence": 0.4,
+          "tier": "prior",
+          "evidenceGrade": "E0",
+          "soe": {
+            "design": 0,
+            "execution": 0,
+            "precision": 0,
+            "independence": 0,
+            "directness": 0,
+            "notes": [
+              "no-paired-result",
+              "metadata-only",
+              "missing-adoption-channels",
+              "docs-unknown",
+              "npm-identity-missing"
+            ]
+          },
+          "goe": {
+            "grade": "E0",
+            "certainty": "very-low",
+            "positive": false,
+            "reasons": [
+              "no-outcome-evidence",
+              "metadata-only"
+            ],
+            "downgrades": [
+              "missing-adoption-channels",
+              "docs-unknown"
+            ]
+          },
+          "unrated": true,
+          "operatorOwned": false,
+          "missing": {
+            "installs": false,
+            "npm7d": true,
+            "stars": true,
+            "docs": true,
+            "npmName": true
+          },
+          "taskReviewed": false,
+          "discovery": {
+            "score": 27.1,
+            "scale": 60,
+            "label": "legacy discovery — not a quality score",
+            "basis": [
+              "maintenance",
+              "adoption",
+              "verification",
+              "documentation"
+            ]
+          },
+          "discoveryPosition": 3,
+          "runners": 0,
+          "runs": 0,
+          "benchTasks": [],
+          "evidence": {
+            "installs": 5,
+            "npm7d": null,
+            "stars": null,
+            "lastPush": "2026-10-05",
+            "verification": "none",
+            "observedAt": "2026-10-06",
+            "repo": "https://github.com/Lum1104/dsh-browser"
+          },
+          "rank": null
+        }
+      ],
+      "top3": [],
+      "featured": null,
+      "measured": 0,
+      "positive": 0,
+      "note": "Prior-only: no paired with/without bench result meets the minimum evidence gate. Rows are unrated; the legacy discovery order is not a quality rank."
+    },
+    {
+      "id": "office",
+      "label": "Office documents and deliverables",
+      "zh": "Office 文档",
+      "tasks": [
+        "office-report"
+      ],
+      "leaderboard": [
+        {
+          "pluginId": "tencent/weknora-dsh",
+          "name": "WeKnora",
+          "author": "Tencent",
+          "surface": "office",
+          "summary": "Document-to-knowledge-base RAG, reasoning agent and self-maintaining wiki.",
+          "status": "active",
+          "license": "MIT",
+          "repo": "https://github.com/Tencent/WeKnora",
+          "npm": null,
+          "score": 35.5,
+          "scoreScale": 60,
+          "prior": 59.2,
+          "priorDimensions": {
+            "maintenance": 100,
+            "adoption": 67.7,
+            "verification": 0,
+            "documentation": null
+          },
+          "bench": null,
+          "coverage": 0,
+          "coverageScore": 0,
+          "community": 0,
+          "confidence": 0.6,
+          "tier": "prior",
+          "evidenceGrade": "E0",
+          "soe": {
+            "design": 0,
+            "execution": 0,
+            "precision": 0,
+            "independence": 0,
+            "directness": 0,
+            "notes": [
+              "no-paired-result",
+              "metadata-only",
+              "missing-adoption-channels",
+              "docs-unknown",
+              "npm-identity-missing"
+            ]
+          },
+          "goe": {
+            "grade": "E0",
+            "certainty": "very-low",
+            "positive": false,
+            "reasons": [
+              "no-outcome-evidence",
+              "metadata-only"
+            ],
+            "downgrades": [
+              "missing-adoption-channels",
+              "docs-unknown"
+            ]
+          },
+          "unrated": true,
+          "operatorOwned": false,
+          "missing": {
+            "installs": false,
+            "npm7d": false,
+            "stars": true,
+            "docs": true,
+            "npmName": true
+          },
+          "taskReviewed": false,
+          "discovery": {
+            "score": 35.5,
+            "scale": 60,
+            "label": "legacy discovery — not a quality score",
+            "basis": [
+              "maintenance",
+              "adoption",
+              "verification",
+              "documentation"
+            ]
+          },
+          "discoveryPosition": 1,
+          "runners": 0,
+          "runs": 0,
+          "benchTasks": [],
+          "evidence": {
+            "installs": 75,
+            "npm7d": 1217,
+            "stars": null,
+            "lastPush": "2026-09-30",
+            "verification": "none",
+            "observedAt": "2026-10-06",
+            "repo": "https://github.com/Tencent/WeKnora"
+          },
+          "rank": null
+        },
+        {
+          "pluginId": "devin-axis/ppt-studio",
+          "name": "ppt-studio",
+          "author": "Devin-AXIS",
+          "surface": "office",
+          "summary": "Presentation authoring and editing.",
+          "status": "active",
+          "license": "MIT",
+          "repo": "https://github.com/Devin-AXIS/iPolloWork",
+          "npm": null,
+          "score": 31.9,
+          "scoreScale": 60,
+          "prior": 53.1,
+          "priorDimensions": {
+            "maintenance": 100,
+            "adoption": 50.3,
+            "verification": 0,
+            "documentation": null
+          },
+          "bench": null,
+          "coverage": 0,
+          "coverageScore": 0,
+          "community": 0,
+          "confidence": 0.6,
+          "tier": "prior",
+          "evidenceGrade": "E0",
+          "soe": {
+            "design": 0,
+            "execution": 0,
+            "precision": 0,
+            "independence": 0,
+            "directness": 0,
+            "notes": [
+              "no-paired-result",
+              "metadata-only",
+              "missing-adoption-channels",
+              "docs-unknown",
+              "npm-identity-missing"
+            ]
+          },
+          "goe": {
+            "grade": "E0",
+            "certainty": "very-low",
+            "positive": false,
+            "reasons": [
+              "no-outcome-evidence",
+              "metadata-only"
+            ],
+            "downgrades": [
+              "missing-adoption-channels",
+              "docs-unknown"
+            ]
+          },
+          "unrated": true,
+          "operatorOwned": false,
+          "missing": {
+            "installs": false,
+            "npm7d": false,
+            "stars": true,
+            "docs": true,
+            "npmName": true
+          },
+          "taskReviewed": false,
+          "discovery": {
+            "score": 31.9,
+            "scale": 60,
+            "label": "legacy discovery — not a quality score",
+            "basis": [
+              "maintenance",
+              "adoption",
+              "verification",
+              "documentation"
+            ]
+          },
+          "discoveryPosition": 2,
+          "runners": 0,
+          "runs": 0,
+          "benchTasks": [],
+          "evidence": {
+            "installs": 24,
+            "npm7d": 443,
+            "stars": null,
+            "lastPush": "2026-10-05",
+            "verification": "none",
+            "observedAt": "2026-10-06",
+            "repo": "https://github.com/Devin-AXIS/iPolloWork"
+          },
+          "rank": null
+        },
+        {
+          "pluginId": "dream-num/dsh-univer-office",
+          "name": "dsh-univer-office",
+          "author": "dream-num",
+          "surface": "office",
+          "summary": "Spreadsheets, documents and presentations with live preview.",
+          "status": "active",
+          "license": "MIT",
+          "repo": "https://github.com/dream-num/dsh-univer-office",
+          "npm": null,
+          "score": 31.1,
+          "scoreScale": 60,
+          "prior": 51.8,
+          "priorDimensions": {
+            "maintenance": 100,
+            "adoption": 46.8,
+            "verification": 0,
+            "documentation": null
+          },
+          "bench": null,
+          "coverage": 0,
+          "coverageScore": 0,
+          "community": 0,
+          "confidence": 0.6,
+          "tier": "prior",
+          "evidenceGrade": "E0",
+          "soe": {
+            "design": 0,
+            "execution": 0,
+            "precision": 0,
+            "independence": 0,
+            "directness": 0,
+            "notes": [
+              "no-paired-result",
+              "metadata-only",
+              "missing-adoption-channels",
+              "docs-unknown",
+              "npm-identity-missing"
+            ]
+          },
+          "goe": {
+            "grade": "E0",
+            "certainty": "very-low",
+            "positive": false,
+            "reasons": [
+              "no-outcome-evidence",
+              "metadata-only"
+            ],
+            "downgrades": [
+              "missing-adoption-channels",
+              "docs-unknown"
+            ]
+          },
+          "unrated": true,
+          "operatorOwned": false,
+          "missing": {
+            "installs": false,
+            "npm7d": false,
+            "stars": true,
+            "docs": true,
+            "npmName": true
+          },
+          "taskReviewed": false,
+          "discovery": {
+            "score": 31.1,
+            "scale": 60,
+            "label": "legacy discovery — not a quality score",
+            "basis": [
+              "maintenance",
+              "adoption",
+              "verification",
+              "documentation"
+            ]
+          },
+          "discoveryPosition": 3,
+          "runners": 0,
+          "runs": 0,
+          "benchTasks": [],
+          "evidence": {
+            "installs": 19,
+            "npm7d": 12227,
+            "stars": null,
+            "lastPush": "2026-10-05",
+            "verification": "none",
+            "observedAt": "2026-10-06",
+            "repo": "https://github.com/dream-num/dsh-univer-office"
+          },
+          "rank": null
+        }
+      ],
+      "top3": [],
+      "featured": null,
+      "measured": 0,
+      "positive": 0,
+      "note": "Prior-only: no paired with/without bench result meets the minimum evidence gate. Rows are unrated; the legacy discovery order is not a quality rank."
+    },
+    {
+      "id": "orchestration",
+      "label": "Multi-agent orchestration",
+      "zh": "多智能体编排",
+      "tasks": [
+        "orchestrate-refactor"
+      ],
+      "leaderboard": [
+        {
+          "pluginId": "nanmicoder/dsh-agent-teams",
+          "name": "dsh-agent-teams",
+          "author": "NanmiCoder",
+          "surface": "orchestration",
+          "summary": "Multi-agent teams that split long tasks across cooperating agents.",
+          "status": "active",
+          "license": "MIT",
+          "repo": "https://github.com/NanmiCoder/dsh-agent-teams",
+          "npm": null,
+          "score": 36.7,
+          "scoreScale": 60,
+          "prior": 61.2,
+          "priorDimensions": {
+            "maintenance": 100,
+            "adoption": 73.5,
+            "verification": 0,
+            "documentation": null
+          },
+          "bench": null,
+          "coverage": 0,
+          "coverageScore": 0,
+          "community": 0,
+          "confidence": 0.6,
+          "tier": "prior",
+          "evidenceGrade": "E0",
+          "soe": {
+            "design": 0,
+            "execution": 0,
+            "precision": 0,
+            "independence": 0,
+            "directness": 0,
+            "notes": [
+              "no-paired-result",
+              "metadata-only",
+              "missing-adoption-channels",
+              "docs-unknown",
+              "npm-identity-missing"
+            ]
+          },
+          "goe": {
+            "grade": "E0",
+            "certainty": "very-low",
+            "positive": false,
+            "reasons": [
+              "no-outcome-evidence",
+              "metadata-only"
+            ],
+            "downgrades": [
+              "missing-adoption-channels",
+              "docs-unknown"
+            ]
+          },
+          "unrated": true,
+          "operatorOwned": false,
+          "missing": {
+            "installs": false,
+            "npm7d": false,
+            "stars": true,
+            "docs": true,
+            "npmName": true
+          },
+          "taskReviewed": false,
+          "discovery": {
+            "score": 36.7,
+            "scale": 60,
+            "label": "legacy discovery — not a quality score",
+            "basis": [
+              "maintenance",
+              "adoption",
+              "verification",
+              "documentation"
+            ]
+          },
+          "discoveryPosition": 1,
+          "runners": 0,
+          "runs": 0,
+          "benchTasks": [],
+          "evidence": {
+            "installs": 109,
+            "npm7d": 13890,
+            "stars": null,
+            "lastPush": "2026-10-05",
+            "verification": "none",
+            "observedAt": "2026-10-06",
+            "repo": "https://github.com/NanmiCoder/dsh-agent-teams"
+          },
+          "rank": null
+        },
+        {
+          "pluginId": "q00/ouroboros",
+          "name": "ouroboros",
+          "author": "Q00",
+          "surface": "orchestration",
+          "summary": "Staged evaluation with budget control.",
+          "status": "active",
+          "license": "MIT",
+          "repo": "https://github.com/Q00/ouroboros",
+          "npm": null,
+          "score": 28.4,
+          "scoreScale": 60,
+          "prior": 47.4,
+          "priorDimensions": {
+            "maintenance": 100,
+            "adoption": 34.4,
+            "verification": 0,
+            "documentation": null
+          },
+          "bench": null,
+          "coverage": 0,
+          "coverageScore": 0,
+          "community": 0,
+          "confidence": 0.4,
+          "tier": "prior",
+          "evidenceGrade": "E0",
+          "soe": {
+            "design": 0,
+            "execution": 0,
+            "precision": 0,
+            "independence": 0,
+            "directness": 0,
+            "notes": [
+              "no-paired-result",
+              "metadata-only",
+              "missing-adoption-channels",
+              "docs-unknown",
+              "npm-identity-missing"
+            ]
+          },
+          "goe": {
+            "grade": "E0",
+            "certainty": "very-low",
+            "positive": false,
+            "reasons": [
+              "no-outcome-evidence",
+              "metadata-only"
+            ],
+            "downgrades": [
+              "missing-adoption-channels",
+              "docs-unknown"
+            ]
+          },
+          "unrated": true,
+          "operatorOwned": false,
+          "missing": {
+            "installs": false,
+            "npm7d": true,
+            "stars": true,
+            "docs": true,
+            "npmName": true
+          },
+          "taskReviewed": false,
+          "discovery": {
+            "score": 28.4,
+            "scale": 60,
+            "label": "legacy discovery — not a quality score",
+            "basis": [
+              "maintenance",
+              "adoption",
+              "verification",
+              "documentation"
+            ]
+          },
+          "discoveryPosition": 2,
+          "runners": 0,
+          "runs": 0,
+          "benchTasks": [],
+          "evidence": {
+            "installs": 8,
+            "npm7d": null,
+            "stars": null,
+            "lastPush": "2026-10-05",
+            "verification": "none",
+            "observedAt": "2026-10-06",
+            "repo": "https://github.com/Q00/ouroboros"
+          },
+          "rank": null
+        },
+        {
+          "pluginId": "perrylink/dsh-autotier",
+          "name": "dsh-autotier",
+          "author": "PerryLink",
+          "surface": "orchestration",
+          "summary": "Strong/cheap model-tier routing with plan handoff and risk guards.",
+          "status": "active",
+          "license": "Apache-2.0",
+          "repo": "https://github.com/PerryLink/dsh-autotier",
+          "npm": "dsh-autotier",
+          "score": 23.5,
+          "scoreScale": 60,
+          "prior": 39.1,
+          "priorDimensions": {
+            "maintenance": 100,
+            "adoption": 10.8,
+            "verification": 0,
+            "documentation": null
+          },
+          "bench": null,
+          "coverage": 0,
+          "coverageScore": 0,
+          "community": 0,
+          "confidence": 0.4,
+          "tier": "prior",
+          "evidenceGrade": "E0",
+          "soe": {
+            "design": 0,
+            "execution": 0,
+            "precision": 0,
+            "independence": 0,
+            "directness": 0,
+            "notes": [
+              "no-paired-result",
+              "metadata-only",
+              "operator-owned",
+              "missing-adoption-channels",
+              "docs-unknown"
+            ]
+          },
+          "goe": {
+            "grade": "E0",
+            "certainty": "very-low",
+            "positive": false,
+            "reasons": [
+              "no-outcome-evidence",
+              "metadata-only"
+            ],
+            "downgrades": [
+              "operator-owned",
+              "missing-adoption-channels",
+              "docs-unknown"
+            ]
+          },
+          "unrated": true,
+          "operatorOwned": true,
+          "missing": {
+            "installs": true,
+            "npm7d": true,
+            "stars": false,
+            "docs": true,
+            "npmName": false
+          },
+          "taskReviewed": false,
+          "discovery": {
+            "score": 23.5,
+            "scale": 60,
+            "label": "legacy discovery — not a quality score",
+            "basis": [
+              "maintenance",
+              "adoption",
+              "verification",
+              "documentation"
+            ]
+          },
+          "discoveryPosition": 3,
+          "runners": 0,
+          "runs": 0,
+          "benchTasks": [],
+          "evidence": {
+            "installs": null,
+            "npm7d": null,
+            "stars": 1,
+            "lastPush": "2026-10-18",
+            "verification": "doctor",
+            "observedAt": "2026-10-18",
+            "repo": "https://github.com/PerryLink/dsh-autotier"
+          },
+          "rank": null
+        }
+      ],
+      "top3": [],
+      "featured": null,
+      "measured": 0,
+      "positive": 0,
+      "note": "Prior-only: no paired with/without bench result meets the minimum evidence gate. Rows are unrated; the legacy discovery order is not a quality rank."
+    },
+    {
+      "id": "safety",
+      "label": "Permission and approval safety",
+      "zh": "权限与审批安全",
+      "tasks": [
+        "safety-gate"
+      ],
+      "leaderboard": [
+        {
+          "pluginId": "perrylink/dsh-auto-review",
+          "name": "dsh-auto-review",
+          "author": "PerryLink",
+          "surface": "safety",
+          "summary": "Second-model review on the approval chain with fail-closed verdicts.",
+          "status": "active",
+          "license": "Apache-2.0",
+          "repo": "https://github.com/PerryLink/dsh-auto-review",
+          "npm": "dsh-auto-review",
+          "score": 39.2,
+          "scoreScale": 60,
+          "prior": 65.4,
+          "priorDimensions": {
+            "maintenance": 100,
+            "adoption": 85.4,
+            "verification": 0,
+            "documentation": null
+          },
+          "bench": null,
+          "coverage": 0,
+          "coverageScore": 0,
+          "community": 0,
+          "confidence": 0.4,
+          "tier": "prior",
+          "evidenceGrade": "E0",
+          "soe": {
+            "design": 0,
+            "execution": 0,
+            "precision": 0,
+            "independence": 0,
+            "directness": 0,
+            "notes": [
+              "no-paired-result",
+              "metadata-only",
+              "operator-owned",
+              "missing-adoption-channels",
+              "docs-unknown"
+            ]
+          },
+          "goe": {
+            "grade": "E0",
+            "certainty": "very-low",
+            "positive": false,
+            "reasons": [
+              "no-outcome-evidence",
+              "metadata-only"
+            ],
+            "downgrades": [
+              "operator-owned",
+              "missing-adoption-channels",
+              "docs-unknown"
+            ]
+          },
+          "unrated": true,
+          "operatorOwned": true,
+          "missing": {
+            "installs": true,
+            "npm7d": true,
+            "stars": false,
+            "docs": true,
+            "npmName": false
+          },
+          "taskReviewed": false,
+          "discovery": {
+            "score": 39.2,
+            "scale": 60,
+            "label": "legacy discovery — not a quality score",
+            "basis": [
+              "maintenance",
+              "adoption",
+              "verification",
+              "documentation"
+            ]
+          },
+          "discoveryPosition": 1,
+          "runners": 0,
+          "runs": 0,
+          "benchTasks": [],
+          "evidence": {
+            "installs": null,
+            "npm7d": null,
+            "stars": 234,
+            "lastPush": "2026-10-18",
+            "verification": "certified",
+            "observedAt": "2026-10-18",
+            "repo": "https://github.com/PerryLink/dsh-auto-review"
+          },
+          "rank": null
+        },
+        {
+          "pluginId": "perrylink/dsh-permission-rules",
+          "name": "dsh-permission-rules",
+          "author": "PerryLink",
+          "surface": "safety",
+          "summary": "Declarative allow/deny/ask rules with argument and path matching, plus a network policy.",
+          "status": "active",
+          "license": "Apache-2.0",
+          "repo": "https://github.com/PerryLink/dsh-permission-rules",
+          "npm": "dsh-permission-rules",
+          "score": 34.6,
+          "scoreScale": 60,
+          "prior": 57.6,
+          "priorDimensions": {
+            "maintenance": 100,
+            "adoption": 63.1,
+            "verification": 0,
+            "documentation": null
+          },
+          "bench": null,
+          "coverage": 0,
+          "coverageScore": 0,
+          "community": 0,
+          "confidence": 0.8,
+          "tier": "prior",
+          "evidenceGrade": "E0",
+          "soe": {
+            "design": 0,
+            "execution": 0,
+            "precision": 0,
+            "independence": 0,
+            "directness": 0,
+            "notes": [
+              "no-paired-result",
+              "metadata-only",
+              "operator-owned",
+              "docs-unknown"
+            ]
+          },
+          "goe": {
+            "grade": "E0",
+            "certainty": "very-low",
+            "positive": false,
+            "reasons": [
+              "no-outcome-evidence",
+              "metadata-only"
+            ],
+            "downgrades": [
+              "operator-owned",
+              "docs-unknown"
+            ]
+          },
+          "unrated": true,
+          "operatorOwned": true,
+          "missing": {
+            "installs": false,
+            "npm7d": false,
+            "stars": false,
+            "docs": true,
+            "npmName": false
+          },
+          "taskReviewed": false,
+          "discovery": {
+            "score": 34.6,
+            "scale": 60,
+            "label": "legacy discovery — not a quality score",
+            "basis": [
+              "maintenance",
+              "adoption",
+              "verification",
+              "documentation"
+            ]
+          },
+          "discoveryPosition": 2,
+          "runners": 0,
+          "runs": 0,
+          "benchTasks": [],
+          "evidence": {
+            "installs": 2,
+            "npm7d": 1965,
+            "stars": 126,
+            "lastPush": "2026-10-18",
+            "verification": "doctor",
+            "observedAt": "2026-10-18",
+            "repo": "https://github.com/PerryLink/dsh-permission-rules"
+          },
+          "rank": null
+        },
+        {
+          "pluginId": "nanmicoder/dsh-auto-mode",
+          "name": "dsh-auto-mode",
+          "author": "NanmiCoder",
+          "surface": "safety",
+          "summary": "Safe automatic permission handling that keeps controls while allowing automation.",
+          "status": "archived",
+          "license": "MIT",
+          "repo": "https://github.com/NanmiCoder/dsh-auto-mode",
+          "npm": null,
+          "score": 18,
+          "scoreScale": 60,
+          "prior": 30,
+          "priorDimensions": {
+            "maintenance": 70,
+            "adoption": 41.3,
+            "verification": 0,
+            "documentation": null
+          },
+          "bench": null,
+          "coverage": 0,
+          "coverageScore": 0,
+          "community": 0,
+          "confidence": 0.6,
+          "tier": "prior",
+          "evidenceGrade": "E0",
+          "soe": {
+            "design": 0,
+            "execution": 0,
+            "precision": 0,
+            "independence": 0,
+            "directness": 0,
+            "notes": [
+              "no-paired-result",
+              "metadata-only",
+              "missing-adoption-channels",
+              "docs-unknown",
+              "npm-identity-missing"
+            ]
+          },
+          "goe": {
+            "grade": "E0",
+            "certainty": "very-low",
+            "positive": false,
+            "reasons": [
+              "no-outcome-evidence",
+              "metadata-only"
+            ],
+            "downgrades": [
+              "missing-adoption-channels",
+              "docs-unknown"
+            ]
+          },
+          "unrated": true,
+          "operatorOwned": false,
+          "missing": {
+            "installs": false,
+            "npm7d": false,
+            "stars": true,
+            "docs": true,
+            "npmName": true
+          },
+          "taskReviewed": false,
+          "discovery": {
+            "score": 18,
+            "scale": 60,
+            "label": "legacy discovery — not a quality score",
+            "basis": [
+              "maintenance",
+              "adoption",
+              "verification",
+              "documentation"
+            ]
+          },
+          "discoveryPosition": 3,
+          "runners": 0,
+          "runs": 0,
+          "benchTasks": [],
+          "evidence": {
+            "installs": 13,
+            "npm7d": 991,
+            "stars": null,
+            "lastPush": "2026-09-01",
+            "verification": "none",
+            "observedAt": "2026-10-06",
+            "repo": "https://github.com/NanmiCoder/dsh-auto-mode"
+          },
+          "rank": null
+        }
+      ],
+      "top3": [],
+      "featured": null,
+      "measured": 0,
+      "positive": 0,
+      "note": "Prior-only: no paired with/without bench result meets the minimum evidence gate. Rows are unrated; the legacy discovery order is not a quality rank."
+    },
+    {
+      "id": "mcp",
+      "label": "MCP connection management",
+      "zh": "MCP 连接管理",
+      "tasks": [
+        "mcp-tools"
+      ],
+      "leaderboard": [
+        {
+          "pluginId": "perrylink/dsh-mcp-panel",
+          "name": "dsh-mcp-panel",
+          "author": "PerryLink",
+          "surface": "mcp",
+          "summary": "MCP management console with health diagnostics, CRUD and trial calls.",
+          "status": "active",
+          "license": "Apache-2.0",
+          "repo": "https://github.com/PerryLink/dsh-mcp-panel",
+          "npm": "dsh-mcp-panel",
+          "score": 37.2,
+          "scoreScale": 60,
+          "prior": 62,
+          "priorDimensions": {
+            "maintenance": 100,
+            "adoption": 75.7,
+            "verification": 0,
+            "documentation": null
+          },
+          "bench": null,
+          "coverage": 0,
+          "coverageScore": 0,
+          "community": 0,
+          "confidence": 0.8,
+          "tier": "prior",
+          "evidenceGrade": "E0",
+          "soe": {
+            "design": 0,
+            "execution": 0,
+            "precision": 0,
+            "independence": 0,
+            "directness": 0,
+            "notes": [
+              "no-paired-result",
+              "metadata-only",
+              "operator-owned",
+              "docs-unknown"
+            ]
+          },
+          "goe": {
+            "grade": "E0",
+            "certainty": "very-low",
+            "positive": false,
+            "reasons": [
+              "no-outcome-evidence",
+              "metadata-only"
+            ],
+            "downgrades": [
+              "operator-owned",
+              "docs-unknown"
+            ]
+          },
+          "unrated": true,
+          "operatorOwned": true,
+          "missing": {
+            "installs": false,
+            "npm7d": false,
+            "stars": false,
+            "docs": true,
+            "npmName": false
+          },
+          "taskReviewed": false,
+          "discovery": {
+            "score": 37.2,
+            "scale": 60,
+            "label": "legacy discovery — not a quality score",
+            "basis": [
+              "maintenance",
+              "adoption",
+              "verification",
+              "documentation"
+            ]
+          },
+          "discoveryPosition": 1,
+          "runners": 0,
+          "runs": 0,
+          "benchTasks": [],
+          "evidence": {
+            "installs": 13,
+            "npm7d": 2472,
+            "stars": 76,
+            "lastPush": "2026-10-18",
+            "verification": "doctor",
+            "observedAt": "2026-10-18",
+            "repo": "https://github.com/PerryLink/dsh-mcp-panel"
+          },
+          "rank": null
+        },
+        {
+          "pluginId": "duhu2000/dsh-mcp-connector",
+          "name": "dsh-mcp-connector",
+          "author": "duhu2000",
+          "surface": "mcp",
+          "summary": "General-purpose MCP connector, connection manager and extension marketplace.",
+          "status": "active",
+          "license": "MIT",
+          "repo": "https://github.com/duhu2000/dsh-mcp-connector",
+          "npm": null,
+          "score": 27.1,
+          "scoreScale": 60,
+          "prior": 45.2,
+          "priorDimensions": {
+            "maintenance": 100,
+            "adoption": 28,
+            "verification": 0,
+            "documentation": null
+          },
+          "bench": null,
+          "coverage": 0,
+          "coverageScore": 0,
+          "community": 0,
+          "confidence": 0.6,
+          "tier": "prior",
+          "evidenceGrade": "E0",
+          "soe": {
+            "design": 0,
+            "execution": 0,
+            "precision": 0,
+            "independence": 0,
+            "directness": 0,
+            "notes": [
+              "no-paired-result",
+              "metadata-only",
+              "missing-adoption-channels",
+              "docs-unknown",
+              "npm-identity-missing"
+            ]
+          },
+          "goe": {
+            "grade": "E0",
+            "certainty": "very-low",
+            "positive": false,
+            "reasons": [
+              "no-outcome-evidence",
+              "metadata-only"
+            ],
+            "downgrades": [
+              "missing-adoption-channels",
+              "docs-unknown"
+            ]
+          },
+          "unrated": true,
+          "operatorOwned": false,
+          "missing": {
+            "installs": false,
+            "npm7d": false,
+            "stars": true,
+            "docs": true,
+            "npmName": true
+          },
+          "taskReviewed": false,
+          "discovery": {
+            "score": 27.1,
+            "scale": 60,
+            "label": "legacy discovery — not a quality score",
+            "basis": [
+              "maintenance",
+              "adoption",
+              "verification",
+              "documentation"
+            ]
+          },
+          "discoveryPosition": 2,
+          "runners": 0,
+          "runs": 0,
+          "benchTasks": [],
+          "evidence": {
+            "installs": 5,
+            "npm7d": 7150,
+            "stars": null,
+            "lastPush": "2026-10-05",
+            "verification": "none",
+            "observedAt": "2026-10-06",
+            "repo": "https://github.com/duhu2000/dsh-mcp-connector"
+          },
+          "rank": null
+        }
+      ],
+      "top3": [],
+      "featured": null,
+      "measured": 0,
+      "positive": 0,
+      "note": "Prior-only: no paired with/without bench result meets the minimum evidence gate. Rows are unrated; the legacy discovery order is not a quality rank."
+    },
+    {
+      "id": "remote",
+      "label": "IM and remote access",
+      "zh": "IM 与远程访问",
+      "tasks": [
+        "remote-approval"
+      ],
+      "leaderboard": [
+        {
+          "pluginId": "shaobeichen/dsh-pocket",
+          "name": "dsh-pocket",
+          "author": "shaobeichen",
+          "surface": "remote",
+          "summary": "Phone access to a desktop DSH over LAN or a public tunnel.",
+          "status": "active",
+          "license": "GPL-2.0",
+          "repo": "https://github.com/shaobeichen/dsh-pocket",
+          "npm": "dsh-pocket",
+          "score": 37,
+          "scoreScale": 60,
+          "prior": 61.6,
+          "priorDimensions": {
+            "maintenance": 88,
+            "adoption": 86.5,
+            "verification": 0,
+            "documentation": null
+          },
+          "bench": null,
+          "coverage": 0,
+          "coverageScore": 0,
+          "community": 0,
+          "confidence": 0.6,
+          "tier": "prior",
+          "evidenceGrade": "E0",
+          "soe": {
+            "design": 0,
+            "execution": 0,
+            "precision": 0,
+            "independence": 0,
+            "directness": 0,
+            "notes": [
+              "no-paired-result",
+              "metadata-only",
+              "missing-adoption-channels",
+              "docs-unknown"
+            ]
+          },
+          "goe": {
+            "grade": "E0",
+            "certainty": "very-low",
+            "positive": false,
+            "reasons": [
+              "no-outcome-evidence",
+              "metadata-only"
+            ],
+            "downgrades": [
+              "missing-adoption-channels",
+              "docs-unknown"
+            ]
+          },
+          "unrated": true,
+          "operatorOwned": false,
+          "missing": {
+            "installs": false,
+            "npm7d": false,
+            "stars": true,
+            "docs": true,
+            "npmName": false
+          },
+          "taskReviewed": false,
+          "discovery": {
+            "score": 37,
+            "scale": 60,
+            "label": "legacy discovery — not a quality score",
+            "basis": [
+              "maintenance",
+              "adoption",
+              "verification",
+              "documentation"
+            ]
+          },
+          "discoveryPosition": 1,
+          "runners": 0,
+          "runs": 0,
+          "benchTasks": [],
+          "evidence": {
+            "installs": 30,
+            "npm7d": 3753,
+            "stars": null,
+            "lastPush": "2026-09-16",
+            "verification": "none",
+            "observedAt": "2026-10-06",
+            "repo": "https://github.com/shaobeichen/dsh-pocket"
+          },
+          "rank": null
+        },
+        {
+          "pluginId": "xmanrui/dsh-im",
+          "name": "dsh-im",
+          "author": "xmanrui",
+          "surface": "remote",
+          "summary": "Twelve IM channels including Feishu, WeChat, Slack, Telegram and Discord.",
+          "status": "active",
+          "license": "MIT",
+          "repo": "https://github.com/xmanrui/dsh-im",
+          "npm": null,
+          "score": 35.4,
+          "scoreScale": 60,
+          "prior": 59,
+          "priorDimensions": {
+            "maintenance": 100,
+            "adoption": 67.3,
+            "verification": 0,
+            "documentation": null
+          },
+          "bench": null,
+          "coverage": 0,
+          "coverageScore": 0,
+          "community": 0,
+          "confidence": 0.6,
+          "tier": "prior",
+          "evidenceGrade": "E0",
+          "soe": {
+            "design": 0,
+            "execution": 0,
+            "precision": 0,
+            "independence": 0,
+            "directness": 0,
+            "notes": [
+              "no-paired-result",
+              "metadata-only",
+              "missing-adoption-channels",
+              "docs-unknown",
+              "npm-identity-missing"
+            ]
+          },
+          "goe": {
+            "grade": "E0",
+            "certainty": "very-low",
+            "positive": false,
+            "reasons": [
+              "no-outcome-evidence",
+              "metadata-only"
+            ],
+            "downgrades": [
+              "missing-adoption-channels",
+              "docs-unknown"
+            ]
+          },
+          "unrated": true,
+          "operatorOwned": false,
+          "missing": {
+            "installs": false,
+            "npm7d": false,
+            "stars": true,
+            "docs": true,
+            "npmName": true
+          },
+          "taskReviewed": false,
+          "discovery": {
+            "score": 35.4,
+            "scale": 60,
+            "label": "legacy discovery — not a quality score",
+            "basis": [
+              "maintenance",
+              "adoption",
+              "verification",
+              "documentation"
+            ]
+          },
+          "discoveryPosition": 2,
+          "runners": 0,
+          "runs": 0,
+          "benchTasks": [],
+          "evidence": {
+            "installs": 73,
+            "npm7d": 17384,
+            "stars": null,
+            "lastPush": "2026-10-05",
+            "verification": "none",
+            "observedAt": "2026-10-06",
+            "repo": "https://github.com/xmanrui/dsh-im"
+          },
+          "rank": null
+        },
+        {
+          "pluginId": "perrylink/dsh-reach",
+          "name": "dsh-reach",
+          "author": "PerryLink",
+          "surface": "remote",
+          "summary": "Approval and question bridge to IM channels with a session console.",
+          "status": "frozen",
+          "license": "Apache-2.0",
+          "repo": "https://github.com/PerryLink/dsh-reach",
+          "npm": "dsh-reach",
+          "score": 24.8,
+          "scoreScale": 60,
+          "prior": 41.4,
+          "priorDimensions": {
+            "maintenance": 100,
+            "adoption": 17.2,
+            "verification": 0,
+            "documentation": null
+          },
+          "bench": null,
+          "coverage": 0,
+          "coverageScore": 0,
+          "community": 0,
+          "confidence": 0.4,
+          "tier": "prior",
+          "evidenceGrade": "E0",
+          "soe": {
+            "design": 0,
+            "execution": 0,
+            "precision": 0,
+            "independence": 0,
+            "directness": 0,
+            "notes": [
+              "no-paired-result",
+              "metadata-only",
+              "operator-owned",
+              "missing-adoption-channels",
+              "docs-unknown"
+            ]
+          },
+          "goe": {
+            "grade": "E0",
+            "certainty": "very-low",
+            "positive": false,
+            "reasons": [
+              "no-outcome-evidence",
+              "metadata-only"
+            ],
+            "downgrades": [
+              "operator-owned",
+              "missing-adoption-channels",
+              "docs-unknown"
+            ]
+          },
+          "unrated": true,
+          "operatorOwned": true,
+          "missing": {
+            "installs": true,
+            "npm7d": true,
+            "stars": false,
+            "docs": true,
+            "npmName": false
+          },
+          "taskReviewed": false,
+          "discovery": {
+            "score": 24.8,
+            "scale": 60,
+            "label": "legacy discovery — not a quality score",
+            "basis": [
+              "maintenance",
+              "adoption",
+              "verification",
+              "documentation"
+            ]
+          },
+          "discoveryPosition": 3,
+          "runners": 0,
+          "runs": 0,
+          "benchTasks": [],
+          "evidence": {
+            "installs": null,
+            "npm7d": null,
+            "stars": 2,
+            "lastPush": "2026-10-18",
+            "verification": "doctor",
+            "observedAt": "2026-10-18",
+            "repo": "https://github.com/PerryLink/dsh-reach"
+          },
+          "rank": null
+        }
+      ],
+      "top3": [],
+      "featured": null,
+      "measured": 0,
+      "positive": 0,
+      "note": "Prior-only: no paired with/without bench result meets the minimum evidence gate. Rows are unrated; the legacy discovery order is not a quality rank."
+    },
+    {
+      "id": "dev",
+      "label": "Plugin development and verification",
+      "zh": "插件开发与核验",
+      "tasks": [
+        "plugin-build",
+        "p1-dev-add",
+        "p1-dev-config",
+        "p1-dev-test",
+        "p1-dev-readme",
+        "p1-dev-eval",
+        "p1-dev-package",
+        "p1-dev-json",
+        "p1-dev-import"
+      ],
+      "leaderboard": [
+        {
+          "pluginId": "perrylink/dsh-plugin-guide",
+          "name": "dsh-plugin-guide",
+          "author": "PerryLink",
+          "surface": "dev",
+          "summary": "Plugin-development knowledge base, agent skill and CLI toolchain.",
+          "status": "active",
+          "license": "Apache-2.0",
+          "repo": "https://github.com/PerryLink/dsh-plugin-guide",
+          "npm": "dsh-plugin-guide",
+          "score": 34.7,
+          "scoreScale": 60,
+          "prior": 57.9,
+          "priorDimensions": {
+            "maintenance": 100,
+            "adoption": 64.2,
+            "verification": 0,
+            "documentation": null
+          },
+          "bench": null,
+          "coverage": 0,
+          "coverageScore": 0,
+          "community": 0,
+          "confidence": 0.8,
+          "tier": "prior",
+          "evidenceGrade": "E0",
+          "soe": {
+            "design": 0,
+            "execution": 0,
+            "precision": 0,
+            "independence": 0,
+            "directness": 0,
+            "notes": [
+              "no-paired-result",
+              "metadata-only",
+              "operator-owned",
+              "docs-unknown"
+            ]
+          },
+          "goe": {
+            "grade": "E0",
+            "certainty": "very-low",
+            "positive": false,
+            "reasons": [
+              "no-outcome-evidence",
+              "metadata-only"
+            ],
+            "downgrades": [
+              "operator-owned",
+              "docs-unknown"
+            ]
+          },
+          "unrated": true,
+          "operatorOwned": true,
+          "missing": {
+            "installs": false,
+            "npm7d": false,
+            "stars": false,
+            "docs": true,
+            "npmName": false
+          },
+          "taskReviewed": false,
+          "discovery": {
+            "score": 34.7,
+            "scale": 60,
+            "label": "legacy discovery — not a quality score",
+            "basis": [
+              "maintenance",
+              "adoption",
+              "verification",
+              "documentation"
+            ]
+          },
+          "discoveryPosition": 1,
+          "runners": 0,
+          "runs": 0,
+          "benchTasks": [],
+          "evidence": {
+            "installs": 6,
+            "npm7d": 1012,
+            "stars": 52,
+            "lastPush": "2026-10-18",
+            "verification": "doctor",
+            "observedAt": "2026-10-18",
+            "repo": "https://github.com/PerryLink/dsh-plugin-guide"
+          },
+          "rank": null
+        },
+        {
+          "pluginId": "perrylink/dsh-score",
+          "name": "dsh-score",
+          "author": "PerryLink",
+          "surface": "dev",
+          "summary": "Five-dimension quality scoring from real gh/npm evidence.",
+          "status": "active",
+          "license": "Apache-2.0",
+          "repo": "https://github.com/PerryLink/dsh-score",
+          "npm": "dsh-score",
+          "score": 29.6,
+          "scoreScale": 60,
+          "prior": 49.4,
+          "priorDimensions": {
+            "maintenance": 100,
+            "adoption": 40.1,
+            "verification": 0,
+            "documentation": null
+          },
+          "bench": null,
+          "coverage": 0,
+          "coverageScore": 0,
+          "community": 0,
+          "confidence": 0.4,
+          "tier": "prior",
+          "evidenceGrade": "E0",
+          "soe": {
+            "design": 0,
+            "execution": 0,
+            "precision": 0,
+            "independence": 0,
+            "directness": 0,
+            "notes": [
+              "no-paired-result",
+              "metadata-only",
+              "operator-owned",
+              "missing-adoption-channels",
+              "docs-unknown"
+            ]
+          },
+          "goe": {
+            "grade": "E0",
+            "certainty": "very-low",
+            "positive": false,
+            "reasons": [
+              "no-outcome-evidence",
+              "metadata-only"
+            ],
+            "downgrades": [
+              "operator-owned",
+              "missing-adoption-channels",
+              "docs-unknown"
+            ]
+          },
+          "unrated": true,
+          "operatorOwned": true,
+          "missing": {
+            "installs": true,
+            "npm7d": true,
+            "stars": false,
+            "docs": true,
+            "npmName": false
+          },
+          "taskReviewed": false,
+          "discovery": {
+            "score": 29.6,
+            "scale": 60,
+            "label": "legacy discovery — not a quality score",
+            "basis": [
+              "maintenance",
+              "adoption",
+              "verification",
+              "documentation"
+            ]
+          },
+          "discoveryPosition": 2,
+          "runners": 0,
+          "runs": 0,
+          "benchTasks": [],
+          "evidence": {
+            "installs": null,
+            "npm7d": null,
+            "stars": 12,
+            "lastPush": "2026-10-18",
+            "verification": "doctor",
+            "observedAt": "2026-10-18",
+            "repo": "https://github.com/PerryLink/dsh-score"
+          },
+          "rank": null
+        },
+        {
+          "pluginId": "perrylink/dsh-test-drive",
+          "name": "dsh-test-drive",
+          "author": "PerryLink",
+          "surface": "dev",
+          "summary": "Isolated install-and-smoke test drives with a structured pass/fail matrix.",
+          "status": "active",
+          "license": "Apache-2.0",
+          "repo": "https://github.com/PerryLink/dsh-test-drive",
+          "npm": "dsh-test-drive",
+          "score": 29.6,
+          "scoreScale": 60,
+          "prior": 49.4,
+          "priorDimensions": {
+            "maintenance": 100,
+            "adoption": 40.1,
+            "verification": 0,
+            "documentation": null
+          },
+          "bench": null,
+          "coverage": 0,
+          "coverageScore": 0,
+          "community": 0,
+          "confidence": 0.4,
+          "tier": "prior",
+          "evidenceGrade": "E0",
+          "soe": {
+            "design": 0,
+            "execution": 0,
+            "precision": 0,
+            "independence": 0,
+            "directness": 0,
+            "notes": [
+              "no-paired-result",
+              "metadata-only",
+              "operator-owned",
+              "missing-adoption-channels",
+              "docs-unknown"
+            ]
+          },
+          "goe": {
+            "grade": "E0",
+            "certainty": "very-low",
+            "positive": false,
+            "reasons": [
+              "no-outcome-evidence",
+              "metadata-only"
+            ],
+            "downgrades": [
+              "operator-owned",
+              "missing-adoption-channels",
+              "docs-unknown"
+            ]
+          },
+          "unrated": true,
+          "operatorOwned": true,
+          "missing": {
+            "installs": true,
+            "npm7d": true,
+            "stars": false,
+            "docs": true,
+            "npmName": false
+          },
+          "taskReviewed": false,
+          "discovery": {
+            "score": 29.6,
+            "scale": 60,
+            "label": "legacy discovery — not a quality score",
+            "basis": [
+              "maintenance",
+              "adoption",
+              "verification",
+              "documentation"
+            ]
+          },
+          "discoveryPosition": 3,
+          "runners": 0,
+          "runs": 0,
+          "benchTasks": [],
+          "evidence": {
+            "installs": null,
+            "npm7d": null,
+            "stars": 12,
+            "lastPush": "2026-10-18",
+            "verification": "doctor",
+            "observedAt": "2026-10-18",
+            "repo": "https://github.com/PerryLink/dsh-test-drive"
+          },
+          "rank": null
+        },
+        {
+          "pluginId": "micromilo/upstream-radar",
+          "name": "upstream-radar",
+          "author": "MicroMilo",
+          "surface": "dev",
+          "summary": "Dependency security monitoring for plugin authors.",
+          "status": "active",
+          "license": "MIT",
+          "repo": "https://github.com/MicroMilo/upstream-radar",
+          "npm": null,
+          "score": 24.8,
+          "scoreScale": 60,
+          "prior": 41.4,
+          "priorDimensions": {
+            "maintenance": 100,
+            "adoption": 17.2,
+            "verification": 0,
+            "documentation": null
+          },
+          "bench": null,
+          "coverage": 0,
+          "coverageScore": 0,
+          "community": 0,
+          "confidence": 0.6,
+          "tier": "prior",
+          "evidenceGrade": "E0",
+          "soe": {
+            "design": 0,
+            "execution": 0,
+            "precision": 0,
+            "independence": 0,
+            "directness": 0,
+            "notes": [
+              "no-paired-result",
+              "metadata-only",
+              "missing-adoption-channels",
+              "docs-unknown",
+              "npm-identity-missing"
+            ]
+          },
+          "goe": {
+            "grade": "E0",
+            "certainty": "very-low",
+            "positive": false,
+            "reasons": [
+              "no-outcome-evidence",
+              "metadata-only"
+            ],
+            "downgrades": [
+              "missing-adoption-channels",
+              "docs-unknown"
+            ]
+          },
+          "unrated": true,
+          "operatorOwned": false,
+          "missing": {
+            "installs": false,
+            "npm7d": false,
+            "stars": true,
+            "docs": true,
+            "npmName": true
+          },
+          "taskReviewed": false,
+          "discovery": {
+            "score": 24.8,
+            "scale": 60,
+            "label": "legacy discovery — not a quality score",
+            "basis": [
+              "maintenance",
+              "adoption",
+              "verification",
+              "documentation"
+            ]
+          },
+          "discoveryPosition": 4,
+          "runners": 0,
+          "runs": 0,
+          "benchTasks": [],
+          "evidence": {
+            "installs": 2,
+            "npm7d": 484,
+            "stars": null,
+            "lastPush": "2026-10-05",
+            "verification": "none",
+            "observedAt": "2026-10-06",
+            "repo": "https://github.com/MicroMilo/upstream-radar"
+          },
+          "rank": null
+        }
+      ],
+      "top3": [],
+      "featured": null,
+      "measured": 0,
+      "positive": 0,
+      "note": "Prior-only: no paired with/without bench result meets the minimum evidence gate. Rows are unrated; the legacy discovery order is not a quality rank."
+    },
+    {
+      "id": "voice",
+      "label": "Voice input and output",
+      "zh": "语音输入输出",
+      "tasks": [
+        "voice-loop"
+      ],
+      "leaderboard": [
+        {
+          "pluginId": "perrylink/dsh-talk",
+          "name": "dsh-talk",
+          "author": "PerryLink",
+          "surface": "voice",
+          "summary": "Voice-first loop: browser/local STT, TTS replies, announcements and interrupt.",
+          "status": "active",
+          "license": "Apache-2.0",
+          "repo": "https://github.com/PerryLink/dsh-talk",
+          "npm": "dsh-talk",
+          "score": 30.4,
+          "scoreScale": 60,
+          "prior": 50.6,
+          "priorDimensions": {
+            "maintenance": 100,
+            "adoption": 43.3,
+            "verification": 0,
+            "documentation": null
+          },
+          "bench": null,
+          "coverage": 0,
+          "coverageScore": 0,
+          "community": 0,
+          "confidence": 0.4,
+          "tier": "prior",
+          "evidenceGrade": "E0",
+          "soe": {
+            "design": 0,
+            "execution": 0,
+            "precision": 0,
+            "independence": 0,
+            "directness": 0,
+            "notes": [
+              "no-paired-result",
+              "metadata-only",
+              "operator-owned",
+              "missing-adoption-channels",
+              "docs-unknown"
+            ]
+          },
+          "goe": {
+            "grade": "E0",
+            "certainty": "very-low",
+            "positive": false,
+            "reasons": [
+              "no-outcome-evidence",
+              "metadata-only"
+            ],
+            "downgrades": [
+              "operator-owned",
+              "missing-adoption-channels",
+              "docs-unknown"
+            ]
+          },
+          "unrated": true,
+          "operatorOwned": true,
+          "missing": {
+            "installs": true,
+            "npm7d": true,
+            "stars": false,
+            "docs": true,
+            "npmName": false
+          },
+          "taskReviewed": false,
+          "discovery": {
+            "score": 30.4,
+            "scale": 60,
+            "label": "legacy discovery — not a quality score",
+            "basis": [
+              "maintenance",
+              "adoption",
+              "verification",
+              "documentation"
+            ]
+          },
+          "discoveryPosition": 1,
+          "runners": 0,
+          "runs": 0,
+          "benchTasks": [],
+          "evidence": {
+            "installs": null,
+            "npm7d": null,
+            "stars": 15,
+            "lastPush": "2026-10-18",
+            "verification": "doctor",
+            "observedAt": "2026-10-18",
+            "repo": "https://github.com/PerryLink/dsh-talk"
+          },
+          "rank": null
+        }
+      ],
+      "top3": [],
+      "featured": null,
+      "measured": 0,
+      "positive": 0,
+      "note": "Prior-only: no paired with/without bench result meets the minimum evidence gate. Rows are unrated; the legacy discovery order is not a quality rank."
+    },
+    {
+      "id": "research",
+      "label": "Research reports and evidence",
+      "zh": "研究报告与证据",
+      "tasks": [
+        "sealed-research"
+      ],
+      "leaderboard": [
+        {
+          "pluginId": "perrylink/dsh-industry-research",
+          "name": "dsh-industry-research",
+          "author": "PerryLink",
+          "surface": "research",
+          "summary": "Industry-chain mapping, policy tracking and auditable research reports.",
+          "status": "active",
+          "license": "Apache-2.0",
+          "repo": "https://github.com/PerryLink/dsh-industry-research",
+          "npm": "dsh-industry-research",
+          "score": 38.9,
+          "scoreScale": 60,
+          "prior": 64.9,
+          "priorDimensions": {
+            "maintenance": 100,
+            "adoption": 84,
+            "verification": 0,
+            "documentation": null
+          },
+          "bench": null,
+          "coverage": 0,
+          "coverageScore": 0,
+          "community": 0,
+          "confidence": 0.4,
+          "tier": "prior",
+          "evidenceGrade": "E0",
+          "soe": {
+            "design": 0,
+            "execution": 0,
+            "precision": 0,
+            "independence": 0,
+            "directness": 0,
+            "notes": [
+              "no-paired-result",
+              "metadata-only",
+              "operator-owned",
+              "missing-adoption-channels",
+              "docs-unknown"
+            ]
+          },
+          "goe": {
+            "grade": "E0",
+            "certainty": "very-low",
+            "positive": false,
+            "reasons": [
+              "no-outcome-evidence",
+              "metadata-only"
+            ],
+            "downgrades": [
+              "operator-owned",
+              "missing-adoption-channels",
+              "docs-unknown"
+            ]
+          },
+          "unrated": true,
+          "operatorOwned": true,
+          "missing": {
+            "installs": true,
+            "npm7d": true,
+            "stars": false,
+            "docs": true,
+            "npmName": false
+          },
+          "taskReviewed": false,
+          "discovery": {
+            "score": 38.9,
+            "scale": 60,
+            "label": "legacy discovery — not a quality score",
+            "basis": [
+              "maintenance",
+              "adoption",
+              "verification",
+              "documentation"
+            ]
+          },
+          "discoveryPosition": 1,
+          "runners": 0,
+          "runs": 0,
+          "benchTasks": [],
+          "evidence": {
+            "installs": null,
+            "npm7d": null,
+            "stars": 214,
+            "lastPush": "2026-10-18",
+            "verification": "doctor",
+            "observedAt": "2026-10-18",
+            "repo": "https://github.com/PerryLink/dsh-industry-research"
+          },
+          "rank": null
+        },
+        {
+          "pluginId": "perrylink/dsh-research-report",
+          "name": "dsh-research-report",
+          "author": "PerryLink",
+          "surface": "research",
+          "summary": "Content-addressed evidence ledger and sealed, versioned reports.",
+          "status": "active",
+          "license": "Apache-2.0",
+          "repo": "https://github.com/PerryLink/dsh-research-report",
+          "npm": "dsh-research-report",
+          "score": 38.9,
+          "scoreScale": 60,
+          "prior": 64.9,
+          "priorDimensions": {
+            "maintenance": 100,
+            "adoption": 83.9,
+            "verification": 0,
+            "documentation": null
+          },
+          "bench": null,
+          "coverage": 0,
+          "coverageScore": 0,
+          "community": 0,
+          "confidence": 0.4,
+          "tier": "prior",
+          "evidenceGrade": "E0",
+          "soe": {
+            "design": 0,
+            "execution": 0,
+            "precision": 0,
+            "independence": 0,
+            "directness": 0,
+            "notes": [
+              "no-paired-result",
+              "metadata-only",
+              "operator-owned",
+              "missing-adoption-channels",
+              "docs-unknown"
+            ]
+          },
+          "goe": {
+            "grade": "E0",
+            "certainty": "very-low",
+            "positive": false,
+            "reasons": [
+              "no-outcome-evidence",
+              "metadata-only"
+            ],
+            "downgrades": [
+              "operator-owned",
+              "missing-adoption-channels",
+              "docs-unknown"
+            ]
+          },
+          "unrated": true,
+          "operatorOwned": true,
+          "missing": {
+            "installs": true,
+            "npm7d": true,
+            "stars": false,
+            "docs": true,
+            "npmName": false
+          },
+          "taskReviewed": false,
+          "discovery": {
+            "score": 38.9,
+            "scale": 60,
+            "label": "legacy discovery — not a quality score",
+            "basis": [
+              "maintenance",
+              "adoption",
+              "verification",
+              "documentation"
+            ]
+          },
+          "discoveryPosition": 2,
+          "runners": 0,
+          "runs": 0,
+          "benchTasks": [],
+          "evidence": {
+            "installs": null,
+            "npm7d": null,
+            "stars": 213,
+            "lastPush": "2026-10-18",
+            "verification": "doctor",
+            "observedAt": "2026-10-18",
+            "repo": "https://github.com/PerryLink/dsh-research-report"
+          },
+          "rank": null
+        },
+        {
+          "pluginId": "perrylink/dsh-fund-research",
+          "name": "dsh-fund-research",
+          "author": "PerryLink",
+          "surface": "research",
+          "summary": "Deterministic fund research reports with computed metrics.",
+          "status": "active",
+          "license": "Apache-2.0",
+          "repo": "https://github.com/PerryLink/dsh-fund-research",
+          "npm": "dsh-fund-research",
+          "score": 35.2,
+          "scoreScale": 60,
+          "prior": 58.6,
+          "priorDimensions": {
+            "maintenance": 100,
+            "adoption": 66,
+            "verification": 0,
+            "documentation": null
+          },
+          "bench": null,
+          "coverage": 0,
+          "coverageScore": 0,
+          "community": 0,
+          "confidence": 0.4,
+          "tier": "prior",
+          "evidenceGrade": "E0",
+          "soe": {
+            "design": 0,
+            "execution": 0,
+            "precision": 0,
+            "independence": 0,
+            "directness": 0,
+            "notes": [
+              "no-paired-result",
+              "metadata-only",
+              "operator-owned",
+              "missing-adoption-channels",
+              "docs-unknown"
+            ]
+          },
+          "goe": {
+            "grade": "E0",
+            "certainty": "very-low",
+            "positive": false,
+            "reasons": [
+              "no-outcome-evidence",
+              "metadata-only"
+            ],
+            "downgrades": [
+              "operator-owned",
+              "missing-adoption-channels",
+              "docs-unknown"
+            ]
+          },
+          "unrated": true,
+          "operatorOwned": true,
+          "missing": {
+            "installs": true,
+            "npm7d": true,
+            "stars": false,
+            "docs": true,
+            "npmName": false
+          },
+          "taskReviewed": false,
+          "discovery": {
+            "score": 35.2,
+            "scale": 60,
+            "label": "legacy discovery — not a quality score",
+            "basis": [
+              "maintenance",
+              "adoption",
+              "verification",
+              "documentation"
+            ]
+          },
+          "discoveryPosition": 3,
+          "runners": 0,
+          "runs": 0,
+          "benchTasks": [],
+          "evidence": {
+            "installs": null,
+            "npm7d": null,
+            "stars": 67,
+            "lastPush": "2026-10-18",
+            "verification": "doctor",
+            "observedAt": "2026-10-18",
+            "repo": "https://github.com/PerryLink/dsh-fund-research"
+          },
+          "rank": null
+        }
+      ],
+      "top3": [],
+      "featured": null,
+      "measured": 0,
+      "positive": 0,
+      "note": "Prior-only: no paired with/without bench result meets the minimum evidence gate. Rows are unrated; the legacy discovery order is not a quality rank."
+    },
+    {
+      "id": "ui",
+      "label": "Sidebar and composer UI",
+      "zh": "侧栏与输入区",
+      "tasks": [
+        "composer-flow"
+      ],
+      "leaderboard": [
+        {
+          "pluginId": "omdsh-dev/dsh-better-sidebar",
+          "name": "DSH-better-sidebar",
+          "author": "omdsh-dev",
+          "surface": "ui",
+          "summary": "Full sidebar workbench: files, Git, subagents and third-party tabs.",
+          "status": "active",
+          "license": "MIT",
+          "repo": "https://github.com/omdsh-dev/DSH-better-sidebar",
+          "npm": null,
+          "score": 39.3,
+          "scoreScale": 60,
+          "prior": 65.5,
+          "priorDimensions": {
+            "maintenance": 100,
+            "adoption": 85.6,
+            "verification": 0,
+            "documentation": null
+          },
+          "bench": null,
+          "coverage": 0,
+          "coverageScore": 0,
+          "community": 0,
+          "confidence": 0.8,
+          "tier": "prior",
+          "evidenceGrade": "E0",
+          "soe": {
+            "design": 0,
+            "execution": 0,
+            "precision": 0,
+            "independence": 0,
+            "directness": 0,
+            "notes": [
+              "no-paired-result",
+              "metadata-only",
+              "docs-unknown",
+              "npm-identity-missing"
+            ]
+          },
+          "goe": {
+            "grade": "E0",
+            "certainty": "very-low",
+            "positive": false,
+            "reasons": [
+              "no-outcome-evidence",
+              "metadata-only"
+            ],
+            "downgrades": [
+              "docs-unknown"
+            ]
+          },
+          "unrated": true,
+          "operatorOwned": false,
+          "missing": {
+            "installs": false,
+            "npm7d": false,
+            "stars": false,
+            "docs": true,
+            "npmName": true
+          },
+          "taskReviewed": false,
+          "discovery": {
+            "score": 39.3,
+            "scale": 60,
+            "label": "legacy discovery — not a quality score",
+            "basis": [
+              "maintenance",
+              "adoption",
+              "verification",
+              "documentation"
+            ]
+          },
+          "discoveryPosition": 1,
+          "runners": 0,
+          "runs": 0,
+          "benchTasks": [],
+          "evidence": {
+            "installs": 127,
+            "npm7d": 57806,
+            "stars": 4006,
+            "lastPush": "2026-10-05",
+            "verification": "none",
+            "observedAt": "2026-10-06",
+            "repo": "https://github.com/omdsh-dev/DSH-better-sidebar"
+          },
+          "rank": null
+        },
+        {
+          "pluginId": "omdsh-dev/dsh-genui",
+          "name": "dsh-genui",
+          "author": "omdsh-dev",
+          "surface": "ui",
+          "summary": "Interactive UI inside assistant replies: layouts, charts, forms, quizzes, 3D.",
+          "status": "active",
+          "license": "MIT",
+          "repo": "https://github.com/omdsh-dev/dsh-genui",
+          "npm": null,
+          "score": 32.1,
+          "scoreScale": 60,
+          "prior": 53.5,
+          "priorDimensions": {
+            "maintenance": 100,
+            "adoption": 51.5,
+            "verification": 0,
+            "documentation": null
+          },
+          "bench": null,
+          "coverage": 0,
+          "coverageScore": 0,
+          "community": 0,
+          "confidence": 0.6,
+          "tier": "prior",
+          "evidenceGrade": "E0",
+          "soe": {
+            "design": 0,
+            "execution": 0,
+            "precision": 0,
+            "independence": 0,
+            "directness": 0,
+            "notes": [
+              "no-paired-result",
+              "metadata-only",
+              "missing-adoption-channels",
+              "docs-unknown",
+              "npm-identity-missing"
+            ]
+          },
+          "goe": {
+            "grade": "E0",
+            "certainty": "very-low",
+            "positive": false,
+            "reasons": [
+              "no-outcome-evidence",
+              "metadata-only"
+            ],
+            "downgrades": [
+              "missing-adoption-channels",
+              "docs-unknown"
+            ]
+          },
+          "unrated": true,
+          "operatorOwned": false,
+          "missing": {
+            "installs": false,
+            "npm7d": false,
+            "stars": true,
+            "docs": true,
+            "npmName": true
+          },
+          "taskReviewed": false,
+          "discovery": {
+            "score": 32.1,
+            "scale": 60,
+            "label": "legacy discovery — not a quality score",
+            "basis": [
+              "maintenance",
+              "adoption",
+              "verification",
+              "documentation"
+            ]
+          },
+          "discoveryPosition": 2,
+          "runners": 0,
+          "runs": 0,
+          "benchTasks": [],
+          "evidence": {
+            "installs": 26,
+            "npm7d": 9982,
+            "stars": null,
+            "lastPush": "2026-10-05",
+            "verification": "none",
+            "observedAt": "2026-10-06",
+            "repo": "https://github.com/omdsh-dev/dsh-genui"
+          },
+          "rank": null
+        },
+        {
+          "pluginId": "perrylink/dsh-composer-history",
+          "name": "dsh-composer-history",
+          "author": "PerryLink",
+          "surface": "ui",
+          "summary": "Terminal-style composer history with Ctrl+R, draft/caret restore and compaction awareness.",
+          "status": "active",
+          "license": "Apache-2.0",
+          "repo": "https://github.com/PerryLink/dsh-composer-history",
+          "npm": "dsh-composer-history",
+          "score": 30.7,
+          "scoreScale": 60,
+          "prior": 51.2,
+          "priorDimensions": {
+            "maintenance": 100,
+            "adoption": 45.2,
+            "verification": 0,
+            "documentation": null
+          },
+          "bench": null,
+          "coverage": 0,
+          "coverageScore": 0,
+          "community": 0,
+          "confidence": 0.4,
+          "tier": "prior",
+          "evidenceGrade": "E0",
+          "soe": {
+            "design": 0,
+            "execution": 0,
+            "precision": 0,
+            "independence": 0,
+            "directness": 0,
+            "notes": [
+              "no-paired-result",
+              "metadata-only",
+              "operator-owned",
+              "missing-adoption-channels",
+              "docs-unknown"
+            ]
+          },
+          "goe": {
+            "grade": "E0",
+            "certainty": "very-low",
+            "positive": false,
+            "reasons": [
+              "no-outcome-evidence",
+              "metadata-only"
+            ],
+            "downgrades": [
+              "operator-owned",
+              "missing-adoption-channels",
+              "docs-unknown"
+            ]
+          },
+          "unrated": true,
+          "operatorOwned": true,
+          "missing": {
+            "installs": true,
+            "npm7d": true,
+            "stars": false,
+            "docs": true,
+            "npmName": false
+          },
+          "taskReviewed": false,
+          "discovery": {
+            "score": 30.7,
+            "scale": 60,
+            "label": "legacy discovery — not a quality score",
+            "basis": [
+              "maintenance",
+              "adoption",
+              "verification",
+              "documentation"
+            ]
+          },
+          "discoveryPosition": 3,
+          "runners": 0,
+          "runs": 0,
+          "benchTasks": [],
+          "evidence": {
+            "installs": null,
+            "npm7d": null,
+            "stars": 17,
+            "lastPush": "2026-10-18",
+            "verification": "doctor",
+            "observedAt": "2026-10-18",
+            "repo": "https://github.com/PerryLink/dsh-composer-history"
+          },
+          "rank": null
+        }
+      ],
+      "top3": [],
+      "featured": null,
+      "measured": 0,
+      "positive": 0,
+      "note": "Prior-only: no paired with/without bench result meets the minimum evidence gate. Rows are unrated; the legacy discovery order is not a quality rank."
+    },
+    {
+      "id": "desktop",
+      "label": "Desktop shell",
+      "zh": "桌面客户端",
+      "tasks": [
+        "desktop-capture"
+      ],
+      "leaderboard": [
+        {
+          "pluginId": "anywhere-labs/dsh-desktop",
+          "name": "dsh-plugin-desktop",
+          "author": "anywhere-labs",
+          "surface": "desktop",
+          "summary": "Desktop shell that treats the desktop as a plugin container.",
+          "status": "active",
+          "license": "MIT",
+          "repo": "https://github.com/anywhere-labs/deepseek-harness-desktop",
+          "npm": null,
+          "score": 35.7,
+          "scoreScale": 60,
+          "prior": 59.5,
+          "priorDimensions": {
+            "maintenance": 100,
+            "adoption": 68.5,
+            "verification": 0,
+            "documentation": null
+          },
+          "bench": null,
+          "coverage": 0,
+          "coverageScore": 0,
+          "community": 0,
+          "confidence": 0.6,
+          "tier": "prior",
+          "evidenceGrade": "E0",
+          "soe": {
+            "design": 0,
+            "execution": 0,
+            "precision": 0,
+            "independence": 0,
+            "directness": 0,
+            "notes": [
+              "no-paired-result",
+              "metadata-only",
+              "missing-adoption-channels",
+              "docs-unknown",
+              "npm-identity-missing"
+            ]
+          },
+          "goe": {
+            "grade": "E0",
+            "certainty": "very-low",
+            "positive": false,
+            "reasons": [
+              "no-outcome-evidence",
+              "metadata-only"
+            ],
+            "downgrades": [
+              "missing-adoption-channels",
+              "docs-unknown"
+            ]
+          },
+          "unrated": true,
+          "operatorOwned": false,
+          "missing": {
+            "installs": false,
+            "npm7d": false,
+            "stars": true,
+            "docs": true,
+            "npmName": true
+          },
+          "taskReviewed": false,
+          "discovery": {
+            "score": 35.7,
+            "scale": 60,
+            "label": "legacy discovery — not a quality score",
+            "basis": [
+              "maintenance",
+              "adoption",
+              "verification",
+              "documentation"
+            ]
+          },
+          "discoveryPosition": 1,
+          "runners": 0,
+          "runs": 0,
+          "benchTasks": [],
+          "evidence": {
+            "installs": 79,
+            "npm7d": 129,
+            "stars": null,
+            "lastPush": "2026-10-05",
+            "verification": "none",
+            "observedAt": "2026-10-06",
+            "repo": "https://github.com/anywhere-labs/deepseek-harness-desktop"
+          },
+          "rank": null
+        },
+        {
+          "pluginId": "dsh-tauri-desk/deepseek-harness-desktop",
+          "name": "dsh-tauri",
+          "author": "dsh-tauri-desk",
+          "surface": "desktop",
+          "summary": "Tauri desktop shell for DSH.",
+          "status": "active",
+          "license": "MIT",
+          "repo": "https://github.com/dsh-tauri-desk/deepseek-harness-desktop",
+          "npm": null,
+          "score": 23.5,
+          "scoreScale": 60,
+          "prior": 39.1,
+          "priorDimensions": {
+            "maintenance": 100,
+            "adoption": 10.8,
+            "verification": 0,
+            "documentation": null
+          },
+          "bench": null,
+          "coverage": 0,
+          "coverageScore": 0,
+          "community": 0,
+          "confidence": 0.4,
+          "tier": "prior",
+          "evidenceGrade": "E0",
+          "soe": {
+            "design": 0,
+            "execution": 0,
+            "precision": 0,
+            "independence": 0,
+            "directness": 0,
+            "notes": [
+              "no-paired-result",
+              "metadata-only",
+              "missing-adoption-channels",
+              "docs-unknown",
+              "npm-identity-missing"
+            ]
+          },
+          "goe": {
+            "grade": "E0",
+            "certainty": "very-low",
+            "positive": false,
+            "reasons": [
+              "no-outcome-evidence",
+              "metadata-only"
+            ],
+            "downgrades": [
+              "missing-adoption-channels",
+              "docs-unknown"
+            ]
+          },
+          "unrated": true,
+          "operatorOwned": false,
+          "missing": {
+            "installs": false,
+            "npm7d": true,
+            "stars": true,
+            "docs": true,
+            "npmName": true
+          },
+          "taskReviewed": false,
+          "discovery": {
+            "score": 23.5,
+            "scale": 60,
+            "label": "legacy discovery — not a quality score",
+            "basis": [
+              "maintenance",
+              "adoption",
+              "verification",
+              "documentation"
+            ]
+          },
+          "discoveryPosition": 2,
+          "runners": 0,
+          "runs": 0,
+          "benchTasks": [],
+          "evidence": {
+            "installs": 1,
+            "npm7d": null,
+            "stars": null,
+            "lastPush": "2026-10-05",
+            "verification": "none",
+            "observedAt": "2026-10-06",
+            "repo": "https://github.com/dsh-tauri-desk/deepseek-harness-desktop"
+          },
+          "rank": null
+        }
+      ],
+      "top3": [],
+      "featured": null,
+      "measured": 0,
+      "positive": 0,
+      "note": "Prior-only: no paired with/without bench result meets the minimum evidence gate. Rows are unrated; the legacy discovery order is not a quality rank."
+    }
+  ],
+  "overall": [],
+  "attention": {
+    "newAndPromising": [
+      {
+        "pluginId": "perrylink/dsh-click",
+        "name": "dsh-click",
+        "author": "PerryLink",
+        "surface": "browser",
+        "summary": "Cross-platform native desktop control: screenshot, read, click, type, launch.",
+        "status": "active",
+        "license": "Apache-2.0",
+        "repo": "https://github.com/PerryLink/dsh-click",
+        "npm": "dsh-click",
+        "score": 31.1,
+        "scoreScale": 60,
+        "prior": 51.8,
+        "priorDimensions": {
+          "maintenance": 100,
+          "adoption": 46.8,
+          "verification": 0,
+          "documentation": null
+        },
+        "bench": null,
+        "coverage": 0,
+        "coverageScore": 0,
+        "community": 0,
+        "confidence": 0.4,
+        "tier": "prior",
+        "evidenceGrade": "E0",
+        "soe": {
+          "design": 0,
+          "execution": 0,
+          "precision": 0,
+          "independence": 0,
+          "directness": 0,
+          "notes": [
+            "no-paired-result",
+            "metadata-only",
+            "operator-owned",
+            "missing-adoption-channels",
+            "docs-unknown"
+          ]
+        },
+        "goe": {
+          "grade": "E0",
+          "certainty": "very-low",
+          "positive": false,
+          "reasons": [
+            "no-outcome-evidence",
+            "metadata-only"
+          ],
+          "downgrades": [
+            "operator-owned",
+            "missing-adoption-channels",
+            "docs-unknown"
+          ]
+        },
+        "unrated": true,
+        "operatorOwned": true,
+        "missing": {
+          "installs": true,
+          "npm7d": true,
+          "stars": false,
+          "docs": true,
+          "npmName": false
+        },
+        "taskReviewed": false,
+        "discovery": {
+          "score": 31.1,
+          "scale": 60,
+          "label": "legacy discovery — not a quality score",
+          "basis": [
+            "maintenance",
+            "adoption",
+            "verification",
+            "documentation"
+          ]
+        },
+        "discoveryPosition": 2,
+        "runners": 0,
+        "runs": 0,
+        "benchTasks": [],
+        "evidence": {
+          "installs": null,
+          "npm7d": null,
+          "stars": 19,
+          "lastPush": "2026-10-18",
+          "verification": "doctor",
+          "observedAt": "2026-10-18",
+          "repo": "https://github.com/PerryLink/dsh-click"
+        },
+        "rank": null
+      },
+      {
+        "pluginId": "perrylink/dsh-composer-history",
+        "name": "dsh-composer-history",
+        "author": "PerryLink",
+        "surface": "ui",
+        "summary": "Terminal-style composer history with Ctrl+R, draft/caret restore and compaction awareness.",
+        "status": "active",
+        "license": "Apache-2.0",
+        "repo": "https://github.com/PerryLink/dsh-composer-history",
+        "npm": "dsh-composer-history",
+        "score": 30.7,
+        "scoreScale": 60,
+        "prior": 51.2,
+        "priorDimensions": {
+          "maintenance": 100,
+          "adoption": 45.2,
+          "verification": 0,
+          "documentation": null
+        },
+        "bench": null,
+        "coverage": 0,
+        "coverageScore": 0,
+        "community": 0,
+        "confidence": 0.4,
+        "tier": "prior",
+        "evidenceGrade": "E0",
+        "soe": {
+          "design": 0,
+          "execution": 0,
+          "precision": 0,
+          "independence": 0,
+          "directness": 0,
+          "notes": [
+            "no-paired-result",
+            "metadata-only",
+            "operator-owned",
+            "missing-adoption-channels",
+            "docs-unknown"
+          ]
+        },
+        "goe": {
+          "grade": "E0",
+          "certainty": "very-low",
+          "positive": false,
+          "reasons": [
+            "no-outcome-evidence",
+            "metadata-only"
+          ],
+          "downgrades": [
+            "operator-owned",
+            "missing-adoption-channels",
+            "docs-unknown"
+          ]
+        },
+        "unrated": true,
+        "operatorOwned": true,
+        "missing": {
+          "installs": true,
+          "npm7d": true,
+          "stars": false,
+          "docs": true,
+          "npmName": false
+        },
+        "taskReviewed": false,
+        "discovery": {
+          "score": 30.7,
+          "scale": 60,
+          "label": "legacy discovery — not a quality score",
+          "basis": [
+            "maintenance",
+            "adoption",
+            "verification",
+            "documentation"
+          ]
+        },
+        "discoveryPosition": 3,
+        "runners": 0,
+        "runs": 0,
+        "benchTasks": [],
+        "evidence": {
+          "installs": null,
+          "npm7d": null,
+          "stars": 17,
+          "lastPush": "2026-10-18",
+          "verification": "doctor",
+          "observedAt": "2026-10-18",
+          "repo": "https://github.com/PerryLink/dsh-composer-history"
+        },
+        "rank": null
+      },
+      {
+        "pluginId": "perrylink/dsh-talk",
+        "name": "dsh-talk",
+        "author": "PerryLink",
+        "surface": "voice",
+        "summary": "Voice-first loop: browser/local STT, TTS replies, announcements and interrupt.",
+        "status": "active",
+        "license": "Apache-2.0",
+        "repo": "https://github.com/PerryLink/dsh-talk",
+        "npm": "dsh-talk",
+        "score": 30.4,
+        "scoreScale": 60,
+        "prior": 50.6,
+        "priorDimensions": {
+          "maintenance": 100,
+          "adoption": 43.3,
+          "verification": 0,
+          "documentation": null
+        },
+        "bench": null,
+        "coverage": 0,
+        "coverageScore": 0,
+        "community": 0,
+        "confidence": 0.4,
+        "tier": "prior",
+        "evidenceGrade": "E0",
+        "soe": {
+          "design": 0,
+          "execution": 0,
+          "precision": 0,
+          "independence": 0,
+          "directness": 0,
+          "notes": [
+            "no-paired-result",
+            "metadata-only",
+            "operator-owned",
+            "missing-adoption-channels",
+            "docs-unknown"
+          ]
+        },
+        "goe": {
+          "grade": "E0",
+          "certainty": "very-low",
+          "positive": false,
+          "reasons": [
+            "no-outcome-evidence",
+            "metadata-only"
+          ],
+          "downgrades": [
+            "operator-owned",
+            "missing-adoption-channels",
+            "docs-unknown"
+          ]
+        },
+        "unrated": true,
+        "operatorOwned": true,
+        "missing": {
+          "installs": true,
+          "npm7d": true,
+          "stars": false,
+          "docs": true,
+          "npmName": false
+        },
+        "taskReviewed": false,
+        "discovery": {
+          "score": 30.4,
+          "scale": 60,
+          "label": "legacy discovery — not a quality score",
+          "basis": [
+            "maintenance",
+            "adoption",
+            "verification",
+            "documentation"
+          ]
+        },
+        "discoveryPosition": 1,
+        "runners": 0,
+        "runs": 0,
+        "benchTasks": [],
+        "evidence": {
+          "installs": null,
+          "npm7d": null,
+          "stars": 15,
+          "lastPush": "2026-10-18",
+          "verification": "doctor",
+          "observedAt": "2026-10-18",
+          "repo": "https://github.com/PerryLink/dsh-talk"
+        },
+        "rank": null
+      }
+    ],
+    "mostNominated": [],
+    "mostReplicated": [],
+    "featuredBySurface": []
+  },
+  "contributors": [],
+  "nominations": [],
+  "apiVersion": "v1",
+  "etag": "sha256:724ecce88ff1bb8bc6a9a4f86fbeb521aff7a340c588309e32e3c6cc7e1e477a"
+}

@@ -1,0 +1,5 @@
+{
+  "schema": "dsh-score/audits/v1",
+  "note": "Independent audit attestations. An empty list means no row can be E5. An audit entry must name the auditor, scope, date, method, evidence URL and signature.",
+  "audits": []
+}

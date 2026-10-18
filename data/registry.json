@@ -23,16 +23,16 @@
   },
   "source": {
     "plugins": 42,
-    "tasks": 15,
+    "tasks": 39,
     "surfaces": 15,
     "benchResults": 0,
     "contributions": 0,
-    "inputHash": "sha256:bd224c1f4c85326404c9832377138f22b827993df7b85e5b6fd0f3e0caf781aa"
+    "inputHash": "sha256:ac0b4b8ec693410e962277de29e31603ab9bea7a8b753496d11033116c378c75"
   },
   "stats": {
     "plugins": 42,
     "surfaces": 15,
-    "tasks": 15,
+    "tasks": 39,
     "measuredPlugins": 0,
     "positiveMeasured": 0,
     "unratedPlugins": 42,
@@ -49,7 +49,15 @@
       "label": "Cross-session memory",
       "zh": "跨会话记忆",
       "tasks": [
-        "memory-recall"
+        "memory-recall",
+        "p1-memory-deploy",
+        "p1-memory-freeze",
+        "p1-memory-api",
+        "p1-memory-owner",
+        "p1-memory-cutoff",
+        "p1-memory-ttl",
+        "p1-memory-recency",
+        "p1-memory-provenance"
       ],
       "leaderboard": [
         {
@@ -114,6 +122,7 @@
             "docs": true,
             "npmName": true
           },
+          "taskReviewed": false,
           "discovery": {
             "score": 41,
             "scale": 60,
@@ -202,6 +211,7 @@
             "docs": true,
             "npmName": true
           },
+          "taskReviewed": false,
           "discovery": {
             "score": 38.2,
             "scale": 60,
@@ -291,6 +301,7 @@
             "docs": true,
             "npmName": false
           },
+          "taskReviewed": false,
           "discovery": {
             "score": 30,
             "scale": 60,
@@ -393,6 +404,7 @@
             "docs": true,
             "npmName": false
           },
+          "taskReviewed": false,
           "discovery": {
             "score": 42.4,
             "scale": 60,
@@ -480,6 +492,7 @@
             "docs": true,
             "npmName": false
           },
+          "taskReviewed": false,
           "discovery": {
             "score": 42.4,
             "scale": 60,
@@ -569,6 +582,7 @@
             "docs": true,
             "npmName": false
           },
+          "taskReviewed": false,
           "discovery": {
             "score": 29.1,
             "scale": 60,
@@ -672,6 +686,7 @@
             "docs": true,
             "npmName": true
           },
+          "taskReviewed": false,
           "discovery": {
             "score": 38.3,
             "scale": 60,
@@ -760,6 +775,7 @@
             "docs": true,
             "npmName": true
           },
+          "taskReviewed": false,
           "discovery": {
             "score": 34.1,
             "scale": 60,
@@ -848,6 +864,7 @@
             "docs": true,
             "npmName": true
           },
+          "taskReviewed": false,
           "discovery": {
             "score": 33.1,
             "scale": 60,
@@ -886,7 +903,15 @@
       "label": "Web search and fetch",
       "zh": "联网搜索",
       "tasks": [
-        "web-current"
+        "web-current",
+        "p1-web-version",
+        "p1-web-date",
+        "p1-web-breaking",
+        "p1-web-default",
+        "p1-web-price",
+        "p1-web-issue",
+        "p1-web-author",
+        "p1-web-updated"
       ],
       "leaderboard": [
         {
@@ -951,6 +976,7 @@
             "docs": true,
             "npmName": true
           },
+          "taskReviewed": false,
           "discovery": {
             "score": 32.5,
             "scale": 60,
@@ -1039,6 +1065,7 @@
             "docs": true,
             "npmName": true
           },
+          "taskReviewed": false,
           "discovery": {
             "score": 32.5,
             "scale": 60,
@@ -1127,6 +1154,7 @@
             "docs": true,
             "npmName": true
           },
+          "taskReviewed": false,
           "discovery": {
             "score": 30.9,
             "scale": 60,
@@ -1230,6 +1258,7 @@
             "docs": true,
             "npmName": true
           },
+          "taskReviewed": false,
           "discovery": {
             "score": 36.3,
             "scale": 60,
@@ -1319,6 +1348,7 @@
             "docs": true,
             "npmName": false
           },
+          "taskReviewed": false,
           "discovery": {
             "score": 31.1,
             "scale": 60,
@@ -1407,6 +1437,7 @@
             "docs": true,
             "npmName": true
           },
+          "taskReviewed": false,
           "discovery": {
             "score": 27.1,
             "scale": 60,
@@ -1510,6 +1541,7 @@
             "docs": true,
             "npmName": true
           },
+          "taskReviewed": false,
           "discovery": {
             "score": 35.5,
             "scale": 60,
@@ -1598,6 +1630,7 @@
             "docs": true,
             "npmName": true
           },
+          "taskReviewed": false,
           "discovery": {
             "score": 31.9,
             "scale": 60,
@@ -1686,6 +1719,7 @@
             "docs": true,
             "npmName": true
           },
+          "taskReviewed": false,
           "discovery": {
             "score": 31.1,
             "scale": 60,
@@ -1789,6 +1823,7 @@
             "docs": true,
             "npmName": true
           },
+          "taskReviewed": false,
           "discovery": {
             "score": 36.7,
             "scale": 60,
@@ -1877,6 +1912,7 @@
             "docs": true,
             "npmName": true
           },
+          "taskReviewed": false,
           "discovery": {
             "score": 28.4,
             "scale": 60,
@@ -1966,6 +2002,7 @@
             "docs": true,
             "npmName": false
           },
+          "taskReviewed": false,
           "discovery": {
             "score": 23.5,
             "scale": 60,
@@ -2070,6 +2107,7 @@
             "docs": true,
             "npmName": false
           },
+          "taskReviewed": false,
           "discovery": {
             "score": 39.2,
             "scale": 60,
@@ -2157,6 +2195,7 @@
             "docs": true,
             "npmName": false
           },
+          "taskReviewed": false,
           "discovery": {
             "score": 34.6,
             "scale": 60,
@@ -2245,6 +2284,7 @@
             "docs": true,
             "npmName": true
           },
+          "taskReviewed": false,
           "discovery": {
             "score": 18,
             "scale": 60,
@@ -2347,6 +2387,7 @@
             "docs": true,
             "npmName": false
           },
+          "taskReviewed": false,
           "discovery": {
             "score": 37.2,
             "scale": 60,
@@ -2435,6 +2476,7 @@
             "docs": true,
             "npmName": true
           },
+          "taskReviewed": false,
           "discovery": {
             "score": 27.1,
             "scale": 60,
@@ -2537,6 +2579,7 @@
             "docs": true,
             "npmName": false
           },
+          "taskReviewed": false,
           "discovery": {
             "score": 37,
             "scale": 60,
@@ -2625,6 +2668,7 @@
             "docs": true,
             "npmName": true
           },
+          "taskReviewed": false,
           "discovery": {
             "score": 35.4,
             "scale": 60,
@@ -2714,6 +2758,7 @@
             "docs": true,
             "npmName": false
           },
+          "taskReviewed": false,
           "discovery": {
             "score": 24.8,
             "scale": 60,
@@ -2752,7 +2797,15 @@
       "label": "Plugin development and verification",
       "zh": "插件开发与核验",
       "tasks": [
-        "plugin-build"
+        "plugin-build",
+        "p1-dev-add",
+        "p1-dev-config",
+        "p1-dev-test",
+        "p1-dev-readme",
+        "p1-dev-eval",
+        "p1-dev-package",
+        "p1-dev-json",
+        "p1-dev-import"
       ],
       "leaderboard": [
         {
@@ -2816,6 +2869,7 @@
             "docs": true,
             "npmName": false
           },
+          "taskReviewed": false,
           "discovery": {
             "score": 34.7,
             "scale": 60,
@@ -2905,6 +2959,7 @@
             "docs": true,
             "npmName": false
           },
+          "taskReviewed": false,
           "discovery": {
             "score": 29.6,
             "scale": 60,
@@ -2994,6 +3049,7 @@
             "docs": true,
             "npmName": false
           },
+          "taskReviewed": false,
           "discovery": {
             "score": 29.6,
             "scale": 60,
@@ -3082,6 +3138,7 @@
             "docs": true,
             "npmName": true
           },
+          "taskReviewed": false,
           "discovery": {
             "score": 24.8,
             "scale": 60,
@@ -3186,6 +3243,7 @@
             "docs": true,
             "npmName": false
           },
+          "taskReviewed": false,
           "discovery": {
             "score": 30.4,
             "scale": 60,
@@ -3290,6 +3348,7 @@
             "docs": true,
             "npmName": false
           },
+          "taskReviewed": false,
           "discovery": {
             "score": 38.9,
             "scale": 60,
@@ -3379,6 +3438,7 @@
             "docs": true,
             "npmName": false
           },
+          "taskReviewed": false,
           "discovery": {
             "score": 38.9,
             "scale": 60,
@@ -3468,6 +3528,7 @@
             "docs": true,
             "npmName": false
           },
+          "taskReviewed": false,
           "discovery": {
             "score": 35.2,
             "scale": 60,
@@ -3569,6 +3630,7 @@
             "docs": true,
             "npmName": true
           },
+          "taskReviewed": false,
           "discovery": {
             "score": 39.3,
             "scale": 60,
@@ -3657,6 +3719,7 @@
             "docs": true,
             "npmName": true
           },
+          "taskReviewed": false,
           "discovery": {
             "score": 32.1,
             "scale": 60,
@@ -3746,6 +3809,7 @@
             "docs": true,
             "npmName": false
           },
+          "taskReviewed": false,
           "discovery": {
             "score": 30.7,
             "scale": 60,
@@ -3849,6 +3913,7 @@
             "docs": true,
             "npmName": true
           },
+          "taskReviewed": false,
           "discovery": {
             "score": 35.7,
             "scale": 60,
@@ -3937,6 +4002,7 @@
             "docs": true,
             "npmName": true
           },
+          "taskReviewed": false,
           "discovery": {
             "score": 23.5,
             "scale": 60,
@@ -4037,6 +4103,7 @@
           "docs": true,
           "npmName": false
         },
+        "taskReviewed": false,
         "discovery": {
           "score": 31.1,
           "scale": 60,
@@ -4126,6 +4193,7 @@
           "docs": true,
           "npmName": false
         },
+        "taskReviewed": false,
         "discovery": {
           "score": 30.7,
           "scale": 60,
@@ -4215,6 +4283,7 @@
           "docs": true,
           "npmName": false
         },
+        "taskReviewed": false,
         "discovery": {
           "score": 30.4,
           "scale": 60,
