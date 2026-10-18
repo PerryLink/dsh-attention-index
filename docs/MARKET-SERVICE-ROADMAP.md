@@ -313,6 +313,9 @@ no-fabricated-data rule and permanently damage credibility with every market.
 Before building anything:
 
 - **Freeze `measured`.** Keep `0 measured`; label every prior row `provisional`.
+- **Strip rank from 0-measured surfaces.** No `#1` badge, no `rank: 1` in feeds;
+  show `provisional / no outcome evidence` instead. A rank-1 badge without a tier
+  is the fastest way to launder a prior into a recommendation.
 - **Audit the data.** Remove or substantiate `certified`; drop `npm7d`/installs
   where the source is missing; label operator-owned rows; publish a COI register.
 - **Neutrality reset.** Verification is 0 unless ≥2 independent certifiers; seed
@@ -345,6 +348,11 @@ rejected; the tab works from the mirror.
 | **P0.6 First measured pilot** | 3 surfaces × 3–5 plugins; 5 runs/arm; deterministic checks; publish results with 95% CIs and environment manifests | ≥15 measured plugin-surface rows; no result without env manifest; reviewer sign-off |
 | **P0.7 Provisional labeling** | Surfaces with 0 measured stop presenting a ranked #1 as quality; show "provisional / no outcome evidence" | UI and API both expose `provisional`; no market can mistake prior for measured |
 | **P0.8 Integrator guide** | 3 recipes: format-1 decoration, Desktop catalog fields, direct signals API; one-page quick start | An external developer can integrate in <1 day |
+
+**Recommendation gate:** none of P0.1–P0.8 is sufficient to ship a recommender.
+It additionally requires: no prior ranks, a `briefs[]` model, `bench-index/v1` +
+`recommendation/v1` v0, Newcombe intervals + gates, version/environment binding,
+and executable tasks. See §15.9.
 
 ### P1 — "multiple markets can use it" (2–3 months)
 
@@ -625,6 +633,7 @@ Read-only probes against the 42-plugin dataset (`data/plugins.json`,
 | **Verification is operator-biased** | 26 `none` / 15 `doctor` / 1 `certified`; all 26 non-operator plugins score 0; removing the 25% weight changes Spearman 0.875 | A quarter of the score is an operator bonus, not a quality signal. |
 | **Missing data is treated as zero** | installs missing 13/42, npm7d 16/42, stars 25/42, npm name 23/42 | Plugins are penalized for unobserved data; adoption is not comparable. |
 | **Scores are compressed** | prior 30–69; public 18–41.4; 32 distinct values; ties at 38.3×3, 28.7×3, 28.6×3 | Differences are small; decimals imply false precision; top-3 can be a tie. |
+| **Ties are settled by plugin id** | memory #1 is 38.3 for the top two rows with identical prior/confidence; `vectorize-io/hindsight` wins over `volcengine/openviking` by id | A `#1` can be decided by alphabetical order, not evidence. |
 | **Weights are not the main issue** | Spearman: equal 0.995, maintenance-heavy 0.965, adoption-heavy 0.941, verification-heavy 0.712, no verification 0.875, no docs 0.998; top-3 churn 0–1/41 | Reweighting will not fix the construct; the data and measurement will. |
 | **Measured composite is semantically wrong** | null (bench 50, prior 64, coverage 1) = **56.7**; prior-only 64 = 38.4; prior-only 80 = 48.0; negative measured (bench 0) = 29.2 but tier-first still ranks it above prior | A null measured plugin outranks a high prior; a negative measured plugin outranks all prior; prior is double-counted. |
 | **Scale break** | prior 0–60 vs measured 0–100 in the same `score` field; `overall` ranks across surfaces | Markets/users cannot compare; cross-surface rank is meaningless. |
@@ -652,7 +661,8 @@ Read-only probes against the 42-plugin dataset (`data/plugins.json`,
 3. Rank **lexicographically**: positive measured (FDR-adjusted LCB > 0) >
    provisional/underpowered (shown, not ranked) > prior-only (separate
    "unmeasured" list) > unrated. Do **not** let a negative measured plugin outrank
-   a prior by tier alone.
+   a prior by tier alone. Within measured, rank by the bench/effect estimate;
+   the composite is display-only.
 4. No single composite. If a number is unavoidable, publish the weights, a
    sensitivity analysis, and "this is not a probability of quality".
 5. Attention: top-3/featured only from **positive measured**; prior-only gets no
@@ -675,7 +685,37 @@ The idea: an **app-level bench**, matched to the current session, recommends the
 highest-scoring plugin on that bench. It is a good idea **if it is a consumer of
 the public evidence, not a new local scorer**.
 
-### 15.1 The boundary
+### 15.1 The app-level bench
+
+"App-level bench" does **not** mean a local score computed in the app. It means:
+
+- a **public task pack per capability surface** (memory, web, office, dev, …);
+- run through DSH (headless or in-app), with a pinned environment;
+- results are **public, signed, version-bound** and enter the same registry that
+  markets consume;
+- the app provides the **session context** and the **recommendation surface**, not
+  the score.
+
+The existing `scripts/bench-run.mjs` is already the runner; the missing pieces are
+executable tasks, sandboxing, attestation and measured coverage. The recommender
+is a consumer of that public bench, not a second bench.
+
+**Units (do not conflate):**
+
+| Unit | Definition | Used for | Never for |
+|---|---|---|---|
+| **Surface** | Market category id (`memory`, `mcp`, `office`, …) | Browsing, index `category`, filters | A claim, a rank, or a `#1` |
+| **Brief** | Job-to-be-done, stable id `surface/job` (`memory/recall`, `office/report`) | **Session matching**, scope of a claim | Ranking across briefs |
+| **Task** | One prompt + fixture + executable checks | Unit of evidence | A standalone winner |
+| **Pack** | Versioned tasks/fixtures/checks for one brief | Result identity, invalidation | Matching (versions churn) |
+| **Instance** | `pack × environment(model, DSH version, profile, runner image) × methodology` | Comparison universe | — |
+| **Cohort** | Measured plugins inside one instance | Rank denominator (`#1 of 5`) | Matching (depends on who ran) |
+
+The surface is a market category, not a measurement: it mixes heterogeneous jobs
+(memory recall vs memory hygiene vs memory cost). Match on a **brief**; rank
+inside an **instance**; publish at surface level; report rank against a **cohort**.
+
+### 15.2 The boundary
 
 | Layer | Runs where | What it does | What it must not do |
 |---|---|---|---|
@@ -687,7 +727,7 @@ This is the key distinction: **matching is routing, not scoring.** The score is
 public and identical for everyone; the session only selects which public bench is
 relevant. This keeps the original "no local scoring" constraint intact.
 
-### 15.2 Sequencing
+### 15.3 Sequencing
 
 Do **not** launch the recommender before 3–5 surfaces have measured results.
 With 0 measured it would recommend prior-only plugins — exactly the "local box"
@@ -698,42 +738,141 @@ with no value that was already rejected. The order is:
 3. recommender (tool first, auto-match later);
 4. market/index integration.
 
-### 15.3 Match design
+**Current-state blockers (verified):**
 
-- **MVP (P0): explicit surface.** A tool `recommend_plugin(surface | task)`:
-  the agent or user names the surface (or a task string), the tool maps it to a
-  surface id and returns the public top-k. No session inference yet.
+- `top3`/`featured` fall back to prior when `measured = 0`
+  (`scripts/score.mjs:308,317`); the rank-1 SVG badge says `#1 memory · 38.3`
+  without a tier, while Markdown says `38.3 · prior`; the `dsh-recommend` feed
+  repeats `rank: 1, tier: prior`. A recommender on top of this **launders
+  prior-only into a recommendation**. Strip `#1`/rank from 0-measured surfaces
+  before shipping any recommendation.
+- `plugins[].surface` is singular; `aggregateBench` takes
+  `aggregate.tasks[0]?.surface`, so a multi-surface plugin gets one arbitrary
+  surface and coverage can exceed 1.0. Add a `briefs[]`/multi-surface model and
+  per-environment result keys before routing.
+- All 15 tasks are `draft` and every check is prose-only (`id` + `description`,
+  no `kind`); nothing is runnable. Fix tasks before matching.
+- The composite is not task-conditioned: 35% of the ordering signal is prior
+  (30% of which is adoption). Rank measured rows on `bench`, not the composite;
+  keep the composite for display only.
+
+### 15.4 Match design
+
+- **MVP (P0): explicit brief.** A tool `recommend_plugin(brief | task | surface)`:
+  the agent or user names the brief/task/surface; the tool maps it to a brief and
+  returns the public top-k. No session inference yet.
 - **P1: local projection.** A Host `sessionProjections` unit folds committed
-  events into `{ surface, confidence, reason, asOfSeq }`. Features: user text
-  keywords, tool names, file types, active skill, working directory, explicit
-  user choice. A rules-first classifier is explainable and cheap; a small model
-  is optional.
-- **State contains only the label, confidence and a short reason** — never the
-  raw user text. The projection is local; nothing is uploaded.
-- **DSH primitives**: a Host plugin can register a `sessionProjections` unit
-  (`{ surface, confidence, reason, asOfSeq }`) whose `wire` view the client reads,
-  or call `ctx.sessionQuery.readSurface(sessionId)` for the current model-facing
-  history. The projection fold must derive the label and drop the text; do not
-  checkpoint raw prompts.
-- **Abstain** when confidence is low, when two surfaces tie, or when the session
-  spans multiple surfaces. Show "not sure — pick a surface" rather than a wrong
-  recommendation.
-- **User override** always wins; remember it only for the session, not globally.
+  events into `{ briefId, surface, confidence, matchedOn[], asOfSeq, ood }`.
+- **Features from DSH events** (verified in `packages/core/session`):
+  `user/message` text; `tool/call.name` (MCP tools are
+  `mcp__<server>__<tool>`, a high-precision signal); `image/offload` (vision);
+  `deliverables/presented` (Office/report); `subagent/*`, `team/*`,
+  `workflow/*` (orchestration); `approval/*`, `permission/preset`,
+  `sandbox/mode` (safety); `compaction/*` (cost/context); `schedule/change`
+  (remote); `model/selection`, `working-directory/change`, `workspace/changes`
+  (dev).
+- **Match the current turn**; if under-determined, the last 3 user turns. Never
+  the whole session: a memory task from hour 1 would dominate the rest.
+- **Never use the installed plugin set to route.** That closes a self-fulfilling
+  loop (benched winners route to themselves). Installed plugins are used only to
+  dedupe/exclude and to compute `versionMatch`.
+- **Output `topK ≤ 3` briefs** with `{ briefId, matchConfidence, matchedOn[] }`
+  and `ood: true` when the job is not covered by any task in the bank. Below
+  threshold → no recommendation, not a global fallback.
+- **Multi-brief sessions**: one shortlist per brief. A session spanning
+  memory+research gets `memory/recall` and `research/sources`, not a blended
+  score. If the two are co-required and no composite brief exists, say "no bench
+  for this combination".
+- **State contains only the label, confidence and a short reason** — never raw
+  user text. Local, no upload, no checkpoint of prompts.
+- **DSH primitives**: `sessionProjections` with a `wire` view for the client; or
+  `ctx.sessionQuery.readSurface(sessionId)` for the current model-facing history.
+- **Abstain** when confidence is low, when briefs tie, or when the session spans
+  multiple briefs. Show "not sure — pick a brief" rather than a wrong answer.
+- **User override** always wins; remember it only for the session.
+- **Meaningfulness preconditions**: same instance for every compared plugin; the
+  matched job is covered by the bank (`ood: false`); environment applicable;
+  cohort ≥ 2.
 
-### 15.4 Recommendation policy
+### 15.5 Recommendation policy
 
-- **Measured-positive first**: only plugins with a positive, FDR-adjusted lower
-  bound enter the top-k.
-- **No false #1**: if CIs overlap or coverage is low, return a tier/set, not a
-  single winner.
-- **No measured?** Return `state: "no-measured"` plus a clearly labelled prior
-  shortlist, or abstain. Never present a prior-only plugin as "the best".
-- **Never hide unmeasured plugins**: a separate "not yet measured" list.
-- **Evidence record**: tier, effect + CI, tasks/runs, coverage, environment,
-  observedAt/expiresAt, evidence URL, install target.
-- **No paid placement**, no install-count ranking, no operator self-promotion.
+**Record must carry:** `tier`, `quality` + `scale`, `lift` + `ci95` + baseline
+`p0/p1`, `coverage` + `tasksRun/tasksInBrief`, `samples` + `runners`,
+`confidence` (completeness, not a probability), `rank` + `cohortSize` +
+`tieGroupSize` + `tiedWith`, `environment.match`, `versionMatch`,
+`observedAt/expiresAt/lastEvidenceAt`, `flags`, `limitations[]`, `excluded[]` with
+reasons, `unmeasuredCandidates`, `disclosures.personalized = false`, and a
+`verify` link. The record is a **pure projection**: same bench-index hash + same
+brief + same environment ⇒ byte-identical output. Add a golden-file test.
 
-### 15.5 Integration options
+**False-#1 algorithm:**
+
+1. `C` = measured plugins in the instance, exact/adjacent environment, fresh,
+   non-revoked, `versionMatch ∈ {exact, carried-forward}`.
+2. If `|C| < 2` → no rank (`only-measured`); a `#1` of one is not a comparison.
+3. Pool tasks with a paired bootstrap; carry `lift`, `ci95`, `coverage`, `runners`.
+4. Gate each row: coverage ≥ 0.5, tasksRun ≥ 5, runners ≥ 2, CI width ≤ 0.30,
+   no open dispute, no draft task.
+5. Eligible set `E`; if empty → unranked shortlist with per-row gate reasons.
+6. Winner `w = argmax quality(E)`. For every other `e`, compute a **paired** CI on
+   `(q_w − q_e)`; if its lower bound ≤ 0, `e` is tied.
+7. `T = {w} ∪ tied`. If `|T| > 1` → `tie-group`; order inside `T` by coverage,
+   then confidence, then plugin id (deterministic).
+8. If `|T| == 1`, require a multiplicity-adjusted margin (max-statistic bootstrap
+   or Bonferroni over `|E|−1`); otherwise still `tie-group`.
+9. Render at most 3 tie-group + 2 next + 3 prior rows, plus cohort size and
+   unmeasured count.
+10. If the winner's lift CI includes 0 → label "indistinguishable from no
+    plugin", regardless of rank.
+
+**States:** `measured` (positive gate), `tie-group`, `only-measured`,
+`provisional` (gate failed), `no-outcome-evidence` (prior-only shortlist),
+`unrated` (not in the bench), `stale`, `revoked`. Never present a prior-only
+plugin as "the best". Never hide unmeasured plugins. No paid placement, no
+install-count ranking, no operator self-promotion.
+
+**Ranking rules (hard):**
+
+- Tier is a **partial order**: measured-valid > measured-provisional > prior-only
+  > unrated. Never blend 0–60 and 0–100 in one sort or column.
+- Order measured by **task-conditioned quality (`bench`)**, not the composite;
+  adoption/community never affect measured order.
+- A **single winner** requires cohort ≥ 2, coverage ≥ 0.5 with ≥ 5 tasks, ≥ 2
+  independent runners, CI width ≤ 0.30, and a multiplicity-adjusted margin
+  LCB > 0. Anything less is a tie group or a shortlist.
+- **Ties**: a paired CI on the quality difference; if its lower bound ≤ 0, the
+  two are tied. Order inside a tie by coverage → confidence → id, never by point
+  estimate.
+- **Environment**: `exact` usable; `adjacent` provisional and labelled;
+  `mismatch` no claim for this user (show "measured on X" separately).
+- **Version**: `exact` is the only unqualified state; `carried-forward` only for
+  a patch bump with a verified no-runtime-surface-change diff, labelled
+  provisional; `newer`/`older` show the score for the measured version, never as
+  the installed version's score, and cannot be a `#1`.
+- **Freshness**: measured 90d, replicated 180d, prior 30d, pack 180d; expired
+  rows demote to prior-only with `stale: true`, never a measured winner.
+- **No-effect must be visible**: if the lift CI includes 0, label
+  "indistinguishable from no plugin" and show lift/CI/p0/p1; do not let the
+  0–100 mapping's 50 read as "mediocre".
+- **Display budget**: ≤ 3 tie-group + 2 next + 3 prior rows, always with cohort
+  size and `unmeasuredCandidates`.
+
+**0-measured behavior (today):**
+
+| State | Claim | Rank? | Prior rows? | Line |
+|---|---|---|---|---|
+| 0 measured, prior exists | `no-outcome-evidence` | **no** | max 3, labelled | "No paired bench for this job yet. Prior evidence only — not an outcome claim." |
+| 0 measured, no prior | `no-evidence` | no | no | "Nothing known for this capability." |
+| no brief matched / below τ | none | no | no | "This session doesn't match a benched job." |
+
+Do **not** abstain entirely when prior exists: an empty answer sends users back
+to stars and install counts. The labelled prior shortlist is bounded: it answers
+"what exists for this job", refuses to answer "which is best", and carries no
+rank. Prior order must **exclude adoption** (`orderBasis: verification,
+maintenance, documentation`); otherwise it is an install-count ranking in
+disguise.
+
+### 15.6 Integration options
 
 | Option | Intrusiveness | Best for | Verdict |
 |---|---|---|---|
@@ -746,7 +885,7 @@ with no value that was already rejected. The order is:
 The tool is the least intrusive and most DSH-native; start there. The dock is a
 later, opt-in convenience, not the product.
 
-### 15.6 How it combines with the market layer
+### 15.7 How it combines with the market layer
 
 - `signals.json` is the single source: the market decorator uses it for
   categories/labels/sortKeys; the recommender uses it for the surface lookup.
@@ -757,7 +896,19 @@ later, opt-in convenience, not the product.
 - The public bench and the market index are two views of the same evidence:
   market = browse by category; recommender = match by session.
 
-### 15.7 Repo ownership
+**Format-1 is a lossy view.** It cannot carry CI, n, cohort or the environment
+tuple. Therefore:
+
+- Encode uncertainty in **labels**: `measured`, `replicated`, `provisional`,
+  `low-coverage`, `wide-ci`, `stale`, `prior-only`, `no-outcome-evidence`, `tie`.
+- **Omit `sortKeys` for unmeasured rows** so the format's "missing value sorts
+  last" rule enforces tier order.
+- `metadata.category` is one id per plugin, so a multi-brief plugin is lossy in a
+  format-1 index. Document it; use labels for the additional briefs.
+- The **app-level recommendation is authoritative**; the market index is a browse
+  view, not the full evidence record.
+
+### 15.8 Repo ownership
 
 - `dsh-attention-index`: bench data, scoring, `signals.json`, surface taxonomy,
   ranking policy.
@@ -771,7 +922,7 @@ later, opt-in convenience, not the product.
 If the matcher grows beyond a small host service, split it into a separate
 `dsh-bench-recommend` package rather than turning the tab into a monolith.
 
-### 15.8 P0/P1/P2
+### 15.9 P0/P1/P2
 
 - **P0**: `recommend_plugin(surface)` over the public signals; explicit surface;
   no auto-match; no persistence; returns top-k + evidence + install target;
@@ -782,7 +933,7 @@ If the matcher grows beyond a small host service, split it into a separate
 - **P2**: proactive dock suggestions, market-side surface filter, cross-surface
   sessions, local-only evaluation dashboard.
 
-### 15.9 Failure modes
+### 15.10 Failure modes
 
 | Failure | Mitigation |
 |---|---|
@@ -794,6 +945,39 @@ If the matcher grows beyond a small host service, split it into a separate
 | Privacy leak | No raw text in projection state; no upload; no telemetry; local-only evaluation |
 | Gaming the matcher | Match on session/task features, not plugin descriptions; measured evidence controls ranking |
 | Stale recommendation | `expiresAt`/`stale` flags; signed snapshot; offline fallback labelled |
+
+## 16. Decisions to make
+
+The research leaves five choices. Recommended answers:
+
+1. **Brief as the public claim unit, surface as browse category.** Yes. A surface
+   mixes heterogeneous jobs (memory recall vs memory hygiene vs memory cost); a
+   brief (`surface/job`) is the smallest unit that can be matched and claimed.
+   Keep surface for market categories/filters; never rank across briefs.
+2. **Registry ordering: tier → quality, not composite.** Change it. The composite
+   is ~35% non-task (30% prior, 5% community); a "task-conditioned" ranking on it
+   is popularity-weighted. If the registry cannot change immediately, make the
+   recommendation order by quality and state that recommendation rank ≠
+   leaderboard rank — but that divergence is confusing; prefer changing the
+   registry.
+3. **Exclude adoption from prior-shortlist ordering.** Yes. Adoption is
+   popularity, not capability. Show it as context, not order;
+   `orderBasis: verification, maintenance, documentation`.
+4. **Accept `provisional` as the normal state for the first year.** Yes. A ±10pp
+   claim needs roughly 2,000 runs/plugin-brief; do not chase that everywhere.
+   Target 3–5 briefs with credible measured results; leave the rest labelled
+   `no-outcome-evidence`. Ten credible measured plugins beat 97 noisy ones.
+5. **Router: local-only, in the app.** Yes. A Host `sessionProjections` unit plus
+   a tool; no server, no session upload, no telemetry. The recommendation is a
+   pure projection of the public `bench-index`; the router outputs a brief id,
+   never a score.
+
+Two consequences:
+
+- The **public claim unit** is the brief, but the **market index** can only carry
+  a surface category + labels; document the loss (see §15.7).
+- The **recommender** can ship only after the P0 truth fixes; otherwise it
+  launders prior into recommendation.
 
 ## Appendix A — Format-1 decoration sketch
 
