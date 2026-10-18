@@ -360,6 +360,7 @@ rejected; the tab works from the mirror.
 | **P1.8 Governance** | 3–5 reviewers, charter, COI/recusal, RFC process, appeals SLA, transparency log, data license | Public membership; first appeal resolved; quarterly report |
 | **P1.9 Coverage** | Task packs for 5 more surfaces; automated prior extraction; nomination → bench queue; rotation | ≥30% measured coverage on top 5 surfaces; ≥3 independent runners per measured surface |
 | **P1.10 Multi-model** | Per-model and per-harness views; no cross-model blending | A user can see "works for model X" separately |
+| **P1.11 `recommend_plugin` tool** | Explicit surface/task → public signals → top-k with tier/CI/evidence/install target; abstains when no measured | The agent can answer "what plugin for this surface?" without local scoring |
 
 ### P2 — "official-grade reference" (6–12 months)
 
@@ -372,6 +373,7 @@ rejected; the tab works from the mirror.
 | **P2.5 Sustainability** | Fiscal sponsor, compute sponsors, public budget, optional paid audits (no rank influence) | ≥1 year of funded compute; funding disclosed |
 | **P2.6 Legal** | Data license (CC BY 4.0), ranking policy, author response, trademark, privacy | Counsel-reviewed public policy |
 | **P2.7 Official partnership** | Joint pilot; optional source listing (not default); shared methodology review | Official market cites the signals with attribution, or a clear "no" with a fallback plan |
+| **P2.8 Session matcher + dock** | Local `sessionProjections` matcher; confidence/abstention; opt-in composer dock; offline signed snapshot | Matcher evaluated offline; no telemetry; wrong-surface rate below an agreed threshold |
 
 ---
 
@@ -526,6 +528,11 @@ promotion, not evidence.
 7. **Write the one-page official brief** and open a public discussion/RFC.
 8. **Recruit** two reviewers (one external) and one compute sponsor; publish the
    funding policy.
+9. **Scoring reset**: label the prior as a discovery prior; fix the dead docs
+   term, verification bias and missing-data-as-zero; remove cross-surface
+   `overall`; no `#1` for prior-only rows.
+10. **Recommender design**: specify `recommend_plugin(surface)` now, but do not
+    ship auto-matching until 3–5 surfaces have measured results.
 
 If only one item can be done, do **P0.0 (evidence correctness) + P0.5
 (sandbox) + P0.6 (one real pilot)**. Everything else is packaging around
@@ -600,6 +607,193 @@ exists, and use it as the reference implementation of the display contract.
 
 If you only have one month, put it into the index — correctness, sandbox, one
 real pilot — not into new `dsh-score` features.
+
+## 14. Is the scoring reasonable?
+
+Short answer: **the direction is reasonable; the current formula is not
+market-grade.** It is a discovery prior dressed as a quality score, and the
+measured composite has semantic bugs.
+
+### 14.1 What the audit found
+
+Read-only probes against the 42-plugin dataset (`data/plugins.json`,
+`data/registry.json`, `scripts/score.mjs`):
+
+| Finding | Evidence | Consequence |
+|---|---|---|
+| **Documentation dimension is dead** | 42/42 rows have no `docs` field → default 50; removing the 15% weight changes Spearman only 0.998 and top-3 by 1/41 | 15% of the formula is constant; docs quality is not measured. |
+| **Verification is operator-biased** | 26 `none` / 15 `doctor` / 1 `certified`; all 26 non-operator plugins score 0; removing the 25% weight changes Spearman 0.875 | A quarter of the score is an operator bonus, not a quality signal. |
+| **Missing data is treated as zero** | installs missing 13/42, npm7d 16/42, stars 25/42, npm name 23/42 | Plugins are penalized for unobserved data; adoption is not comparable. |
+| **Scores are compressed** | prior 30–69; public 18–41.4; 32 distinct values; ties at 38.3×3, 28.7×3, 28.6×3 | Differences are small; decimals imply false precision; top-3 can be a tie. |
+| **Weights are not the main issue** | Spearman: equal 0.995, maintenance-heavy 0.965, adoption-heavy 0.941, verification-heavy 0.712, no verification 0.875, no docs 0.998; top-3 churn 0–1/41 | Reweighting will not fix the construct; the data and measurement will. |
+| **Measured composite is semantically wrong** | null (bench 50, prior 64, coverage 1) = **56.7**; prior-only 64 = 38.4; prior-only 80 = 48.0; negative measured (bench 0) = 29.2 but tier-first still ranks it above prior | A null measured plugin outranks a high prior; a negative measured plugin outranks all prior; prior is double-counted. |
+| **Scale break** | prior 0–60 vs measured 0–100 in the same `score` field; `overall` ranks across surfaces | Markets/users cannot compare; cross-surface rank is meaningless. |
+| **Confidence is not a CI** | 0.82 for 1 task / 3 runs / 1 runner | Looks precise when evidence is minimal. |
+
+### 14.2 Verdict
+
+- The prior is a **discovery prior**, not a quality score. It mixes popularity,
+  maintenance, verification and documentation; it is not task-conditioned; it
+  penalizes missing data; verification is operator-heavy.
+- The weights are largely arbitrary, but **not the main problem**: the ranking is
+  robust to plausible reweighting. The construct and the data are the problem.
+- The measured composite is not defensible: it double-counts prior, rewards
+  coverage (which is not quality), adds demand, maps zero effect to 50, and lets
+  any measured — including a negative one — outrank a prior.
+- A single 0–100 "quality" number is not appropriate for a market reference.
+
+### 14.3 What to do
+
+1. Separate **evidence grade** (E0 prior / E1 screened / E2 provisional measured /
+   E3 measured / E4 replicated) from the **prior** and the **effect estimate**.
+2. Make prior a **per-surface percentile** with explicit missing-data handling
+   (`no-evidence`, not 0); remove the dead docs term or populate it; verification
+   is 0 unless ≥2 independent certifiers; publish a sensitivity report.
+3. Rank **lexicographically**: positive measured (FDR-adjusted LCB > 0) >
+   provisional/underpowered (shown, not ranked) > prior-only (separate
+   "unmeasured" list) > unrated. Do **not** let a negative measured plugin outrank
+   a prior by tier alone.
+4. No single composite. If a number is unavoidable, publish the weights, a
+   sensitivity analysis, and "this is not a probability of quality".
+5. Attention: top-3/featured only from **positive measured**; prior-only gets no
+   `#1` badge; operator recusal; new/under-evaluated slots stay.
+6. The recommender uses tier + effect + CI + coverage, not the prior score.
+
+### 14.4 P0/P1/P2
+
+- **P0**: freeze measured; label prior as a discovery prior; fix the dead docs
+  term, verification bias and missing-data-as-zero; remove cross-surface
+  `overall`; no `#1` for prior.
+- **P1**: evidence grade + lexicographic ranking; per-surface percentile;
+  sensitivity report; FDR/CI display; retract any "quality score" wording.
+- **P2**: calibration study against independent signals; external audit;
+  governance of weight/methodology changes.
+
+## 15. Session-to-bench recommendation
+
+The idea: an **app-level bench**, matched to the current session, recommends the
+highest-scoring plugin on that bench. It is a good idea **if it is a consumer of
+the public evidence, not a new local scorer**.
+
+### 15.1 The boundary
+
+| Layer | Runs where | What it does | What it must not do |
+|---|---|---|---|
+| **Match** | Local, ephemeral | Infer the capability surface / bench from the session (memory, web, office, dev, …) | Compute a score, persist raw text, upload anything |
+| **Lookup** | Public | Read the public ranking for that surface/cohort from `signals.json` | Personalize the ranking |
+| **Recommend** | Local UI/tool | Show top-k with tier/CI/coverage/evidence and an install link | Rank by installs/clicks, hide unmeasured plugins |
+
+This is the key distinction: **matching is routing, not scoring.** The score is
+public and identical for everyone; the session only selects which public bench is
+relevant. This keeps the original "no local scoring" constraint intact.
+
+### 15.2 Sequencing
+
+Do **not** launch the recommender before 3–5 surfaces have measured results.
+With 0 measured it would recommend prior-only plugins — exactly the "local box"
+with no value that was already rejected. The order is:
+
+1. executable tasks + sandbox + first measured pilot;
+2. public signals + ranking policy;
+3. recommender (tool first, auto-match later);
+4. market/index integration.
+
+### 15.3 Match design
+
+- **MVP (P0): explicit surface.** A tool `recommend_plugin(surface | task)`:
+  the agent or user names the surface (or a task string), the tool maps it to a
+  surface id and returns the public top-k. No session inference yet.
+- **P1: local projection.** A Host `sessionProjections` unit folds committed
+  events into `{ surface, confidence, reason, asOfSeq }`. Features: user text
+  keywords, tool names, file types, active skill, working directory, explicit
+  user choice. A rules-first classifier is explainable and cheap; a small model
+  is optional.
+- **State contains only the label, confidence and a short reason** — never the
+  raw user text. The projection is local; nothing is uploaded.
+- **DSH primitives**: a Host plugin can register a `sessionProjections` unit
+  (`{ surface, confidence, reason, asOfSeq }`) whose `wire` view the client reads,
+  or call `ctx.sessionQuery.readSurface(sessionId)` for the current model-facing
+  history. The projection fold must derive the label and drop the text; do not
+  checkpoint raw prompts.
+- **Abstain** when confidence is low, when two surfaces tie, or when the session
+  spans multiple surfaces. Show "not sure — pick a surface" rather than a wrong
+  recommendation.
+- **User override** always wins; remember it only for the session, not globally.
+
+### 15.4 Recommendation policy
+
+- **Measured-positive first**: only plugins with a positive, FDR-adjusted lower
+  bound enter the top-k.
+- **No false #1**: if CIs overlap or coverage is low, return a tier/set, not a
+  single winner.
+- **No measured?** Return `state: "no-measured"` plus a clearly labelled prior
+  shortlist, or abstain. Never present a prior-only plugin as "the best".
+- **Never hide unmeasured plugins**: a separate "not yet measured" list.
+- **Evidence record**: tier, effect + CI, tasks/runs, coverage, environment,
+  observedAt/expiresAt, evidence URL, install target.
+- **No paid placement**, no install-count ranking, no operator self-promotion.
+
+### 15.5 Integration options
+
+| Option | Intrusiveness | Best for | Verdict |
+|---|---|---|---|
+| **Agent tool** `recommend_plugin` | Low | "What plugin for this task?"; the model calls it | **P0** |
+| **Composer dock pill** | Medium | A dismissible "Memory task detected · top measured: X" | P1, opt-in |
+| **Settings/Plugins tab** | Low | Browse recommendations for a surface | P1 |
+| **Discover filter/sort** | Low | Market-side surface + evidence filter | P1 |
+| **CLI install guard** | Low | Show evidence before install | P2 |
+
+The tool is the least intrusive and most DSH-native; start there. The dock is a
+later, opt-in convenience, not the product.
+
+### 15.6 How it combines with the market layer
+
+- `signals.json` is the single source: the market decorator uses it for
+  categories/labels/sortKeys; the recommender uses it for the surface lookup.
+- The **surface taxonomy is shared**: a session match selects the same surface id
+  that a market filters by.
+- The recommendation record can carry the **install target** and the **market
+  index URL**, so the existing install flow is reused.
+- The public bench and the market index are two views of the same evidence:
+  market = browse by category; recommender = match by session.
+
+### 15.7 Repo ownership
+
+- `dsh-attention-index`: bench data, scoring, `signals.json`, surface taxonomy,
+  ranking policy.
+- `dsh-community-bench`: the in-app reference consumer; add the host-side
+  `recommend_plugin` tool and (later) the local projection matcher. Do not add a
+  second scoring path.
+- `dsh-score`: local prior inspector; not part of the recommendation path.
+- `dsh-recommend` (external): can consume the sidecar feed; not the session
+  matcher.
+
+If the matcher grows beyond a small host service, split it into a separate
+`dsh-bench-recommend` package rather than turning the tab into a monolith.
+
+### 15.8 P0/P1/P2
+
+- **P0**: `recommend_plugin(surface)` over the public signals; explicit surface;
+  no auto-match; no persistence; returns top-k + evidence + install target;
+  abstains if no measured.
+- **P1**: local projection matcher with confidence/abstention; user override;
+  optional composer dock; offline cache of the last signed snapshot; matcher
+  evaluation on synthetic/consented sessions.
+- **P2**: proactive dock suggestions, market-side surface filter, cross-surface
+  sessions, local-only evaluation dashboard.
+
+### 15.9 Failure modes
+
+| Failure | Mitigation |
+|---|---|
+| Wrong surface → wrong plugin | Confidence + abstention + user override; explain the match |
+| Recommending prior-only as "best" | `no-measured` state; separate labelled list |
+| Nagging / notification fatigue | Opt-in dock; dismiss per session; no repeated prompts |
+| Gatekeeping / rich-get-richer | Measured-positive only; diversity slots; no install-count ranking |
+| Local-scoring creep | The matcher only emits a surface id; the score is read from the public snapshot |
+| Privacy leak | No raw text in projection state; no upload; no telemetry; local-only evaluation |
+| Gaming the matcher | Match on session/task features, not plugin descriptions; measured evidence controls ranking |
+| Stale recommendation | `expiresAt`/`stale` flags; signed snapshot; offline fallback labelled |
 
 ## Appendix A — Format-1 decoration sketch
 
