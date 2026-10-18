@@ -135,7 +135,10 @@ export function buildOutputs({ today } = {}) {
   const tasksFile = readJson('data/tasks.json')
   const results = readDir('data/results').map(item => item.value)
   const contributions = readDir('data/contributions').map(item => item.value)
-  const generatedAt = new Date().toISOString()
+  const day = today ?? new Date().toISOString().slice(0, 10)
+  // Deterministic for a given --today: re-running with the same inputs produces
+  // byte-identical registry, site data and badges.
+  const generatedAt = `${day}T00:00:00.000Z`
   const registry = buildRegistry({
     plugins: pluginsFile.plugins,
     surfaces: tasksFile.surfaces,

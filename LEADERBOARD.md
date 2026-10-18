@@ -1,6 +1,6 @@
 # DSH Community Bench
 
-Generated: 2026-10-18T09:36:33.888Z · scoring `v1` · 0/42 plugins with paired bench evidence
+Generated: 2026-10-18T00:00:00.000Z · scoring `v1` · 0/42 plugins with paired bench evidence
 
 > Prior-only rows are not outcome claims. A plugin without a qualifying paired with/without result cannot outrank a measured plugin.
 

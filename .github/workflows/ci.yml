@@ -16,8 +16,12 @@ jobs:
           node-version: 22
       - name: Pure scoring tests
         run: node --test test/*.test.mjs
-      - name: Build registry (deterministic scoring fields)
+      - name: Build registry (deterministic)
         run: node scripts/aggregate.mjs --today 2026-10-18
+      - name: Export the dsh-recommend sidecar
+        run: node scripts/export-recommend.mjs
+      - name: Generated files must be committed
+        run: git diff --exit-code
       - name: Check generated JSON parses
         run: |
           node -e "const r=JSON.parse(require('fs').readFileSync('data/registry.json','utf8')); if(r.schema!=='dsh-attention/registry/v1') process.exit(1); console.log(r.stats)"

@@ -1,6 +1,6 @@
 {
   "schema": "dsh-attention/recommend-feed/v1",
-  "generatedAt": "2026-10-18T09:36:33.888Z",
+  "generatedAt": "2026-10-18T00:00:00.000Z",
   "scoringVersion": "v1",
   "source": "data/registry.json",
   "note": "Sidecar only: join by GitHub fullName. Do not replace the host ranking score; show the Community Bench score and tier beside it.",
