@@ -27,6 +27,7 @@ function scoreText(row) {
   if (row?.unrated === true || row?.evidenceGrade === 'E0') {
     return 'E0<small>unrated</small>'
   }
+  if (row?.evidenceGrade === 'E2') return 'E2<small>provisional</small>'
   const scale = row.scoreScale ?? (row.tier === 'measured' ? 100 : 60)
   return `${Number(row.score).toFixed(1)}<small>/${scale}</small>`
 }
@@ -35,11 +36,12 @@ function tierChip(row) {
   const unrated = row?.unrated === true || row?.evidenceGrade === 'E0'
   const tier = row?.tier ?? row
   if (unrated) return '<span class="chip prior">未评级</span>'
+  if (row?.evidenceGrade === 'E2') return '<span class="chip prior">provisional</span>'
   return `<span class="chip ${tier === 'measured' ? 'measured' : 'prior'}">${tier === 'measured' ? '实测' : '先验'}</span>`
 }
 
 function bar(row) {
-  if (row?.unrated === true || row?.evidenceGrade === 'E0') return ''
+  if (row?.unrated === true || row?.evidenceGrade === 'E0' || row?.evidenceGrade === 'E2') return ''
   const scale = row.scoreScale ?? (row.tier === 'measured' ? 100 : 60)
   const width = Math.max(0, Math.min(100, (Number(row.score) / scale) * 100))
   return `<div class="bar ${row.tier === 'measured' ? 'measured' : 'prior'}"><span style="width:${width.toFixed(1)}%"></span></div>`

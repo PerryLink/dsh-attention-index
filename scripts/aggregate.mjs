@@ -107,7 +107,7 @@ function renderMarkdown(registry) {
     lines.push('| # | Plugin | GOE | Tier | Prior | Bench | Coverage | Evidence completeness |')
     lines.push('|---:|---|---|---|---:|---:|---:|---:|')
     for (const row of surface.leaderboard.slice(0, 10)) {
-      lines.push(`| ${row.rank ?? '—'} | [${row.name}](${row.repo}) | ${row.evidenceGrade}${row.unrated ? ' unrated' : ''} | ${row.unrated ? 'unrated' : row.tier} | ${row.prior} | ${row.bench ?? '—'} | ${Math.round(row.coverage * 100)}% | ${row.confidence} |`)
+      lines.push(`| ${row.rank ?? '—'} | [${row.name}](${row.repo}) | ${row.evidenceGrade}${row.unrated ? ' unrated' : ''} | ${row.unrated ? 'unrated' : row.evidenceGrade === 'E2' ? 'provisional' : row.tier} | ${row.prior} | ${row.bench ?? '—'} | ${Math.round(row.coverage * 100)}% | ${row.confidence} |`)
     }
     lines.push('', `_${surface.note}_`, '')
   }
