@@ -770,6 +770,25 @@ with no value that was already rejected. The order is:
 - **P2: session-aware.** A Host Remote `matchSession(sessionId)` plus an opt-in
   `conversation.session.header.utilities` chip; `pluginMarket` install/compat
   enrichment; signed snapshots before any install CTA.
+
+**Placement constraints (verified):**
+
+- **`plugins.tab` cannot host session matching.** It is root-scoped and has no
+  session content. Matching must live in a Host command/tool or a session-scoped
+  slot (`conversation.composer.dock` / `conversation.session.header.*`). The tab
+  can only offer an **explicit surface picker**.
+- **Discover has no per-entry bench badge or deep-link today.** Market entry
+  pages are internal to `ui-plugin-market`; `plugins.detail.*` belongs to the
+  Installed page. The only no-core-change Discover integration is **format-1
+  decoration** (labels + sortKeys + an attributed description note). A separate
+  Bench tab is the reliable human destination.
+- **At 0 measured, the recommender must abstain, not rank.** P0 is a pull-only
+  evidence-status surface + `/bench`, not an install recommendation. A prior-only
+  "top pick" violates G13/P0.7 and the no-fabricated-data rule.
+- **No install CTA before version-bound measured signals exist.** Registry rows
+  carry no version, 23/42 have no npm name, every surface has one draft task, and
+  the registry is unsigned. A recommendation that hands off to the standard
+  install dialog before that is unsafe.
 - **Features from DSH events** (P2 session-aware path only; the P1 tool takes an
   explicit query/surface and must not read the session): `user/message` text
   (filter `source.kind === 'user'`; synthetic context uses the same event type);
@@ -842,6 +861,12 @@ with no value that was already rejected. The order is:
   per-action, previewable, revocable decision.
 - **No telemetry.** Add a CI dependency check that the plugin graph never reaches
   `dsh-telemetry*`.
+- **Install-handoff caveat.** DSH Desktop product analytics is default-on and
+  records `plugin_install_click` (package id) and `install_plugin_result`; a
+  recommendation that hands off to the standard install dialog inherits that
+  collection. The recommender must add **zero events**; if "no telemetry" is
+  absolute, the install handoff needs an explicit audit/suppression decision
+  before any CTA.
 
 ### 15.5 Recommendation policy
 
@@ -879,6 +904,11 @@ brief + same environment ⇒ byte-identical output. Add a golden-file test.
 `unrated` (not in the bench), `stale`, `revoked`. Never present a prior-only
 plugin as "the best". Never hide unmeasured plugins. No paid placement, no
 install-count ranking, no operator self-promotion.
+
+**COI rule:** every row carries `operatorOwned: true|false`; an operator-owned
+plugin is excluded from the primary slot, and a surface is not recommendable
+until external share ≥60% and operator share ≤25%. Current data: 16/42
+operator-owned (38%), operator-owned `#1` in 5/15 surfaces, 15/45 top-3 slots.
 
 **Ranking rules (hard):**
 
@@ -926,14 +956,17 @@ disguise.
 
 | Option | Intrusiveness | Best for | Verdict |
 |---|---|---|---|
-| **Agent tool** `recommend_plugin` | Low | "What plugin for this task?"; the model calls it | **P0** |
-| **Composer dock pill** | Medium | A dismissible "Memory task detected · top measured: X" | P1, opt-in |
-| **Settings/Plugins tab** | Low | Browse recommendations for a surface | P1 |
-| **Discover filter/sort** | Low | Market-side surface + evidence filter | P1 |
+| **`/bench` finder** | Low | Surface + evidence status + link; **no rank** | P0, optional |
+| **Agent tool `bench_recommend`** | Low | Explicit `query`/`surface`; the model calls it | **P1** |
+| **Settings/Plugins tab** | Low | Explicit surface picker; root scope, no session | P1 |
+| **Discover format-1 decoration** | Low | Labels/sortKeys + attributed description note; no per-entry badge | P1 |
+| **Composer dock / session chip** | Medium | Session-aware suggestion, on click | P2, opt-in |
 | **CLI install guard** | Low | Show evidence before install | P2 |
 
-The tool is the least intrusive and most DSH-native; start there. The dock is a
-later, opt-in convenience, not the product.
+The tool is the least intrusive and most DSH-native; start there **after**
+measured evidence exists. The dock is a later, opt-in convenience, not the
+product. Discover cannot show a per-entry bench badge or deep-link today; a
+separate Bench tab is the reliable human destination.
 
 ### 15.7 How it combines with the market layer
 
@@ -1019,7 +1052,10 @@ end-user plugin.
 - D2 consented corpus (30–100) + D3 private holdout; formative user study;
   simulated exposure audit.
 - Acceptance: chip only on click; network/logs contain no session text; signature
-  verified; chip hidden until ≥3 measured surfaces.
+  verified; chip hidden until ≥3 measured surfaces. Install CTA only from a signed
+  snapshot and a version-bound measured signal; document that the standard install
+  dialog inherits Desktop's default-on install analytics, and the recommender adds
+  zero events.
 
 ### 15.10 Failure modes
 
