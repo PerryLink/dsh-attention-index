@@ -69,3 +69,15 @@ surface, all results signed; no fabricated data; E2/E3 visible with CI.
   quality claim.
 - P1–P3 cannot be truthfully completed without measured runs, signing keys and
   network access. They are not marked done.
+
+## Publication status (2026-10-18)
+
+| Channel | Status |
+|---|---|
+| GitHub `dsh-attention-index` | pushed `4fee04d`; P0 registry, site, docs and badges live |
+| GitHub Pages | live at <https://perrylink.github.io/dsh-attention-index/>; title `dsh-score`; 42 E0 unrated; prior top badges return 404 |
+| GitHub `perrylink` / `dsh-kit` / `dsh-score` | pushed brand/docs commits |
+| GitHub release | `dsh-community-bench v0.2.0` published |
+| npm | `dsh-community-bench@0.2.0` live, `latest`, with provenance |
+| Gitee / GitCode | one-way mirror sync triggered; workflow still running at the time of this note |
+| Repo rename `dsh-score-index` | **not executed**; migration runbook ready, URLs intentionally kept stable until the redirect/mirror/patch release is coordinated |
