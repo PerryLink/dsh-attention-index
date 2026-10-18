@@ -69,6 +69,11 @@ formula, which is intentional.
 
 ## 3. Bench (0–100)
 
+> **Legacy section.** The `bench`/composite math below is kept for reproducing
+> the historical discovery number. It is **deprecated** and is not used for a
+> quality slot. Quality gating is `evidenceGrade` (E3+) + positive Newcombe lower
+> bound + SOE/GOE; see [docs/SOE-GOE.md](docs/SOE-GOE.md).
+
 A bench task `t` has a fixed prompt, fixture, model, harness, budget and checks. For each plugin and task, the runner produces paired arms:
 
 ```
