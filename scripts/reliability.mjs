@@ -119,9 +119,9 @@ function gradeFromSoe(soe, { measured, operatorOwned, missing }) {
 
   const floor = Math.min(soe.design, soe.execution, soe.precision, soe.independence, soe.directness)
   let grade = 'E2'
-  if (soe.independence >= 4 && soe.design >= 4 && floor >= 3) grade = 'E5'
-  else if (soe.independence >= 3 && soe.design >= 3 && floor >= 2) grade = 'E4'
-  else if (soe.independence >= 2 && soe.design >= 2 && soe.precision >= 1) grade = 'E3'
+  if (soe.independence >= 4 && soe.design >= 4 && soe.precision >= 3 && floor >= 3) grade = 'E5'
+  else if (soe.independence >= 3 && soe.design >= 4 && floor >= 3) grade = 'E4'
+  else if (soe.independence >= 2 && soe.design >= 3 && soe.precision >= 2) grade = 'E3'
 
   const certainty = floor >= 4 ? 'high' : floor >= 3 ? 'moderate' : floor >= 2 ? 'low' : 'very-low'
   const downgrades = []
