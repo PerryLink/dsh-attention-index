@@ -669,6 +669,17 @@ Read-only probes against the 42-plugin dataset (`data/plugins.json`,
   any measured — including a negative one — outrank a prior.
 - A single 0–100 "quality" number is not appropriate for a market reference.
 
+**Latest validity audit adds:** the top 3 overall are **3/3 operator**; removing
+verification makes them **0/3**, using actual `lastPush` makes them **1/3**, and
+crediting external doctor passes makes them **1/3**. The only `certified` row
+(`dsh-auto-review`) is #1 safety by 0.1 and drops out of the top 8 if `certified`
+is treated as `doctor`. OpenSSF rho = 0.032; `dsh-plugin-doctor` rho = **−0.857**
+(the same tool that grants operator verification credit). Presentation:
+`scoring.formula` says `min(prior,60)` but the code is `60*prior/100`; `rank`
+conflicts on 41/42 rows; `overall` #1 comes from a 2-entry MCP surface; root
+`badges/` has 17 top files (6 operator, 2 stale) and `--check` does not flag
+extras.
+
 ### 14.3 What to do
 
 1. Separate **evidence grade** (E0 prior / E1 screened / E2 provisional measured /
