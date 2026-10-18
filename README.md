@@ -1,5 +1,8 @@
 # DSH Community Bench
 
+[![Gitee](https://img.shields.io/badge/Gitee-mirror-c71d23?logo=gitee)](https://gitee.com/perrylink/dsh-attention-index)
+[![GitCode](https://img.shields.io/badge/GitCode-mirror-2f6feb)](https://gitcode.com/PerryLink/dsh-attention-index)
+
 **Public, reproducible, task-conditioned scores for DeepSeek Harness plugins — and an explicit rule for who gets community attention.**
 
 > Status: **v0.1 · prior-only**. 42 candidate plugins, 15 capability surfaces, **0 paired bench results**, **0 public contributions**.
