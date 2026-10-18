@@ -42,30 +42,33 @@ A result is **one arm** of one task. A task counts only when both arms have at l
 ```sh
 # dry-run first: prints the exact commands, installs nothing, calls no model
 node scripts/bench-run.mjs \
-  --task memory-recall \
+  --pack fixtures/smoke-tasks.json \
+  --task smoke-file \
   --plugin owner/repo \
   --spec owner/repo#<commit> \
   --version 0.1.0 \
   --arm with \
-  --repeat 3 \
+  --repeat 1 \
   --dry-run
 
 # real run (needs dsh on PATH and a headless-profile model credential)
 node scripts/bench-run.mjs \
-  --task memory-recall \
+  --pack fixtures/smoke-tasks.json \
+  --task smoke-file \
   --plugin owner/repo \
   --spec owner/repo#<commit> \
   --version 0.1.0 \
   --arm with \
-  --repeat 3
+  --repeat 1
 
 # the comparison arm: same task, no plugin
 node scripts/bench-run.mjs \
-  --task memory-recall \
+  --pack fixtures/smoke-tasks.json \
+  --task smoke-file \
   --plugin owner/repo \
   --version 0.1.0 \
   --arm without \
-  --repeat 3
+  --repeat 1
 ```
 
 Then:

@@ -178,6 +178,10 @@ async function main() {
   const tasksFile = JSON.parse(await readFile(resolve(ROOT, args.pack ?? 'data/tasks.json'), 'utf8'))
   const task = tasksFile.tasks.find(item => item.id === taskId)
   if (task === undefined) throw new Error(`unknown task ${taskId}`)
+  if (task.status === 'draft') throw new Error(`task ${taskId} is a draft: add executable checks and a fixture before running it`)
+  if (!Array.isArray(task.checks) || task.checks.length === 0 || task.checks.some(check => typeof check.kind !== 'string')) {
+    throw new Error(`task ${taskId} has no executable checks (each check needs a kind)`)
+  }
   const pluginId = args.plugin ?? 'unknown/unknown'
   const pluginVersion = args.version ?? 'unknown'
   const outDir = resolve(ROOT, args.out ?? 'data/results')

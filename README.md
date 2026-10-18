@@ -61,13 +61,13 @@ python3 -m http.server 8765 --directory site
 # 3. Run the pure scoring tests
 node --test test/*.test.mjs
 
-# 4. Dry-run a paired bench (no model call, no install)
+# 4. Dry-run the harness smoke task (no model call, no install)
 node scripts/bench-run.mjs \
-  --task memory-recall \
-  --plugin perrylink/dsh-memento \
-  --spec dsh-memento \
-  --version 0.5.25 \
-  --arm with --repeat 3 --dry-run
+  --pack fixtures/smoke-tasks.json \
+  --task smoke-file \
+  --plugin owner/repo \
+  --spec owner/repo \
+  --arm with --repeat 1 --dry-run
 ```
 
 A real bench run needs `dsh` on `PATH`, a throwaway `DSH_HOME`, and a model credential (`DEEPSEEK_API_KEY` in the launch environment for the headless profile). The runner never touches the real `~/.dsh`.

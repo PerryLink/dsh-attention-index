@@ -1,6 +1,6 @@
 {
   "schema": "dsh-attention/registry/v1",
-  "generatedAt": "2026-10-18T09:35:53.475Z",
+  "generatedAt": "2026-10-18T09:36:33.888Z",
   "scoring": {
     "version": "v1",
     "weights": {

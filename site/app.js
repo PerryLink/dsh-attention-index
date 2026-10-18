@@ -69,7 +69,7 @@ function renderHero() {
     ? `${total} 个插件 · 0 个实测`
     : `${measured}/${total} 个插件有实测`
   $('#hero-sub').textContent = measured === 0
-    ? '当前是 prior-only：分数只代表公开证据先验，不代表任务效果。'
+    ? '当前是 prior-only：分数只用于同一能力面内的先验排序，不代表任务效果；0–60 是压缩刻度。'
     : '实测行由成对 bench 决定；先验行单独标注。'
   $('#hero-card').classList.toggle('has-measured', measured > 0)
 }

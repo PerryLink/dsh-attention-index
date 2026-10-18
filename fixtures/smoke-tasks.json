@@ -1,0 +1,17 @@
+{
+  "tasks": [
+    {
+      "id": "smoke-file",
+      "surface": "dev",
+      "title": "Write a file with an exact value",
+      "intent": "A minimal end-to-end harness check: the agent must create a file with an exact value.",
+      "status": "ready",
+      "prompt": "Create a file named hello.txt in the current workspace. Its exact contents must be: hello",
+      "checks": [
+        { "id": "hello-file", "kind": "file-equals", "path": "hello.txt", "value": "hello" }
+      ],
+      "model": "deepseek-flash",
+      "harness": "0.2.1-rc.2"
+    }
+  ]
+}
