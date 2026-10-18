@@ -62,6 +62,7 @@ Any of these demotes one grade or blocks a quality slot:
 
 - self-run or operator-owned runner;
 - an unreviewed pilot task pack (hard cap at E2);
+- a partial sandbox such as `bwrap-fs` with shared network (hard cap at E2);
 - self-asserted `certified` / `docs` without certifier or URL;
 - missing adoption channels treated as zero;
 - cross-version or cross-model borrowing;

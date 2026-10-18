@@ -1,148 +1,164 @@
-# dsh-score
+<div align="center">
 
+# 🏆 dsh-score
+
+**Public evidence for DeepSeek Harness plugins — and an explicit rule for who gets community attention.**
+
+*Prior is discovery. A quality claim needs a paired result, a grade, and an independent path.*
+
+[![CI](https://img.shields.io/github/actions/workflow/status/PerryLink/dsh-attention-index/ci.yml?branch=main&label=CI)](https://github.com/PerryLink/dsh-attention-index/actions)
+[![Pages](https://img.shields.io/badge/evidence-live-2f855a)](https://perrylink.github.io/dsh-attention-index/)
+[![API](https://img.shields.io/badge/API-v1-2f6feb)](https://perrylink.github.io/dsh-attention-index/api/v1/index.json)
 [![Gitee](https://img.shields.io/badge/Gitee-mirror-c71d23?logo=gitee)](https://gitee.com/perrylink/dsh-attention-index)
 [![GitCode](https://img.shields.io/badge/GitCode-mirror-2f6feb)](https://gitcode.com/PerryLink/dsh-attention-index)
+[![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
+[![DSH plugin](https://img.shields.io/badge/dsh--plugin-✅-green)](https://github.com/topics/dsh-plugin)
 
-**Public evidence and scores for DeepSeek Harness plugins — and an explicit rule for who gets community attention.**
+[English](README.md) · [简体中文](README-zh.md)
 
-> **Brand / scope.** `dsh-score` is the umbrella brand. This repository is the
-> **public evidence layer** (currently `dsh-attention-index`; it will be renamed
-> `dsh-score-index`). The local, on-demand five-dimension inspector is the separate
-> [`dsh-score`](https://github.com/PerryLink/dsh-score) plugin; the in-app consumer
-> is [`dsh-community-bench`](https://github.com/PerryLink/dsh-community-bench).
->
-> Status: **v0.1 · first measured pilot**. 42 candidate plugins, 15 capability
-> surfaces, **31 signed paired results**, **1 E2 provisional** (a null pilot),
-> **41 E0 / unrated**, **0 positive**, **0 public contributions**, **24
-> executable pilot tasks** (unreviewed). There is **no quality #1**. The legacy
-> discovery number is `60 × prior / 100` and is not a task-outcome claim.
->
-> This is deliberate: the repository does not fake outcome evidence while the
-> bench network is being built.
+```sh
+# public evidence (this repo)
+open https://perrylink.github.io/dsh-attention-index/
 
-- **Leaderboard site:** `site/index.html` (static; deploy `site/` to GitHub Pages)
-- **Public registry:** [`data/registry.json`](data/registry.json)
-- **Badges:** [`badges/index.json`](badges/index.json)
-- **`dsh-recommend` sidecar:** [`integrations/dsh-recommend/bench-feed.json`](integrations/dsh-recommend/bench-feed.json)
-- **Scoring:** [SCORING.md](SCORING.md)
-- **Reliability (SOE / GOE):** [docs/SOE-GOE.md](docs/SOE-GOE.md)
-- **P0–P3 implementation:** [docs/P0-P3-PLAN.md](docs/P0-P3-PLAN.md)
-- **P1 measured-evidence runbook:** [docs/P1-RUNBOOK.md](docs/P1-RUNBOOK.md) · [sandbox requirements](docs/SANDBOX.md)
-- **P2 integration contract:** [docs/P2-INTEGRATION.md](docs/P2-INTEGRATION.md)
-- **Versioned API:** [`api/v1/index.json`](api/v1/index.json)
-- **Market signals:** [`integrations/market/signals.json`](integrations/market/signals.json)
-- **Audit / E5:** [docs/AUDIT-CHECKLIST.md](docs/AUDIT-CHECKLIST.md)
-- **SLA / official market:** [docs/SLA.md](docs/SLA.md) · [docs/OFFICIAL-MARKET.md](docs/OFFICIAL-MARKET.md)
-- **Contribute:** [CONTRIBUTING.md](CONTRIBUTING.md)
-- **Governance:** [GOVERNANCE.md](GOVERNANCE.md)
+# in-app consumer
+dsh plugin --profile web add dsh-community-bench
+```
+
+</div>
+
+---
+
+<img src="docs/assets/dsh-score-hero.png" width="100%" alt="dsh-score: public evidence, E0 unrated, E2 provisional, no quality #1" />
+
+<img src="docs/assets/dsh-score-demo.gif" width="100%" alt="Animated dsh-score demo: prior is discovery, not a quality claim" />
+
+*The same rule, animated.*
 
 ## Why this exists
 
-The DSH ecosystem does not lack plugins. It lacks a **shared, task-conditioned answer to “which plugin is good for this job?”**
+Plugin discovery is not a popularity contest, and a download count is not a
+task-outcome claim. `dsh-score` separates four things that used to be mixed:
 
-- Stars are not quality: a single monorepo can occupy 27 of the top 60 star slots.
-- Install counts are channel-biased: 1024Store counts only installs through its own wrapper.
-- npm downloads include CI and mirrors.
-- Static quality scores (manifest, maintenance, security) are necessary but **task-blind**.
-- Global popularity rankings are **context-blind**: the best memory plugin is not the best Office plugin.
-- A local per-user score cannot allocate **community** attention: every user sees a different answer.
+1. **Discovery** — is this plugin maintained and visible?
+2. **Evidence** — was it run with and without on the same task?
+3. **Grade** — how strong is that evidence (E0–E5)?
+4. **Attention** — only a positive, adequately powered result gets a quality slot.
 
-This repository publishes **public, identical evidence** per capability surface,
-with two evidence tiers and one replication label:
+At v0.1 the answer is deliberately uncomfortable: **there is no quality #1**.
 
-| Tier / label | Evidence | Behaviour |
+## Current state
+
+| Metric | Value |
+|---|---:|
+| Plugins | **42** |
+| Capability surfaces | **15** |
+| Tasks | **39** (24 executable pilot + 15 draft) |
+| Signed results | **30** |
+| E0 / unrated | **41** |
+| E2 / provisional | **1** (a null pilot) |
+| E3+ / positive | **0** |
+| Quality #1 | **none** |
+| Public contributions | **0** |
+
+The first pilot is `dsh-memento@0.5.27` on five memory tasks × three runs/arm.
+Both arms passed every task: it is a **null result**, capped at **E2** because
+the task pack is unreviewed, the runner is operator-owned, and the sandbox is
+filesystem-only. `rank` is `null`; `top3` is empty.
+
+## What a grade means
+
+<img src="docs/assets/dsh-score-grades.png" width="100%" alt="dsh-score grade ladder: E0 unrated, E1 screened, E2 provisional, E3 measured, E4 replicated, E5 audited" />
+
+| Grade | Meaning | Quality slot? |
 |---|---|---|
-| `prior` | public repo/adoption/verification evidence | discovery signal; compressed to 0–60; cannot outrank `measured`; **not** a quality claim |
-| `measured` | paired `with` / `without` bench results, ≥3 runs per arm | full 0–100 score, with lift lower bound and sample counts |
-| `replicated` (label) | `measured` + ≥2 independent runner ids | enters Most replicated; highest confidence; not a third tier |
+| **E0** | unrated — metadata only, no outcome evidence | No |
+| **E1** | screened — executable task + fixture hash | No |
+| **E2** | provisional — paired pilot; review/sandbox/independence incomplete | No |
+| **E3** | measured — ≥5 reviewed tasks, ≥5 runs/arm, positive LCB | Yes |
+| **E4** | replicated — ≥2 independent runners, consistent direction | Yes |
+| **E5** | audited — independent audit + pre-registration | Yes |
 
-At v0.1 every row is `E0 / unrated`; the measured tier is deliberately empty
-until the bench network produces signed, version-bound results. The registry
-publishes evidence; there is **no paid ranking** and no sponsored slot.
+**Hard gates:** an unreviewed pack or a partial sandbox caps at **E2**; E5
+requires an independent audit in [`data/audits/index.json`](data/audits/index.json).
+No prior-only row can receive a quality rank. No one can buy a slot.
 
-## What the registry contains
+Full model: [docs/SOE-GOE.md](docs/SOE-GOE.md) · [SCORING.md](SCORING.md).
 
-`data/registry.json` is the single machine-readable artifact. It contains:
+## What is public
 
-- `surfaces[]` — one evidence list per capability surface (memory, cost, vision, web, browser, office, orchestration, safety, MCP, remote, dev, voice, research, UI, desktop).
-- `evidenceGrade`, `soe`, `goe`, `unrated` per row — the SOE/GOE reliability model.
-- `overall[]` — empty while no positive measured row exists; there is no cross-surface quality rank.
-- `attention` — `featuredBySurface`, `newAndPromising`, `mostNominated`, `mostReplicated`; quality slots are only positive measured.
-- `contributors[]` — public contributor reputation from trajectory receipts.
-- `scoring` — reliability version, legacy discovery formula, weights, prior cap, minimum samples.
-- `source` / `stats` — input counts, measured coverage and `gradeCounts`.
+| Artifact | What it is |
+|---|---|
+| [Evidence site](https://perrylink.github.io/dsh-attention-index/) | Human view; E0/unrated is visible, not hidden |
+| [`data/registry.json`](data/registry.json) | Single machine-readable registry |
+| [`api/v1/registry.json`](api/v1/registry.json) | Versioned snapshot + `etag` |
+| [`integrations/market/signals.json`](integrations/market/signals.json) | Decoration sidecar for markets; not a ranking input |
+| [`badges/index.json`](badges/index.json) | Per-plugin badge; unrated is explicit |
+| [`integrations/dsh-recommend/bench-feed.json`](integrations/dsh-recommend/bench-feed.json) | Sidecar for `dsh-recommend` |
+| [`data/results/`](data/results) | 30 signed paired results (hashes, no session text) |
 
-A consumer (static site, plugin manager, catalog, `dsh-recommend`, an agent tool) can read the same file and get the same answer. The companion DSH plugin `dsh-community-bench` renders this registry as a **Settings → Plugins → Community Bench** tab; it never computes a local score.
+```sh
+curl https://perrylink.github.io/dsh-attention-index/api/v1/registry.json
+```
 
 ## Quick start
 
 ```sh
-# 1. Recompute the registry from committed data
+# 1. Recompute the registry deterministically
 node scripts/aggregate.mjs --today 2026-10-18
 
-# 2. Preview the static site
-python3 -m http.server 8765 --directory site
-# open http://127.0.0.1:8765/
-
-# 3. Run the pure scoring tests
+# 2. Contract checks
+node scripts/check-invariants.mjs
+node scripts/conformance.mjs
 node --test test/*.test.mjs
 
-# 4. Dry-run the harness smoke task (no model call, no install)
-node scripts/bench-run.mjs \
-  --pack fixtures/smoke-tasks.json \
-  --task smoke-file \
-  --plugin owner/repo \
-  --spec owner/repo \
-  --arm with --repeat 1 --dry-run
+# 3. Preview the site
+python3 -m http.server 8765 --directory site
 ```
 
-A real bench run needs `dsh` on `PATH`, a throwaway `DSH_HOME`, and a model credential (`DEEPSEEK_API_KEY` in the launch environment for the headless profile). The runner never touches the real `~/.dsh`.
+## The pipeline
 
-## Contribute a trajectory
-
-```sh
-node scripts/contribution-from-session.mjs \
-  --session ~/.dsh/sessions/.../session.v4.jsonl.zstd \
-  --contributor github:your-handle \
-  --surface memory \
-  --plugins perrylink/dsh-memento \
-  --rating 4 \
-  --nomination some/under-evaluated-plugin
+```
+task pack (pilot, unreviewed)
+  → paired with/without runs
+  → signed result + environment manifest + fixture hash
+  → strict ingest (signature, fixture, duplicate)
+  → Newcombe interval + SOE/GOE grade
+  → E0/E1 no rank · E2 provisional · E3+ positive quality slot
 ```
 
-The receipt carries hashes and metrics only (no session text). It is written under `data/contributions/`; review it and open a PR. The registry aggregates it into contributor reputation, a small demand signal, and at most one nomination.
+- [P1 measured-evidence runbook](docs/P1-RUNBOOK.md)
+- [Sandbox requirements](docs/SANDBOX.md)
+- [P2 integration contract](docs/P2-INTEGRATION.md)
+- [P3 audit checklist](docs/AUDIT-CHECKLIST.md)
+- [P0–P3 status](docs/P0-P3-PLAN.md)
 
-## Attention allocation (not a popularity contest)
+## Not done yet
 
-Implemented policy (P0, live):
+- A **full** sandbox (egress allowlist + seccomp); current `bwrap-fs` is partial.
+- Task review and an **independent runner** for E3+.
+- FDR/bootstrap/holdouts, version binding, token accounting.
+- Signed snapshot history and a third-party market pilot.
+- E5 (independent audit) — a self-review is published, but it is not E5.
+- Repository rename to `dsh-score-index`; URLs are intentionally stable.
 
-- **Measured leaders** — only positive `E3+` rows (CI lower bound > 0).
-- **Replicated** — `E4+` with ≥2 independent runners.
-- **Discovery** — prior-only rows are `E0 / unrated`, in a separate, unnumbered
-  list; no `#1`, no featured badge, no install CTA.
-- **New arrivals** — new/under-evaluated plugins, labelled; not a quality rank.
-- **Most nominated** — under-evaluated plugins nominated by receipts; used to
-  schedule bench runs, never to score.
+No fabricated results. No prior-only #1. No paid rank.
 
-The allocation is a fixed set of slots, computed from the same registry. It cannot
-be bought, and a plugin author cannot certify their own plugin into
-`measured`/`replicated`.
+## DSH plugin family
 
-## Current limitations
+| Project | Role |
+|---|---|
+| **[dsh-score](https://github.com/PerryLink/dsh-score)** | Local, on-demand prior inspector (five dimensions) |
+| **dsh-score index** (this repo) | Public, version-bound evidence layer |
+| **[dsh-community-bench](https://github.com/PerryLink/dsh-community-bench)** | In-app consumer: reads the public registry; no local scoring |
+| **[dsh-kit](https://github.com/PerryLink/dsh-kit)** | One-command starter pack for the family |
+| **[PerryLink](https://github.com/PerryLink)** | 40+ Apache-2.0 DSH plugins |
 
-- **No measured results yet.** The bench runner is implemented, but no public run has been committed; this is why every row is `E0 / unrated`.
-- The seed plugin list and evidence are a snapshot from `dsh-plugin-guide` (2026-10-06) and the GitHub API (2026-10-18), not a live crawler.
-- Bench tasks are draft prompts/checks; fixtures for image/Office tasks are not committed yet.
-- Contributions are open-loop: the contributor quality score is self-reported unless replayed; `verification` is recorded, but public-key verification is a P1 item.
-- The static site is dependency-free and intentionally simple; no accounts, no server, no database.
+## ⭐ 如果它帮到了你
 
-## Roadmap
+这个项目是 [DSH 插件家族](https://github.com/PerryLink)的一员（40+ 个，全部 Apache-2.0）。如果你在用，**给个 star** —— 它不会解锁任何功能，但会让下一个人在搜索里更容易找到它。
 
-See [docs/P0-P3-PLAN.md](docs/P0-P3-PLAN.md) for the task-level plan and current
-status. P0 (truth) is implemented; P1 (measured evidence) requires executable
-tasks, a sandbox and signed results; P2/P3 require measured coverage, governance
-and an independent audit.
+*English:* part of a 40+ plugin family for DeepSeek Harness. If it is useful, **a star helps the next person find it** — nothing is gated behind it.
 
 ## License
 
-Apache-2.0 for the code and data in this repository. Plugin names and README content remain their authors' property; the registry stores links and measured facts, not copied source.
+Apache-2.0. See [LICENSE](LICENSE).

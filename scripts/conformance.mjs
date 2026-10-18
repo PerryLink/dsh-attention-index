@@ -12,6 +12,7 @@ import { dirname, join } from 'node:path'
 import { spawnSync } from 'node:child_process'
 import { fileURLToPath } from 'node:url'
 import { validateAudits } from './audit-check.mjs'
+import { verifyApi } from './verify-api.mjs'
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..')
 const failures = []
@@ -38,6 +39,9 @@ if (signals.stats?.unrated !== registry.stats?.unratedPlugins) failures.push('si
 if (signals.entries?.length !== registry.stats?.plugins) failures.push('signals entry count does not match registry')
 if (signals.source?.inputHash !== registry.source?.inputHash) failures.push('signals source hash does not match registry')
 if ((signals.stats?.measured ?? 0) !== registry.stats?.measuredPlugins) failures.push('signals measured count does not match registry')
+
+const apiSignature = verifyApi()
+if (!apiSignature.valid) failures.push(`api signature: ${apiSignature.reason}`)
 
 const audits = JSON.parse(readFileSync(join(ROOT, 'data/audits/index.json'), 'utf8'))
 for (const failure of validateAudits(registry, audits)) failures.push(failure)

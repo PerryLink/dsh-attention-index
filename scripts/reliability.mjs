@@ -91,6 +91,7 @@ function measuredSoe(entry, missing, operatorOwned) {
   if (entry.selfRun) notes.push('self-run')
   if (entry.versionMatch !== 'exact') notes.push('version-mismatch')
   if (!entry.taskReviewed) notes.push('task-unreviewed')
+  if (entry.sandboxStrength === 'fs') notes.push('sandbox-partial')
 
   return {
     design: dim(taskCount >= 8 ? 4 : taskCount >= 5 ? 3 : taskCount >= 3 ? 2 : taskCount >= 1 ? 1 : 0),
@@ -103,7 +104,7 @@ function measuredSoe(entry, missing, operatorOwned) {
 }
 
 /** Ordinal grade from SOE and bias checks. */
-function gradeFromSoe(soe, { measured, operatorOwned, missing, taskReviewed, audited, environmentBound }) {
+function gradeFromSoe(soe, { measured, operatorOwned, missing, taskReviewed, audited, environmentBound, sandboxStrength }) {
   if (!measured) {
     return {
       grade: 'E0',
@@ -142,6 +143,10 @@ function gradeFromSoe(soe, { measured, operatorOwned, missing, taskReviewed, aud
     grade = 'E2'
     certainty = certainty === 'very-low' ? 'very-low' : 'low'
     downgrades.push('sandbox-missing')
+  } else if (sandboxStrength !== 'full') {
+    grade = 'E2'
+    certainty = certainty === 'very-low' ? 'very-low' : 'low'
+    downgrades.push('sandbox-partial')
   }
 
   return {
@@ -165,8 +170,9 @@ export function evaluateReliability(entry) {
   const taskReviewed = entry?.taskReviewed === true
   const audited = entry?.audited === true
   const environmentBound = entry?.environmentBound === true
+  const sandboxStrength = entry?.sandboxStrength ?? 'none'
   const soe = measured ? measuredSoe(entry, missing, operatorOwned) : priorSoe(entry, missing, operatorOwned)
-  const goe = gradeFromSoe(soe, { measured, operatorOwned, missing, taskReviewed, audited, environmentBound })
+  const goe = gradeFromSoe(soe, { measured, operatorOwned, missing, taskReviewed, audited, environmentBound, sandboxStrength })
   const positive = measured && goe.grade !== 'E2' && Array.isArray(entry.benchTasks)
     && entry.benchTasks.some(task => Number(task.liftLowerBound) > 0)
   if (measured) goe.positive = positive

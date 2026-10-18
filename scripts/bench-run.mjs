@@ -146,7 +146,8 @@ export function parseHeadlessJson(stdout) {
   const toolCalls = events.filter(event => event.type === 'tool_call').length
   const toolResults = events.filter(event => event.type === 'tool_result').length
   const toolErrors = events.filter(event => event.type === 'tool_result' && (event.is_error === true || event.isError === true)).length
-  return { events, text, toolCalls, toolResults, toolErrors }
+  const tokens = events.reduce((sum, event) => sum + (Number(event.usage?.totalTokens) || 0), 0)
+  return { events, text, toolCalls, toolResults, toolErrors, tokens }
 }
 
 /** Resolve the newest session log file under a throwaway DSH_HOME. */
@@ -243,9 +244,14 @@ async function main() {
   const keep = args.keep === true
   const allowCommands = args['allow-commands'] === true
   const sandbox = args.sandbox === true
-  if (sandbox) {
-    throw new Error('--sandbox backend is not implemented yet; refusing to produce measured evidence')
+  const bwrap = args.bwrap ?? process.env.DSH_BENCH_BWRAP ?? 'bwrap'
+  const nodeRoot = args['node-root'] ?? process.env.DSH_BENCH_NODE_ROOT
+  const checkout = args.checkout ?? process.env.DSH_BENCH_CHECKOUT
+  if (sandbox && (typeof nodeRoot !== 'string' || typeof checkout !== 'string')) {
+    throw new Error('--sandbox requires --node-root and --checkout (or DSH_BENCH_NODE_ROOT / DSH_BENCH_CHECKOUT)')
   }
+  const dshCommand = sandbox ? join(ROOT, 'scripts/bench-sandbox.sh') : dsh
+  const sandboxEnv = sandbox ? { DSH_BENCH_BWRAP: bwrap, DSH_BENCH_NODE_ROOT: nodeRoot, DSH_BENCH_CHECKOUT: checkout } : {}
 
   if (arm === 'with' && (typeof args.spec !== 'string' || args.spec.length === 0) && dryRun === false) {
     throw new Error('--spec is required for the with arm (npm name, git spec, tarball or local path)')
@@ -288,8 +294,8 @@ async function main() {
 
     let install = { code: 0, stdout: '', stderr: '' }
     if (arm === 'with') {
-      install = await run(dsh, ['plugin', '--profile', profile, 'add', args.spec], {
-        cwd: temp, env: { DSH_HOME: home, HOME: home }, timeoutMs: 600000,
+      install = await run(dshCommand, ['plugin', '--profile', profile, 'add', args.spec], {
+        cwd: workspace, env: { DSH_HOME: home, HOME: home, ...sandboxEnv }, timeoutMs: 600000,
       })
       if (install.code !== 0) {
         console.error(`install failed for ${pluginId}: ${install.code}`)
@@ -301,9 +307,9 @@ async function main() {
 
     const startedAt = new Date().toISOString()
     const started = Date.now()
-    const runResult = await run(dsh, ['--profile', profile, '--json', task.prompt], {
+    const runResult = await run(dshCommand, ['--profile', profile, '--json', task.prompt], {
       cwd: workspace,
-      env: { DSH_HOME: home, HOME: home },
+      env: { DSH_HOME: home, HOME: home, ...sandboxEnv },
       timeoutMs,
     })
     const durationMs = Date.now() - started
@@ -324,7 +330,8 @@ async function main() {
       model,
       harness,
       profile,
-      sandbox: sandbox ? 'bwrap' : 'none',
+      sandbox: sandbox ? 'bwrap-fs' : 'none',
+      sandboxStrength: sandbox ? 'fs' : 'none',
       fixtureHash,
     }
     const result = {
@@ -338,12 +345,13 @@ async function main() {
       startedAt,
       finishedAt: new Date().toISOString(),
       outcome: { pass, checks },
-      metrics: { tokens: 0, durationMs, toolErrors: parsed.toolErrors },
+      metrics: { tokens: parsed.tokens, durationMs, toolErrors: parsed.toolErrors },
       sessionHash,
       artifacts,
       environment,
       environmentBound: sandbox,
-      sandbox: sandbox ? 'bwrap' : 'none',
+      sandbox: sandbox ? 'bwrap-fs' : 'none',
+      sandboxStrength: sandbox ? 'fs' : 'none',
       runner: { id: runnerId, ...(typeof args['key-id'] === 'string' ? { keyId: args['key-id'] } : {}) },
     }
     const signature = signResult(result, args['signing-key'])

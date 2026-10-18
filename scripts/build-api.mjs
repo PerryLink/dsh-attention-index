@@ -24,6 +24,7 @@ const index = {
   generatedAt: registry.generatedAt,
   registry: 'registry.json',
   sha256: 'registry.sha256',
+  signature: 'registry.sig',
   etag,
   note: 'Static, cacheable snapshot. Scores are evidence grades, not a quality guarantee.',
 }

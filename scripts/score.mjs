@@ -223,6 +223,8 @@ export function aggregateBench(results, tasks, options = {}) {
     const lcb = interval.lower
     const signatureVerified = [...entry.with, ...entry.without].every(item => item.verified === true)
     const environmentBound = [...entry.with, ...entry.without].every(item => item.environmentBound === true)
+    const strengths = [...entry.with, ...entry.without].map(item => item.sandboxStrength ?? 'none')
+    const sandboxStrength = strengths.every(value => value === 'full') ? 'full' : strengths.every(value => value === 'fs' || value === 'full') ? 'fs' : 'none'
     const row = {
       taskId: entry.taskId,
       surface: task.surface,
@@ -240,10 +242,13 @@ export function aggregateBench(results, tasks, options = {}) {
       runs: entry.with.length + entry.without.length,
       signatureVerified,
       environmentBound,
+      sandboxStrength,
     }
-    const aggregate = perPlugin.get(entry.pluginId) ?? { tasks: [], runners: new Set(), runs: 0, signatureVerified: true, environmentBound: true }
+    const aggregate = perPlugin.get(entry.pluginId) ?? { tasks: [], runners: new Set(), runs: 0, signatureVerified: true, environmentBound: true, sandboxStrength: 'full' }
     aggregate.signatureVerified = aggregate.signatureVerified && signatureVerified
     aggregate.environmentBound = aggregate.environmentBound && environmentBound
+    if (sandboxStrength === 'none') aggregate.sandboxStrength = 'none'
+    else if (sandboxStrength === 'fs' && aggregate.sandboxStrength === 'full') aggregate.sandboxStrength = 'fs'
     aggregate.tasks.push(row)
     for (const value of entry.with.map(item => item.runner?.id).filter(Boolean)) aggregate.runners.add(value)
     aggregate.runs += row.runs
@@ -269,6 +274,7 @@ export function aggregateBench(results, tasks, options = {}) {
       taskReviewed,
       signatureVerified: aggregate.signatureVerified === true,
       environmentBound: aggregate.environmentBound === true,
+      sandboxStrength: aggregate.sandboxStrength,
       tasks: aggregate.tasks.sort((left, right) => left.taskId.localeCompare(right.taskId)),
     })
   }
@@ -521,6 +527,7 @@ export function scorePlugin(plugin, bench, contribution, today) {
     benchTasks: bench?.tasks ?? [],
     signatureVerified: bench?.signatureVerified === true,
     environmentBound: bench?.environmentBound === true,
+    sandboxStrength: bench?.sandboxStrength ?? 'none',
     selfRun: false,
     versionMatch: 'unknown',
     holdout: false,
@@ -579,6 +586,8 @@ export function publicEntry(entry) {
     operatorOwned: entry.operatorOwned,
     missing: entry.missing,
     taskReviewed: entry.taskReviewed,
+    environmentBound: entry.environmentBound,
+    sandboxStrength: entry.sandboxStrength,
     discovery: entry.discovery,
     discoveryPosition: entry.discoveryPosition ?? null,
     runners: entry.runners,

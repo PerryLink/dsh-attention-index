@@ -18,7 +18,7 @@ no quality #1 from prior-only rows.**
 | P0.6 | Operator flag + independent verification | done | `operatorOwned` published; verification counts only with `certifiedBy`/`verificationSource` |
 | P0.7 | Badge/artifact truth | done | unrated badge; `--check` fails on extra badge files; prior top badges deleted |
 | P0.8 | Formula string and rank namespace | done | `60*prior/100`; `rank` null for unrated; `overall = []` |
-| P0.9 | Site/consumer display | done | site and tab show GOE/unrated, no prior #1; tab 0.2.0 rebuilt |
+| P0.9 | Site/consumer display | done | site and tab show GOE/unrated, no prior #1; tab 0.2.2 rebuilt |
 | P0.10 | Pin Pages `--today`; content hash/signature | partial | Pages uses `--check --today 2026-10-18`; `source.inputHash` added; signature pending |
 | P0.11 | Schema validation for registry/plugins/tasks | partial | invariant script + CI added; JSON Schema pending |
 
@@ -29,13 +29,13 @@ P0 is a **truth fix**, not a measurement. It does not create measured evidence.
 | # | Task | Status | Depends on |
 |---|---|---|---|
 | P1.1 | 3–5 briefs × ≥8 executable tasks with fixtures/checks | done (pilot) | 24 offline tasks, 3 briefs × 8; `reviewed:false` caps E2 |
-| P1.2 | Sandboxed runner (no host FS/env, egress allowlist, cgroups) | partial | env scrub + temp home + fixture hash + `--sandbox` refusal; no bwrap backend or egress control yet |
+| P1.2 | Sandboxed runner (no host FS/env, egress allowlist, cgroups) | partial | `bwrap-fs` user/PID/FS isolation works; network shared, no egress allowlist/seccomp yet |
 | P1.3 | Signed results + environment manifest + dedupe | done | `runner-keygen.mjs`, `verify-result.mjs`, `ingest-result.mjs`; tests |
-| P1.4 | Newcombe/paired bootstrap at task level; FDR; holdout | partial | Newcombe + task cap in place; FDR/bootstrap/holdout pending |
-| P1.5 | First measured pilot; E2/E3 grades | done (E2 pilot) | 31 signed results, 1 E2 provisional null; E3+ still blocked by task review + sandbox |
+| P1.4 | Newcombe/paired bootstrap at task level; FDR; holdout | partial | Newcombe + BH/paired bootstrap implemented/tested; not yet wired into promotion; holdout pending |
+| P1.5 | First measured pilot; E2/E3 grades | done (E2 pilot) | 30 signed results inside `bwrap-fs`; 1 E2 provisional null; E3+ still blocked by review, independence and partial sandbox |
 | P1.6 | `signals.json` + format-1 decorator + reference index | done | `integrations/market/signals.json` + API; not a third-party market claim |
 | P1.7 | `bench_recommend` explicit-surface tool (no session read) | done (pure) | `scripts/recommend.mjs`; Host tool wiring is P2 |
-| P1.8 | Publish `dsh-community-bench` 0.2.0 | done | npm `latest`, with provenance |
+| P1.8 | Publish `dsh-community-bench` 0.2.2 | done | npm `latest`, with provenance and family-style README |
 
 **Exit criteria:** ≥3 briefs with ≥5 tasks/arm, ≥2 independent runners for one
 surface, all results signed; no fabricated data; E2/E3 visible with CI. The code
@@ -65,7 +65,7 @@ is ready; the measured result is still blocked by the key/sandbox gate.
 ## Current honest state
 
 - 42 plugins, 15 surfaces, **39 tasks** (24 executable pilot + 15 draft),
-  **31 signed results**, **1 E2 measured** (provisional null), **41 E0**,
+  **30 signed results**, **1 E2 measured** (provisional null), **41 E0**,
   **0 positive**, **0 contributions**.
 - No quality #1 exists; the only measured row is E2/provisional and has
   `rank: null`.
@@ -82,8 +82,8 @@ is ready; the measured result is still blocked by the key/sandbox gate.
 | GitHub `dsh-attention-index` | pushed `d8628b5`; P0 registry + P1–P3 pilot/API/signals live; CI and Pages green |
 | GitHub Pages | live at <https://perrylink.github.io/dsh-attention-index/>; title `dsh-score`; 42 E0 unrated; prior top badges return 404 |
 | GitHub `perrylink` / `dsh-kit` / `dsh-score` | pushed brand/docs commits |
-| GitHub release | `dsh-community-bench v0.2.0` published |
-| npm | `dsh-community-bench@0.2.0` live, `latest`, with provenance |
+| GitHub release | `dsh-community-bench v0.2.2` published |
+| npm | `dsh-community-bench@0.2.2` live, `latest`, with provenance |
 | Gitee / GitCode | fresh mirror sync triggered for `d8628b5`; previous GitCode run failed on 4 unrelated divergent mirrors (`dsh-claude-move`, `dsh-memento`, `dsh-plugin-kit`, `dsh-plugin-portal`) |
 | P1–P3 artifacts | 24 pilot tasks, signed ingest, `api/v1`, market signals, matcher/recommender, audit gate, conformance suite; **0 measured** |
 | Repo rename `dsh-score-index` | **not executed**; migration runbook ready, URLs intentionally kept stable until the redirect/mirror/patch release is coordinated |

@@ -24,6 +24,8 @@ jobs:
         run: |
           node scripts/build-api.mjs
           node scripts/build-signals.mjs
+      - name: Verify API snapshot signature
+        run: node scripts/verify-api.mjs
       - name: Pre-registration hash must match
         run: node scripts/preregister.mjs --check
       - name: P2/P3 conformance

@@ -1,0 +1,10 @@
+{
+  "schema": "dsh-score/release-keys/v1",
+  "keys": [
+    {
+      "id": "release:main",
+      "publicKey": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAStdAXftW73km9wxdWUESlva/gOEfFwvfiexpZY/eepg=\n-----END PUBLIC KEY-----\n",
+      "createdAt": "2026-10-18"
+    }
+  ]
+}

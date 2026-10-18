@@ -9,8 +9,8 @@
 > [docs/SOE-GOE.md](docs/SOE-GOE.md); implementation is
 > [`scripts/reliability.mjs`](scripts/reliability.mjs).
 >
-> **Hard gates:** an unreviewed task pack or a run without a real sandbox is
-> capped at **E2 provisional**. E5 additionally requires an independent audit in
+> **Hard gates:** an unreviewed task pack or a run without a **full** sandbox
+> (the current `bwrap-fs` mode is partial) is capped at **E2 provisional**. E5 additionally requires an independent audit in
 > `data/audits/index.json`. The current 24-task pilot pack is unreviewed, so it
 > cannot produce E3+.
 

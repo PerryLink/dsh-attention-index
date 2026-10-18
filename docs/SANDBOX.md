@@ -1,7 +1,8 @@
 # Sandbox requirements (P1.2)
 
-Status: **not complete.** The runner currently provides process hygiene, not a
-security boundary. Measured E3+ evidence requires the sandbox below.
+Status: **partial.** The runner supports a `bwrap-fs` sandbox (filesystem,
+user, PID, UTS and IPC namespaces). The network is shared, so this is not yet
+E3+ evidence; an egress allowlist and seccomp are still required.
 
 ## What the runner does today
 
@@ -9,10 +10,12 @@ security boundary. Measured E3+ evidence requires the sandbox below.
 - Scrubs ambient environment; only `PATH`, `HOME` (the temp home), locale,
   `DEEPSEEK_API_KEY` and `DEEPSEEK_BASE_URL` are forwarded.
 - Hashes the fixture directory and records the environment manifest.
-- Refuses `--sandbox` entirely until the backend is implemented.
+- Runs through `scripts/bench-sandbox.sh` when `--sandbox` is set: read-only
+  system, read-only DSH checkout/Node, writable workspace and throwaway home.
 
-That is **not enough**: the child can still read the host filesystem and reach
-the network. A malicious plugin could read host files or exfiltrate a key.
+That blocks host-home reads and PID/UTS/IPC interference, but **the child can
+still reach the network**. A malicious plugin could exfiltrate a key; that is why
+the result stays at E2.
 
 ## Required sandbox for E3+
 
@@ -31,9 +34,10 @@ the network. A malicious plugin could read host files or exfiltrate a key.
 
 ## Current blocker
 
-This machine has `unshare` but no `bwrap`/`firejail` and no root to install one.
-The runner therefore refuses measured runs. Implementing the bwrap backend and
-the egress proxy is the next P1.2 task; until then no E3+ result may be published.
+This machine has a local `bwrap` 0.9.0 and `unshare`; the filesystem sandbox
+works. The missing piece is the egress proxy/allowlist (and seccomp/resource
+limits) that would let the runner claim `sandboxStrength: "full"`. Until then no
+E3+ result may be published.
 
 ## What not to do
 

@@ -52,6 +52,7 @@ test('8 tasks, 10 runs/arm, 2 signed independent runners, exact env is E4 positi
     runners: 2,
     signatureVerified: true,
     environmentBound: true,
+    sandboxStrength: 'full',
     versionMatch: 'exact',
     holdout: true,
     taskReviewed: true,
@@ -74,6 +75,7 @@ test('an unreviewed pilot task pack caps at E2', () => {
     runners: 2,
     signatureVerified: true,
     environmentBound: true,
+    sandboxStrength: 'full',
     versionMatch: 'exact',
     holdout: true,
     taskReviewed: false,
@@ -97,6 +99,7 @@ test('E5 requires an explicit independent audit flag', () => {
     runners: 3,
     signatureVerified: true,
     environmentBound: true,
+    sandboxStrength: 'full',
     versionMatch: 'exact',
     holdout: true,
     taskReviewed: true,
@@ -119,6 +122,7 @@ test('a strong result without a sandbox is capped at E2', () => {
     runners: 2,
     signatureVerified: true,
     environmentBound: false,
+    sandboxStrength: 'none',
     versionMatch: 'exact',
     holdout: true,
     taskReviewed: true,
@@ -126,6 +130,29 @@ test('a strong result without a sandbox is capped at E2', () => {
   }))
   assert.equal(result.evidenceGrade, 'E2')
   assert.ok(result.goe.downgrades.includes('sandbox-missing'))
+})
+
+
+test('a filesystem-only sandbox is capped at E2', () => {
+  const benchTasks = Array.from({ length: 8 }, (_, index) => ({
+    taskId: `task-${index}`,
+    withRuns: 10,
+    withoutRuns: 10,
+    liftLowerBound: 0.2,
+  }))
+  const result = evaluateReliability(base({
+    tier: 'measured',
+    benchTasks,
+    runners: 2,
+    signatureVerified: true,
+    environmentBound: true,
+    sandboxStrength: 'fs',
+    versionMatch: 'exact',
+    holdout: true,
+    taskReviewed: true,
+  }))
+  assert.equal(result.evidenceGrade, 'E2')
+  assert.ok(result.goe.downgrades.includes('sandbox-partial'))
 })
 
 test('operator-owned and missing channels are downgrades', () => {

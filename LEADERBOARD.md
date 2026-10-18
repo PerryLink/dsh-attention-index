@@ -10,7 +10,7 @@ Generated: 2026-10-18T00:00:00.000Z · reliability `soe-goe/v1` · 1/42 measured
 
 | # | Plugin | GOE | Tier | Prior | Bench | Coverage | Evidence completeness |
 |---:|---|---|---|---:|---:|---:|---:|
-| — | [dsh-memento](https://github.com/PerryLink/dsh-memento) | E2 | provisional | 50 | 22.6 | 56% | 0.77 |
+| — | [dsh-memento](https://github.com/PerryLink/dsh-memento) | E2 | provisional | 50 | 21.9 | 56% | 0.77 |
 | — | [OpenViking memory](https://github.com/volcengine/OpenViking) | E0 unrated | unrated | 68.4 | — | 0% | 0.6 |
 | — | [hindsight](https://github.com/vectorize-io/hindsight) | E0 unrated | unrated | 63.6 | — | 0% | 0.6 |
 

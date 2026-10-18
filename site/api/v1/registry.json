@@ -25,9 +25,9 @@
     "plugins": 42,
     "tasks": 39,
     "surfaces": 15,
-    "benchResults": 31,
+    "benchResults": 30,
     "contributions": 0,
-    "inputHash": "sha256:675ded408306316788ef580356d821f2825b5b79aa52ddbef90d3a6be2adcc54"
+    "inputHash": "sha256:af3dbbc751c48711eddf39edb76ed230f514ea4f9164b53c807877486f9eff20"
   },
   "stats": {
     "plugins": 42,
@@ -42,7 +42,7 @@
     },
     "contributors": 0,
     "contributions": 0,
-    "benchResults": 31
+    "benchResults": 30
   },
   "surfaces": [
     {
@@ -71,7 +71,7 @@
           "license": "Apache-2.0",
           "repo": "https://github.com/PerryLink/dsh-memento",
           "npm": "dsh-memento",
-          "score": 33,
+          "score": 32.6,
           "scoreScale": 100,
           "prior": 50,
           "priorDimensions": {
@@ -80,7 +80,7 @@
             "verification": 0,
             "documentation": null
           },
-          "bench": 22.6,
+          "bench": 21.9,
           "coverage": 0.556,
           "coverageScore": 55.6,
           "community": 0,
@@ -89,7 +89,7 @@
           "evidenceGrade": "E2",
           "soe": {
             "design": 3,
-            "execution": 3,
+            "execution": 4,
             "precision": 1,
             "independence": 1,
             "directness": 0,
@@ -98,7 +98,8 @@
               "missing-adoption-channels",
               "docs-unknown",
               "version-mismatch",
-              "task-unreviewed"
+              "task-unreviewed",
+              "sandbox-partial"
             ]
           },
           "goe": {
@@ -117,7 +118,7 @@
               "small-sample",
               "version-or-environment-mismatch",
               "task-unreviewed",
-              "sandbox-missing"
+              "sandbox-partial"
             ]
           },
           "unrated": false,
@@ -130,8 +131,10 @@
             "npmName": false
           },
           "taskReviewed": false,
+          "environmentBound": true,
+          "sandboxStrength": "fs",
           "discovery": {
-            "score": 33,
+            "score": 32.6,
             "scale": 100,
             "label": "legacy discovery — not a quality score",
             "basis": [
@@ -143,7 +146,7 @@
           },
           "discoveryPosition": 1,
           "runners": 1,
-          "runs": 31,
+          "runs": 30,
           "benchTasks": [
             {
               "taskId": "p1-memory-api",
@@ -161,7 +164,8 @@
               "runners": 1,
               "runs": 6,
               "signatureVerified": true,
-              "environmentBound": false
+              "environmentBound": true,
+              "sandboxStrength": "fs"
             },
             {
               "taskId": "p1-memory-cutoff",
@@ -179,25 +183,27 @@
               "runners": 1,
               "runs": 6,
               "signatureVerified": true,
-              "environmentBound": false
+              "environmentBound": true,
+              "sandboxStrength": "fs"
             },
             {
               "taskId": "p1-memory-deploy",
               "surface": "memory",
               "weight": 1,
-              "withRuns": 4,
+              "withRuns": 3,
               "withoutRuns": 3,
               "withSuccess": 1,
               "withoutSuccess": 1,
               "lift": 0,
-              "liftLowerBound": -0.49,
-              "ciLower": -0.49,
+              "liftLowerBound": -0.562,
+              "ciLower": -0.562,
               "ciUpper": 0.562,
-              "score": 25.5,
+              "score": 21.9,
               "runners": 1,
-              "runs": 7,
+              "runs": 6,
               "signatureVerified": true,
-              "environmentBound": false
+              "environmentBound": true,
+              "sandboxStrength": "fs"
             },
             {
               "taskId": "p1-memory-freeze",
@@ -215,7 +221,8 @@
               "runners": 1,
               "runs": 6,
               "signatureVerified": true,
-              "environmentBound": false
+              "environmentBound": true,
+              "sandboxStrength": "fs"
             },
             {
               "taskId": "p1-memory-owner",
@@ -233,7 +240,8 @@
               "runners": 1,
               "runs": 6,
               "signatureVerified": true,
-              "environmentBound": false
+              "environmentBound": true,
+              "sandboxStrength": "fs"
             }
           ],
           "evidence": {
@@ -310,6 +318,8 @@
             "npmName": true
           },
           "taskReviewed": false,
+          "environmentBound": false,
+          "sandboxStrength": "none",
           "discovery": {
             "score": 41,
             "scale": 60,
@@ -399,6 +409,8 @@
             "npmName": true
           },
           "taskReviewed": false,
+          "environmentBound": false,
+          "sandboxStrength": "none",
           "discovery": {
             "score": 38.2,
             "scale": 60,
@@ -502,6 +514,8 @@
             "npmName": false
           },
           "taskReviewed": false,
+          "environmentBound": false,
+          "sandboxStrength": "none",
           "discovery": {
             "score": 42.4,
             "scale": 60,
@@ -590,6 +604,8 @@
             "npmName": false
           },
           "taskReviewed": false,
+          "environmentBound": false,
+          "sandboxStrength": "none",
           "discovery": {
             "score": 42.4,
             "scale": 60,
@@ -680,6 +696,8 @@
             "npmName": false
           },
           "taskReviewed": false,
+          "environmentBound": false,
+          "sandboxStrength": "none",
           "discovery": {
             "score": 29.1,
             "scale": 60,
@@ -784,6 +802,8 @@
             "npmName": true
           },
           "taskReviewed": false,
+          "environmentBound": false,
+          "sandboxStrength": "none",
           "discovery": {
             "score": 38.3,
             "scale": 60,
@@ -873,6 +893,8 @@
             "npmName": true
           },
           "taskReviewed": false,
+          "environmentBound": false,
+          "sandboxStrength": "none",
           "discovery": {
             "score": 34.1,
             "scale": 60,
@@ -962,6 +984,8 @@
             "npmName": true
           },
           "taskReviewed": false,
+          "environmentBound": false,
+          "sandboxStrength": "none",
           "discovery": {
             "score": 33.1,
             "scale": 60,
@@ -1074,6 +1098,8 @@
             "npmName": true
           },
           "taskReviewed": false,
+          "environmentBound": false,
+          "sandboxStrength": "none",
           "discovery": {
             "score": 32.5,
             "scale": 60,
@@ -1163,6 +1189,8 @@
             "npmName": true
           },
           "taskReviewed": false,
+          "environmentBound": false,
+          "sandboxStrength": "none",
           "discovery": {
             "score": 32.5,
             "scale": 60,
@@ -1252,6 +1280,8 @@
             "npmName": true
           },
           "taskReviewed": false,
+          "environmentBound": false,
+          "sandboxStrength": "none",
           "discovery": {
             "score": 30.9,
             "scale": 60,
@@ -1356,6 +1386,8 @@
             "npmName": true
           },
           "taskReviewed": false,
+          "environmentBound": false,
+          "sandboxStrength": "none",
           "discovery": {
             "score": 36.3,
             "scale": 60,
@@ -1446,6 +1478,8 @@
             "npmName": false
           },
           "taskReviewed": false,
+          "environmentBound": false,
+          "sandboxStrength": "none",
           "discovery": {
             "score": 31.1,
             "scale": 60,
@@ -1535,6 +1569,8 @@
             "npmName": true
           },
           "taskReviewed": false,
+          "environmentBound": false,
+          "sandboxStrength": "none",
           "discovery": {
             "score": 27.1,
             "scale": 60,
@@ -1639,6 +1675,8 @@
             "npmName": true
           },
           "taskReviewed": false,
+          "environmentBound": false,
+          "sandboxStrength": "none",
           "discovery": {
             "score": 35.5,
             "scale": 60,
@@ -1728,6 +1766,8 @@
             "npmName": true
           },
           "taskReviewed": false,
+          "environmentBound": false,
+          "sandboxStrength": "none",
           "discovery": {
             "score": 31.9,
             "scale": 60,
@@ -1817,6 +1857,8 @@
             "npmName": true
           },
           "taskReviewed": false,
+          "environmentBound": false,
+          "sandboxStrength": "none",
           "discovery": {
             "score": 31.1,
             "scale": 60,
@@ -1921,6 +1963,8 @@
             "npmName": true
           },
           "taskReviewed": false,
+          "environmentBound": false,
+          "sandboxStrength": "none",
           "discovery": {
             "score": 36.7,
             "scale": 60,
@@ -2010,6 +2054,8 @@
             "npmName": true
           },
           "taskReviewed": false,
+          "environmentBound": false,
+          "sandboxStrength": "none",
           "discovery": {
             "score": 28.4,
             "scale": 60,
@@ -2100,6 +2146,8 @@
             "npmName": false
           },
           "taskReviewed": false,
+          "environmentBound": false,
+          "sandboxStrength": "none",
           "discovery": {
             "score": 23.5,
             "scale": 60,
@@ -2205,6 +2253,8 @@
             "npmName": false
           },
           "taskReviewed": false,
+          "environmentBound": false,
+          "sandboxStrength": "none",
           "discovery": {
             "score": 39.2,
             "scale": 60,
@@ -2293,6 +2343,8 @@
             "npmName": false
           },
           "taskReviewed": false,
+          "environmentBound": false,
+          "sandboxStrength": "none",
           "discovery": {
             "score": 34.6,
             "scale": 60,
@@ -2382,6 +2434,8 @@
             "npmName": true
           },
           "taskReviewed": false,
+          "environmentBound": false,
+          "sandboxStrength": "none",
           "discovery": {
             "score": 18,
             "scale": 60,
@@ -2485,6 +2539,8 @@
             "npmName": false
           },
           "taskReviewed": false,
+          "environmentBound": false,
+          "sandboxStrength": "none",
           "discovery": {
             "score": 37.2,
             "scale": 60,
@@ -2574,6 +2630,8 @@
             "npmName": true
           },
           "taskReviewed": false,
+          "environmentBound": false,
+          "sandboxStrength": "none",
           "discovery": {
             "score": 27.1,
             "scale": 60,
@@ -2677,6 +2735,8 @@
             "npmName": false
           },
           "taskReviewed": false,
+          "environmentBound": false,
+          "sandboxStrength": "none",
           "discovery": {
             "score": 37,
             "scale": 60,
@@ -2766,6 +2826,8 @@
             "npmName": true
           },
           "taskReviewed": false,
+          "environmentBound": false,
+          "sandboxStrength": "none",
           "discovery": {
             "score": 35.4,
             "scale": 60,
@@ -2856,6 +2918,8 @@
             "npmName": false
           },
           "taskReviewed": false,
+          "environmentBound": false,
+          "sandboxStrength": "none",
           "discovery": {
             "score": 24.8,
             "scale": 60,
@@ -2967,6 +3031,8 @@
             "npmName": false
           },
           "taskReviewed": false,
+          "environmentBound": false,
+          "sandboxStrength": "none",
           "discovery": {
             "score": 34.7,
             "scale": 60,
@@ -3057,6 +3123,8 @@
             "npmName": false
           },
           "taskReviewed": false,
+          "environmentBound": false,
+          "sandboxStrength": "none",
           "discovery": {
             "score": 29.6,
             "scale": 60,
@@ -3147,6 +3215,8 @@
             "npmName": false
           },
           "taskReviewed": false,
+          "environmentBound": false,
+          "sandboxStrength": "none",
           "discovery": {
             "score": 29.6,
             "scale": 60,
@@ -3236,6 +3306,8 @@
             "npmName": true
           },
           "taskReviewed": false,
+          "environmentBound": false,
+          "sandboxStrength": "none",
           "discovery": {
             "score": 24.8,
             "scale": 60,
@@ -3341,6 +3413,8 @@
             "npmName": false
           },
           "taskReviewed": false,
+          "environmentBound": false,
+          "sandboxStrength": "none",
           "discovery": {
             "score": 30.4,
             "scale": 60,
@@ -3446,6 +3520,8 @@
             "npmName": false
           },
           "taskReviewed": false,
+          "environmentBound": false,
+          "sandboxStrength": "none",
           "discovery": {
             "score": 38.9,
             "scale": 60,
@@ -3536,6 +3612,8 @@
             "npmName": false
           },
           "taskReviewed": false,
+          "environmentBound": false,
+          "sandboxStrength": "none",
           "discovery": {
             "score": 38.9,
             "scale": 60,
@@ -3626,6 +3704,8 @@
             "npmName": false
           },
           "taskReviewed": false,
+          "environmentBound": false,
+          "sandboxStrength": "none",
           "discovery": {
             "score": 35.2,
             "scale": 60,
@@ -3728,6 +3808,8 @@
             "npmName": true
           },
           "taskReviewed": false,
+          "environmentBound": false,
+          "sandboxStrength": "none",
           "discovery": {
             "score": 39.3,
             "scale": 60,
@@ -3817,6 +3899,8 @@
             "npmName": true
           },
           "taskReviewed": false,
+          "environmentBound": false,
+          "sandboxStrength": "none",
           "discovery": {
             "score": 32.1,
             "scale": 60,
@@ -3907,6 +3991,8 @@
             "npmName": false
           },
           "taskReviewed": false,
+          "environmentBound": false,
+          "sandboxStrength": "none",
           "discovery": {
             "score": 30.7,
             "scale": 60,
@@ -4011,6 +4097,8 @@
             "npmName": true
           },
           "taskReviewed": false,
+          "environmentBound": false,
+          "sandboxStrength": "none",
           "discovery": {
             "score": 35.7,
             "scale": 60,
@@ -4100,6 +4188,8 @@
             "npmName": true
           },
           "taskReviewed": false,
+          "environmentBound": false,
+          "sandboxStrength": "none",
           "discovery": {
             "score": 23.5,
             "scale": 60,
@@ -4201,6 +4291,8 @@
           "npmName": false
         },
         "taskReviewed": false,
+        "environmentBound": false,
+        "sandboxStrength": "none",
         "discovery": {
           "score": 31.1,
           "scale": 60,
@@ -4291,6 +4383,8 @@
           "npmName": false
         },
         "taskReviewed": false,
+        "environmentBound": false,
+        "sandboxStrength": "none",
         "discovery": {
           "score": 30.7,
           "scale": 60,
@@ -4381,6 +4475,8 @@
           "npmName": false
         },
         "taskReviewed": false,
+        "environmentBound": false,
+        "sandboxStrength": "none",
         "discovery": {
           "score": 30.4,
           "scale": 60,
@@ -4415,5 +4511,5 @@
   "contributors": [],
   "nominations": [],
   "apiVersion": "v1",
-  "etag": "sha256:c1424ee49d5ecc4e6d97333a6191caad8e2f3b41b5d0d70790edc0498d499dab"
+  "etag": "sha256:40b13978c1063380703bdb86bbfd73e465660dbfab733ab5f9eb4e4701c5f71c"
 }
