@@ -9,18 +9,17 @@
       "selfReview": true,
       "scope": "perrylink/dsh-memento@0.5.27 / p1-pilot-1 / memory",
       "date": "2026-10-18",
-      "method": "30 signature verifications; fixture/check replay; adversarial review of the first sandboxed pilot",
+      "method": "30 signature verifications; fixture/check replay; adversarial review of the first network-isolated pilot",
       "evidenceUrl": "https://github.com/PerryLink/dsh-attention-index",
       "result": "pass-with-findings",
       "findings": [
         "operator-owned plugin (PerryLink); disclosed, not independent",
-        "sandbox=bwrap-fs (filesystem/user/PID isolated, network shared); partial, capped at E2",
+        "sandbox=bwrap-net (FS/user/PID/UTS/IPC + private netns + DeepSeek-only egress proxy; no seccomp); capped at E2",
         "task pack p1-pilot-1 is unreviewed; E2 cap",
         "5 of 8 memory tasks, 3 runs per arm; coverage 0.556",
         "null result: both arms passed all five tasks; no positive lift",
-        "all 30 results have valid Ed25519 signatures, fixture hashes and bwrap-fs metadata",
-        "one plugin and one surface only; no generalisation claim",
-        "tokens metric is not captured; duration/tool errors only"
+        "all 30 results have valid Ed25519 signatures, fixture hashes, bwrap-net metadata and captured token usage",
+        "one plugin and one surface only; no generalisation claim"
       ],
       "gradeCeiling": "E2",
       "note": "Self-review is published for transparency. It cannot satisfy E5 and must never be counted as an independent audit."

@@ -18,6 +18,8 @@ const registry = JSON.parse(readFileSync(join(ROOT, 'data/registry.json'), 'utf8
 const base = { ...registry, apiVersion: 'v1' }
 const etag = `sha256:${createHash('sha256').update(JSON.stringify(base)).digest('hex')}`
 const api = { ...base, etag }
+const registryText = `${JSON.stringify(api, null, 2)}\n`
+const fileSha256 = `sha256:${createHash('sha256').update(registryText).digest('hex')}`
 const index = {
   schema: 'dsh-score/api-index/v1',
   apiVersion: 'v1',
@@ -25,13 +27,15 @@ const index = {
   registry: 'registry.json',
   sha256: 'registry.sha256',
   signature: 'registry.sig',
+  fileSha256: 'registry.file.sha256',
   etag,
   note: 'Static, cacheable snapshot. registry.sha256 is the canonical-object etag; registry.sig.sha256 is the file digest.',
 }
 for (const dir of [join(ROOT, 'api/v1'), join(ROOT, 'site/api/v1')]) {
   mkdirSync(dir, { recursive: true })
-  writeFileSync(join(dir, 'registry.json'), `${JSON.stringify(api, null, 2)}\n`)
+  writeFileSync(join(dir, 'registry.json'), registryText)
   writeFileSync(join(dir, 'registry.sha256'), `${etag}\n`)
+  writeFileSync(join(dir, 'registry.file.sha256'), `${fileSha256}\n`)
   writeFileSync(join(dir, 'index.json'), `${JSON.stringify(index, null, 2)}\n`)
 }
 console.log(`wrote api/v1 · ${api.stats.plugins} plugins · ${etag}`)

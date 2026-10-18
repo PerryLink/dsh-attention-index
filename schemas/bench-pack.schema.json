@@ -132,7 +132,9 @@
                   "file-equals",
                   "command-exit-zero",
                   "no-clarifying-question",
-                  "judge-rubric"
+                  "judge-rubric",
+                  "file-contains",
+                  "file-not-contains"
                 ]
               },
               "value": {

@@ -614,6 +614,9 @@
           "description": "Agent does not end with a clarifying question"
         }
       ],
+      "keywords": [
+        "memory"
+      ],
       "status": "pilot",
       "reviewed": false,
       "model": "deepseek-flash",
@@ -639,6 +642,9 @@
           "kind": "no-clarifying-question",
           "description": "Agent does not end with a clarifying question"
         }
+      ],
+      "keywords": [
+        "memory"
       ],
       "status": "pilot",
       "reviewed": false,
@@ -666,6 +672,9 @@
           "description": "Agent does not end with a clarifying question"
         }
       ],
+      "keywords": [
+        "memory"
+      ],
       "status": "pilot",
       "reviewed": false,
       "model": "deepseek-flash",
@@ -691,6 +700,9 @@
           "kind": "no-clarifying-question",
           "description": "Agent does not end with a clarifying question"
         }
+      ],
+      "keywords": [
+        "memory"
       ],
       "status": "pilot",
       "reviewed": false,
@@ -718,6 +730,9 @@
           "description": "Agent does not end with a clarifying question"
         }
       ],
+      "keywords": [
+        "memory"
+      ],
       "status": "pilot",
       "reviewed": false,
       "model": "deepseek-flash",
@@ -743,6 +758,9 @@
           "kind": "no-clarifying-question",
           "description": "Agent does not end with a clarifying question"
         }
+      ],
+      "keywords": [
+        "memory"
       ],
       "status": "pilot",
       "reviewed": false,
@@ -770,6 +788,9 @@
           "description": "Agent does not end with a clarifying question"
         }
       ],
+      "keywords": [
+        "web"
+      ],
       "status": "pilot",
       "reviewed": false,
       "model": "deepseek-flash",
@@ -795,6 +816,9 @@
           "kind": "no-clarifying-question",
           "description": "Agent does not end with a clarifying question"
         }
+      ],
+      "keywords": [
+        "web"
       ],
       "status": "pilot",
       "reviewed": false,
@@ -822,6 +846,9 @@
           "description": "Agent does not end with a clarifying question"
         }
       ],
+      "keywords": [
+        "web"
+      ],
       "status": "pilot",
       "reviewed": false,
       "model": "deepseek-flash",
@@ -847,6 +874,9 @@
           "kind": "no-clarifying-question",
           "description": "Agent does not end with a clarifying question"
         }
+      ],
+      "keywords": [
+        "web"
       ],
       "status": "pilot",
       "reviewed": false,
@@ -874,6 +904,9 @@
           "description": "Agent does not end with a clarifying question"
         }
       ],
+      "keywords": [
+        "web"
+      ],
       "status": "pilot",
       "reviewed": false,
       "model": "deepseek-flash",
@@ -899,6 +932,9 @@
           "kind": "no-clarifying-question",
           "description": "Agent does not end with a clarifying question"
         }
+      ],
+      "keywords": [
+        "web"
       ],
       "status": "pilot",
       "reviewed": false,
@@ -928,6 +964,9 @@
           "description": "bug.js adds instead of subtracts"
         }
       ],
+      "keywords": [
+        "dev"
+      ],
       "status": "pilot",
       "reviewed": false,
       "model": "deepseek-flash",
@@ -949,6 +988,9 @@
           "value": "\"2.0.0\"",
           "description": "config.json contains version 2.0.0"
         }
+      ],
+      "keywords": [
+        "dev"
       ],
       "status": "pilot",
       "reviewed": false,
@@ -984,6 +1026,9 @@
           "description": "sum.js adds"
         }
       ],
+      "keywords": [
+        "dev"
+      ],
       "status": "pilot",
       "reviewed": false,
       "model": "deepseek-flash",
@@ -1012,6 +1057,9 @@
           "value": "node tool.js",
           "description": "README names the command"
         }
+      ],
+      "keywords": [
+        "dev"
       ],
       "status": "pilot",
       "reviewed": false,
@@ -1042,6 +1090,9 @@
           "description": "server.js has no eval("
         }
       ],
+      "keywords": [
+        "dev"
+      ],
       "status": "pilot",
       "reviewed": false,
       "model": "deepseek-flash",
@@ -1063,6 +1114,9 @@
           "value": "\"type\": \"module\"",
           "description": "package.json declares type module"
         }
+      ],
+      "keywords": [
+        "dev"
       ],
       "status": "pilot",
       "reviewed": false,
@@ -1090,6 +1144,9 @@
           "description": "Agent does not end with a clarifying question"
         }
       ],
+      "keywords": [
+        "memory"
+      ],
       "status": "pilot",
       "reviewed": false,
       "model": "deepseek-flash",
@@ -1115,6 +1172,9 @@
           "kind": "no-clarifying-question",
           "description": "Agent does not end with a clarifying question"
         }
+      ],
+      "keywords": [
+        "memory"
       ],
       "status": "pilot",
       "reviewed": false,
@@ -1142,6 +1202,9 @@
           "description": "Agent does not end with a clarifying question"
         }
       ],
+      "keywords": [
+        "web"
+      ],
       "status": "pilot",
       "reviewed": false,
       "model": "deepseek-flash",
@@ -1167,6 +1230,9 @@
           "kind": "no-clarifying-question",
           "description": "Agent does not end with a clarifying question"
         }
+      ],
+      "keywords": [
+        "web"
       ],
       "status": "pilot",
       "reviewed": false,
@@ -1196,6 +1262,9 @@
           "description": "no trailing comma"
         }
       ],
+      "keywords": [
+        "dev"
+      ],
       "status": "pilot",
       "reviewed": false,
       "model": "deepseek-flash",
@@ -1217,6 +1286,9 @@
           "value": "./utils.js",
           "description": "main.js imports utils.js"
         }
+      ],
+      "keywords": [
+        "dev"
       ],
       "status": "pilot",
       "reviewed": false,

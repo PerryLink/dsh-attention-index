@@ -92,7 +92,7 @@ function measuredSoe(entry, missing, operatorOwned) {
   if (entry.versionMatch === 'unknown') notes.push('version-unbound')
   else if (entry.versionMatch !== 'exact') notes.push('version-mismatch')
   if (!entry.taskReviewed) notes.push('task-unreviewed')
-  if (entry.sandboxStrength === 'fs') notes.push('sandbox-partial')
+  if (entry.sandboxStrength === 'fs' || entry.sandboxStrength === 'network') notes.push('sandbox-partial')
 
   return {
     design: dim(taskCount >= 8 ? 4 : taskCount >= 5 ? 3 : taskCount >= 3 ? 2 : taskCount >= 1 ? 1 : 0),

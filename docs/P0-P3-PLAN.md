@@ -20,7 +20,7 @@ no quality #1 from prior-only rows.**
 | P0.8 | Formula string and rank namespace | done | `60*prior/100`; `rank` null for unrated; `overall = []` |
 | P0.9 | Site/consumer display | done | site and tab show E2 provisional/unrated, no prior #1; tab 0.2.4 |
 | P0.10 | Pin Pages `--today`; content hash/signature | partial | Pages uses `--check --today 2026-10-18`; `source.inputHash` + signed API snapshot; registry-level signature pending |
-| P0.11 | Schema validation for registry/plugins/tasks | partial | result/pack schemas aligned; invariant script + CI; validator not wired |
+| P0.11 | Schema validation for registry/plugins/tasks | done | result/task schemas aligned and Ajv-validated in CI |
 
 P0 is a **truth fix**, not a measurement. It does not create measured evidence.
 
@@ -29,10 +29,10 @@ P0 is a **truth fix**, not a measurement. It does not create measured evidence.
 | # | Task | Status | Depends on |
 |---|---|---|---|
 | P1.1 | 3–5 briefs × ≥8 executable tasks with fixtures/checks | done (pilot) | 24 offline tasks, 3 briefs × 8; `reviewed:false` caps E2 |
-| P1.2 | Sandboxed runner (no host FS/env, egress allowlist, cgroups) | partial | `bwrap-fs` user/PID/FS isolation works; network shared, no egress allowlist/seccomp yet |
+| P1.2 | Sandboxed runner (no host FS/env, egress allowlist, cgroups) | partial | `bwrap-net` FS/user/PID + private netns + DeepSeek-only Unix-socket egress proxy + prlimit; seccomp/cgroup pending |
 | P1.3 | Signed results + environment manifest + dedupe | done | `runner-keygen.mjs`, `verify-result.mjs`, `ingest-result.mjs`; tests |
 | P1.4 | Newcombe/paired bootstrap at task level; FDR; holdout | partial | Newcombe + BH/paired bootstrap implemented/tested; not yet wired into promotion; holdout pending |
-| P1.5 | First measured pilot; E2/E3 grades | done (E2 pilot) | 30 signed results inside `bwrap-fs`; 1 E2 provisional null; E3+ still blocked by review, independence and partial sandbox |
+| P1.5 | First measured pilot; E2/E3 grades | done (E2 pilot) | 30 signed results inside `bwrap-net`; 1 E2 provisional null; E3+ still blocked by review, independence and seccomp |
 | P1.6 | `signals.json` + format-1 decorator + reference index | done | `integrations/market/signals.json` + API; not a third-party market claim |
 | P1.7 | `bench_recommend` explicit-surface tool (no session read) | done (pure) | `scripts/recommend.mjs`; Host tool wiring is P2 |
 | P1.8 | Publish `dsh-community-bench` 0.2.3 | done | npm `latest`, with provenance and family-style README |
@@ -86,5 +86,5 @@ is ready; the measured result is still blocked by the key/sandbox gate.
 | npm | `dsh-community-bench@0.2.4` live, `latest`, with provenance |
 | Gitee | **not mirrored** for `dsh-attention-index` / `dsh-community-bench`; badges removed. `dsh-score`/`dsh-kit` mirrors exist. |
 | GitCode | `dsh-attention-index` at `82911a2` (slightly behind); overall sync fails on 4 unrelated divergent mirrors |
-| P1–P3 artifacts | 24 pilot tasks, 30 signed bwrap-fs results, **1 E2 / 41 E0 / 0 positive**, API/signals, matcher/recommender, audit gate, conformance |
+| P1–P3 artifacts | 24 pilot tasks, 30 signed bwrap-net results, **1 E2 / 41 E0 / 0 positive**, API/signals, matcher/recommender, audit gate, conformance |
 | Repo rename `dsh-score-index` | **not executed**; migration runbook ready, URLs intentionally kept stable until the redirect/mirror/patch release is coordinated |

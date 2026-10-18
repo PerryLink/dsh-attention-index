@@ -51,6 +51,9 @@ export async function validateResult(result, options) {
   } else if (sandbox === 'bwrap-fs') {
     if (result.environmentBound !== true || strength !== 'fs') return { ok: false, reason: 'sandbox-inconsistent' }
     if (result.environment?.sandbox !== 'bwrap-fs' || result.environment?.sandboxStrength !== 'fs') return { ok: false, reason: 'sandbox-inconsistent' }
+  } else if (sandbox === 'bwrap-net') {
+    if (result.environmentBound !== true || strength !== 'network') return { ok: false, reason: 'sandbox-inconsistent' }
+    if (result.environment?.sandbox !== 'bwrap-net' || result.environment?.sandboxStrength !== 'network') return { ok: false, reason: 'sandbox-inconsistent' }
   } else {
     return { ok: false, reason: 'unknown-sandbox' }
   }

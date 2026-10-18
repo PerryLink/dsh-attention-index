@@ -220,13 +220,15 @@
         "sandbox": {
           "enum": [
             "none",
-            "bwrap-fs"
+            "bwrap-fs",
+            "bwrap-net"
           ]
         },
         "sandboxStrength": {
           "enum": [
             "none",
             "fs",
+            "network",
             "full"
           ]
         },
@@ -244,13 +246,15 @@
     "sandbox": {
       "enum": [
         "none",
-        "bwrap-fs"
+        "bwrap-fs",
+        "bwrap-net"
       ]
     },
     "sandboxStrength": {
       "enum": [
         "none",
         "fs",
+        "network",
         "full"
       ]
     }

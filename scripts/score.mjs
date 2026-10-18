@@ -227,7 +227,9 @@ export function aggregateBench(results, tasks, options = {}) {
     const signatureVerified = [...entry.with, ...entry.without].every(item => item.verified === true)
     const environmentBound = [...entry.with, ...entry.without].every(item => item.environmentBound === true)
     const strengths = [...entry.with, ...entry.without].map(item => item.sandboxStrength ?? 'none')
-    const sandboxStrength = strengths.every(value => value === 'full') ? 'full' : strengths.every(value => value === 'fs' || value === 'full') ? 'fs' : 'none'
+    const strengthRank = { none: 0, fs: 1, network: 2, full: 3 }
+    const minStrength = Math.min(...strengths.map(value => strengthRank[value] ?? 0))
+    const sandboxStrength = Object.keys(strengthRank).find(key => strengthRank[key] === minStrength) ?? 'none'
     const row = {
       taskId: entry.taskId,
       surface: task.surface,
@@ -252,7 +254,7 @@ export function aggregateBench(results, tasks, options = {}) {
     aggregate.signatureVerified = aggregate.signatureVerified && signatureVerified
     aggregate.environmentBound = aggregate.environmentBound && environmentBound
     if (sandboxStrength === 'none') aggregate.sandboxStrength = 'none'
-    else if (sandboxStrength === 'fs' && aggregate.sandboxStrength === 'full') aggregate.sandboxStrength = 'fs'
+    else if ((sandboxStrength === 'fs' || sandboxStrength === 'network') && strengthRank[aggregate.sandboxStrength] > strengthRank[sandboxStrength]) aggregate.sandboxStrength = sandboxStrength
     aggregate.tasks.push(row)
     for (const value of entry.with.map(item => item.runner?.id).filter(Boolean)) aggregate.runners.add(value)
     aggregate.runs += row.runs

@@ -6,7 +6,7 @@
       "id": "bench:local-pilot",
       "publicKey": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAmWS/9rS1onU8nm56e68PiRqUFyvWXv7UZJGqVSJ7Q+g=\n-----END PUBLIC KEY-----\n",
       "createdAt": "2026-10-18",
-      "note": "pilot runner; operator-owned plugin; sandbox=bwrap-fs (partial, network shared)"
+      "note": "pilot runner; operator-owned plugin; sandbox=bwrap-net (FS/PID/net allowlist, no seccomp)"
     }
   ]
 }

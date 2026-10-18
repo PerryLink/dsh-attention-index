@@ -48,6 +48,7 @@ for (const [left, right, label] of [
   ['api/v1/registry.json', 'site/api/v1/registry.json', 'api registry'],
   ['api/v1/registry.sig', 'site/api/v1/registry.sig', 'api signature'],
   ['api/v1/registry.sha256', 'site/api/v1/registry.sha256', 'api sha256'],
+  ['api/v1/registry.file.sha256', 'site/api/v1/registry.file.sha256', 'api file sha256'],
   ['api/v1/index.json', 'site/api/v1/index.json', 'api index'],
   ['integrations/market/signals.json', 'site/market/signals.json', 'market signals'],
 ]) {
@@ -57,6 +58,10 @@ for (const [left, right, label] of [
 }
 const pinned = readFileSync(join(ROOT, 'api/v1/registry.sha256'), 'utf8').trim()
 if (pinned !== etag) failures.push(`registry.sha256 mismatch: ${pinned} != ${etag}`)
+const apiBytes = readFileSync(join(ROOT, 'api/v1/registry.json'))
+const fileDigest = `sha256:${createHash('sha256').update(apiBytes).digest('hex')}`
+const pinnedFile = readFileSync(join(ROOT, 'api/v1/registry.file.sha256'), 'utf8').trim()
+if (pinnedFile !== fileDigest) failures.push(`registry.file.sha256 mismatch: ${pinnedFile} != ${fileDigest}`)
 const apiIndex = JSON.parse(readFileSync(join(ROOT, 'api/v1/index.json'), 'utf8'))
 if (apiIndex.etag !== etag) failures.push('api index etag mismatch')
 

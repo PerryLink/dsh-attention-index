@@ -3,7 +3,7 @@
 Status: **pipeline implemented; first E2 pilot run completed.** The pilot task
 pack is `p1-pilot-1`, 24 offline tasks across `memory`, `web`, `dev`
 (3 briefs × 8). The first pilot used 5 memory tasks × 3 runs/arm with
-`dsh-memento` and produced 30 signed results inside a `bwrap-fs` sandbox:
+`dsh-memento` and produced 30 signed results inside a `bwrap-net` sandbox:
 1 E2 provisional, a null result (both arms passed all tasks). E3+ remains
 blocked by task review, operator ownership and the missing egress allowlist.
 Every task is `status: "pilot"` and `reviewed: false`, so any result is capped at
@@ -13,10 +13,11 @@ Every task is `status: "pilot"` and `reviewed: false`, so any result is capped a
 
 1. **Bench-scoped model key.** Do not use a personal key. The runner scrubs the
    ambient environment and only forwards `DEEPSEEK_API_KEY` / `DEEPSEEK_BASE_URL`.
-2. **A partial sandbox.** `--sandbox` uses `bwrap` with a read-only system,
-   throwaway home/workspace and isolated user/PID/UTS/IPC namespaces. The
-   network is shared, so this is **not** full E3 evidence; an egress allowlist
-   is still required.
+2. **A network-isolated sandbox.** `--sandbox` uses `bwrap` with a read-only
+   system, throwaway home/workspace, isolated user/PID/UTS/IPC and a private
+   network namespace. The only egress is a Unix-socket proxy allowing
+   `*.deepseek.com:443`; seccomp/cgroups are still pending, so this is **not**
+   full E3 evidence. Install runs outside the task sandbox without the key.
 3. **A throwaway DSH home.** The runner creates one under `/tmp`; never point
    `DSH_HOME` at the user's real `~/.dsh`.
 4. **A runner key.** Generate it outside the repo:
@@ -26,8 +27,8 @@ Every task is `status: "pilot"` and `reviewed: false`, so any result is capped a
    # copy the printed public entry into data/runners.json
    ```
 
-5. **A candidate plugin pinned by version.** The `with` arm installs it only in
-   the throwaway profile.
+5. **A candidate plugin pinned by version.** The `with` arm installs it outside
+   the task sandbox, without the model key, into the throwaway profile.
 
 ## Dry-run first
 
@@ -74,7 +75,7 @@ It never repairs or fills a result.
 
 - 24 tasks × 2 arms × 5 runs = 240 model calls per plugin at the minimum; budget
   accordingly. Start with one task and `--repeat 2` to validate plumbing.
-- The sandbox is required because a plugin is arbitrary code. Without `bwrap`,
+- The sandbox is required because a plugin is arbitrary code. Without `bwrap` and the egress proxy,
   stop; do not substitute `--allow-commands` on the host.
 - The runner does not publish tokens, session text or raw file contents; it
   publishes hashes, outcomes, checks and metrics.

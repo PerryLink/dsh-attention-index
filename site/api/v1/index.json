@@ -5,6 +5,7 @@
   "registry": "registry.json",
   "sha256": "registry.sha256",
   "signature": "registry.sig",
-  "etag": "sha256:262b91f91c7c84e7a08530fd2cbb9b69909916b209a9a4293662e35da51c9e16",
+  "fileSha256": "registry.file.sha256",
+  "etag": "sha256:83e80e82906bd88c12e8ac1981d94af60b7d70efe322b398d0e9dc4624d951d4",
   "note": "Static, cacheable snapshot. registry.sha256 is the canonical-object etag; registry.sig.sha256 is the file digest."
 }

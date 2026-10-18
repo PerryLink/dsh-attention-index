@@ -62,7 +62,7 @@ At v0.1 the answer is deliberately uncomfortable: **there is no quality #1**.
 The first pilot is `dsh-memento@0.5.27` on five memory tasks × three runs/arm.
 Both arms passed every task: it is a **null result**, capped at **E2** because
 the task pack is unreviewed, the runner is operator-owned, and the sandbox is
-filesystem-only. `rank` is `null`; `top3` is empty.
+network-isolated but not seccomp-hardened. `rank` is `null`; `top3` is empty.
 
 ## What a grade means
 
@@ -133,7 +133,7 @@ task pack (pilot, unreviewed)
 
 ## Not done yet
 
-- A **full** sandbox (egress allowlist + seccomp); current `bwrap-fs` is partial.
+- A **seccomp/cgroup-hardened** sandbox; current `bwrap-net` has FS/PID/network isolation and a DeepSeek-only egress proxy, but no seccomp.
 - Task review and an **independent runner** for E3+.
 - FDR/bootstrap are implemented but not wired; holdouts, version binding and token accounting remain.
 - Signed snapshot history and a third-party market pilot.

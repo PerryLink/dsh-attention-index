@@ -27,7 +27,7 @@
     "surfaces": 15,
     "benchResults": 30,
     "contributions": 0,
-    "inputHash": "sha256:af3dbbc751c48711eddf39edb76ed230f514ea4f9164b53c807877486f9eff20"
+    "inputHash": "sha256:fc750cd98131e8acc91d94fe60f3494cb86829f5e22d52ab9112f12f3a41f169"
   },
   "stats": {
     "plugins": 42,
@@ -134,7 +134,7 @@
           },
           "taskReviewed": false,
           "environmentBound": true,
-          "sandboxStrength": "fs",
+          "sandboxStrength": "network",
           "discovery": {
             "score": 32.6,
             "scale": 100,
@@ -167,7 +167,7 @@
               "runs": 6,
               "signatureVerified": true,
               "environmentBound": true,
-              "sandboxStrength": "fs"
+              "sandboxStrength": "network"
             },
             {
               "taskId": "p1-memory-cutoff",
@@ -186,7 +186,7 @@
               "runs": 6,
               "signatureVerified": true,
               "environmentBound": true,
-              "sandboxStrength": "fs"
+              "sandboxStrength": "network"
             },
             {
               "taskId": "p1-memory-deploy",
@@ -205,7 +205,7 @@
               "runs": 6,
               "signatureVerified": true,
               "environmentBound": true,
-              "sandboxStrength": "fs"
+              "sandboxStrength": "network"
             },
             {
               "taskId": "p1-memory-freeze",
@@ -224,7 +224,7 @@
               "runs": 6,
               "signatureVerified": true,
               "environmentBound": true,
-              "sandboxStrength": "fs"
+              "sandboxStrength": "network"
             },
             {
               "taskId": "p1-memory-owner",
@@ -243,7 +243,7 @@
               "runs": 6,
               "signatureVerified": true,
               "environmentBound": true,
-              "sandboxStrength": "fs"
+              "sandboxStrength": "network"
             }
           ],
           "evidence": {

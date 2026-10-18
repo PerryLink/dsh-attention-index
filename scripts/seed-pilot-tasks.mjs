@@ -341,6 +341,7 @@ const existing = new Map(tasksFile.tasks.map(task => [task.id, task]))
 for (const task of tasks) {
   existing.set(task.id, {
     ...task,
+    keywords: task.keywords ?? [task.surface],
     status: 'pilot',
     reviewed: false,
     model: 'deepseek-flash',

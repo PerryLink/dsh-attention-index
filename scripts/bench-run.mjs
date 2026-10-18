@@ -22,6 +22,7 @@
  */
 
 import { spawn } from 'node:child_process'
+import { decompress } from 'fzstd'
 import { createHash, createPrivateKey, sign } from 'node:crypto'
 import { cp, mkdir, mkdtemp, readdir, readFile, rm, stat, writeFile } from 'node:fs/promises'
 import { existsSync, readFileSync } from 'node:fs'
@@ -179,6 +180,38 @@ async function newestSessionFile(home) {
   return withStats[0].path
 }
 
+/** Read the authoritative turn result from the DSH session log. */
+export async function readSessionResult(home) {
+  const file = await newestSessionFile(home)
+  if (file === undefined) return { text: '', tokens: 0, toolErrors: 0, turnEnded: false, events: [] }
+  const bytes = await readFile(file)
+  const text = file.endsWith('.zstd')
+    ? new TextDecoder().decode(decompress(bytes))
+    : bytes.toString('utf8')
+  const events = []
+  for (const line of text.split('\n')) {
+    const trimmed = line.trim()
+    if (trimmed.length === 0) continue
+    try { events.push(JSON.parse(trimmed)) } catch { /* ignore diagnostics */ }
+  }
+  const assistant = events.filter(event => event.type === 'assistant/message')
+  const withText = assistant
+    .map(event => ({
+      event,
+      text: (event.data?.message?.content ?? [])
+        .filter(block => block?.type === 'text' && typeof block.text === 'string')
+        .map(block => block.text)
+        .join('\n'),
+    }))
+    .filter(item => item.text.trim().length > 0)
+  const finalText = withText.length > 0 ? withText[withText.length - 1].text : ''
+  const tokens = assistant.reduce((sum, event) => sum + (Number(event.data?.usage?.totalTokens) || 0), 0)
+  const toolErrors = events.filter(event => event.type === 'tool/result'
+    && (event.data?.message?.isError === true || event.data?.isError === true || event.data?.status === 'error')).length
+  const turnEnded = events.some(event => event.type === 'turn/end' && event.data?.reason?.kind === 'completed')
+  return { text: finalText, tokens, toolErrors, turnEnded, events }
+}
+
 /** Evaluate one task check against the run. */
 async function evaluateCheck(check, context) {
   const id = check.id ?? check.kind ?? 'check'
@@ -318,8 +351,10 @@ async function main() {
 
     let install = { code: 0, stdout: '', stderr: '' }
     if (arm === 'with') {
-      install = await run(dshCommand, ['plugin', '--profile', profile, 'add', args.spec], {
-        cwd: workspace, env: { DSH_HOME: home, HOME: home, ...sandboxEnv }, timeoutMs: 600000, includeKey: false,
+      // Install runs outside the task sandbox: npm needs the registry, while the
+      // measured task itself stays network-isolated. No model key is forwarded.
+      install = await run(sandbox ? dsh : dshCommand, ['plugin', '--profile', profile, 'add', args.spec], {
+        cwd: workspace, env: { DSH_HOME: home, HOME: home, ...(sandbox ? {} : sandboxEnv) }, timeoutMs: 600000, includeKey: false,
       })
       if (install.code !== 0) {
         console.error(`install failed for ${pluginId}: ${install.code}`)
@@ -337,10 +372,10 @@ async function main() {
       timeoutMs,
     })
     const durationMs = Date.now() - started
-    const parsed = parseHeadlessJson(runResult.stdout)
+    const session = await readSessionResult(home)
     const checks = []
-    for (const check of task.checks ?? []) checks.push(await evaluateCheck(check, { workspace, home, answer: parsed.text, allowCommands, bwrap, nodeRoot }))
-    const pass = runResult.code === 0 && checks.length > 0 && checks.every(check => check.pass)
+    for (const check of task.checks ?? []) checks.push(await evaluateCheck(check, { workspace, home, answer: session.text, allowCommands, bwrap, nodeRoot }))
+    const pass = runResult.code === 0 && session.turnEnded && checks.length > 0 && checks.every(check => check.pass)
     const sessionFile = await newestSessionFile(home)
     const sessionBytes = sessionFile === undefined ? Buffer.alloc(0) : await readFile(sessionFile)
     const sessionHash = `sha256:${sha256(sessionBytes)}`
@@ -354,8 +389,8 @@ async function main() {
       model,
       harness,
       profile,
-      sandbox: sandbox ? 'bwrap-fs' : 'none',
-      sandboxStrength: sandbox ? 'fs' : 'none',
+      sandbox: sandbox ? 'bwrap-net' : 'none',
+      sandboxStrength: sandbox ? 'network' : 'none',
       fixtureHash,
     }
     const result = {
@@ -369,13 +404,13 @@ async function main() {
       startedAt,
       finishedAt: new Date().toISOString(),
       outcome: { pass, checks },
-      metrics: { tokens: parsed.tokens, durationMs, toolErrors: parsed.toolErrors },
+      metrics: { tokens: session.tokens, durationMs, toolErrors: session.toolErrors },
       sessionHash,
       artifacts,
       environment,
       environmentBound: sandbox,
-      sandbox: sandbox ? 'bwrap-fs' : 'none',
-      sandboxStrength: sandbox ? 'fs' : 'none',
+      sandbox: sandbox ? 'bwrap-net' : 'none',
+      sandboxStrength: sandbox ? 'network' : 'none',
       runner: { id: runnerId, ...(typeof args['key-id'] === 'string' ? { keyId: args['key-id'] } : {}) },
     }
     const signature = signResult(result, args['signing-key'])

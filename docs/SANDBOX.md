@@ -1,8 +1,10 @@
 # Sandbox requirements (P1.2)
 
-Status: **partial.** The runner supports a `bwrap-fs` sandbox (filesystem,
-user, PID, UTS and IPC namespaces). The network is shared, so this is not yet
-E3+ evidence; an egress allowlist and seccomp are still required.
+Status: **partial (network-isolated).** The runner now uses `bwrap-net`:
+filesystem, user, PID, UTS and IPC namespaces, a **private network namespace**,
+and a Unix-socket egress proxy that allows HTTPS CONNECT only to
+`*.deepseek.com:443`. `prlimit` caps nproc/nofile/file size. No seccomp/cgroup
+yet, so `sandboxStrength` is `network` and the result stays capped at E2.
 
 ## What the runner does today
 
@@ -11,10 +13,12 @@ E3+ evidence; an egress allowlist and seccomp are still required.
   `DEEPSEEK_API_KEY` and `DEEPSEEK_BASE_URL` are forwarded.
 - Hashes the fixture directory and records the environment manifest.
 - Runs through `scripts/bench-sandbox.sh` when `--sandbox` is set: read-only
-  system, read-only DSH checkout/Node, writable workspace and throwaway home.
+  system, read-only DSH checkout/Node, writable workspace and throwaway home;
+  no host network route except the Unix-socket proxy.
 
-That blocks host-home reads and PID/UTS/IPC interference, but **the child can
-still reach the network**. A malicious plugin could exfiltrate a key; that is why
+That blocks host-home reads, PID/UTS/IPC interference and arbitrary egress. The
+child can still read its own model key (required to call the model) and talk only
+to the allowlisted DeepSeek host; seccomp/cgroup hardening is still missing, so
 the result stays at E2.
 
 ## Required sandbox for E3+
@@ -34,10 +38,10 @@ the result stays at E2.
 
 ## Current blocker
 
-This machine has a local `bwrap` 0.9.0 and `unshare`; the filesystem sandbox
-works. The missing piece is the egress proxy/allowlist (and seccomp/resource
-limits) that would let the runner claim `sandboxStrength: "full"`. Until then no
-E3+ result may be published.
+This machine has a local `bwrap` 0.9.0 and `unshare`; the filesystem and network
+sandbox works. The missing piece is a seccomp profile and cgroup limits that
+would let the runner claim `sandboxStrength: "full"`. Until then no E3+ result
+may be published.
 
 ## What not to do
 
