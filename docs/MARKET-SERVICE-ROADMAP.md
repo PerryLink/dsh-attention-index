@@ -629,21 +629,39 @@ Read-only probes against the 42-plugin dataset (`data/plugins.json`,
 
 | Finding | Evidence | Consequence |
 |---|---|---|
-| **Documentation dimension is dead** | 42/42 rows have no `docs` field → default 50; removing the 15% weight changes Spearman only 0.998 and top-3 by 1/41 | 15% of the formula is constant; docs quality is not measured. |
-| **Verification is operator-biased** | 26 `none` / 15 `doctor` / 1 `certified`; all 26 non-operator plugins score 0; removing the 25% weight changes Spearman 0.875 | A quarter of the score is an operator bonus, not a quality signal. |
+| **Documentation is dead and self-assertable** | 42/42 rows have no `docs` → default 50; removing the 15% weight changes rho 1.000 and 0 ranks. But a self-asserted `docs:"full"` is worth +6 prior (=20 adoption points ≈ 27× npm); applying it to OpenViking moves #7 (63.9) → #1 (69.9); adding certification → 94.9 prior / 56.9 public | 15% of the formula is constant, yet a free-text field can buy a `#1`. |
+| **Verification is an operator flag** | 16/16 PerryLink rows have `doctor`/`certified`; 26/26 external rows are `none` (Fisher p=6e-12); removing V changes 35/42 ranks and the `#1` (mcp-panel → better-sidebar); no PerryLink plugin remains in the top 8 | A quarter of the score is an operator bonus, not a quality signal. |
+| **Maintenance is an observation-date artifact** | M=100 exactly for the 16 operator rows observed 2026-10-18; the 26 external rows observed 2026-10-06 get 88; anchoring to each row's `observedAt` changes 25/42 ranks and leaves 7/8 of the new top rows external | Maintenance measures when data was observed, not repo activity. |
 | **Missing data is treated as zero** | installs missing 13/42, npm7d 16/42, stars 25/42, npm name 23/42 | Plugins are penalized for unobserved data; adoption is not comparable. |
-| **Scores are compressed** | prior 30–69; public 18–41.4; 32 distinct values; ties at 38.3×3, 28.7×3, 28.6×3 | Differences are small; decimals imply false precision; top-3 can be a tie. |
-| **Ties are settled by plugin id** | memory #1 is 38.3 for the top two rows with identical prior/confidence; `vectorize-io/hindsight` wins over `volcengine/openviking` by id | A `#1` can be decided by alphabetical order, not evidence. |
-| **Weights are not the main issue** | Spearman: equal 0.995, maintenance-heavy 0.965, adoption-heavy 0.941, verification-heavy 0.712, no verification 0.875, no docs 0.998; top-3 churn 0–1/41 | Reweighting will not fix the construct; the data and measurement will. |
-| **Measured composite is semantically wrong** | null (bench 50, prior 64, coverage 1) = **56.7**; prior-only 64 = 38.4; prior-only 80 = 48.0; negative measured (bench 0) = 29.2 but tier-first still ranks it above prior | A null measured plugin outranks a high prior; a negative measured plugin outranks all prior; prior is double-counted. |
-| **Scale break** | prior 0–60 vs measured 0–100 in the same `score` field; `overall` ranks across surfaces | Markets/users cannot compare; cross-surface rank is meaningless. |
+| **Scores are compressed / tied** | prior 30–69; public 18–41.4; 32 distinct values; ties at 38.3×3, 28.7×3, 28.6×3 | Decimals imply false precision; memory `#1` is 38.3 and settled by plugin id. |
+| **Weights are not the main issue** | Spearman 0.94–0.995 across plausible reweights; top-3 churn 0–1/41 | Reweighting will not fix the construct; the data and measurement will. |
+| **Measured-first contradicts rank and score** | A plugin with 0/3 with vs 3/3 without scores **24.6**, yet becomes `#1`, featured and overall `#1` above prior-only 38.3; `top3` then has length 1. A null 3/3 vs 3/3 scores **52.1** | A losing plugin becomes `#1`; rank and score disagree; a single measured row collapses top-3. |
+| **Composite double-counts / misweights** | null (bench 50, prior 64, coverage 1) = **56.7**; prior-only 64 = 38.4; prior-only 80 = 48.0; negative measured (bench 0) = 29.2 but tier-first still ranks it above prior; ~35% of the ordering is non-task | A null measured plugin outranks a high prior; a negative measured outranks all prior; task-conditioning is a minority of the weight. |
+| **Statistics are unsafe at n=3** | 3/3 vs 0/3 → 100; exact one-sided size at n=3 is 10.9%, not 5%; nominal 95% LCB coverage <90% in 22/45 grid cells (worst 46.9%); power for +20pp is 22.7%; with 42 nulls P(at least one false positive)=99.2%, P(at least one 100)=48.4% | The measured tier would publish noise, not evidence. |
+| **Scores drift with the wall clock** | Same inputs, `--today` +14d: 29/42 ranks change; +31d: 22/42 change, mean prior 54.05→47.5, max 69→60; CI pins 2026-10-18 while Pages uses today; no history | Scores move without new evidence; no audit trail. |
+| **Attention is near-universal and partly empty** | 14/15 surfaces have ≤3 plugins → `top3` is all rows; 41/42 plugins appear in some `top3`; `newAndPromising` empty (best 47.8, 2.2 below 50; plugin-guide misses by 2 stars); `mostNominated`/`mostReplicated` empty; `overall` #1 is from a 2-plugin surface | "Top 3/featured" is not selective; cross-surface `overall` is meaningless. |
 | **Confidence is not a CI** | 0.82 for 1 task / 3 runs / 1 runner | Looks precise when evidence is minimal. |
 
 ### 14.2 Verdict
 
 - The prior is a **discovery prior**, not a quality score. It mixes popularity,
   maintenance, verification and documentation; it is not task-conditioned; it
-  penalizes missing data; verification is operator-heavy.
+  penalizes missing data; verification is effectively an operator flag (16/16 vs
+  0/26, Fisher p=6e-12), maintenance is an observation-date artifact, and docs is
+  both unimplemented and self-assertable.
+- **Effective variance:** adoption explains **87.2%** of prior variance,
+  maintenance 1.6%, verification **−1.1%**, documentation 0%. OLS
+  `prior ~ adoption` gives R²=0.479; adding an `is PerryLink` dummy gives
+  **R²=0.774** with **+14.67 prior points** at equal adoption. The nominal
+  30/30/25/15 is effectively *adoption + operator indicator + snapshot date*.
+- **Measured calibration:** a null on a deterministic task scores **54.2**, only
+  5.2 below a true +40pp effect at n=30 (59.4); a perfect 6-run result (**81.7**)
+  beats a true +40pp effect with 200 runs (62.0) by 19.7 points; a harmful plugin
+  at n=30 still scores **37.4**, above its own prior-only 33.4. The composite is
+  not calibrated.
+- **All 42 rows are E0.** There is no basis to say `dsh-mcp-panel` is better than
+  `hindsight`: different channels, different evidence, no outcome data. The
+  current rank is a policy artifact.
 - The weights are largely arbitrary, but **not the main problem**: the ranking is
   robust to plausible reweighting. The construct and the data are the problem.
 - The measured composite is not defensible: it double-counts prior, rewards
@@ -908,7 +926,8 @@ install-count ranking, no operator self-promotion.
 **COI rule:** every row carries `operatorOwned: true|false`; an operator-owned
 plugin is excluded from the primary slot, and a surface is not recommendable
 until external share ≥60% and operator share ≤25%. Current data: 16/42
-operator-owned (38%), operator-owned `#1` in 5/15 surfaces, 15/45 top-3 slots.
+operator-owned (38%), operator-owned `#1` in 5/15 surfaces, 15/41 top-3 slots
+(~37%).
 
 **Ranking rules (hard):**
 
@@ -1074,6 +1093,34 @@ end-user plugin.
 | Recommendation content uploaded | Tool results containing the route/score join the session log that `session-log-deepseek` uploads. Write no recommendation content to the log; keep `/bench` output local; scope the claim. |
 | Credits buy attention | Remove `boost`/sponsor/credit balances from the recommendation path; credits are reputation only. |
 
+### 15.11 P0 UI contract (0 measured)
+
+- **Existing Settings tab first; no new Plugins tab yet.** Extend the current
+  Community Bench tab with evidence status and prior-only candidates. A
+  Plugins-page Bench tab is P1, when there are measured recommendations to show.
+- **`/bench [surface]`**: a host command (text), an explicit surface or a
+  15-surface chooser; never guesses; no session inference.
+- **Drop or demote the prior-only `#` rank.** The tab renders `#1/#2/#3` on cards;
+  the `Top 3` string is defined but unused. P0: no `#` rank for prior-only rows
+  (or an explained "attention rank" only in details), and a `Candidates` header.
+- **Evidence-status banner**: `0 of 42 plugins measured · 15 surfaces · 15 draft
+  tasks`; "We don't recommend a plugin without outcome evidence."
+- **CTAs**: Request a run / Nominate / Contribute / How it works; no install.
+- **State copy**:
+  - no measured: "No measured results yet."
+  - no task: "No bench task for this surface yet."
+  - insufficient: "Evidence is insufficient."
+  - stale: "Evidence is stale (over 30 days)."
+  - unavailable: "Bench unavailable; no recommendation."
+  - operator-owned only: "No independent candidate yet."
+  - already covered: "You already have a plugin for this surface."
+  - ambiguous: "Which capability?" chooser.
+- **Disclosure**: "Public Community Bench data. Same scores for everyone; no
+  per-user score. No account, no telemetry, no session upload. Matching runs on
+  this device only when you ask."
+- **Forbidden in P0**: `Recommended`, `Best`, `#1`, `Top pick`; an install button;
+  any paid/sponsored slot.
+
 ## 16. Decisions to make
 
 The research leaves six choices. Recommended answers:
@@ -1103,6 +1150,28 @@ The research leaves six choices. Recommended answers:
 6. **No fourth repo.** Extend `dsh-community-bench` with a host half; extract a
    `dsh-bench-match` library only if a headless or second consumer appears. One
    plugin, one snapshot, one privacy review.
+7. **Placement.** Extend the existing Settings Community Bench tab in P0; add
+   `/bench` as a host command in P0; add a Plugins-page Bench tab in P1 (when
+   there are measured recommendations); composer dock only in P2, opt-in. Do not
+   add a new tab with nothing to show.
+8. **COI.** Publish `operatorOwned`; exclude operator-owned plugins from the
+   primary slot; a surface is recommendable only with external share ≥60% and
+   operator share ≤25%.
+9. **Deep link.** No core `openMarketEntry` in P0/P1; the Bench tab is the
+   destination. A generic `pluginNavigation.openMarketEntry` is a later optional
+   core addition, not a dependency.
+10. **Telemetry.** No install CTA until the Desktop analytics decision is made;
+    if a CTA ships later, disclose or suppress the inherited
+    `plugin_install_click`/`install_plugin_result`. The recommender adds zero
+    events.
+11. **Minimum evidence.** ≥8 tasks/surface, ≥3 runs/arm, ≥2 independent runners,
+    coverage ≥0.5, evidence completeness ≥0.6, exact version match, freshness
+    ≤30d. If any fails, `insufficient_evidence` with a reason code.
+12. **Prior-only candidates.** Show collapsed, unnumbered, never as a
+    recommendation; abstain on an operator-dominated surface. No install CTA.
+13. **Surface taxonomy.** `dsh-attention-index` owns `data/surfaces.json` +
+    `matcherVersion`; new surfaces go through an RFC and a version bump; no
+    author-supplied routing terms.
 
 Two consequences:
 
