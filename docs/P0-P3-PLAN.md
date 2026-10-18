@@ -18,7 +18,7 @@ no quality #1 from prior-only rows.**
 | P0.6 | Operator flag + independent verification | done | `operatorOwned` published; verification counts only with `certifiedBy`/`verificationSource` |
 | P0.7 | Badge/artifact truth | done | unrated badge; `--check` fails on extra badge files; prior top badges deleted |
 | P0.8 | Formula string and rank namespace | done | `60*prior/100`; `rank` null for unrated; `overall = []` |
-| P0.9 | Site/consumer display | done | site and tab show GOE/unrated, no prior #1; tab 0.2.2 rebuilt |
+| P0.9 | Site/consumer display | done | site and tab show GOE/unrated, no prior #1; tab 0.2.3 rebuilt |
 | P0.10 | Pin Pages `--today`; content hash/signature | partial | Pages uses `--check --today 2026-10-18`; `source.inputHash` added; signature pending |
 | P0.11 | Schema validation for registry/plugins/tasks | partial | invariant script + CI added; JSON Schema pending |
 
@@ -35,7 +35,7 @@ P0 is a **truth fix**, not a measurement. It does not create measured evidence.
 | P1.5 | First measured pilot; E2/E3 grades | done (E2 pilot) | 30 signed results inside `bwrap-fs`; 1 E2 provisional null; E3+ still blocked by review, independence and partial sandbox |
 | P1.6 | `signals.json` + format-1 decorator + reference index | done | `integrations/market/signals.json` + API; not a third-party market claim |
 | P1.7 | `bench_recommend` explicit-surface tool (no session read) | done (pure) | `scripts/recommend.mjs`; Host tool wiring is P2 |
-| P1.8 | Publish `dsh-community-bench` 0.2.2 | done | npm `latest`, with provenance and family-style README |
+| P1.8 | Publish `dsh-community-bench` 0.2.3 | done | npm `latest`, with provenance and family-style README |
 
 **Exit criteria:** ≥3 briefs with ≥5 tasks/arm, ≥2 independent runners for one
 surface, all results signed; no fabricated data; E2/E3 visible with CI. The code
@@ -46,7 +46,7 @@ is ready; the measured result is still blocked by the key/sandbox gate.
 | # | Task | Status | Depends on |
 |---|---|---|---|
 | P2.1 | Identity graph (npm/repo/bundle/aliases, `unrated`) | done (module) | `scripts/identity.mjs` + tests; alias data can grow |
-| P2.2 | Versioned API + signed snapshots + history | partial | `api/v1` + etag/sha; history and signatures pending |
+| P2.2 | Versioned API + signed snapshots + history | partial | `api/v1` + etag/sha + Ed25519 `registry.sig`; history/rotation pending |
 | P2.3 | Ingestion + attestation + moderation | done | signature, fixture hash, duplicate checks; moderation is manual |
 | P2.4 | Market decorator/sidecar pilot (dsh-catalog/1024Store/dshfind) | partial | signals sidecar ready; no partner installed |
 | P2.5 | Local session→brief matcher + opt-in chip | done (module) | `scripts/match-brief.mjs` + tests; no session storage read |
@@ -82,8 +82,8 @@ is ready; the measured result is still blocked by the key/sandbox gate.
 | GitHub `dsh-attention-index` | pushed `d8628b5`; P0 registry + P1–P3 pilot/API/signals live; CI and Pages green |
 | GitHub Pages | live at <https://perrylink.github.io/dsh-attention-index/>; title `dsh-score`; 42 E0 unrated; prior top badges return 404 |
 | GitHub `perrylink` / `dsh-kit` / `dsh-score` | pushed brand/docs commits |
-| GitHub release | `dsh-community-bench v0.2.2` published |
-| npm | `dsh-community-bench@0.2.2` live, `latest`, with provenance |
+| GitHub release | `dsh-community-bench v0.2.3` published |
+| npm | `dsh-community-bench@0.2.3` live, `latest`, with provenance |
 | Gitee / GitCode | fresh mirror sync triggered for `d8628b5`; previous GitCode run failed on 4 unrelated divergent mirrors (`dsh-claude-move`, `dsh-memento`, `dsh-plugin-kit`, `dsh-plugin-portal`) |
 | P1–P3 artifacts | 24 pilot tasks, signed ingest, `api/v1`, market signals, matcher/recommender, audit gate, conformance suite; **0 measured** |
 | Repo rename `dsh-score-index` | **not executed**; migration runbook ready, URLs intentionally kept stable until the redirect/mirror/patch release is coordinated |
