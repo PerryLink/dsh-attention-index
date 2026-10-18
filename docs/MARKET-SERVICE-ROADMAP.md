@@ -64,6 +64,11 @@ Two design decisions in the official surfaces matter more than any feature:
   displayed by a market, but it remains a third-party claim. This is exactly the
   slot a neutral bench should occupy.
 
+Bottom line: the official **mechanism** exists; an official **market/index** does
+not. Web Discover is experimental and has no default source; the Desktop
+Community Market is a third-party app with its own neutral contract. Plan for a
+multi-market world, not for one central ranking.
+
 ### 2.2 In this project
 
 | Asset | State |
@@ -108,6 +113,21 @@ The **decorator is the product**; the reference index is the demo. A market keep
 its own coverage, identity and curation; the decorator adds signals to that
 market's existing index without taking it over. This is also what keeps the
 project neutral: we supply a layer, not a competing catalog.
+
+There are **two channels, not one**:
+
+- **Format-1 reference index** for Web Discover: it natively carries
+  `categories`, `labels` and arbitrary `sortKeys`, so a user who adds it sees an
+  evidence-ordered list and can filter by surface. This is the only official
+  surface that can carry a ranking today.
+- **Sidecar feed / badge** for markets whose contract cannot carry a custom sort:
+  Desktop Community Market v1 (only `relevance`, `updated`, `name`, `downloads`;
+  unknown fields rejected), 1024Store and dshfind (provider-owned APIs). These
+  markets can show a badge/label or a "measured only" catalog source, but they
+  cannot accept an injected ranking. Do not pretend otherwise.
+
+The in-app tab and a CLI install guard are **reference consumers**; they
+demonstrate the contract but are not the distribution.
 
 ---
 
@@ -259,27 +279,58 @@ Two gaps deserve emphasis:
   consume is a hobby. A decorator and a reference index are small, high-leverage
   work.
 
-### 5.1 Correctness findings (fix before any pilot)
+### 5.1 Stop-ship findings (fix before any pilot)
 
-A code audit found that the "measured outranks prior" claim has never actually
-been exercised, and that the evidence path has correctness bugs. These are not
-feature gaps; they make the published contract untrue.
+A code/security audit found that the current measured tier is not merely
+unexercised; it is **forgeable**, the runner has **no execution boundary**, and
+the public artifacts already contain **neutrality and injection risks**. Until
+these are fixed, the only honest state is `0 measured`.
 
 | Finding | Evidence | Consequence |
 |---|---|---|
-| **No runnable production task** | All 15 tasks are `status: draft`; all 30 checks lack `kind`; `bench-run` refuses drafts (`scripts/bench-run.mjs:181-184`, `data/tasks.json`) | Only the trivial smoke fixture can run. The measured tier is unreachable by construction. |
-| **Result identity is not implemented** | `aggregateBench` groups by `plugin.id + taskId` only (`scripts/score.mjs:155`), ignoring version/model/harness, contrary to `SCORING.md:66` | Results from different models merge; a +1.0 and a −1.0 lift become one 21.7 score. The registry drops model/harness/version from `benchTasks`. |
-| **Evidence is unverified** | Signature is optional at generation (`scripts/bench-run.mjs:283`) but required by the result schema; aggregation checks neither; `runner.id` is free text; contribution `verification` is self-declared | Fabricated or unsigned results can enter `measured`; `mostReplicated` is forgeable. |
-| **Primary payload has no schema** | No `registry.schema.json`, `plugins.schema.json` or `tasks.schema.json`; CI only calls `JSON.parse` (`ci.yml:25-29`); bench-pack and bench-result schemas disagree | Schema drift is invisible; a malformed registry can publish. |
-| **Catalog join is fragile** | 30/42 ids are lowercased while GitHub `fullName` preserves case; `fullNameOf` is case-sensitive and host-blind (`scripts/export-recommend.mjs:18-26`); 23/42 have no npm name; no alias map; no `unrated` state | A 97-package market would show ~55% blanks and can collide GitHub/Gitee paths. |
+| **Measured is forgeable** | `aggregateBench` keys only `plugin.id + taskId`; no signature check, no dedupe. Six hand-written JSON files (same run repeated 3× per arm, 3/3 pass vs 0/3 fail) produce `benchScore: 100`, `tier: measured`, and a score above 60. | A fabricated result outranks every honest prior-only plugin. This violates the project's core promise. |
+| **No execution boundary** | `bench-run` forwards `process.env`, runs plugin code in the DSH host process, has no network/CPU/memory limits, does not kill descendants, and `--allow-commands` runs host `/bin/sh` from pack data. DSH plugins are host Node modules; DSH's own `SAFETY.md` says sandboxing is not a guarantee. | A malicious plugin can read `~/.ssh`, exfiltrate the model key, or persist after the run. No measured result can be trusted or reproduced. |
+| **Statistics manufacture winners** | n=3/arm has 0% power; the Wald LCB collapses at p=1, so 3/3 vs 0/3 → 100; 3/3 vs 3/3 → 50 (not "no effect"); a null plugin has P(score≥50)=14.1%, P(=100)=1.56%; with 42 null plugins, P(at least one 100)=48%. No multiplicity control. | The leaderboard is a noise generator, not evidence. |
+| **Result identity is not implemented** | `aggregateBench` groups by `plugin.id + taskId` only, ignoring version/model/harness; the registry drops the tuple; a mixed-model probe (+1.0 and −1.0) becomes 21.7. | A score cannot be attributed to a version or environment. |
+| **Evidence is unverified** | Signature is optional at generation but required by the schema; aggregation checks neither; `runner.id` is free text; contribution `verification` is self-declared. | Fabricated/unsigned results and fake `replicated` counts enter the registry. |
+| **Consumer/site XSS** | The plugin fetches an unsigned, mutable `raw.githubusercontent.com/.../main/...` registry on mount with no schema/size/URL checks, then renders `href: row.repo`; React 18 warns but does not block `javascript:`. The site has a stored-XSS path via receipt `surface` and unsanitized repo hrefs. | A compromised repo/account can execute script in the DSH Web GUI origin. Fix before accepting receipts or publishing live scores. |
+| **Neutrality is already broken** | 16/42 plugins are operator-owned (38%); 6/15 featured slots are operator-owned; 4 of the top 5 overall are operator-owned; the only `certified` entry is the operator's own plugin with no certifier; 20/42 rows have `npm7d` while `npm` is null; all 26 non-operator plugins score 0 on the 25%-weighted verification dimension. | A neutral market or official reviewer will read this as a family benchmark, not a reference layer. |
+| **Primary payload has no schema** | No `registry`/`plugins`/`tasks` schema; CI only calls `JSON.parse`; bench-pack and bench-result schemas disagree; `task.weight` is used but forbidden; `check.kind` is not required. | Schema drift is invisible; a malformed registry can publish. |
+| **Scores drift without new evidence** | Same inputs, `--today` +31 days: hindsight 38.3→35.1, memento 29.3→23.9; no history file. | No audit trail; a market cannot explain a change. |
+| **Catalog join is fragile** | 30/42 ids are lowercased vs GitHub `fullName` case; 23/42 have no npm name; the join is case/host-blind; no alias map; no `unrated` state. | A 97-package market shows ~55% blanks and can collide GitHub/Gitee paths. |
 
-The fix order is therefore: **executable tasks → identity/validation → signing →
-schemas → join aliases**, before adding surfaces or UI. A pilot that publishes a
-wrongly merged score is worse than no pilot.
+The fix order is: **freeze measured → executable tasks → identity/attestation →
+sandbox → schema/CI → data audit/COI → consumer security → history/join**.
+Publishing a "measured" score before that would violate the project's own
+no-fabricated-data rule and permanently damage credibility with every market.
 
 ---
 
 ## 6. Roadmap
+
+### P0 gate — freeze and truth (week 0)
+
+Before building anything:
+
+- **Freeze `measured`.** Keep `0 measured`; label every prior row `provisional`.
+- **Audit the data.** Remove or substantiate `certified`; drop `npm7d`/installs
+  where the source is missing; label operator-owned rows; publish a COI register.
+- **Neutrality reset.** Verification is 0 unless ≥2 independent certifiers; seed
+  at least 60% external plugins from 1024Store / dsh-market / dshfind / awesome,
+  **not** from `dsh-catalog` or `dsh-kit` (both are family artifacts); PerryLink
+  share ≤25%; the first measured result comes from an external runner. A family
+  benchmark cannot become a market reference.
+- **Fix the consumer/site XSS.** https-only repo allowlist, URL-scheme validation,
+  escaped receipt fields, CSP; never render an arbitrary `href`.
+- **Sign and validate the registry.** Verify in the consumer; add schema, size and
+  URL checks; pin a last-known-good snapshot.
+- **Add a China-reachable mirror/CDN** for `registry.json` and the index;
+  `raw.githubusercontent.com` is unreliable for much of the audience.
+- **Publish "what the score does not mean"** and link it from every surface.
+
+Acceptance: no `measured` row; no self-certified badge; no unverifiable adoption
+input in the score; XSS tests pass; a tampered/oversized/invalid registry is
+rejected; the tab works from the mirror.
 
 ### P0 — "one market can use it" (4–6 weeks)
 
@@ -382,6 +433,11 @@ market.
 | Data license | CC BY 4.0 for data; Apache-2.0 for code; trademark policy |
 | Funding | Compute sponsors and grants; disclosed; no influence on scores; optional paid audits with public results |
 
+**Cost reality (year 1):** task authoring $18k–54k; runner/review operations
+$20k; compute $0.25k–2.5k; infrastructure $1k–3k; audit/legal $5k–10k; total
+roughly **$45k–90k**. Compute is not the bottleneck; credible evaluation labor
+is. Fund task authoring and runner independence, not GPUs.
+
 ### 8.3 Liability posture
 
 - The score is an **opinion based on published evidence**, not a certification of
@@ -397,27 +453,33 @@ market.
 Do **not** ask to be the official ranking, the default source, or an exclusive
 provider. The official design explicitly avoids defaults and endorsements.
 
-**Offer:**
+**Offer — four artifacts:**
 
-1. An open signals specification and JSON Schemas.
-2. A reference implementation (feed, decorator, conformance suite).
-3. Public, reproducible evidence and a methodology paper.
-4. An audit/verification process the official team can cite.
-5. A pilot that displays the signal **with attribution and a "third-party claim"
-   label**.
+1. A short **"DSH Plugin Evidence Standard v1"**: tiers, schemas, reproducibility,
+   dispute process, neutrality covenant. Not a ranking proposal.
+2. A **data package**: 3 surfaces × 5 plugins, raw logs, signed results,
+   reproduction commands, including one null or negative result.
+3. A **reference implementation**: this repo, the in-app tab, the badge endpoint,
+   a standard catalog source, and an install guard.
+4. An **independent audit**: a statistician/methodologist reviews the design and
+   the first results; the report is public.
 
-**Ask:**
+**Ask — five items:**
 
-1. An optional `signals`/`quality` field in the market contract (additive,
-   backward compatible).
-2. A `quality` sort value, if the contract can carry it.
-3. A link to the methodology from the entry page.
-4. A review of the conformance tests.
+1. A docs link as "community measurement", not "official ranking".
+2. Access to release candidates for compatibility testing.
+3. A non-voting liaison.
+4. Optional consumption of `signals.json` / `registry.json` in any official
+   directory.
+5. Endorse the vocabulary (`prior` / `measured` / `replicated`), not the scores.
+
+**No** exclusivity, **no** "official" label, **no** veto.
 
 **Fallback if the official market builds in-house:** become the independent
 benchmark and cross-market identity/signal utility that the official market can
 cite, the way MLPerf results are cited without the vendor owning the benchmark.
-That is still a valuable, defensible role.
+That is still a valuable, defensible role. Trigger the fallback if the official
+team announces its own scoring/ranking or declines two meetings; stop chasing.
 
 ---
 
@@ -426,6 +488,9 @@ That is still a valuable, defensible role.
 | Metric | 6 months | 12 months |
 |---|---|---|
 | Measured coverage, top 5 surfaces | ≥30% | ≥60% |
+| External (non-operator) plugin share | ≥60% | ≥75% |
+| Operator-owned share of ranked rows | ≤25% | ≤15% |
+| Measured rows from independent runners | 100% | 100% |
 | Independent runners per measured surface | ≥3 | ≥5 |
 | Market integrations (embed or cite) | ≥2 | ≥4 |
 | Measured rows refreshed within 30 days | 100% | 100% |
@@ -442,18 +507,25 @@ promotion, not evidence.
 
 ## 11. Immediate next two weeks
 
-1. **Fix evidence correctness first**: make 3 tasks executable (checks + fixtures);
+1. **Freeze and reset**: keep `0 measured`; label every prior row `provisional`;
+   remove or substantiate `certified`; drop unverifiable `npm7d`/installs; label
+   operator-owned rows; seed at least 60% external plugins; publish the COI
+   register; fix the consumer/site XSS; add a China-reachable mirror.
+2. **Fix evidence correctness**: make 3 tasks executable (checks + fixtures);
    group by version/model/harness; require signature verification; add the missing
    schemas; fix the case-insensitive join. Without this, a pilot would publish a
    wrong number.
-2. **Freeze methodology v1.1**: version binding, `provisional`, CI, minimum
-   evidence (≥3 tasks, ≥5 runs/arm, environment manifest, reviewer sign-off).
-3. **Ship `signals.json` + schema + decorator**; generate a 10-plugin reference
+3. **Freeze methodology v1.1**: version binding, `provisional`, CI, minimum
+   evidence (≥8 tasks, ≥3 runs/arm, environment manifest, independent runner).
+4. **Ship `signals.json` + schema + decorator**; generate a 10-plugin reference
    index; validate it; add it to Discover; capture the result.
-4. **Sandbox the runner** and run one surface pilot (5 plugins × 5 runs); publish
+5. **Sandbox the runner** and run one surface pilot (5 plugins × 5 runs); publish
    results with CIs, or publish "pilot failed" with the reason.
-5. **Write the one-page official brief** and open a public discussion/RFC.
-6. **Recruit** two reviewers and one compute sponsor; publish the funding policy.
+6. **Converge `dsh-score`**: publish one prior spec and a conformance fixture;
+   `dsh-score` becomes the local inspector, not a second public ranking.
+7. **Write the one-page official brief** and open a public discussion/RFC.
+8. **Recruit** two reviewers (one external) and one compute sponsor; publish the
+   funding policy.
 
 If only one item can be done, do **P0.0 (evidence correctness) + P0.5
 (sandbox) + P0.6 (one real pilot)**. Everything else is packaging around
@@ -478,6 +550,56 @@ evidence that does not yet exist.
    benchmark.
 
 ---
+
+## 13. Which repository should you invest in?
+
+Short answer: **`dsh-attention-index`**. Converge `dsh-score` into a local prior
+inspector; keep `dsh-community-bench` thin.
+
+| | `dsh-score` | `dsh-attention-index` | `dsh-community-bench` |
+|---|---|---|---|
+| **What it is** | Local/on-demand five-dimension scorer (install, maintenance, docs, security, compliance) with tools, JSON, badges, storage | Public registry/scoring/site with prior/measured tiers, attention slots, badges | In-app Settings tab that renders the public registry |
+| **Strength** | Mature code, evidence links, `no-evidence` states, JSON/badge API, good author UX | The only public, deterministic, market-facing artifact; attention allocation | Visibility; zero local scoring; a clean reference consumer |
+| **Limit for the market goal** | Local, per-user, no public versioned artifact, no paired outcome evidence; its five dimensions overlap the index's prior | 0 measured; correctness/security/neutrality bugs; no signals/index/identity/API | Thin consumer; no data of its own; UI only |
+| **Role** | Author-side inspector / prior implementation | **Public evidence + signals layer** | Reference consumer / demo |
+| **Investment** | **20%**: converge on one prior spec; add install/security evidence; never a second public ranking | **70%**: correctness, sandbox, pilot, signals, decorator, identity, governance | **10%**: XSS/freshness/evidence detail; do not grow |
+
+### 13.1 Why not `dsh-score` as the main layer?
+
+- It computes **locally** with the user's `gh`/`npm` credentials. Two users can get
+  different results, and a market cannot consume it at scale.
+- It has **no paired outcome evidence**. Its five dimensions are priors — install,
+  maintenance, documentation, security, compliance — not "does this plugin improve
+  task outcomes?".
+- It has **no version/cohort binding**, signed snapshot, or public registry. Its
+  leaderboard is a local batch artifact.
+- It **overlaps** the index's prior dimensions. Two public numbers for the same
+  plugin (`dsh-score` 84/100 vs index 38.3/60) is a credibility problem, not a
+  feature. A market cannot know which one to trust.
+
+### 13.2 Why not `dsh-community-bench`?
+
+It is a consumer. Improving it without fixing the data is polishing the dashboard.
+Keep it read-only, add evidence detail/status/author response after the data
+exists, and use it as the reference implementation of the display contract.
+
+### 13.3 Convergence design
+
+1. Define one **`dsh-plugin-prior/v1`** spec: dimensions, evidence links,
+   `no-evidence`, weights, versioning. Make `dsh-score` and `dsh-attention-index`
+   two implementations of it; add a conformance fixture that asserts identical
+   outputs for the same inputs.
+2. `dsh-score` becomes the **local/author-side inspector**. It may display the
+   public measured signal by fetching a signed snapshot, but it never computes
+   `measured` locally.
+3. `dsh-attention-index` becomes the **public aggregator**. It publishes prior +
+   measured + signals; it does not keep a second static formula.
+4. Deprecate the duplicate formula in the index (or map it explicitly). Keep the
+   0–60 public cap as a **presentation policy**, not a second score.
+5. `dsh-community-bench` renders the public snapshot; no local scoring.
+
+If you only have one month, put it into the index — correctness, sandbox, one
+real pilot — not into new `dsh-score` features.
 
 ## Appendix A — Format-1 decoration sketch
 
