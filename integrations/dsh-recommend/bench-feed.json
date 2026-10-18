@@ -5,6 +5,24 @@
   "source": "data/registry.json",
   "note": "Sidecar only: join by GitHub fullName. Do not replace the host ranking score; show the Community Bench score and tier beside it.",
   "byFullName": {
+    "PerryLink/dsh-memento": {
+      "pluginId": "perrylink/dsh-memento",
+      "surface": "memory",
+      "surfaceLabel": "Cross-session memory",
+      "rank": null,
+      "evidenceGrade": "E2",
+      "unrated": false,
+      "goe": "very-low",
+      "score": 33,
+      "scoreScale": 100,
+      "tier": "measured",
+      "prior": 50,
+      "bench": 22.6,
+      "coverage": 0.556,
+      "confidence": 0.77,
+      "badge": "![dsh-score E2](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-memento.svg)",
+      "registry": "data/registry.json"
+    },
     "volcengine/OpenViking": {
       "pluginId": "volcengine/openviking",
       "surface": "memory",
@@ -39,24 +57,6 @@
       "coverage": 0,
       "confidence": 0.6,
       "badge": "![dsh-score E0 · unrated](https://perrylink.github.io/dsh-attention-index/badges/vectorize-io-hindsight.svg)",
-      "registry": "data/registry.json"
-    },
-    "PerryLink/dsh-memento": {
-      "pluginId": "perrylink/dsh-memento",
-      "surface": "memory",
-      "surfaceLabel": "Cross-session memory",
-      "rank": null,
-      "evidenceGrade": "E0",
-      "unrated": true,
-      "goe": "very-low",
-      "score": 30,
-      "scoreScale": 60,
-      "tier": "prior",
-      "prior": 50,
-      "bench": null,
-      "coverage": 0,
-      "confidence": 0.4,
-      "badge": "![dsh-score E0 · unrated](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-memento.svg)",
       "registry": "data/registry.json"
     },
     "bowenliang123/dsh-context": {
