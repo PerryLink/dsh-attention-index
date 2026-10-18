@@ -1,5 +1,29 @@
 {
   "schema": "dsh-score/audits/v1",
   "note": "Independent audit attestations. An empty list means no row can be E5. An audit entry must name the auditor, scope, date, method, evidence URL and signature.",
-  "audits": []
+  "audits": [
+    {
+      "id": "self-review-2026-10-18",
+      "auditor": "dsh-score maintainers (self-review, NOT independent)",
+      "independent": false,
+      "selfReview": true,
+      "scope": "perrylink/dsh-memento@0.5.27 / p1-pilot-1 / memory",
+      "date": "2026-10-18",
+      "method": "31 signature verifications; fixture/check replay; adversarial review of the first pilot",
+      "evidenceUrl": "https://github.com/PerryLink/dsh-attention-index/commit/20af9f6104104d852a55a7a0ddd78e96c94a9827",
+      "result": "pass-with-findings",
+      "findings": [
+        "operator-owned plugin (PerryLink); disclosed, not independent",
+        "sandbox=none; result is capped at E2 and cannot be E3+",
+        "task pack p1-pilot-1 is unreviewed; E2 cap",
+        "5 of 8 memory tasks, 3 runs per arm; coverage 0.556",
+        "null result: both arms passed all five tasks; no positive lift",
+        "all 31 results have valid Ed25519 signatures and fixture hashes",
+        "one plugin and one surface only; no generalisation claim",
+        "tokens metric is not captured; duration/tool errors only"
+      ],
+      "gradeCeiling": "E2",
+      "note": "Self-review is published for transparency. It cannot satisfy E5 and must never be counted as an independent audit."
+    }
+  ]
 }

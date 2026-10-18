@@ -56,7 +56,7 @@ is ready; the measured result is still blocked by the key/sandbox gate.
 
 | # | Task | Status | Depends on |
 |---|---|---|---|
-| P3.1 | Independent audit of method and first results | pending | no auditor engaged; cannot self-audit |
+| P3.1 | Independent audit of method and first results | pending | self-review published (`data/audits/index.json`, `independent:false`); no independent auditor, so no E5 |
 | P3.2 | Pre-registration + all-results publication | done (unreviewed) | `data/preregistration.json`, hash-checked; independent review still false |
 | P3.3 | Federation/mirrors, 99.9% SLA, status page | partial | Gitee/GitCode sync + SLA target; no hosted 99.9% claim |
 | P3.4 | E5 audited grade + conformance suite | partial | E5 audit gate, checklist, conformance; no E5 row |
