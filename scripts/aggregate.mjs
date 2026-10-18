@@ -18,6 +18,7 @@ import { createHash } from 'node:crypto'
 import { join, dirname } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import { buildRegistry } from './score.mjs'
+import { loadPublicKeys, verifyResult } from './verify-result.mjs'
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..')
 const BADGE_BASE = process.env.BENCH_BADGE_BASE ?? 'https://perrylink.github.io/dsh-attention-index/badges/'
@@ -135,6 +136,13 @@ export function buildOutputs({ today } = {}) {
   const pluginsFile = readJson('data/plugins.json')
   const tasksFile = readJson('data/tasks.json')
   const results = readDir('data/results').map(item => item.value)
+  const publicKeys = loadPublicKeys(join(ROOT, 'data/runners.json'))
+  const verifiedResults = []
+  for (const result of results) {
+    const verdict = verifyResult(result, publicKeys)
+    if (verdict.valid) verifiedResults.push({ ...result, verified: true })
+    else console.error(`skip unverified result ${result.runId ?? '?'}: ${verdict.reason}`)
+  }
   const contributions = readDir('data/contributions').map(item => item.value)
   const day = today ?? new Date().toISOString().slice(0, 10)
   // Deterministic for a given --today: re-running with the same inputs produces
@@ -144,7 +152,7 @@ export function buildOutputs({ today } = {}) {
     plugins: pluginsFile.plugins,
     surfaces: tasksFile.surfaces,
     tasks: tasksFile.tasks,
-    results,
+    results: verifiedResults,
     contributions,
     today: today ?? pluginsFile.observedAt ?? generatedAt.slice(0, 10),
     generatedAt,

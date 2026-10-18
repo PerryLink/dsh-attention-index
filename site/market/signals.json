@@ -3,11 +3,57 @@
   "generatedAt": "2026-10-18T00:00:00.000Z",
   "source": {
     "registry": "data/registry.json",
-    "inputHash": "sha256:ac0b4b8ec693410e962277de29e31603ab9bea7a8b753496d11033116c378c75",
+    "inputHash": "sha256:675ded408306316788ef580356d821f2825b5b79aa52ddbef90d3a6be2adcc54",
     "reliabilityVersion": "soe-goe/v1"
   },
   "note": "Decoration only: E0/unrated means no outcome evidence. A market must not use this file as its default ranking.",
   "entries": [
+    {
+      "id": "perrylink/dsh-memento",
+      "aliases": [
+        "perrylink/dsh-memento",
+        "dsh-memento",
+        "https://github.com/PerryLink/dsh-memento"
+      ],
+      "surface": "memory",
+      "evidenceGrade": "E2",
+      "unrated": false,
+      "goe": {
+        "grade": "E2",
+        "certainty": "very-low",
+        "positive": false,
+        "reasons": [
+          "paired-result",
+          "task-unreviewed"
+        ],
+        "downgrades": [
+          "operator-owned",
+          "missing-adoption-channels",
+          "docs-unknown",
+          "single-or-self-run",
+          "small-sample",
+          "version-or-environment-mismatch",
+          "task-unreviewed",
+          "sandbox-missing"
+        ]
+      },
+      "operatorOwned": true,
+      "missing": {
+        "installs": true,
+        "npm7d": true,
+        "stars": false,
+        "docs": true,
+        "npmName": false
+      },
+      "taskReviewed": false,
+      "versionBound": false,
+      "measured": true,
+      "rank": null,
+      "score": 33,
+      "scoreScale": 100,
+      "scoreLabel": "legacy discovery — not a quality score",
+      "badge": "badges/perrylink-dsh-memento.svg"
+    },
     {
       "id": "volcengine/openviking",
       "aliases": [
@@ -85,47 +131,6 @@
       "scoreScale": 60,
       "scoreLabel": "legacy discovery — not a quality score",
       "badge": "badges/vectorize-io-hindsight.svg"
-    },
-    {
-      "id": "perrylink/dsh-memento",
-      "aliases": [
-        "perrylink/dsh-memento",
-        "dsh-memento",
-        "https://github.com/PerryLink/dsh-memento"
-      ],
-      "surface": "memory",
-      "evidenceGrade": "E0",
-      "unrated": true,
-      "goe": {
-        "grade": "E0",
-        "certainty": "very-low",
-        "positive": false,
-        "reasons": [
-          "no-outcome-evidence",
-          "metadata-only"
-        ],
-        "downgrades": [
-          "operator-owned",
-          "missing-adoption-channels",
-          "docs-unknown"
-        ]
-      },
-      "operatorOwned": true,
-      "missing": {
-        "installs": true,
-        "npm7d": true,
-        "stars": false,
-        "docs": true,
-        "npmName": false
-      },
-      "taskReviewed": false,
-      "versionBound": false,
-      "measured": false,
-      "rank": null,
-      "score": 30,
-      "scoreScale": 60,
-      "scoreLabel": "legacy discovery — not a quality score",
-      "badge": "badges/perrylink-dsh-memento.svg"
     },
     {
       "id": "bowenliang123/dsh-context",
@@ -1680,10 +1685,11 @@
   ],
   "stats": {
     "entries": 42,
-    "measured": 0,
-    "unrated": 42,
+    "measured": 1,
+    "unrated": 41,
     "grades": {
-      "E0": 42
+      "E2": 1,
+      "E0": 41
     }
   },
   "identityIndexSize": 106

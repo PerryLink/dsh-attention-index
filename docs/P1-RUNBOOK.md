@@ -1,8 +1,10 @@
 # P1 measured-evidence runbook
 
-Status: **pipeline implemented; real measured results not yet run.** The pilot
-task pack is `p1-pilot-1`, 24 offline tasks across `memory`, `web`, `dev`
-(3 briefs × 8).
+Status: **pipeline implemented; first E2 pilot run completed.** The pilot task
+pack is `p1-pilot-1`, 24 offline tasks across `memory`, `web`, `dev`
+(3 briefs × 8). The first pilot used 5 memory tasks × 3 runs/arm with
+`dsh-memento` and produced 31 signed results: 1 E2 provisional, a null result
+(both arms passed all tasks). E3+ remains blocked by task review and sandbox.
 Every task is `status: "pilot"` and `reviewed: false`, so any result is capped at
 **E2 provisional** by the SOE/GOE layer. That is deliberate.
 

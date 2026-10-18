@@ -11,11 +11,11 @@
 > [`dsh-score`](https://github.com/PerryLink/dsh-score) plugin; the in-app consumer
 > is [`dsh-community-bench`](https://github.com/PerryLink/dsh-community-bench).
 >
-> Status: **v0.1 · E0 / unrated**. 42 candidate plugins, 15 capability surfaces,
-> **0 paired bench results**, **0 public contributions**, **24 executable pilot
-> tasks** (unreviewed). All 42 rows are
-> `E0 / unrated`; there is **no quality #1**. The legacy discovery number is
-> `60 × prior / 100` and is not a task-outcome claim.
+> Status: **v0.1 · first measured pilot**. 42 candidate plugins, 15 capability
+> surfaces, **31 signed paired results**, **1 E2 provisional** (a null pilot),
+> **41 E0 / unrated**, **0 positive**, **0 public contributions**, **24
+> executable pilot tasks** (unreviewed). There is **no quality #1**. The legacy
+> discovery number is `60 × prior / 100` and is not a task-outcome claim.
 >
 > This is deliberate: the repository does not fake outcome evidence while the
 > bench network is being built.

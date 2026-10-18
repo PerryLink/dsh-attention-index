@@ -32,7 +32,7 @@ P0 is a **truth fix**, not a measurement. It does not create measured evidence.
 | P1.2 | Sandboxed runner (no host FS/env, egress allowlist, cgroups) | partial | env scrub + temp home + fixture hash + `--sandbox` refusal; no bwrap backend or egress control yet |
 | P1.3 | Signed results + environment manifest + dedupe | done | `runner-keygen.mjs`, `verify-result.mjs`, `ingest-result.mjs`; tests |
 | P1.4 | Newcombe/paired bootstrap at task level; FDR; holdout | partial | Newcombe + task cap in place; FDR/bootstrap/holdout pending |
-| P1.5 | First measured pilot; E2/E3 grades | blocked | needs a bench-scoped model key + real bwrap sandbox; not fabricated |
+| P1.5 | First measured pilot; E2/E3 grades | done (E2 pilot) | 31 signed results, 1 E2 provisional null; E3+ still blocked by task review + sandbox |
 | P1.6 | `signals.json` + format-1 decorator + reference index | done | `integrations/market/signals.json` + API; not a third-party market claim |
 | P1.7 | `bench_recommend` explicit-surface tool (no session read) | done (pure) | `scripts/recommend.mjs`; Host tool wiring is P2 |
 | P1.8 | Publish `dsh-community-bench` 0.2.0 | done | npm `latest`, with provenance |
@@ -65,8 +65,10 @@ is ready; the measured result is still blocked by the key/sandbox gate.
 ## Current honest state
 
 - 42 plugins, 15 surfaces, **39 tasks** (24 executable pilot + 15 draft),
-  **0 measured**, **0 contributions**.
-- 42/42 rows are **E0 / unrated**. No quality #1 exists.
+  **31 signed results**, **1 E2 measured** (provisional null), **41 E0**,
+  **0 positive**, **0 contributions**.
+- No quality #1 exists; the only measured row is E2/provisional and has
+  `rank: null`.
 - The legacy `score` remains as `discovery.score` for compatibility; it is not a
   quality claim.
 - P1–P3 **code/artifacts are implemented where they do not require an external

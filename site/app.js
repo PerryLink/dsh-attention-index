@@ -137,7 +137,7 @@ function filteredRows(rows) {
 function renderCards(rows) {
   const top = rows.slice(0, 3)
   if (top.length === 0) {
-    $('#surface-cards').innerHTML = '<p class="surface-note">No measured evidence yet. Prior rows are candidates, not a quality rank.</p>'
+    $('#surface-cards').innerHTML = '<p class="surface-note">No positive measured evidence yet. Prior rows are candidates, not a quality rank.</p>'
     return
   }
   $('#surface-cards').innerHTML = top.map(row => `

@@ -3,6 +3,19 @@
   "generatedAt": "2026-10-18T00:00:00.000Z",
   "badges": [
     {
+      "pluginId": "perrylink/dsh-memento",
+      "name": "dsh-memento",
+      "surface": "memory",
+      "rank": null,
+      "evidenceGrade": "E2",
+      "unrated": false,
+      "score": 33,
+      "tier": "measured",
+      "svg": "badges/perrylink-dsh-memento.svg",
+      "url": "https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-memento.svg",
+      "markdown": "![dsh-score E2](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-memento.svg)"
+    },
+    {
       "pluginId": "volcengine/openviking",
       "name": "OpenViking memory",
       "surface": "memory",
@@ -27,19 +40,6 @@
       "svg": "badges/vectorize-io-hindsight.svg",
       "url": "https://perrylink.github.io/dsh-attention-index/badges/vectorize-io-hindsight.svg",
       "markdown": "![dsh-score E0 · unrated](https://perrylink.github.io/dsh-attention-index/badges/vectorize-io-hindsight.svg)"
-    },
-    {
-      "pluginId": "perrylink/dsh-memento",
-      "name": "dsh-memento",
-      "surface": "memory",
-      "rank": null,
-      "evidenceGrade": "E0",
-      "unrated": true,
-      "score": 30,
-      "tier": "prior",
-      "svg": "badges/perrylink-dsh-memento.svg",
-      "url": "https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-memento.svg",
-      "markdown": "![dsh-score E0 · unrated](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-memento.svg)"
     },
     {
       "pluginId": "bowenliang123/dsh-context",

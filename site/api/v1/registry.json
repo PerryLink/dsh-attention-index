@@ -25,23 +25,24 @@
     "plugins": 42,
     "tasks": 39,
     "surfaces": 15,
-    "benchResults": 0,
+    "benchResults": 31,
     "contributions": 0,
-    "inputHash": "sha256:ac0b4b8ec693410e962277de29e31603ab9bea7a8b753496d11033116c378c75"
+    "inputHash": "sha256:675ded408306316788ef580356d821f2825b5b79aa52ddbef90d3a6be2adcc54"
   },
   "stats": {
     "plugins": 42,
     "surfaces": 15,
     "tasks": 39,
-    "measuredPlugins": 0,
+    "measuredPlugins": 1,
     "positiveMeasured": 0,
-    "unratedPlugins": 42,
+    "unratedPlugins": 41,
     "gradeCounts": {
-      "E0": 42
+      "E0": 41,
+      "E2": 1
     },
     "contributors": 0,
     "contributions": 0,
-    "benchResults": 0
+    "benchResults": 31
   },
   "surfaces": [
     {
@@ -60,6 +61,192 @@
         "p1-memory-provenance"
       ],
       "leaderboard": [
+        {
+          "pluginId": "perrylink/dsh-memento",
+          "name": "dsh-memento",
+          "author": "PerryLink",
+          "surface": "memory",
+          "summary": "Bounded, approval-gated cross-session memory with a ctx.memory seam and SQLite provider.",
+          "status": "frozen",
+          "license": "Apache-2.0",
+          "repo": "https://github.com/PerryLink/dsh-memento",
+          "npm": "dsh-memento",
+          "score": 33,
+          "scoreScale": 100,
+          "prior": 50,
+          "priorDimensions": {
+            "maintenance": 100,
+            "adoption": 76.9,
+            "verification": 0,
+            "documentation": null
+          },
+          "bench": 22.6,
+          "coverage": 0.556,
+          "coverageScore": 55.6,
+          "community": 0,
+          "confidence": 0.77,
+          "tier": "measured",
+          "evidenceGrade": "E2",
+          "soe": {
+            "design": 3,
+            "execution": 3,
+            "precision": 1,
+            "independence": 1,
+            "directness": 0,
+            "notes": [
+              "operator-owned",
+              "missing-adoption-channels",
+              "docs-unknown",
+              "version-mismatch",
+              "task-unreviewed"
+            ]
+          },
+          "goe": {
+            "grade": "E2",
+            "certainty": "very-low",
+            "positive": false,
+            "reasons": [
+              "paired-result",
+              "task-unreviewed"
+            ],
+            "downgrades": [
+              "operator-owned",
+              "missing-adoption-channels",
+              "docs-unknown",
+              "single-or-self-run",
+              "small-sample",
+              "version-or-environment-mismatch",
+              "task-unreviewed",
+              "sandbox-missing"
+            ]
+          },
+          "unrated": false,
+          "operatorOwned": true,
+          "missing": {
+            "installs": true,
+            "npm7d": true,
+            "stars": false,
+            "docs": true,
+            "npmName": false
+          },
+          "taskReviewed": false,
+          "discovery": {
+            "score": 33,
+            "scale": 100,
+            "label": "legacy discovery — not a quality score",
+            "basis": [
+              "maintenance",
+              "adoption",
+              "verification",
+              "documentation"
+            ]
+          },
+          "discoveryPosition": 1,
+          "runners": 1,
+          "runs": 31,
+          "benchTasks": [
+            {
+              "taskId": "p1-memory-api",
+              "surface": "memory",
+              "weight": 1,
+              "withRuns": 3,
+              "withoutRuns": 3,
+              "withSuccess": 1,
+              "withoutSuccess": 1,
+              "lift": 0,
+              "liftLowerBound": -0.562,
+              "ciLower": -0.562,
+              "ciUpper": 0.562,
+              "score": 21.9,
+              "runners": 1,
+              "runs": 6,
+              "signatureVerified": true,
+              "environmentBound": false
+            },
+            {
+              "taskId": "p1-memory-cutoff",
+              "surface": "memory",
+              "weight": 1,
+              "withRuns": 3,
+              "withoutRuns": 3,
+              "withSuccess": 1,
+              "withoutSuccess": 1,
+              "lift": 0,
+              "liftLowerBound": -0.562,
+              "ciLower": -0.562,
+              "ciUpper": 0.562,
+              "score": 21.9,
+              "runners": 1,
+              "runs": 6,
+              "signatureVerified": true,
+              "environmentBound": false
+            },
+            {
+              "taskId": "p1-memory-deploy",
+              "surface": "memory",
+              "weight": 1,
+              "withRuns": 4,
+              "withoutRuns": 3,
+              "withSuccess": 1,
+              "withoutSuccess": 1,
+              "lift": 0,
+              "liftLowerBound": -0.49,
+              "ciLower": -0.49,
+              "ciUpper": 0.562,
+              "score": 25.5,
+              "runners": 1,
+              "runs": 7,
+              "signatureVerified": true,
+              "environmentBound": false
+            },
+            {
+              "taskId": "p1-memory-freeze",
+              "surface": "memory",
+              "weight": 1,
+              "withRuns": 3,
+              "withoutRuns": 3,
+              "withSuccess": 1,
+              "withoutSuccess": 1,
+              "lift": 0,
+              "liftLowerBound": -0.562,
+              "ciLower": -0.562,
+              "ciUpper": 0.562,
+              "score": 21.9,
+              "runners": 1,
+              "runs": 6,
+              "signatureVerified": true,
+              "environmentBound": false
+            },
+            {
+              "taskId": "p1-memory-owner",
+              "surface": "memory",
+              "weight": 1,
+              "withRuns": 3,
+              "withoutRuns": 3,
+              "withSuccess": 1,
+              "withoutSuccess": 1,
+              "lift": 0,
+              "liftLowerBound": -0.562,
+              "ciLower": -0.562,
+              "ciUpper": 0.562,
+              "score": 21.9,
+              "runners": 1,
+              "runs": 6,
+              "signatureVerified": true,
+              "environmentBound": false
+            }
+          ],
+          "evidence": {
+            "installs": null,
+            "npm7d": null,
+            "stars": 136,
+            "lastPush": "2026-10-18",
+            "verification": "doctor",
+            "observedAt": "2026-10-18",
+            "repo": "https://github.com/PerryLink/dsh-memento"
+          },
+          "rank": null
+        },
         {
           "pluginId": "volcengine/openviking",
           "name": "OpenViking memory",
@@ -134,7 +321,7 @@
               "documentation"
             ]
           },
-          "discoveryPosition": 1,
+          "discoveryPosition": 2,
           "runners": 0,
           "runs": 0,
           "benchTasks": [],
@@ -223,7 +410,7 @@
               "documentation"
             ]
           },
-          "discoveryPosition": 2,
+          "discoveryPosition": 3,
           "runners": 0,
           "runs": 0,
           "benchTasks": [],
@@ -237,103 +424,13 @@
             "repo": "https://github.com/vectorize-io/hindsight"
           },
           "rank": null
-        },
-        {
-          "pluginId": "perrylink/dsh-memento",
-          "name": "dsh-memento",
-          "author": "PerryLink",
-          "surface": "memory",
-          "summary": "Bounded, approval-gated cross-session memory with a ctx.memory seam and SQLite provider.",
-          "status": "frozen",
-          "license": "Apache-2.0",
-          "repo": "https://github.com/PerryLink/dsh-memento",
-          "npm": "dsh-memento",
-          "score": 30,
-          "scoreScale": 60,
-          "prior": 50,
-          "priorDimensions": {
-            "maintenance": 100,
-            "adoption": 76.9,
-            "verification": 0,
-            "documentation": null
-          },
-          "bench": null,
-          "coverage": 0,
-          "coverageScore": 0,
-          "community": 0,
-          "confidence": 0.4,
-          "tier": "prior",
-          "evidenceGrade": "E0",
-          "soe": {
-            "design": 0,
-            "execution": 0,
-            "precision": 0,
-            "independence": 0,
-            "directness": 0,
-            "notes": [
-              "no-paired-result",
-              "metadata-only",
-              "operator-owned",
-              "missing-adoption-channels",
-              "docs-unknown"
-            ]
-          },
-          "goe": {
-            "grade": "E0",
-            "certainty": "very-low",
-            "positive": false,
-            "reasons": [
-              "no-outcome-evidence",
-              "metadata-only"
-            ],
-            "downgrades": [
-              "operator-owned",
-              "missing-adoption-channels",
-              "docs-unknown"
-            ]
-          },
-          "unrated": true,
-          "operatorOwned": true,
-          "missing": {
-            "installs": true,
-            "npm7d": true,
-            "stars": false,
-            "docs": true,
-            "npmName": false
-          },
-          "taskReviewed": false,
-          "discovery": {
-            "score": 30,
-            "scale": 60,
-            "label": "legacy discovery — not a quality score",
-            "basis": [
-              "maintenance",
-              "adoption",
-              "verification",
-              "documentation"
-            ]
-          },
-          "discoveryPosition": 3,
-          "runners": 0,
-          "runs": 0,
-          "benchTasks": [],
-          "evidence": {
-            "installs": null,
-            "npm7d": null,
-            "stars": 136,
-            "lastPush": "2026-10-18",
-            "verification": "doctor",
-            "observedAt": "2026-10-18",
-            "repo": "https://github.com/PerryLink/dsh-memento"
-          },
-          "rank": null
         }
       ],
       "top3": [],
       "featured": null,
-      "measured": 0,
+      "measured": 1,
       "positive": 0,
-      "note": "Prior-only: no paired with/without bench result meets the minimum evidence gate. Rows are unrated; the legacy discovery order is not a quality rank."
+      "note": "Measured results exist, but none is positive and adequately powered. No quality #1 is shown."
     },
     {
       "id": "cost",
@@ -4318,5 +4415,5 @@
   "contributors": [],
   "nominations": [],
   "apiVersion": "v1",
-  "etag": "sha256:724ecce88ff1bb8bc6a9a4f86fbeb521aff7a340c588309e32e3c6cc7e1e477a"
+  "etag": "sha256:c1424ee49d5ecc4e6d97333a6191caad8e2f3b41b5d0d70790edc0498d499dab"
 }

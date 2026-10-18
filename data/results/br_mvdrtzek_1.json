@@ -1,0 +1,54 @@
+{
+  "schema": "dsh-attention/bench-result/v1",
+  "runId": "br_mvdrtzek_1",
+  "taskId": "p1-memory-freeze",
+  "plugin": {
+    "id": "perrylink/dsh-memento",
+    "version": "0.5.27"
+  },
+  "arm": "with",
+  "model": "deepseek-flash",
+  "harness": "0.2.1-rc.2",
+  "startedAt": "2026-10-18T11:57:48.883Z",
+  "finishedAt": "2026-10-18T11:57:51.356Z",
+  "outcome": {
+    "pass": true,
+    "checks": [
+      {
+        "id": "answer",
+        "pass": true,
+        "detail": "answer contains the expected text"
+      },
+      {
+        "id": "no-question",
+        "pass": true,
+        "detail": "answer does not end in a question"
+      }
+    ]
+  },
+  "metrics": {
+    "tokens": 0,
+    "durationMs": 2470,
+    "toolErrors": 0
+  },
+  "sessionHash": "sha256:e74755a18dea8fad9b94a926e89478a1e1d2e075651c1a47c36c4e9c3b389132",
+  "artifacts": [],
+  "environment": {
+    "node": "v22.22.3",
+    "platform": "linux",
+    "arch": "x64",
+    "dsh": "0.2.1-rc.2",
+    "model": "deepseek-flash",
+    "harness": "0.2.1-rc.2",
+    "profile": "headless",
+    "sandbox": "none",
+    "fixtureHash": "sha256:f4c27499b3fee9eb3e4fca03af9540489ad42ebf9e2f2f422e79d6c7b61b0a4a"
+  },
+  "environmentBound": false,
+  "sandbox": "none",
+  "runner": {
+    "id": "bench:local-pilot",
+    "keyId": "bench:local-pilot"
+  },
+  "signature": "gk0Q2HsCfMjUveCxnBMxpGFurzf7Aun2C+nBDWNT3SokL8RYtkVr2RZn55yDBogDYR/Z32SuzSPdRhM5uIuvCg=="
+}

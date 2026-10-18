@@ -221,6 +221,8 @@ export function aggregateBench(results, tasks, options = {}) {
     const p0 = mean(entry.without.map(row => row.outcome.pass ? 1 : 0))
     const interval = liftInterval(p1, entry.with.length, p0, entry.without.length)
     const lcb = interval.lower
+    const signatureVerified = [...entry.with, ...entry.without].every(item => item.verified === true)
+    const environmentBound = [...entry.with, ...entry.without].every(item => item.environmentBound === true)
     const row = {
       taskId: entry.taskId,
       surface: task.surface,
@@ -236,8 +238,12 @@ export function aggregateBench(results, tasks, options = {}) {
       score: round(((lcb + 1) / 2) * 100, 1),
       runners: unique(entry.with.map(row => row.runner?.id).filter(Boolean)).length,
       runs: entry.with.length + entry.without.length,
+      signatureVerified,
+      environmentBound,
     }
-    const aggregate = perPlugin.get(entry.pluginId) ?? { tasks: [], runners: new Set(), runs: 0 }
+    const aggregate = perPlugin.get(entry.pluginId) ?? { tasks: [], runners: new Set(), runs: 0, signatureVerified: true, environmentBound: true }
+    aggregate.signatureVerified = aggregate.signatureVerified && signatureVerified
+    aggregate.environmentBound = aggregate.environmentBound && environmentBound
     aggregate.tasks.push(row)
     for (const value of entry.with.map(item => item.runner?.id).filter(Boolean)) aggregate.runners.add(value)
     aggregate.runs += row.runs
@@ -261,6 +267,8 @@ export function aggregateBench(results, tasks, options = {}) {
       runners: aggregate.runners.size,
       runs: aggregate.runs,
       taskReviewed,
+      signatureVerified: aggregate.signatureVerified === true,
+      environmentBound: aggregate.environmentBound === true,
       tasks: aggregate.tasks.sort((left, right) => left.taskId.localeCompare(right.taskId)),
     })
   }
@@ -365,7 +373,7 @@ export function buildRegistry(input) {
     rows.sort(compareEntries)
     rows.forEach((row, index) => {
       row.discoveryPosition = index + 1
-      row.rank = row.tier === 'measured' ? index + 1 : null
+      row.rank = row.tier === 'measured' && row.goe?.positive === true ? index + 1 : null
     })
     const measured = rows.filter(row => row.tier === 'measured')
     const positive = measured.filter(row => row.goe?.positive === true)
@@ -511,8 +519,8 @@ export function scorePlugin(plugin, bench, contribution, today) {
     runners: bench?.runners ?? 0,
     runs: bench?.runs ?? 0,
     benchTasks: bench?.tasks ?? [],
-    signatureVerified: false,
-    environmentBound: false,
+    signatureVerified: bench?.signatureVerified === true,
+    environmentBound: bench?.environmentBound === true,
     selfRun: false,
     versionMatch: 'unknown',
     holdout: false,
