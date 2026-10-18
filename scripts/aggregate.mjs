@@ -91,7 +91,7 @@ function contributorColor(badge) {
 /** Build the Markdown leaderboard. */
 function renderMarkdown(registry) {
   const lines = [
-    '# DSH Community Bench',
+    '# dsh-score',
     '',
     `Generated: ${registry.generatedAt} · scoring \`${registry.scoring.version}\` · ${registry.stats.measuredPlugins}/${registry.stats.plugins} plugins with paired bench evidence`,
     '',
@@ -158,10 +158,10 @@ export function buildOutputs({ today } = {}) {
       const message = row.rank === 1
         ? `#1 ${surface.id} · ${row.score}`
         : `${row.score} · ${row.tier}`
-      const svg = badgeSvg('DSH Bench', message, tierColor(row.tier))
+      const svg = badgeSvg('dsh-score', message, tierColor(row.tier))
       badges.set(file, svg)
       if (row.rank === 1) {
-        badges.set(`${base}-top.svg`, badgeSvg('DSH Bench', `#1 ${surface.id} · ${row.score}`, '#2f855a'))
+        badges.set(`${base}-top.svg`, badgeSvg('dsh-score', `#1 ${surface.id} · ${row.score}`, '#2f855a'))
       }
       if (!badgeIndex.some(item => item.pluginId === row.pluginId)) {
         badgeIndex.push({
@@ -173,17 +173,17 @@ export function buildOutputs({ today } = {}) {
           tier: row.tier,
           svg: `badges/${file}`,
           url: `${BADGE_BASE}${file}`,
-          markdown: `![DSH Bench ${row.score} · ${row.tier}](${BADGE_BASE}${file})`,
+          markdown: `![dsh-score ${row.score} · ${row.tier}](${BADGE_BASE}${file})`,
         })
       }
     }
   }
   for (const contributor of registry.contributors) {
     const file = `contributor-${slug(contributor.contributor)}.svg`
-    badges.set(file, badgeSvg('DSH Bench Contributor', `${contributor.credits} credits · ${contributor.badge}`, contributorColor(contributor.badge)))
+    badges.set(file, badgeSvg('dsh-score contributor', `${contributor.credits} credits · ${contributor.badge}`, contributorColor(contributor.badge)))
     contributor.svg = `badges/${file}`
   }
-  badges.set('dsh-bench.svg', badgeSvg('DSH Bench', `${registry.stats.measuredPlugins}/${registry.stats.plugins} measured`, '#2f855a'))
+  badges.set('dsh-bench.svg', badgeSvg('dsh-score', `${registry.stats.measuredPlugins}/${registry.stats.plugins} measured`, '#2f855a'))
 
   return {
     registry,

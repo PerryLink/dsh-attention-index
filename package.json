@@ -1,9 +1,9 @@
 {
-  "name": "dsh-attention-index",
+  "name": "dsh-score-index",
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Public, reproducible, task-conditioned scores and attention allocation for DeepSeek Harness plugins.",
+  "description": "Public evidence and scores for DeepSeek Harness plugins (prior-only v0.1).",
   "scripts": {
     "test": "node --test test/*.test.mjs",
     "aggregate": "node scripts/aggregate.mjs",

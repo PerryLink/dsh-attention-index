@@ -17,7 +17,7 @@
       "bench": null,
       "coverage": 0,
       "confidence": 0.6,
-      "badge": "![DSH Bench 38.3 · prior](https://perrylink.github.io/dsh-attention-index/badges/vectorize-io-hindsight.svg)",
+      "badge": "![dsh-score 38.3 · prior](https://perrylink.github.io/dsh-attention-index/badges/vectorize-io-hindsight.svg)",
       "registry": "data/registry.json"
     },
     "volcengine/OpenViking": {
@@ -32,7 +32,7 @@
       "bench": null,
       "coverage": 0,
       "confidence": 0.6,
-      "badge": "![DSH Bench 38.3 · prior](https://perrylink.github.io/dsh-attention-index/badges/volcengine-openviking.svg)",
+      "badge": "![dsh-score 38.3 · prior](https://perrylink.github.io/dsh-attention-index/badges/volcengine-openviking.svg)",
       "registry": "data/registry.json"
     },
     "PerryLink/dsh-memento": {
@@ -47,7 +47,7 @@
       "bench": null,
       "coverage": 0,
       "confidence": 0.4,
-      "badge": "![DSH Bench 29.3 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-memento.svg)",
+      "badge": "![dsh-score 29.3 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-memento.svg)",
       "registry": "data/registry.json"
     },
     "Han-1413141/dsh-cost-meter": {
@@ -62,7 +62,7 @@
       "bench": null,
       "coverage": 0,
       "confidence": 0.6,
-      "badge": "![DSH Bench 37.7 · prior](https://perrylink.github.io/dsh-attention-index/badges/han-1413141-dsh-cost-meter.svg)",
+      "badge": "![dsh-score 37.7 · prior](https://perrylink.github.io/dsh-attention-index/badges/han-1413141-dsh-cost-meter.svg)",
       "registry": "data/registry.json"
     },
     "bowenliang123/dsh-context": {
@@ -77,7 +77,7 @@
       "bench": null,
       "coverage": 0,
       "confidence": 0.6,
-      "badge": "![DSH Bench 37.4 · prior](https://perrylink.github.io/dsh-attention-index/badges/bowenliang123-dsh-context.svg)",
+      "badge": "![dsh-score 37.4 · prior](https://perrylink.github.io/dsh-attention-index/badges/bowenliang123-dsh-context.svg)",
       "registry": "data/registry.json"
     },
     "PerryLink/dsh-budget": {
@@ -92,7 +92,7 @@
       "bench": null,
       "coverage": 0,
       "confidence": 0.4,
-      "badge": "![DSH Bench 28.5 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-budget.svg)",
+      "badge": "![dsh-score 28.5 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-budget.svg)",
       "registry": "data/registry.json"
     },
     "liustack/modlens": {
@@ -107,7 +107,7 @@
       "bench": null,
       "coverage": 0,
       "confidence": 0.6,
-      "badge": "![DSH Bench 38.2 · prior](https://perrylink.github.io/dsh-attention-index/badges/liustack-modlens.svg)",
+      "badge": "![dsh-score 38.2 · prior](https://perrylink.github.io/dsh-attention-index/badges/liustack-modlens.svg)",
       "registry": "data/registry.json"
     },
     "ysr666/dsh-vision-router": {
@@ -122,7 +122,7 @@
       "bench": null,
       "coverage": 0,
       "confidence": 0.6,
-      "badge": "![DSH Bench 35.9 · prior](https://perrylink.github.io/dsh-attention-index/badges/ysr666-dsh-vision-router.svg)",
+      "badge": "![dsh-score 35.9 · prior](https://perrylink.github.io/dsh-attention-index/badges/ysr666-dsh-vision-router.svg)",
       "registry": "data/registry.json"
     },
     "Anionex/dsh-vision-toolkit": {
@@ -137,7 +137,7 @@
       "bench": null,
       "coverage": 0,
       "confidence": 0.6,
-      "badge": "![DSH Bench 34.4 · prior](https://perrylink.github.io/dsh-attention-index/badges/anionex-dsh-vision-toolkit.svg)",
+      "badge": "![dsh-score 34.4 · prior](https://perrylink.github.io/dsh-attention-index/badges/anionex-dsh-vision-toolkit.svg)",
       "registry": "data/registry.json"
     },
     "DDDMUC/dsh-free-search": {
@@ -152,7 +152,7 @@
       "bench": null,
       "coverage": 0,
       "confidence": 0.6,
-      "badge": "![DSH Bench 35 · prior](https://perrylink.github.io/dsh-attention-index/badges/dddmuc-dsh-free-search.svg)",
+      "badge": "![dsh-score 35 · prior](https://perrylink.github.io/dsh-attention-index/badges/dddmuc-dsh-free-search.svg)",
       "registry": "data/registry.json"
     },
     "liustack/modsearch": {
@@ -167,7 +167,7 @@
       "bench": null,
       "coverage": 0,
       "confidence": 0.6,
-      "badge": "![DSH Bench 34.9 · prior](https://perrylink.github.io/dsh-attention-index/badges/liustack-modsearch.svg)",
+      "badge": "![dsh-score 34.9 · prior](https://perrylink.github.io/dsh-attention-index/badges/liustack-modsearch.svg)",
       "registry": "data/registry.json"
     },
     "anysearch-team/anysearch-dsh": {
@@ -182,7 +182,7 @@
       "bench": null,
       "coverage": 0,
       "confidence": 0.6,
-      "badge": "![DSH Bench 33.4 · prior](https://perrylink.github.io/dsh-attention-index/badges/anysearch-team-anysearch-dsh.svg)",
+      "badge": "![dsh-score 33.4 · prior](https://perrylink.github.io/dsh-attention-index/badges/anysearch-team-anysearch-dsh.svg)",
       "registry": "data/registry.json"
     },
     "Tencent/BrowserSkill": {
@@ -197,7 +197,7 @@
       "bench": null,
       "coverage": 0,
       "confidence": 0.6,
-      "badge": "![DSH Bench 36.5 · prior](https://perrylink.github.io/dsh-attention-index/badges/tencent-browserskill.svg)",
+      "badge": "![dsh-score 36.5 · prior](https://perrylink.github.io/dsh-attention-index/badges/tencent-browserskill.svg)",
       "registry": "data/registry.json"
     },
     "PerryLink/dsh-click": {
@@ -212,7 +212,7 @@
       "bench": null,
       "coverage": 0,
       "confidence": 0.4,
-      "badge": "![DSH Bench 28.7 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-click.svg)",
+      "badge": "![dsh-score 28.7 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-click.svg)",
       "registry": "data/registry.json"
     },
     "Lum1104/dsh-browser": {
@@ -227,7 +227,7 @@
       "bench": null,
       "coverage": 0,
       "confidence": 0.4,
-      "badge": "![DSH Bench 22.9 · prior](https://perrylink.github.io/dsh-attention-index/badges/lum1104-dsh-browser.svg)",
+      "badge": "![dsh-score 22.9 · prior](https://perrylink.github.io/dsh-attention-index/badges/lum1104-dsh-browser.svg)",
       "registry": "data/registry.json"
     },
     "dream-num/dsh-univer-office": {
@@ -242,7 +242,7 @@
       "bench": null,
       "coverage": 0,
       "confidence": 0.6,
-      "badge": "![DSH Bench 34.9 · prior](https://perrylink.github.io/dsh-attention-index/badges/dream-num-dsh-univer-office.svg)",
+      "badge": "![dsh-score 34.9 · prior](https://perrylink.github.io/dsh-attention-index/badges/dream-num-dsh-univer-office.svg)",
       "registry": "data/registry.json"
     },
     "Tencent/WeKnora": {
@@ -257,7 +257,7 @@
       "bench": null,
       "coverage": 0,
       "confidence": 0.6,
-      "badge": "![DSH Bench 34.2 · prior](https://perrylink.github.io/dsh-attention-index/badges/tencent-weknora-dsh.svg)",
+      "badge": "![dsh-score 34.2 · prior](https://perrylink.github.io/dsh-attention-index/badges/tencent-weknora-dsh.svg)",
       "registry": "data/registry.json"
     },
     "Devin-AXIS/iPolloWork": {
@@ -272,7 +272,7 @@
       "bench": null,
       "coverage": 0,
       "confidence": 0.6,
-      "badge": "![DSH Bench 31.6 · prior](https://perrylink.github.io/dsh-attention-index/badges/devin-axis-ppt-studio.svg)",
+      "badge": "![dsh-score 31.6 · prior](https://perrylink.github.io/dsh-attention-index/badges/devin-axis-ppt-studio.svg)",
       "registry": "data/registry.json"
     },
     "NanmiCoder/dsh-agent-teams": {
@@ -287,7 +287,7 @@
       "bench": null,
       "coverage": 0,
       "confidence": 0.6,
-      "badge": "![DSH Bench 37.4 · prior](https://perrylink.github.io/dsh-attention-index/badges/nanmicoder-dsh-agent-teams.svg)",
+      "badge": "![dsh-score 37.4 · prior](https://perrylink.github.io/dsh-attention-index/badges/nanmicoder-dsh-agent-teams.svg)",
       "registry": "data/registry.json"
     },
     "PerryLink/dsh-autotier": {
@@ -302,7 +302,7 @@
       "bench": null,
       "coverage": 0,
       "confidence": 0.4,
-      "badge": "![DSH Bench 28 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-autotier.svg)",
+      "badge": "![dsh-score 28 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-autotier.svg)",
       "registry": "data/registry.json"
     },
     "Q00/ouroboros": {
@@ -317,7 +317,7 @@
       "bench": null,
       "coverage": 0,
       "confidence": 0.4,
-      "badge": "![DSH Bench 23.5 · prior](https://perrylink.github.io/dsh-attention-index/badges/q00-ouroboros.svg)",
+      "badge": "![dsh-score 23.5 · prior](https://perrylink.github.io/dsh-attention-index/badges/q00-ouroboros.svg)",
       "registry": "data/registry.json"
     },
     "PerryLink/dsh-auto-review": {
@@ -332,7 +332,7 @@
       "bench": null,
       "coverage": 0,
       "confidence": 0.6,
-      "badge": "![DSH Bench 39.2 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-auto-review.svg)",
+      "badge": "![dsh-score 39.2 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-auto-review.svg)",
       "registry": "data/registry.json"
     },
     "PerryLink/dsh-permission-rules": {
@@ -347,7 +347,7 @@
       "bench": null,
       "coverage": 0,
       "confidence": 0.8,
-      "badge": "![DSH Bench 39.1 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-permission-rules.svg)",
+      "badge": "![dsh-score 39.1 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-permission-rules.svg)",
       "registry": "data/registry.json"
     },
     "NanmiCoder/dsh-auto-mode": {
@@ -362,7 +362,7 @@
       "bench": null,
       "coverage": 0,
       "confidence": 0.6,
-      "badge": "![DSH Bench 18 · prior](https://perrylink.github.io/dsh-attention-index/badges/nanmicoder-dsh-auto-mode.svg)",
+      "badge": "![dsh-score 18 · prior](https://perrylink.github.io/dsh-attention-index/badges/nanmicoder-dsh-auto-mode.svg)",
       "registry": "data/registry.json"
     },
     "PerryLink/dsh-mcp-panel": {
@@ -377,7 +377,7 @@
       "bench": null,
       "coverage": 0,
       "confidence": 0.8,
-      "badge": "![DSH Bench 41.4 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-mcp-panel.svg)",
+      "badge": "![dsh-score 41.4 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-mcp-panel.svg)",
       "registry": "data/registry.json"
     },
     "duhu2000/dsh-mcp-connector": {
@@ -392,7 +392,7 @@
       "bench": null,
       "coverage": 0,
       "confidence": 0.6,
-      "badge": "![DSH Bench 32.6 · prior](https://perrylink.github.io/dsh-attention-index/badges/duhu2000-dsh-mcp-connector.svg)",
+      "badge": "![dsh-score 32.6 · prior](https://perrylink.github.io/dsh-attention-index/badges/duhu2000-dsh-mcp-connector.svg)",
       "registry": "data/registry.json"
     },
     "xmanrui/dsh-im": {
@@ -407,7 +407,7 @@
       "bench": null,
       "coverage": 0,
       "confidence": 0.6,
-      "badge": "![DSH Bench 37.1 · prior](https://perrylink.github.io/dsh-attention-index/badges/xmanrui-dsh-im.svg)",
+      "badge": "![dsh-score 37.1 · prior](https://perrylink.github.io/dsh-attention-index/badges/xmanrui-dsh-im.svg)",
       "registry": "data/registry.json"
     },
     "shaobeichen/dsh-pocket": {
@@ -422,7 +422,7 @@
       "bench": null,
       "coverage": 0,
       "confidence": 0.6,
-      "badge": "![DSH Bench 31 · prior](https://perrylink.github.io/dsh-attention-index/badges/shaobeichen-dsh-pocket.svg)",
+      "badge": "![dsh-score 31 · prior](https://perrylink.github.io/dsh-attention-index/badges/shaobeichen-dsh-pocket.svg)",
       "registry": "data/registry.json"
     },
     "PerryLink/dsh-reach": {
@@ -437,7 +437,7 @@
       "bench": null,
       "coverage": 0,
       "confidence": 0.4,
-      "badge": "![DSH Bench 28.1 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-reach.svg)",
+      "badge": "![dsh-score 28.1 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-reach.svg)",
       "registry": "data/registry.json"
     },
     "PerryLink/dsh-plugin-guide": {
@@ -452,7 +452,7 @@
       "bench": null,
       "coverage": 0,
       "confidence": 0.8,
-      "badge": "![DSH Bench 39.3 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-plugin-guide.svg)",
+      "badge": "![dsh-score 39.3 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-plugin-guide.svg)",
       "registry": "data/registry.json"
     },
     "MicroMilo/upstream-radar": {
@@ -467,7 +467,7 @@
       "bench": null,
       "coverage": 0,
       "confidence": 0.6,
-      "badge": "![DSH Bench 28.7 · prior](https://perrylink.github.io/dsh-attention-index/badges/micromilo-upstream-radar.svg)",
+      "badge": "![dsh-score 28.7 · prior](https://perrylink.github.io/dsh-attention-index/badges/micromilo-upstream-radar.svg)",
       "registry": "data/registry.json"
     },
     "PerryLink/dsh-score": {
@@ -482,7 +482,7 @@
       "bench": null,
       "coverage": 0,
       "confidence": 0.4,
-      "badge": "![DSH Bench 28.6 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-score.svg)",
+      "badge": "![dsh-score 28.6 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-score.svg)",
       "registry": "data/registry.json"
     },
     "PerryLink/dsh-test-drive": {
@@ -497,7 +497,7 @@
       "bench": null,
       "coverage": 0,
       "confidence": 0.4,
-      "badge": "![DSH Bench 28.6 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-test-drive.svg)",
+      "badge": "![dsh-score 28.6 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-test-drive.svg)",
       "registry": "data/registry.json"
     },
     "PerryLink/dsh-talk": {
@@ -512,7 +512,7 @@
       "bench": null,
       "coverage": 0,
       "confidence": 0.4,
-      "badge": "![DSH Bench 28.6 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-talk.svg)",
+      "badge": "![dsh-score 28.6 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-talk.svg)",
       "registry": "data/registry.json"
     },
     "PerryLink/dsh-industry-research": {
@@ -527,7 +527,7 @@
       "bench": null,
       "coverage": 0,
       "confidence": 0.4,
-      "badge": "![DSH Bench 29.4 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-industry-research.svg)",
+      "badge": "![dsh-score 29.4 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-industry-research.svg)",
       "registry": "data/registry.json"
     },
     "PerryLink/dsh-research-report": {
@@ -542,7 +542,7 @@
       "bench": null,
       "coverage": 0,
       "confidence": 0.4,
-      "badge": "![DSH Bench 29.4 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-research-report.svg)",
+      "badge": "![dsh-score 29.4 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-research-report.svg)",
       "registry": "data/registry.json"
     },
     "PerryLink/dsh-fund-research": {
@@ -557,7 +557,7 @@
       "bench": null,
       "coverage": 0,
       "confidence": 0.4,
-      "badge": "![DSH Bench 29 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-fund-research.svg)",
+      "badge": "![dsh-score 29 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-fund-research.svg)",
       "registry": "data/registry.json"
     },
     "omdsh-dev/DSH-better-sidebar": {
@@ -572,7 +572,7 @@
       "bench": null,
       "coverage": 0,
       "confidence": 0.8,
-      "badge": "![DSH Bench 38.3 · prior](https://perrylink.github.io/dsh-attention-index/badges/omdsh-dev-dsh-better-sidebar.svg)",
+      "badge": "![dsh-score 38.3 · prior](https://perrylink.github.io/dsh-attention-index/badges/omdsh-dev-dsh-better-sidebar.svg)",
       "registry": "data/registry.json"
     },
     "omdsh-dev/dsh-genui": {
@@ -587,7 +587,7 @@
       "bench": null,
       "coverage": 0,
       "confidence": 0.6,
-      "badge": "![DSH Bench 35 · prior](https://perrylink.github.io/dsh-attention-index/badges/omdsh-dev-dsh-genui.svg)",
+      "badge": "![dsh-score 35 · prior](https://perrylink.github.io/dsh-attention-index/badges/omdsh-dev-dsh-genui.svg)",
       "registry": "data/registry.json"
     },
     "PerryLink/dsh-composer-history": {
@@ -602,7 +602,7 @@
       "bench": null,
       "coverage": 0,
       "confidence": 0.4,
-      "badge": "![DSH Bench 28.7 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-composer-history.svg)",
+      "badge": "![dsh-score 28.7 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-composer-history.svg)",
       "registry": "data/registry.json"
     },
     "anywhere-labs/deepseek-harness-desktop": {
@@ -617,7 +617,7 @@
       "bench": null,
       "coverage": 0,
       "confidence": 0.6,
-      "badge": "![DSH Bench 31.9 · prior](https://perrylink.github.io/dsh-attention-index/badges/anywhere-labs-dsh-desktop.svg)",
+      "badge": "![dsh-score 31.9 · prior](https://perrylink.github.io/dsh-attention-index/badges/anywhere-labs-dsh-desktop.svg)",
       "registry": "data/registry.json"
     },
     "dsh-tauri-desk/deepseek-harness-desktop": {
@@ -632,7 +632,7 @@
       "bench": null,
       "coverage": 0,
       "confidence": 0.4,
-      "badge": "![DSH Bench 21.3 · prior](https://perrylink.github.io/dsh-attention-index/badges/dsh-tauri-desk-deepseek-harness-desktop.svg)",
+      "badge": "![dsh-score 21.3 · prior](https://perrylink.github.io/dsh-attention-index/badges/dsh-tauri-desk-deepseek-harness-desktop.svg)",
       "registry": "data/registry.json"
     }
   },

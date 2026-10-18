@@ -1,9 +1,15 @@
-# DSH Community Bench as a market reference and service layer
+# dsh-score as a market reference and service layer
 
 Status: proposal for discussion · 2026-10-18
 Scope: what this project must become if its purpose is to serve DSH markets
 (third-party catalogs today, a possible official market later) rather than to be
 one more leaderboard.
+
+> **Naming:** `dsh-score` is the brand. This repository is the public evidence
+> layer; it is currently `dsh-attention-index` and will be renamed
+> `dsh-score-index` (see `docs/MIGRATION-dsh-score-index.md`). The local
+> inspector is the separate `dsh-score` plugin; the in-app consumer is
+> `dsh-community-bench`.
 
 ---
 
@@ -41,6 +47,20 @@ differentiated asset is paired, task-conditioned outcome evidence with a
 reproducible environment — which is exactly the part that is currently at zero.
 
 ---
+
+## 1.5 Naming and project disposition (final)
+
+- **Brand:** `dsh-score`.
+- **Public evidence layer:** this repository; rename to `dsh-score-index`
+  (pending; see `docs/MIGRATION-dsh-score-index.md`).
+- **Local/on-demand inspector:** the separate `dsh-score` plugin (npm); it is not
+  a second public ranking.
+- **In-app consumer:** `dsh-community-bench` (maintenance mode).
+- **Investment:** this repository 80–90%; `dsh-score` 5–10% (bug/security only);
+  `dsh-community-bench` 5–10% (consumer only). If only one repository survives,
+  keep this one and archive/deprecate the other two.
+- **Avoid** `dsh-bench`, `dsh-attention`, `dsh-evidence`: the npm names are taken
+  by unrelated projects.
 
 ## 2. What already exists
 

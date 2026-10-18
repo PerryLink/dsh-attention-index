@@ -11,7 +11,7 @@
       "tier": "prior",
       "svg": "badges/vectorize-io-hindsight.svg",
       "url": "https://perrylink.github.io/dsh-attention-index/badges/vectorize-io-hindsight.svg",
-      "markdown": "![DSH Bench 38.3 · prior](https://perrylink.github.io/dsh-attention-index/badges/vectorize-io-hindsight.svg)"
+      "markdown": "![dsh-score 38.3 · prior](https://perrylink.github.io/dsh-attention-index/badges/vectorize-io-hindsight.svg)"
     },
     {
       "pluginId": "volcengine/openviking",
@@ -22,7 +22,7 @@
       "tier": "prior",
       "svg": "badges/volcengine-openviking.svg",
       "url": "https://perrylink.github.io/dsh-attention-index/badges/volcengine-openviking.svg",
-      "markdown": "![DSH Bench 38.3 · prior](https://perrylink.github.io/dsh-attention-index/badges/volcengine-openviking.svg)"
+      "markdown": "![dsh-score 38.3 · prior](https://perrylink.github.io/dsh-attention-index/badges/volcengine-openviking.svg)"
     },
     {
       "pluginId": "perrylink/dsh-memento",
@@ -33,7 +33,7 @@
       "tier": "prior",
       "svg": "badges/perrylink-dsh-memento.svg",
       "url": "https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-memento.svg",
-      "markdown": "![DSH Bench 29.3 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-memento.svg)"
+      "markdown": "![dsh-score 29.3 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-memento.svg)"
     },
     {
       "pluginId": "han-1413141/dsh-cost-meter",
@@ -44,7 +44,7 @@
       "tier": "prior",
       "svg": "badges/han-1413141-dsh-cost-meter.svg",
       "url": "https://perrylink.github.io/dsh-attention-index/badges/han-1413141-dsh-cost-meter.svg",
-      "markdown": "![DSH Bench 37.7 · prior](https://perrylink.github.io/dsh-attention-index/badges/han-1413141-dsh-cost-meter.svg)"
+      "markdown": "![dsh-score 37.7 · prior](https://perrylink.github.io/dsh-attention-index/badges/han-1413141-dsh-cost-meter.svg)"
     },
     {
       "pluginId": "bowenliang123/dsh-context",
@@ -55,7 +55,7 @@
       "tier": "prior",
       "svg": "badges/bowenliang123-dsh-context.svg",
       "url": "https://perrylink.github.io/dsh-attention-index/badges/bowenliang123-dsh-context.svg",
-      "markdown": "![DSH Bench 37.4 · prior](https://perrylink.github.io/dsh-attention-index/badges/bowenliang123-dsh-context.svg)"
+      "markdown": "![dsh-score 37.4 · prior](https://perrylink.github.io/dsh-attention-index/badges/bowenliang123-dsh-context.svg)"
     },
     {
       "pluginId": "perrylink/dsh-budget",
@@ -66,7 +66,7 @@
       "tier": "prior",
       "svg": "badges/perrylink-dsh-budget.svg",
       "url": "https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-budget.svg",
-      "markdown": "![DSH Bench 28.5 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-budget.svg)"
+      "markdown": "![dsh-score 28.5 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-budget.svg)"
     },
     {
       "pluginId": "liustack/modlens",
@@ -77,7 +77,7 @@
       "tier": "prior",
       "svg": "badges/liustack-modlens.svg",
       "url": "https://perrylink.github.io/dsh-attention-index/badges/liustack-modlens.svg",
-      "markdown": "![DSH Bench 38.2 · prior](https://perrylink.github.io/dsh-attention-index/badges/liustack-modlens.svg)"
+      "markdown": "![dsh-score 38.2 · prior](https://perrylink.github.io/dsh-attention-index/badges/liustack-modlens.svg)"
     },
     {
       "pluginId": "ysr666/dsh-vision-router",
@@ -88,7 +88,7 @@
       "tier": "prior",
       "svg": "badges/ysr666-dsh-vision-router.svg",
       "url": "https://perrylink.github.io/dsh-attention-index/badges/ysr666-dsh-vision-router.svg",
-      "markdown": "![DSH Bench 35.9 · prior](https://perrylink.github.io/dsh-attention-index/badges/ysr666-dsh-vision-router.svg)"
+      "markdown": "![dsh-score 35.9 · prior](https://perrylink.github.io/dsh-attention-index/badges/ysr666-dsh-vision-router.svg)"
     },
     {
       "pluginId": "anionex/dsh-vision-toolkit",
@@ -99,7 +99,7 @@
       "tier": "prior",
       "svg": "badges/anionex-dsh-vision-toolkit.svg",
       "url": "https://perrylink.github.io/dsh-attention-index/badges/anionex-dsh-vision-toolkit.svg",
-      "markdown": "![DSH Bench 34.4 · prior](https://perrylink.github.io/dsh-attention-index/badges/anionex-dsh-vision-toolkit.svg)"
+      "markdown": "![dsh-score 34.4 · prior](https://perrylink.github.io/dsh-attention-index/badges/anionex-dsh-vision-toolkit.svg)"
     },
     {
       "pluginId": "dddmuc/dsh-free-search",
@@ -110,7 +110,7 @@
       "tier": "prior",
       "svg": "badges/dddmuc-dsh-free-search.svg",
       "url": "https://perrylink.github.io/dsh-attention-index/badges/dddmuc-dsh-free-search.svg",
-      "markdown": "![DSH Bench 35 · prior](https://perrylink.github.io/dsh-attention-index/badges/dddmuc-dsh-free-search.svg)"
+      "markdown": "![dsh-score 35 · prior](https://perrylink.github.io/dsh-attention-index/badges/dddmuc-dsh-free-search.svg)"
     },
     {
       "pluginId": "liustack/modsearch",
@@ -121,7 +121,7 @@
       "tier": "prior",
       "svg": "badges/liustack-modsearch.svg",
       "url": "https://perrylink.github.io/dsh-attention-index/badges/liustack-modsearch.svg",
-      "markdown": "![DSH Bench 34.9 · prior](https://perrylink.github.io/dsh-attention-index/badges/liustack-modsearch.svg)"
+      "markdown": "![dsh-score 34.9 · prior](https://perrylink.github.io/dsh-attention-index/badges/liustack-modsearch.svg)"
     },
     {
       "pluginId": "anysearch-team/anysearch-dsh",
@@ -132,7 +132,7 @@
       "tier": "prior",
       "svg": "badges/anysearch-team-anysearch-dsh.svg",
       "url": "https://perrylink.github.io/dsh-attention-index/badges/anysearch-team-anysearch-dsh.svg",
-      "markdown": "![DSH Bench 33.4 · prior](https://perrylink.github.io/dsh-attention-index/badges/anysearch-team-anysearch-dsh.svg)"
+      "markdown": "![dsh-score 33.4 · prior](https://perrylink.github.io/dsh-attention-index/badges/anysearch-team-anysearch-dsh.svg)"
     },
     {
       "pluginId": "tencent/browserskill",
@@ -143,7 +143,7 @@
       "tier": "prior",
       "svg": "badges/tencent-browserskill.svg",
       "url": "https://perrylink.github.io/dsh-attention-index/badges/tencent-browserskill.svg",
-      "markdown": "![DSH Bench 36.5 · prior](https://perrylink.github.io/dsh-attention-index/badges/tencent-browserskill.svg)"
+      "markdown": "![dsh-score 36.5 · prior](https://perrylink.github.io/dsh-attention-index/badges/tencent-browserskill.svg)"
     },
     {
       "pluginId": "perrylink/dsh-click",
@@ -154,7 +154,7 @@
       "tier": "prior",
       "svg": "badges/perrylink-dsh-click.svg",
       "url": "https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-click.svg",
-      "markdown": "![DSH Bench 28.7 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-click.svg)"
+      "markdown": "![dsh-score 28.7 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-click.svg)"
     },
     {
       "pluginId": "lum1104/dsh-browser",
@@ -165,7 +165,7 @@
       "tier": "prior",
       "svg": "badges/lum1104-dsh-browser.svg",
       "url": "https://perrylink.github.io/dsh-attention-index/badges/lum1104-dsh-browser.svg",
-      "markdown": "![DSH Bench 22.9 · prior](https://perrylink.github.io/dsh-attention-index/badges/lum1104-dsh-browser.svg)"
+      "markdown": "![dsh-score 22.9 · prior](https://perrylink.github.io/dsh-attention-index/badges/lum1104-dsh-browser.svg)"
     },
     {
       "pluginId": "dream-num/dsh-univer-office",
@@ -176,7 +176,7 @@
       "tier": "prior",
       "svg": "badges/dream-num-dsh-univer-office.svg",
       "url": "https://perrylink.github.io/dsh-attention-index/badges/dream-num-dsh-univer-office.svg",
-      "markdown": "![DSH Bench 34.9 · prior](https://perrylink.github.io/dsh-attention-index/badges/dream-num-dsh-univer-office.svg)"
+      "markdown": "![dsh-score 34.9 · prior](https://perrylink.github.io/dsh-attention-index/badges/dream-num-dsh-univer-office.svg)"
     },
     {
       "pluginId": "tencent/weknora-dsh",
@@ -187,7 +187,7 @@
       "tier": "prior",
       "svg": "badges/tencent-weknora-dsh.svg",
       "url": "https://perrylink.github.io/dsh-attention-index/badges/tencent-weknora-dsh.svg",
-      "markdown": "![DSH Bench 34.2 · prior](https://perrylink.github.io/dsh-attention-index/badges/tencent-weknora-dsh.svg)"
+      "markdown": "![dsh-score 34.2 · prior](https://perrylink.github.io/dsh-attention-index/badges/tencent-weknora-dsh.svg)"
     },
     {
       "pluginId": "devin-axis/ppt-studio",
@@ -198,7 +198,7 @@
       "tier": "prior",
       "svg": "badges/devin-axis-ppt-studio.svg",
       "url": "https://perrylink.github.io/dsh-attention-index/badges/devin-axis-ppt-studio.svg",
-      "markdown": "![DSH Bench 31.6 · prior](https://perrylink.github.io/dsh-attention-index/badges/devin-axis-ppt-studio.svg)"
+      "markdown": "![dsh-score 31.6 · prior](https://perrylink.github.io/dsh-attention-index/badges/devin-axis-ppt-studio.svg)"
     },
     {
       "pluginId": "nanmicoder/dsh-agent-teams",
@@ -209,7 +209,7 @@
       "tier": "prior",
       "svg": "badges/nanmicoder-dsh-agent-teams.svg",
       "url": "https://perrylink.github.io/dsh-attention-index/badges/nanmicoder-dsh-agent-teams.svg",
-      "markdown": "![DSH Bench 37.4 · prior](https://perrylink.github.io/dsh-attention-index/badges/nanmicoder-dsh-agent-teams.svg)"
+      "markdown": "![dsh-score 37.4 · prior](https://perrylink.github.io/dsh-attention-index/badges/nanmicoder-dsh-agent-teams.svg)"
     },
     {
       "pluginId": "perrylink/dsh-autotier",
@@ -220,7 +220,7 @@
       "tier": "prior",
       "svg": "badges/perrylink-dsh-autotier.svg",
       "url": "https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-autotier.svg",
-      "markdown": "![DSH Bench 28 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-autotier.svg)"
+      "markdown": "![dsh-score 28 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-autotier.svg)"
     },
     {
       "pluginId": "q00/ouroboros",
@@ -231,7 +231,7 @@
       "tier": "prior",
       "svg": "badges/q00-ouroboros.svg",
       "url": "https://perrylink.github.io/dsh-attention-index/badges/q00-ouroboros.svg",
-      "markdown": "![DSH Bench 23.5 · prior](https://perrylink.github.io/dsh-attention-index/badges/q00-ouroboros.svg)"
+      "markdown": "![dsh-score 23.5 · prior](https://perrylink.github.io/dsh-attention-index/badges/q00-ouroboros.svg)"
     },
     {
       "pluginId": "perrylink/dsh-auto-review",
@@ -242,7 +242,7 @@
       "tier": "prior",
       "svg": "badges/perrylink-dsh-auto-review.svg",
       "url": "https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-auto-review.svg",
-      "markdown": "![DSH Bench 39.2 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-auto-review.svg)"
+      "markdown": "![dsh-score 39.2 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-auto-review.svg)"
     },
     {
       "pluginId": "perrylink/dsh-permission-rules",
@@ -253,7 +253,7 @@
       "tier": "prior",
       "svg": "badges/perrylink-dsh-permission-rules.svg",
       "url": "https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-permission-rules.svg",
-      "markdown": "![DSH Bench 39.1 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-permission-rules.svg)"
+      "markdown": "![dsh-score 39.1 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-permission-rules.svg)"
     },
     {
       "pluginId": "nanmicoder/dsh-auto-mode",
@@ -264,7 +264,7 @@
       "tier": "prior",
       "svg": "badges/nanmicoder-dsh-auto-mode.svg",
       "url": "https://perrylink.github.io/dsh-attention-index/badges/nanmicoder-dsh-auto-mode.svg",
-      "markdown": "![DSH Bench 18 · prior](https://perrylink.github.io/dsh-attention-index/badges/nanmicoder-dsh-auto-mode.svg)"
+      "markdown": "![dsh-score 18 · prior](https://perrylink.github.io/dsh-attention-index/badges/nanmicoder-dsh-auto-mode.svg)"
     },
     {
       "pluginId": "perrylink/dsh-mcp-panel",
@@ -275,7 +275,7 @@
       "tier": "prior",
       "svg": "badges/perrylink-dsh-mcp-panel.svg",
       "url": "https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-mcp-panel.svg",
-      "markdown": "![DSH Bench 41.4 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-mcp-panel.svg)"
+      "markdown": "![dsh-score 41.4 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-mcp-panel.svg)"
     },
     {
       "pluginId": "duhu2000/dsh-mcp-connector",
@@ -286,7 +286,7 @@
       "tier": "prior",
       "svg": "badges/duhu2000-dsh-mcp-connector.svg",
       "url": "https://perrylink.github.io/dsh-attention-index/badges/duhu2000-dsh-mcp-connector.svg",
-      "markdown": "![DSH Bench 32.6 · prior](https://perrylink.github.io/dsh-attention-index/badges/duhu2000-dsh-mcp-connector.svg)"
+      "markdown": "![dsh-score 32.6 · prior](https://perrylink.github.io/dsh-attention-index/badges/duhu2000-dsh-mcp-connector.svg)"
     },
     {
       "pluginId": "xmanrui/dsh-im",
@@ -297,7 +297,7 @@
       "tier": "prior",
       "svg": "badges/xmanrui-dsh-im.svg",
       "url": "https://perrylink.github.io/dsh-attention-index/badges/xmanrui-dsh-im.svg",
-      "markdown": "![DSH Bench 37.1 · prior](https://perrylink.github.io/dsh-attention-index/badges/xmanrui-dsh-im.svg)"
+      "markdown": "![dsh-score 37.1 · prior](https://perrylink.github.io/dsh-attention-index/badges/xmanrui-dsh-im.svg)"
     },
     {
       "pluginId": "shaobeichen/dsh-pocket",
@@ -308,7 +308,7 @@
       "tier": "prior",
       "svg": "badges/shaobeichen-dsh-pocket.svg",
       "url": "https://perrylink.github.io/dsh-attention-index/badges/shaobeichen-dsh-pocket.svg",
-      "markdown": "![DSH Bench 31 · prior](https://perrylink.github.io/dsh-attention-index/badges/shaobeichen-dsh-pocket.svg)"
+      "markdown": "![dsh-score 31 · prior](https://perrylink.github.io/dsh-attention-index/badges/shaobeichen-dsh-pocket.svg)"
     },
     {
       "pluginId": "perrylink/dsh-reach",
@@ -319,7 +319,7 @@
       "tier": "prior",
       "svg": "badges/perrylink-dsh-reach.svg",
       "url": "https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-reach.svg",
-      "markdown": "![DSH Bench 28.1 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-reach.svg)"
+      "markdown": "![dsh-score 28.1 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-reach.svg)"
     },
     {
       "pluginId": "perrylink/dsh-plugin-guide",
@@ -330,7 +330,7 @@
       "tier": "prior",
       "svg": "badges/perrylink-dsh-plugin-guide.svg",
       "url": "https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-plugin-guide.svg",
-      "markdown": "![DSH Bench 39.3 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-plugin-guide.svg)"
+      "markdown": "![dsh-score 39.3 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-plugin-guide.svg)"
     },
     {
       "pluginId": "micromilo/upstream-radar",
@@ -341,7 +341,7 @@
       "tier": "prior",
       "svg": "badges/micromilo-upstream-radar.svg",
       "url": "https://perrylink.github.io/dsh-attention-index/badges/micromilo-upstream-radar.svg",
-      "markdown": "![DSH Bench 28.7 · prior](https://perrylink.github.io/dsh-attention-index/badges/micromilo-upstream-radar.svg)"
+      "markdown": "![dsh-score 28.7 · prior](https://perrylink.github.io/dsh-attention-index/badges/micromilo-upstream-radar.svg)"
     },
     {
       "pluginId": "perrylink/dsh-score",
@@ -352,7 +352,7 @@
       "tier": "prior",
       "svg": "badges/perrylink-dsh-score.svg",
       "url": "https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-score.svg",
-      "markdown": "![DSH Bench 28.6 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-score.svg)"
+      "markdown": "![dsh-score 28.6 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-score.svg)"
     },
     {
       "pluginId": "perrylink/dsh-test-drive",
@@ -363,7 +363,7 @@
       "tier": "prior",
       "svg": "badges/perrylink-dsh-test-drive.svg",
       "url": "https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-test-drive.svg",
-      "markdown": "![DSH Bench 28.6 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-test-drive.svg)"
+      "markdown": "![dsh-score 28.6 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-test-drive.svg)"
     },
     {
       "pluginId": "perrylink/dsh-talk",
@@ -374,7 +374,7 @@
       "tier": "prior",
       "svg": "badges/perrylink-dsh-talk.svg",
       "url": "https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-talk.svg",
-      "markdown": "![DSH Bench 28.6 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-talk.svg)"
+      "markdown": "![dsh-score 28.6 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-talk.svg)"
     },
     {
       "pluginId": "perrylink/dsh-industry-research",
@@ -385,7 +385,7 @@
       "tier": "prior",
       "svg": "badges/perrylink-dsh-industry-research.svg",
       "url": "https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-industry-research.svg",
-      "markdown": "![DSH Bench 29.4 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-industry-research.svg)"
+      "markdown": "![dsh-score 29.4 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-industry-research.svg)"
     },
     {
       "pluginId": "perrylink/dsh-research-report",
@@ -396,7 +396,7 @@
       "tier": "prior",
       "svg": "badges/perrylink-dsh-research-report.svg",
       "url": "https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-research-report.svg",
-      "markdown": "![DSH Bench 29.4 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-research-report.svg)"
+      "markdown": "![dsh-score 29.4 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-research-report.svg)"
     },
     {
       "pluginId": "perrylink/dsh-fund-research",
@@ -407,7 +407,7 @@
       "tier": "prior",
       "svg": "badges/perrylink-dsh-fund-research.svg",
       "url": "https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-fund-research.svg",
-      "markdown": "![DSH Bench 29 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-fund-research.svg)"
+      "markdown": "![dsh-score 29 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-fund-research.svg)"
     },
     {
       "pluginId": "omdsh-dev/dsh-better-sidebar",
@@ -418,7 +418,7 @@
       "tier": "prior",
       "svg": "badges/omdsh-dev-dsh-better-sidebar.svg",
       "url": "https://perrylink.github.io/dsh-attention-index/badges/omdsh-dev-dsh-better-sidebar.svg",
-      "markdown": "![DSH Bench 38.3 · prior](https://perrylink.github.io/dsh-attention-index/badges/omdsh-dev-dsh-better-sidebar.svg)"
+      "markdown": "![dsh-score 38.3 · prior](https://perrylink.github.io/dsh-attention-index/badges/omdsh-dev-dsh-better-sidebar.svg)"
     },
     {
       "pluginId": "omdsh-dev/dsh-genui",
@@ -429,7 +429,7 @@
       "tier": "prior",
       "svg": "badges/omdsh-dev-dsh-genui.svg",
       "url": "https://perrylink.github.io/dsh-attention-index/badges/omdsh-dev-dsh-genui.svg",
-      "markdown": "![DSH Bench 35 · prior](https://perrylink.github.io/dsh-attention-index/badges/omdsh-dev-dsh-genui.svg)"
+      "markdown": "![dsh-score 35 · prior](https://perrylink.github.io/dsh-attention-index/badges/omdsh-dev-dsh-genui.svg)"
     },
     {
       "pluginId": "perrylink/dsh-composer-history",
@@ -440,7 +440,7 @@
       "tier": "prior",
       "svg": "badges/perrylink-dsh-composer-history.svg",
       "url": "https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-composer-history.svg",
-      "markdown": "![DSH Bench 28.7 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-composer-history.svg)"
+      "markdown": "![dsh-score 28.7 · prior](https://perrylink.github.io/dsh-attention-index/badges/perrylink-dsh-composer-history.svg)"
     },
     {
       "pluginId": "anywhere-labs/dsh-desktop",
@@ -451,7 +451,7 @@
       "tier": "prior",
       "svg": "badges/anywhere-labs-dsh-desktop.svg",
       "url": "https://perrylink.github.io/dsh-attention-index/badges/anywhere-labs-dsh-desktop.svg",
-      "markdown": "![DSH Bench 31.9 · prior](https://perrylink.github.io/dsh-attention-index/badges/anywhere-labs-dsh-desktop.svg)"
+      "markdown": "![dsh-score 31.9 · prior](https://perrylink.github.io/dsh-attention-index/badges/anywhere-labs-dsh-desktop.svg)"
     },
     {
       "pluginId": "dsh-tauri-desk/deepseek-harness-desktop",
@@ -462,7 +462,7 @@
       "tier": "prior",
       "svg": "badges/dsh-tauri-desk-deepseek-harness-desktop.svg",
       "url": "https://perrylink.github.io/dsh-attention-index/badges/dsh-tauri-desk-deepseek-harness-desktop.svg",
-      "markdown": "![DSH Bench 21.3 · prior](https://perrylink.github.io/dsh-attention-index/badges/dsh-tauri-desk-deepseek-harness-desktop.svg)"
+      "markdown": "![dsh-score 21.3 · prior](https://perrylink.github.io/dsh-attention-index/badges/dsh-tauri-desk-deepseek-harness-desktop.svg)"
     }
   ]
 }

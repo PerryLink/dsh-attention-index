@@ -1,13 +1,23 @@
-# DSH Community Bench
+# dsh-score
 
 [![Gitee](https://img.shields.io/badge/Gitee-mirror-c71d23?logo=gitee)](https://gitee.com/perrylink/dsh-attention-index)
 [![GitCode](https://img.shields.io/badge/GitCode-mirror-2f6feb)](https://gitcode.com/PerryLink/dsh-attention-index)
 
-**Public, reproducible, task-conditioned scores for DeepSeek Harness plugins — and an explicit rule for who gets community attention.**
+**Public evidence and scores for DeepSeek Harness plugins — and an explicit rule for who gets community attention.**
 
-> Status: **v0.1 · prior-only**. 42 candidate plugins, 15 capability surfaces, **0 paired bench results**, **0 public contributions**.
-> Every row without a paired with/without bench is labelled `prior`; it cannot outrank a measured plugin.
-> This is deliberate: the repository does not fake outcome evidence while the bench network is being built.
+> **Brand / scope.** `dsh-score` is the umbrella brand. This repository is the
+> **public evidence layer** (currently `dsh-attention-index`; it will be renamed
+> `dsh-score-index`). The local, on-demand five-dimension inspector is the separate
+> [`dsh-score`](https://github.com/PerryLink/dsh-score) plugin; the in-app consumer
+> is [`dsh-community-bench`](https://github.com/PerryLink/dsh-community-bench).
+>
+> Status: **v0.1 · prior-only**. 42 candidate plugins, 15 capability surfaces,
+> **0 paired bench results**, **0 public contributions**. At v0.1 every public
+> score is `60 × prior / 100`; **prior is a discovery signal, not a task-outcome
+> claim**.
+>
+> This is deliberate: the repository does not fake outcome evidence while the
+> bench network is being built.
 
 - **Leaderboard site:** `site/index.html` (static; deploy `site/` to GitHub Pages)
 - **Public registry:** [`data/registry.json`](data/registry.json)
@@ -28,15 +38,18 @@ The DSH ecosystem does not lack plugins. It lacks a **shared, task-conditioned a
 - Global popularity rankings are **context-blind**: the best memory plugin is not the best Office plugin.
 - A local per-user score cannot allocate **community** attention: every user sees a different answer.
 
-This repository makes the score **public and identical for everyone**, per capability surface, with three evidence tiers:
+This repository publishes **public, identical evidence** per capability surface,
+with two evidence tiers and one replication label:
 
-| Tier | Evidence | Behaviour |
+| Tier / label | Evidence | Behaviour |
 |---|---|---|
-| `prior` | public repo/adoption/verification evidence | score compressed to 0–60; cannot outrank `measured` |
+| `prior` | public repo/adoption/verification evidence | discovery signal; compressed to 0–60; cannot outrank `measured`; **not** a quality claim |
 | `measured` | paired `with` / `without` bench results, ≥3 runs per arm | full 0–100 score, with lift lower bound and sample counts |
-| `replicated` | `measured` + ≥2 independent runner ids | enters Most replicated; highest confidence |
+| `replicated` (label) | `measured` + ≥2 independent runner ids | enters Most replicated; highest confidence; not a third tier |
 
-The score decides attention: top 3 per surface, Featured, New & promising, Most nominated, Most replicated. There is **no paid ranking** and no sponsored slot in the registry.
+At v0.1 every row is `prior`; the measured tier is deliberately empty until the
+bench network produces signed, version-bound results. The registry decides
+attention; there is **no paid ranking** and no sponsored slot.
 
 ## What the registry contains
 
@@ -91,15 +104,20 @@ The receipt carries hashes and metrics only (no session text). It is written und
 
 ## Attention allocation (not a popularity contest)
 
-For each capability surface:
+Target policy (P0; the current site still shows prior-only `#1` until the truth
+fix lands):
 
-- **Top 3** — measured first; prior-only only when the surface has no measured plugin.
-- **Featured** — the first row of the top 3.
-- **New & promising** — active, low adoption, recent, prior-only; gives new plugins a bounded, labelled slot.
-- **Most nominated** — under-evaluated plugins nominated by contribution receipts.
-- **Most replicated** — measured plugins with ≥2 independent runners.
+- **Measured leaders** — only positive `measured` (CI lower bound > 0).
+- **Replicated** — `measured` + ≥2 independent runners.
+- **Discovery** — prior-only rows in a separate, unnumbered list; no `#1`, no
+  featured badge, no install CTA.
+- **New arrivals** — new/under-evaluated plugins, labelled; not a quality rank.
+- **Most nominated** — under-evaluated plugins nominated by receipts; used to
+  schedule bench runs, never to score.
 
-The allocation is a fixed set of slots, computed from the same registry. It cannot be bought, and a plugin author cannot certify their own plugin into `measured`/`replicated`.
+The allocation is a fixed set of slots, computed from the same registry. It cannot
+be bought, and a plugin author cannot certify their own plugin into
+`measured`/`replicated`.
 
 ## Current limitations
 

@@ -1,4 +1,4 @@
-# DSH Community Bench
+# dsh-score
 
 Generated: 2026-10-18T00:00:00.000Z · scoring `v1` · 0/42 plugins with paired bench evidence
 
