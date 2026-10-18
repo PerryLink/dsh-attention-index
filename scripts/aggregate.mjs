@@ -13,7 +13,8 @@
  * @module dsh-attention-index/aggregate
  */
 
-import { readFileSync, readdirSync, writeFileSync, existsSync } from 'node:fs'
+import { readFileSync, readdirSync, writeFileSync, existsSync, unlinkSync } from 'node:fs'
+import { createHash } from 'node:crypto'
 import { join, dirname } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import { buildRegistry } from './score.mjs'
@@ -93,19 +94,19 @@ function renderMarkdown(registry) {
   const lines = [
     '# dsh-score',
     '',
-    `Generated: ${registry.generatedAt} · scoring \`${registry.scoring.version}\` · ${registry.stats.measuredPlugins}/${registry.stats.plugins} plugins with paired bench evidence`,
+    `Generated: ${registry.generatedAt} · reliability \`${registry.scoring.reliabilityVersion}\` · ${registry.stats.measuredPlugins}/${registry.stats.plugins} measured · ${registry.stats.unratedPlugins} unrated`,
     '',
-    '> Prior-only rows are not outcome claims. A plugin without a qualifying paired with/without result cannot outrank a measured plugin.',
+    '> Prior-only rows are **E0 / unrated**: metadata is not outcome evidence. No quality rank or #1 is published while every row is E0.',
     '',
-    '## Leaderboard by capability surface',
+    '## Evidence by capability surface',
     '',
   ]
   for (const surface of registry.surfaces) {
     lines.push(`### ${surface.zh} / ${surface.label}`, '')
-    lines.push('| # | Plugin | Score | Tier | Prior | Bench | Coverage | Confidence |')
-    lines.push('|---:|---|---:|---|---:|---:|---:|---:|')
+    lines.push('| # | Plugin | GOE | Tier | Prior | Bench | Coverage | Evidence completeness |')
+    lines.push('|---:|---|---|---|---:|---:|---:|---:|')
     for (const row of surface.leaderboard.slice(0, 10)) {
-      lines.push(`| ${row.rank} | [${row.name}](${row.repo}) | ${row.score} | ${row.tier} | ${row.prior} | ${row.bench ?? '—'} | ${Math.round(row.coverage * 100)}% | ${row.confidence} |`)
+      lines.push(`| ${row.rank ?? '—'} | [${row.name}](${row.repo}) | ${row.evidenceGrade}${row.unrated ? ' unrated' : ''} | ${row.unrated ? 'unrated' : row.tier} | ${row.prior} | ${row.bench ?? '—'} | ${Math.round(row.coverage * 100)}% | ${row.confidence} |`)
     }
     lines.push('', `_${surface.note}_`, '')
   }
@@ -148,6 +149,10 @@ export function buildOutputs({ today } = {}) {
     today: today ?? pluginsFile.observedAt ?? generatedAt.slice(0, 10),
     generatedAt,
   })
+  const inputHash = createHash('sha256')
+    .update(JSON.stringify({ plugins: pluginsFile, tasks: tasksFile, results, contributions }))
+    .digest('hex')
+  registry.source.inputHash = `sha256:${inputHash}`
 
   const badges = new Map()
   const badgeIndex = []
@@ -155,13 +160,14 @@ export function buildOutputs({ today } = {}) {
     for (const row of surface.leaderboard) {
       const base = slug(row.pluginId)
       const file = `${base}.svg`
-      const message = row.rank === 1
-        ? `#1 ${surface.id} · ${row.score}`
-        : `${row.score} · ${row.tier}`
+      const positiveMeasured = row.tier === 'measured' && row.goe?.positive === true
+      const message = positiveMeasured
+        ? (row.rank === 1 ? `#1 ${surface.id} · ${row.evidenceGrade}` : `${row.evidenceGrade} · measured`)
+        : (row.unrated ? 'E0 · unrated' : `${row.evidenceGrade} · provisional`)
       const svg = badgeSvg('dsh-score', message, tierColor(row.tier))
       badges.set(file, svg)
-      if (row.rank === 1) {
-        badges.set(`${base}-top.svg`, badgeSvg('dsh-score', `#1 ${surface.id} · ${row.score}`, '#2f855a'))
+      if (positiveMeasured && row.rank === 1) {
+        badges.set(`${base}-top.svg`, badgeSvg('dsh-score', `#1 ${surface.id} · ${row.evidenceGrade}`, '#2f855a'))
       }
       if (!badgeIndex.some(item => item.pluginId === row.pluginId)) {
         badgeIndex.push({
@@ -169,11 +175,13 @@ export function buildOutputs({ today } = {}) {
           name: row.name,
           surface: row.surface,
           rank: row.rank,
+          evidenceGrade: row.evidenceGrade,
+          unrated: row.unrated,
           score: row.score,
           tier: row.tier,
           svg: `badges/${file}`,
           url: `${BADGE_BASE}${file}`,
-          markdown: `![dsh-score ${row.score} · ${row.tier}](${BADGE_BASE}${file})`,
+          markdown: `![dsh-score ${row.evidenceGrade}${row.unrated ? ' · unrated' : ''}](${BADGE_BASE}${file})`,
         })
       }
     }
@@ -183,7 +191,7 @@ export function buildOutputs({ today } = {}) {
     badges.set(file, badgeSvg('dsh-score contributor', `${contributor.credits} credits · ${contributor.badge}`, contributorColor(contributor.badge)))
     contributor.svg = `badges/${file}`
   }
-  badges.set('dsh-bench.svg', badgeSvg('dsh-score', `${registry.stats.measuredPlugins}/${registry.stats.plugins} measured`, '#2f855a'))
+  badges.set('dsh-bench.svg', badgeSvg('dsh-score', `${registry.stats.measuredPlugins}/${registry.stats.plugins} measured · ${registry.stats.unratedPlugins} unrated`, '#2f855a'))
 
   return {
     registry,
@@ -220,6 +228,15 @@ function main() {
     ...[...outputs.badges].map(([name, content]) => [`badges/${name}`, content]),
     ...[...outputs.badges].map(([name, content]) => [`site/badges/${name}`, content]),
   ]
+  const expectedBadges = new Set(outputs.badges.keys())
+  const extraBadges = []
+  for (const dir of ['badges', 'site/badges']) {
+    const absolute = join(ROOT, dir)
+    if (!existsSync(absolute)) continue
+    for (const name of readdirSync(absolute)) {
+      if (name.endsWith('.svg') && !expectedBadges.has(name)) extraBadges.push(join(dir, name))
+    }
+  }
   if (check) {
     let drift = 0
     for (const [path, content] of files) {
@@ -229,12 +246,17 @@ function main() {
         drift += 1
       }
     }
+    for (const path of extraBadges) {
+      console.error(`stale badge: ${path}`)
+      drift += 1
+    }
     if (drift > 0) process.exit(1)
     console.log('registry is up to date')
     return
   }
   for (const [path, content] of files) write(path, content)
-  console.log(`wrote ${files.length} files · ${outputs.registry.stats.plugins} plugins · ${outputs.registry.stats.measuredPlugins} measured · ${outputs.registry.stats.contributors} contributors`)
+  for (const path of extraBadges) unlinkSync(join(ROOT, path))
+  console.log(`wrote ${files.length} files · ${outputs.registry.stats.plugins} plugins · ${outputs.registry.stats.measuredPlugins} measured · ${outputs.registry.stats.unratedPlugins} unrated · ${outputs.registry.stats.contributors} contributors`)
 }
 
 if (process.argv[1] !== undefined && import.meta.url === pathToFileURL(process.argv[1]).href) main()

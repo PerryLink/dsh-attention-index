@@ -1,157 +1,157 @@
 # dsh-score
 
-Generated: 2026-10-18T00:00:00.000Z · scoring `v1` · 0/42 plugins with paired bench evidence
+Generated: 2026-10-18T00:00:00.000Z · reliability `soe-goe/v1` · 0/42 measured · 42 unrated
 
-> Prior-only rows are not outcome claims. A plugin without a qualifying paired with/without result cannot outrank a measured plugin.
+> Prior-only rows are **E0 / unrated**: metadata is not outcome evidence. No quality rank or #1 is published while every row is E0.
 
-## Leaderboard by capability surface
+## Evidence by capability surface
 
 ### 跨会话记忆 / Cross-session memory
 
-| # | Plugin | Score | Tier | Prior | Bench | Coverage | Confidence |
-|---:|---|---:|---|---:|---:|---:|---:|
-| 1 | [hindsight](https://github.com/vectorize-io/hindsight) | 38.3 | prior | 63.9 | — | 0% | 0.6 |
-| 2 | [OpenViking memory](https://github.com/volcengine/OpenViking) | 38.3 | prior | 63.9 | — | 0% | 0.6 |
-| 3 | [dsh-memento](https://github.com/PerryLink/dsh-memento) | 29.3 | prior | 48.8 | — | 0% | 0.4 |
+| # | Plugin | GOE | Tier | Prior | Bench | Coverage | Evidence completeness |
+|---:|---|---|---|---:|---:|---:|---:|
+| — | [OpenViking memory](https://github.com/volcengine/OpenViking) | E0 unrated | unrated | 68.4 | — | 0% | 0.6 |
+| — | [hindsight](https://github.com/vectorize-io/hindsight) | E0 unrated | unrated | 63.6 | — | 0% | 0.6 |
+| — | [dsh-memento](https://github.com/PerryLink/dsh-memento) | E0 unrated | unrated | 50 | — | 0% | 0.4 |
 
-_Prior-only: no paired with/without bench result meets the minimum sample count yet._
+_Prior-only: no paired with/without bench result meets the minimum evidence gate. Rows are unrated; the legacy discovery order is not a quality rank._
 
 ### 成本与上下文 / Cost and context accounting
 
-| # | Plugin | Score | Tier | Prior | Bench | Coverage | Confidence |
-|---:|---|---:|---|---:|---:|---:|---:|
-| 1 | [dsh-cost-meter](https://github.com/Han-1413141/dsh-cost-meter) | 37.7 | prior | 62.9 | — | 0% | 0.6 |
-| 2 | [dsh-context](https://github.com/bowenliang123/dsh-context) | 37.4 | prior | 62.4 | — | 0% | 0.6 |
-| 3 | [dsh-budget](https://github.com/PerryLink/dsh-budget) | 28.5 | prior | 47.5 | — | 0% | 0.4 |
+| # | Plugin | GOE | Tier | Prior | Bench | Coverage | Evidence completeness |
+|---:|---|---|---|---:|---:|---:|---:|
+| — | [dsh-context](https://github.com/bowenliang123/dsh-context) | E0 unrated | unrated | 70.6 | — | 0% | 0.6 |
+| — | [dsh-cost-meter](https://github.com/Han-1413141/dsh-cost-meter) | E0 unrated | unrated | 70.6 | — | 0% | 0.6 |
+| — | [dsh-budget](https://github.com/PerryLink/dsh-budget) | E0 unrated | unrated | 48.5 | — | 0% | 0.4 |
 
-_Prior-only: no paired with/without bench result meets the minimum sample count yet._
+_Prior-only: no paired with/without bench result meets the minimum evidence gate. Rows are unrated; the legacy discovery order is not a quality rank._
 
 ### 图像理解 / Image understanding
 
-| # | Plugin | Score | Tier | Prior | Bench | Coverage | Confidence |
-|---:|---|---:|---|---:|---:|---:|---:|
-| 1 | [modlens](https://github.com/liustack/modlens) | 38.2 | prior | 63.7 | — | 0% | 0.6 |
-| 2 | [dsh-vision-router](https://github.com/ysr666/dsh-vision-router) | 35.9 | prior | 59.9 | — | 0% | 0.6 |
-| 3 | [dsh-vision-toolkit](https://github.com/Anionex/dsh-vision-toolkit) | 34.4 | prior | 57.3 | — | 0% | 0.6 |
+| # | Plugin | GOE | Tier | Prior | Bench | Coverage | Evidence completeness |
+|---:|---|---|---|---:|---:|---:|---:|
+| — | [modlens](https://github.com/liustack/modlens) | E0 unrated | unrated | 63.8 | — | 0% | 0.6 |
+| — | [dsh-vision-router](https://github.com/ysr666/dsh-vision-router) | E0 unrated | unrated | 56.8 | — | 0% | 0.6 |
+| — | [dsh-vision-toolkit](https://github.com/Anionex/dsh-vision-toolkit) | E0 unrated | unrated | 55.1 | — | 0% | 0.6 |
 
-_Prior-only: no paired with/without bench result meets the minimum sample count yet._
+_Prior-only: no paired with/without bench result meets the minimum evidence gate. Rows are unrated; the legacy discovery order is not a quality rank._
 
 ### 联网搜索 / Web search and fetch
 
-| # | Plugin | Score | Tier | Prior | Bench | Coverage | Confidence |
-|---:|---|---:|---|---:|---:|---:|---:|
-| 1 | [dsh-free-search](https://github.com/DDDMUC/dsh-free-search) | 35 | prior | 58.3 | — | 0% | 0.6 |
-| 2 | [modsearch](https://github.com/liustack/modsearch) | 34.9 | prior | 58.2 | — | 0% | 0.6 |
-| 3 | [anysearch-dsh](https://github.com/anysearch-team/anysearch-dsh) | 33.4 | prior | 55.6 | — | 0% | 0.6 |
+| # | Plugin | GOE | Tier | Prior | Bench | Coverage | Evidence completeness |
+|---:|---|---|---|---:|---:|---:|---:|
+| — | [anysearch-dsh](https://github.com/anysearch-team/anysearch-dsh) | E0 unrated | unrated | 54.2 | — | 0% | 0.6 |
+| — | [modsearch](https://github.com/liustack/modsearch) | E0 unrated | unrated | 54.2 | — | 0% | 0.6 |
+| — | [dsh-free-search](https://github.com/DDDMUC/dsh-free-search) | E0 unrated | unrated | 51.5 | — | 0% | 0.6 |
 
-_Prior-only: no paired with/without bench result meets the minimum sample count yet._
+_Prior-only: no paired with/without bench result meets the minimum evidence gate. Rows are unrated; the legacy discovery order is not a quality rank._
 
 ### 浏览器与桌面控制 / Browser and desktop control
 
-| # | Plugin | Score | Tier | Prior | Bench | Coverage | Confidence |
-|---:|---|---:|---|---:|---:|---:|---:|
-| 1 | [BrowserSkill](https://github.com/Tencent/BrowserSkill) | 36.5 | prior | 60.9 | — | 0% | 0.6 |
-| 2 | [dsh-click](https://github.com/PerryLink/dsh-click) | 28.7 | prior | 47.8 | — | 0% | 0.4 |
-| 3 | [dsh-browser](https://github.com/Lum1104/dsh-browser) | 22.9 | prior | 38.1 | — | 0% | 0.4 |
+| # | Plugin | GOE | Tier | Prior | Bench | Coverage | Evidence completeness |
+|---:|---|---|---|---:|---:|---:|---:|
+| — | [BrowserSkill](https://github.com/Tencent/BrowserSkill) | E0 unrated | unrated | 60.5 | — | 0% | 0.6 |
+| — | [dsh-click](https://github.com/PerryLink/dsh-click) | E0 unrated | unrated | 51.8 | — | 0% | 0.4 |
+| — | [dsh-browser](https://github.com/Lum1104/dsh-browser) | E0 unrated | unrated | 45.2 | — | 0% | 0.4 |
 
-_Prior-only: no paired with/without bench result meets the minimum sample count yet._
+_Prior-only: no paired with/without bench result meets the minimum evidence gate. Rows are unrated; the legacy discovery order is not a quality rank._
 
 ### Office 文档 / Office documents and deliverables
 
-| # | Plugin | Score | Tier | Prior | Bench | Coverage | Confidence |
-|---:|---|---:|---|---:|---:|---:|---:|
-| 1 | [dsh-univer-office](https://github.com/dream-num/dsh-univer-office) | 34.9 | prior | 58.1 | — | 0% | 0.6 |
-| 2 | [WeKnora](https://github.com/Tencent/WeKnora) | 34.2 | prior | 57 | — | 0% | 0.6 |
-| 3 | [ppt-studio](https://github.com/Devin-AXIS/iPolloWork) | 31.6 | prior | 52.6 | — | 0% | 0.6 |
+| # | Plugin | GOE | Tier | Prior | Bench | Coverage | Evidence completeness |
+|---:|---|---|---|---:|---:|---:|---:|
+| — | [WeKnora](https://github.com/Tencent/WeKnora) | E0 unrated | unrated | 59.2 | — | 0% | 0.6 |
+| — | [ppt-studio](https://github.com/Devin-AXIS/iPolloWork) | E0 unrated | unrated | 53.1 | — | 0% | 0.6 |
+| — | [dsh-univer-office](https://github.com/dream-num/dsh-univer-office) | E0 unrated | unrated | 51.8 | — | 0% | 0.6 |
 
-_Prior-only: no paired with/without bench result meets the minimum sample count yet._
+_Prior-only: no paired with/without bench result meets the minimum evidence gate. Rows are unrated; the legacy discovery order is not a quality rank._
 
 ### 多智能体编排 / Multi-agent orchestration
 
-| # | Plugin | Score | Tier | Prior | Bench | Coverage | Confidence |
-|---:|---|---:|---|---:|---:|---:|---:|
-| 1 | [dsh-agent-teams](https://github.com/NanmiCoder/dsh-agent-teams) | 37.4 | prior | 62.3 | — | 0% | 0.6 |
-| 2 | [dsh-autotier](https://github.com/PerryLink/dsh-autotier) | 28 | prior | 46.6 | — | 0% | 0.4 |
-| 3 | [ouroboros](https://github.com/Q00/ouroboros) | 23.5 | prior | 39.1 | — | 0% | 0.4 |
+| # | Plugin | GOE | Tier | Prior | Bench | Coverage | Evidence completeness |
+|---:|---|---|---|---:|---:|---:|---:|
+| — | [dsh-agent-teams](https://github.com/NanmiCoder/dsh-agent-teams) | E0 unrated | unrated | 61.2 | — | 0% | 0.6 |
+| — | [ouroboros](https://github.com/Q00/ouroboros) | E0 unrated | unrated | 47.4 | — | 0% | 0.4 |
+| — | [dsh-autotier](https://github.com/PerryLink/dsh-autotier) | E0 unrated | unrated | 39.1 | — | 0% | 0.4 |
 
-_Prior-only: no paired with/without bench result meets the minimum sample count yet._
+_Prior-only: no paired with/without bench result meets the minimum evidence gate. Rows are unrated; the legacy discovery order is not a quality rank._
 
 ### 权限与审批安全 / Permission and approval safety
 
-| # | Plugin | Score | Tier | Prior | Bench | Coverage | Confidence |
-|---:|---|---:|---|---:|---:|---:|---:|
-| 1 | [dsh-auto-review](https://github.com/PerryLink/dsh-auto-review) | 39.2 | prior | 65.3 | — | 0% | 0.6 |
-| 2 | [dsh-permission-rules](https://github.com/PerryLink/dsh-permission-rules) | 39.1 | prior | 65.2 | — | 0% | 0.8 |
-| 3 | [dsh-auto-mode](https://github.com/NanmiCoder/dsh-auto-mode) | 18 | prior | 30 | — | 0% | 0.6 |
+| # | Plugin | GOE | Tier | Prior | Bench | Coverage | Evidence completeness |
+|---:|---|---|---|---:|---:|---:|---:|
+| — | [dsh-auto-review](https://github.com/PerryLink/dsh-auto-review) | E0 unrated | unrated | 65.4 | — | 0% | 0.4 |
+| — | [dsh-permission-rules](https://github.com/PerryLink/dsh-permission-rules) | E0 unrated | unrated | 57.6 | — | 0% | 0.8 |
+| — | [dsh-auto-mode](https://github.com/NanmiCoder/dsh-auto-mode) | E0 unrated | unrated | 30 | — | 0% | 0.6 |
 
-_Prior-only: no paired with/without bench result meets the minimum sample count yet._
+_Prior-only: no paired with/without bench result meets the minimum evidence gate. Rows are unrated; the legacy discovery order is not a quality rank._
 
 ### MCP 连接管理 / MCP connection management
 
-| # | Plugin | Score | Tier | Prior | Bench | Coverage | Confidence |
-|---:|---|---:|---|---:|---:|---:|---:|
-| 1 | [dsh-mcp-panel](https://github.com/PerryLink/dsh-mcp-panel) | 41.4 | prior | 69 | — | 0% | 0.8 |
-| 2 | [dsh-mcp-connector](https://github.com/duhu2000/dsh-mcp-connector) | 32.6 | prior | 54.3 | — | 0% | 0.6 |
+| # | Plugin | GOE | Tier | Prior | Bench | Coverage | Evidence completeness |
+|---:|---|---|---|---:|---:|---:|---:|
+| — | [dsh-mcp-panel](https://github.com/PerryLink/dsh-mcp-panel) | E0 unrated | unrated | 62 | — | 0% | 0.8 |
+| — | [dsh-mcp-connector](https://github.com/duhu2000/dsh-mcp-connector) | E0 unrated | unrated | 45.2 | — | 0% | 0.6 |
 
-_Prior-only: no paired with/without bench result meets the minimum sample count yet._
+_Prior-only: no paired with/without bench result meets the minimum evidence gate. Rows are unrated; the legacy discovery order is not a quality rank._
 
 ### IM 与远程访问 / IM and remote access
 
-| # | Plugin | Score | Tier | Prior | Bench | Coverage | Confidence |
-|---:|---|---:|---|---:|---:|---:|---:|
-| 1 | [dsh-im](https://github.com/xmanrui/dsh-im) | 37.1 | prior | 61.8 | — | 0% | 0.6 |
-| 2 | [dsh-pocket](https://github.com/shaobeichen/dsh-pocket) | 31 | prior | 51.6 | — | 0% | 0.6 |
-| 3 | [dsh-reach](https://github.com/PerryLink/dsh-reach) | 28.1 | prior | 46.8 | — | 0% | 0.4 |
+| # | Plugin | GOE | Tier | Prior | Bench | Coverage | Evidence completeness |
+|---:|---|---|---|---:|---:|---:|---:|
+| — | [dsh-pocket](https://github.com/shaobeichen/dsh-pocket) | E0 unrated | unrated | 61.6 | — | 0% | 0.6 |
+| — | [dsh-im](https://github.com/xmanrui/dsh-im) | E0 unrated | unrated | 59 | — | 0% | 0.6 |
+| — | [dsh-reach](https://github.com/PerryLink/dsh-reach) | E0 unrated | unrated | 41.4 | — | 0% | 0.4 |
 
-_Prior-only: no paired with/without bench result meets the minimum sample count yet._
+_Prior-only: no paired with/without bench result meets the minimum evidence gate. Rows are unrated; the legacy discovery order is not a quality rank._
 
 ### 插件开发与核验 / Plugin development and verification
 
-| # | Plugin | Score | Tier | Prior | Bench | Coverage | Confidence |
-|---:|---|---:|---|---:|---:|---:|---:|
-| 1 | [dsh-plugin-guide](https://github.com/PerryLink/dsh-plugin-guide) | 39.3 | prior | 65.5 | — | 0% | 0.8 |
-| 2 | [upstream-radar](https://github.com/MicroMilo/upstream-radar) | 28.7 | prior | 47.8 | — | 0% | 0.6 |
-| 3 | [dsh-score](https://github.com/PerryLink/dsh-score) | 28.6 | prior | 47.6 | — | 0% | 0.4 |
-| 4 | [dsh-test-drive](https://github.com/PerryLink/dsh-test-drive) | 28.6 | prior | 47.6 | — | 0% | 0.4 |
+| # | Plugin | GOE | Tier | Prior | Bench | Coverage | Evidence completeness |
+|---:|---|---|---|---:|---:|---:|---:|
+| — | [dsh-plugin-guide](https://github.com/PerryLink/dsh-plugin-guide) | E0 unrated | unrated | 57.9 | — | 0% | 0.8 |
+| — | [dsh-score](https://github.com/PerryLink/dsh-score) | E0 unrated | unrated | 49.4 | — | 0% | 0.4 |
+| — | [dsh-test-drive](https://github.com/PerryLink/dsh-test-drive) | E0 unrated | unrated | 49.4 | — | 0% | 0.4 |
+| — | [upstream-radar](https://github.com/MicroMilo/upstream-radar) | E0 unrated | unrated | 41.4 | — | 0% | 0.6 |
 
-_Prior-only: no paired with/without bench result meets the minimum sample count yet._
+_Prior-only: no paired with/without bench result meets the minimum evidence gate. Rows are unrated; the legacy discovery order is not a quality rank._
 
 ### 语音输入输出 / Voice input and output
 
-| # | Plugin | Score | Tier | Prior | Bench | Coverage | Confidence |
-|---:|---|---:|---|---:|---:|---:|---:|
-| 1 | [dsh-talk](https://github.com/PerryLink/dsh-talk) | 28.6 | prior | 47.7 | — | 0% | 0.4 |
+| # | Plugin | GOE | Tier | Prior | Bench | Coverage | Evidence completeness |
+|---:|---|---|---|---:|---:|---:|---:|
+| — | [dsh-talk](https://github.com/PerryLink/dsh-talk) | E0 unrated | unrated | 50.6 | — | 0% | 0.4 |
 
-_Prior-only: no paired with/without bench result meets the minimum sample count yet._
+_Prior-only: no paired with/without bench result meets the minimum evidence gate. Rows are unrated; the legacy discovery order is not a quality rank._
 
 ### 研究报告与证据 / Research reports and evidence
 
-| # | Plugin | Score | Tier | Prior | Bench | Coverage | Confidence |
-|---:|---|---:|---|---:|---:|---:|---:|
-| 1 | [dsh-industry-research](https://github.com/PerryLink/dsh-industry-research) | 29.4 | prior | 49 | — | 0% | 0.4 |
-| 2 | [dsh-research-report](https://github.com/PerryLink/dsh-research-report) | 29.4 | prior | 49 | — | 0% | 0.4 |
-| 3 | [dsh-fund-research](https://github.com/PerryLink/dsh-fund-research) | 29 | prior | 48.4 | — | 0% | 0.4 |
+| # | Plugin | GOE | Tier | Prior | Bench | Coverage | Evidence completeness |
+|---:|---|---|---|---:|---:|---:|---:|
+| — | [dsh-industry-research](https://github.com/PerryLink/dsh-industry-research) | E0 unrated | unrated | 64.9 | — | 0% | 0.4 |
+| — | [dsh-research-report](https://github.com/PerryLink/dsh-research-report) | E0 unrated | unrated | 64.9 | — | 0% | 0.4 |
+| — | [dsh-fund-research](https://github.com/PerryLink/dsh-fund-research) | E0 unrated | unrated | 58.6 | — | 0% | 0.4 |
 
-_Prior-only: no paired with/without bench result meets the minimum sample count yet._
+_Prior-only: no paired with/without bench result meets the minimum evidence gate. Rows are unrated; the legacy discovery order is not a quality rank._
 
 ### 侧栏与输入区 / Sidebar and composer UI
 
-| # | Plugin | Score | Tier | Prior | Bench | Coverage | Confidence |
-|---:|---|---:|---|---:|---:|---:|---:|
-| 1 | [DSH-better-sidebar](https://github.com/omdsh-dev/DSH-better-sidebar) | 38.3 | prior | 63.9 | — | 0% | 0.8 |
-| 2 | [dsh-genui](https://github.com/omdsh-dev/dsh-genui) | 35 | prior | 58.4 | — | 0% | 0.6 |
-| 3 | [dsh-composer-history](https://github.com/PerryLink/dsh-composer-history) | 28.7 | prior | 47.8 | — | 0% | 0.4 |
+| # | Plugin | GOE | Tier | Prior | Bench | Coverage | Evidence completeness |
+|---:|---|---|---|---:|---:|---:|---:|
+| — | [DSH-better-sidebar](https://github.com/omdsh-dev/DSH-better-sidebar) | E0 unrated | unrated | 65.5 | — | 0% | 0.8 |
+| — | [dsh-genui](https://github.com/omdsh-dev/dsh-genui) | E0 unrated | unrated | 53.5 | — | 0% | 0.6 |
+| — | [dsh-composer-history](https://github.com/PerryLink/dsh-composer-history) | E0 unrated | unrated | 51.2 | — | 0% | 0.4 |
 
-_Prior-only: no paired with/without bench result meets the minimum sample count yet._
+_Prior-only: no paired with/without bench result meets the minimum evidence gate. Rows are unrated; the legacy discovery order is not a quality rank._
 
 ### 桌面客户端 / Desktop shell
 
-| # | Plugin | Score | Tier | Prior | Bench | Coverage | Confidence |
-|---:|---|---:|---|---:|---:|---:|---:|
-| 1 | [dsh-plugin-desktop](https://github.com/anywhere-labs/deepseek-harness-desktop) | 31.9 | prior | 53.1 | — | 0% | 0.6 |
-| 2 | [dsh-tauri](https://github.com/dsh-tauri-desk/deepseek-harness-desktop) | 21.3 | prior | 35.5 | — | 0% | 0.4 |
+| # | Plugin | GOE | Tier | Prior | Bench | Coverage | Evidence completeness |
+|---:|---|---|---|---:|---:|---:|---:|
+| — | [dsh-plugin-desktop](https://github.com/anywhere-labs/deepseek-harness-desktop) | E0 unrated | unrated | 59.5 | — | 0% | 0.6 |
+| — | [dsh-tauri](https://github.com/dsh-tauri-desk/deepseek-harness-desktop) | E0 unrated | unrated | 39.1 | — | 0% | 0.4 |
 
-_Prior-only: no paired with/without bench result meets the minimum sample count yet._
+_Prior-only: no paired with/without bench result meets the minimum evidence gate. Rows are unrated; the legacy discovery order is not a quality rank._
 
 ## Contributors
 

@@ -10,6 +10,12 @@ one more leaderboard.
 > `dsh-score-index` (see `docs/MIGRATION-dsh-score-index.md`). The local
 > inspector is the separate `dsh-score` plugin; the in-app consumer is
 > `dsh-community-bench`.
+>
+> **P0 status (2026-10-18):** implemented the SOE/GOE layer
+> (`docs/SOE-GOE.md`), all 42 rows are `E0 / unrated`, prior `#1`/top badges and
+> quality slots are removed, and the lift interval is Newcombe. P1–P3 remain
+> blocked on measured runs, signing keys and network; see
+> `docs/P0-P3-PLAN.md`.
 
 ---
 

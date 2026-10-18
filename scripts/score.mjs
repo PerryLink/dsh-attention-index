@@ -12,6 +12,8 @@
  * @module dsh-attention-index/score
  */
 
+import { evaluateReliability, RELIABILITY_VERSION } from './reliability.mjs'
+
 export const SCORING_VERSION = 'v1'
 export const PRIOR_CAP = 60
 export const MIN_SAMPLES = 3
@@ -46,30 +48,43 @@ export function maintenanceScore(lastPush, today) {
   return 5
 }
 
-/** Adoption sub-score; all three public signals are used with small weights. */
-export function adoptionScore(evidence) {
-  const installs = Number.isFinite(evidence.installs) ? evidence.installs : 0
-  const npm = Number.isFinite(evidence.npm7d) ? evidence.npm7d : 0
-  const stars = Number.isFinite(evidence.stars) ? evidence.stars : 0
-  return clamp(
-    18 * Math.log10(installs + 1) + 14 * Math.log10(npm + 1) + 4 * Math.log10(stars + 1),
-    0,
-    100,
-  )
+/**
+ * Adoption sub-score. Missing channels are excluded and the observed weights are
+ * renormalized; a download count without an npm package identity is not counted.
+ * Returns null when no channel is observed (never zero-as-missing).
+ */
+export function adoptionScore(evidence, npmName) {
+  const allowNpm = npmName === undefined || Boolean(npmName)
+  const channels = [
+    { weight: 18, value: evidence.installs },
+    { weight: 14, value: allowNpm ? evidence.npm7d : undefined },
+    { weight: 4, value: evidence.stars },
+  ].filter(channel => Number.isFinite(channel.value) && channel.value >= 0)
+  if (channels.length === 0) return null
+  const totalWeight = channels.reduce((sum, channel) => sum + channel.weight, 0)
+  const weightedLogs = channels.reduce((sum, channel) => sum + channel.weight * Math.log10(channel.value + 1), 0)
+  return clamp((36 * weightedLogs) / totalWeight, 0, 100)
 }
 
-/** Verification sub-score; self-checks count much less than a certification. */
-export function verificationScore(verification) {
-  if (verification === 'certified') return 100
-  if (verification === 'doctor') return 35
+/**
+ * Verification sub-score. A bare `certified`/`doctor` string is not evidence:
+ * it must name an independent certifier (`certifiedBy` or
+ * `verificationSource`). Self/operator assertions score 0.
+ */
+export function verificationScore(evidence) {
+  if (typeof evidence === 'string') return 0
+  const certifier = evidence?.certifiedBy ?? evidence?.verificationSource
+  if (typeof certifier !== 'string' || certifier.trim() === '') return 0
+  if (evidence.verification === 'certified') return 100
+  if (evidence.verification === 'doctor') return 35
   return 0
 }
 
-/** Documentation sub-score from the coarse `docs` field. */
+/** Documentation sub-score; absent docs is unknown, not an average 50. */
 export function documentationScore(docs) {
   if (docs === 'full') return 90
   if (docs === 'basic') return 65
-  return 50
+  return null
 }
 
 /**
@@ -82,11 +97,20 @@ export function documentationScore(docs) {
  */
 export function priorOf(plugin, today) {
   const evidence = plugin.evidence ?? {}
-  const maintenance = maintenanceScore(evidence.lastPush, today)
-  const adoption = adoptionScore(evidence)
-  const verification = verificationScore(evidence.verification)
+  const maintenance = maintenanceScore(evidence.lastPush, evidence.observedAt ?? today)
+  const adoption = adoptionScore(evidence, plugin.npm)
+  const verification = verificationScore(evidence)
   const documentation = documentationScore(evidence.docs)
-  let score = 0.30 * maintenance + 0.30 * adoption + 0.25 * verification + 0.15 * documentation
+  const parts = [
+    { weight: 0.30, value: maintenance },
+    { weight: 0.30, value: adoption },
+    { weight: 0.25, value: verification },
+    { weight: 0.15, value: documentation },
+  ].filter(part => part.value !== null && part.value !== undefined)
+  const totalWeight = parts.reduce((sum, part) => sum + part.weight, 0)
+  let score = totalWeight > 0
+    ? parts.reduce((sum, part) => sum + part.weight * part.value, 0) / totalWeight
+    : 0
   // The raw prior keeps its full ordering; the 60-point public cap is applied
   // only to the final score of a prior-only plugin (below), so high-prior rows
   // do not collapse into a 60-point tie.
@@ -97,7 +121,7 @@ export function priorOf(plugin, today) {
     + 0.2 * (Number.isFinite(evidence.installs) ? 1 : 0)
     + 0.2 * (Number.isFinite(evidence.npm7d) ? 1 : 0)
     + 0.2 * (Number.isFinite(evidence.stars) ? 1 : 0)
-    + 0.2 * (evidence.verification === 'certified' ? 1 : 0),
+    + 0.2 * (verification > 0 ? 1 : 0),
     0,
     1,
   )
@@ -105,19 +129,53 @@ export function priorOf(plugin, today) {
     score: round(clamp(score, 0, 100), 1),
     confidence: round(confidence, 2),
     dimensions: {
-      maintenance: round(maintenance, 1),
-      adoption: round(adoption, 1),
+      maintenance: maintenance === null ? null : round(maintenance, 1),
+      adoption: adoption === null ? null : round(adoption, 1),
       verification: round(verification, 1),
-      documentation: round(documentation, 1),
+      documentation: documentation === null ? null : round(documentation, 1),
     },
   }
 }
 
 /**
- * Lower bound of a difference of two proportions, normal approximation.
- * Conservative enough for small samples; the registry also requires a minimum
- * sample count before using it.
+ * Wilson score interval for one proportion.
  *
+ * @param {number} p - observed proportion.
+ * @param {number} n - sample count.
+ * @param {number} [z] - normal quantile; 1.96 for 95%.
+ * @returns {[number, number]} lower and upper bounds in [0, 1].
+ */
+export function wilsonInterval(p, n, z = 1.96) {
+  if (!(n > 0)) return [0, 1]
+  const denominator = 1 + (z * z) / n
+  const centre = (p + (z * z) / (2 * n)) / denominator
+  const half = (z * Math.sqrt((p * (1 - p)) / n + (z * z) / (4 * n * n))) / denominator
+  return [clamp(centre - half, 0, 1), clamp(centre + half, 0, 1)]
+}
+
+/**
+ * Newcombe hybrid-score interval for a difference of independent proportions.
+ * Replaces the Wald interval, which collapses to zero variance at p=1 and
+ * produced 100 for a 3/3 vs 0/3 sweep.
+ *
+ * @param {number} p1 - with-plugin rate.
+ * @param {number} n1 - with-plugin samples.
+ * @param {number} p0 - without-plugin rate.
+ * @param {number} n0 - without-plugin samples.
+ * @returns {{lift:number, lower:number, upper:number}}
+ */
+export function liftInterval(p1, n1, p0, n0) {
+  if (!(n1 > 0) || !(n0 > 0)) return { lift: 0, lower: -1, upper: 1 }
+  const lift = p1 - p0
+  const [l1, u1] = wilsonInterval(p1, n1)
+  const [l0, u0] = wilsonInterval(p0, n0)
+  const lower = lift - Math.sqrt((p1 - l1) ** 2 + (u0 - p0) ** 2)
+  const upper = lift + Math.sqrt((u1 - p1) ** 2 + (p0 - l0) ** 2)
+  return { lift, lower: clamp(lower, -1, 1), upper: clamp(upper, -1, 1) }
+}
+
+/**
+ * Lower bound of a difference of two proportions (Newcombe).
  * @param {number} p1 - with-plugin success rate.
  * @param {number} n1 - with-plugin samples.
  * @param {number} p0 - without-plugin success rate.
@@ -125,11 +183,7 @@ export function priorOf(plugin, today) {
  * @returns {number} lower bound in [-1, 1].
  */
 export function liftLowerBound(p1, n1, p0, n0) {
-  if (!(n1 > 0) || !(n0 > 0)) return -1
-  const lift = p1 - p0
-  const variance = (p1 * (1 - p1)) / n1 + (p0 * (1 - p0)) / n0
-  const se = Math.sqrt(Math.max(0, variance))
-  return clamp(lift - 1.96 * se, -1, 1)
+  return liftInterval(p1, n1, p0, n0).lower
 }
 
 /**
@@ -165,7 +219,8 @@ export function aggregateBench(results, tasks, options = {}) {
     if (entry.with.length < minSamples || entry.without.length < minSamples) continue
     const p1 = mean(entry.with.map(row => row.outcome.pass ? 1 : 0))
     const p0 = mean(entry.without.map(row => row.outcome.pass ? 1 : 0))
-    const lcb = liftLowerBound(p1, entry.with.length, p0, entry.without.length)
+    const interval = liftInterval(p1, entry.with.length, p0, entry.without.length)
+    const lcb = interval.lower
     const row = {
       taskId: entry.taskId,
       surface: task.surface,
@@ -176,6 +231,8 @@ export function aggregateBench(results, tasks, options = {}) {
       withoutSuccess: round(p0, 3),
       lift: round(p1 - p0, 3),
       liftLowerBound: round(lcb, 3),
+      ciLower: round(interval.lower, 3),
+      ciUpper: round(interval.upper, 3),
       score: round(((lcb + 1) / 2) * 100, 1),
       runners: unique(entry.with.map(row => row.runner?.id).filter(Boolean)).length,
       runs: entry.with.length + entry.without.length,
@@ -194,7 +251,7 @@ export function aggregateBench(results, tasks, options = {}) {
       : null
     const surface = aggregate.tasks[0]?.surface
     const surfaceTasks = tasks.filter(task => task.surface === surface).length
-    const coverage = surfaceTasks > 0 ? aggregate.tasks.length / surfaceTasks : 0
+    const coverage = surfaceTasks > 0 ? Math.min(1, aggregate.tasks.length / surfaceTasks) : 0
     output.set(pluginId, {
       benchScore: benchScore === null ? null : round(benchScore, 1),
       coverage: round(coverage, 3),
@@ -303,9 +360,13 @@ export function buildRegistry(input) {
   const surfaceRows = surfaces.map((surface) => {
     const rows = bySurface.get(surface.id) ?? []
     rows.sort(compareEntries)
-    rows.forEach((row, index) => { row.rank = index + 1 })
+    rows.forEach((row, index) => {
+      row.discoveryPosition = index + 1
+      row.rank = row.tier === 'measured' ? index + 1 : null
+    })
     const measured = rows.filter(row => row.tier === 'measured')
-    const top = (measured.length > 0 ? measured : rows).slice(0, 3)
+    const positive = measured.filter(row => row.goe?.positive === true)
+    const top = positive.slice(0, 3)
     const tasksForSurface = tasks.filter(task => task.surface === surface.id)
     return {
       id: surface.id,
@@ -316,13 +377,19 @@ export function buildRegistry(input) {
       top3: top.map(publicEntry),
       featured: top[0] === undefined ? null : publicEntry(top[0]),
       measured: measured.length,
+      positive: positive.length,
       note: measured.length === 0
-        ? 'Prior-only: no paired with/without bench result meets the minimum sample count yet.'
-        : `${measured.length} plugin(s) have paired bench evidence; confidence and sample counts are shown per row.`,
+        ? 'Prior-only: no paired with/without bench result meets the minimum evidence gate. Rows are unrated; the legacy discovery order is not a quality rank.'
+        : positive.length === 0
+          ? 'Measured results exist, but none is positive and adequately powered. No quality #1 is shown.'
+          : `${positive.length} positive measured plugin(s); confidence and sample counts are shown per row.`,
     }
   })
-  const overall = [...entries].sort(compareEntries).map((entry, index) => ({ ...publicEntry(entry), rank: index + 1 }))
   const measuredPlugins = entries.filter(entry => entry.tier === 'measured')
+  const overall = measuredPlugins
+    .filter(entry => entry.goe?.positive === true)
+    .sort(compareEntries)
+    .map((entry, index) => ({ ...publicEntry(entry), rank: index + 1 }))
   const newAndPromising = entries
     .filter(entry => entry.status === 'active' && entry.tier === 'prior' && (entry.evidence.installs ?? 0) <= 10 && (entry.evidence.npm7d ?? 0) <= 2000 && (entry.evidence.stars ?? 0) <= 50 && entry.prior >= 50 && daysBetween(entry.evidence.lastPush, today) <= 30)
     .sort((left, right) => right.prior - left.prior || left.pluginId.localeCompare(right.pluginId))
@@ -347,11 +414,13 @@ export function buildRegistry(input) {
     generatedAt,
     scoring: {
       version: SCORING_VERSION,
+      reliabilityVersion: RELIABILITY_VERSION,
       weights: WEIGHTS,
       priorCap: PRIOR_CAP,
       minSamples: MIN_SAMPLES,
-      formula: 'measured: 0.55*bench + 0.30*prior + 0.10*coverage + 0.05*community; prior-only: min(prior, 60)',
-      note: 'A plugin with no qualifying paired bench is prior-only and cannot outrank a measured plugin. Contributions do not substitute for a bench.',
+      formula: 'measured: 0.55*bench + 0.30*prior + 0.10*coverage + 0.05*community; prior-only: 60*prior/100',
+      priorOnlyFormula: '60*prior/100',
+      note: 'Prior-only rows are E0/unrated: metadata is not outcome evidence. Only a positive, adequately powered measured result can occupy a quality slot. Contributions do not substitute for a bench.',
     },
     source: {
       plugins: plugins.length,
@@ -365,6 +434,12 @@ export function buildRegistry(input) {
       surfaces: surfaces.length,
       tasks: tasks.length,
       measuredPlugins: measuredPlugins.length,
+      positiveMeasured: measuredPlugins.filter(entry => entry.goe?.positive === true).length,
+      unratedPlugins: entries.filter(entry => entry.unrated === true).length,
+      gradeCounts: entries.reduce((counts, entry) => {
+        counts[entry.evidenceGrade] = (counts[entry.evidenceGrade] ?? 0) + 1
+        return counts
+      }, {}),
       contributors: contribution.contributors.length,
       contributions: contribution.total,
       benchResults: results.length,
@@ -410,7 +485,7 @@ export function scorePlugin(plugin, bench, contribution, today) {
   const confidence = measured
     ? clamp(0.4 + 0.3 * bench.coverage + 0.2 * Math.min(1, bench.runners / 2) + 0.1 * Math.min(1, bench.runs / 30), 0, 1)
     : prior.confidence
-  return {
+  const entry = {
     pluginId: plugin.id,
     name: plugin.name,
     author: plugin.author,
@@ -433,6 +508,11 @@ export function scorePlugin(plugin, bench, contribution, today) {
     runners: bench?.runners ?? 0,
     runs: bench?.runs ?? 0,
     benchTasks: bench?.tasks ?? [],
+    signatureVerified: false,
+    environmentBound: false,
+    selfRun: false,
+    versionMatch: 'unknown',
+    holdout: false,
     evidence: {
       installs: plugin.evidence?.installs ?? null,
       npm7d: plugin.evidence?.npm7d ?? null,
@@ -441,6 +521,18 @@ export function scorePlugin(plugin, bench, contribution, today) {
       verification: plugin.evidence?.verification ?? 'none',
       observedAt: plugin.evidence?.observedAt ?? today,
       repo: plugin.repo,
+    },
+    rank: 0,
+  }
+  const reliability = evaluateReliability(entry)
+  return {
+    ...entry,
+    ...reliability,
+    discovery: {
+      score: entry.score,
+      scale: entry.scoreScale,
+      label: 'legacy discovery — not a quality score',
+      basis: ['maintenance', 'adoption', 'verification', 'documentation'],
     },
     rank: 0,
   }
@@ -468,6 +560,14 @@ export function publicEntry(entry) {
     community: entry.community,
     confidence: entry.confidence,
     tier: entry.tier,
+    evidenceGrade: entry.evidenceGrade,
+    soe: entry.soe,
+    goe: entry.goe,
+    unrated: entry.unrated,
+    operatorOwned: entry.operatorOwned,
+    missing: entry.missing,
+    discovery: entry.discovery,
+    discoveryPosition: entry.discoveryPosition ?? null,
     runners: entry.runners,
     runs: entry.runs,
     benchTasks: entry.benchTasks,

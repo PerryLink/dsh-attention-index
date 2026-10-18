@@ -24,15 +24,22 @@ function pct(value) {
 }
 
 function scoreText(row) {
+  if (row?.unrated === true || row?.evidenceGrade === 'E0') {
+    return 'E0<small>unrated</small>'
+  }
   const scale = row.scoreScale ?? (row.tier === 'measured' ? 100 : 60)
   return `${Number(row.score).toFixed(1)}<small>/${scale}</small>`
 }
 
-function tierChip(tier) {
+function tierChip(row) {
+  const unrated = row?.unrated === true || row?.evidenceGrade === 'E0'
+  const tier = row?.tier ?? row
+  if (unrated) return '<span class="chip prior">未评级</span>'
   return `<span class="chip ${tier === 'measured' ? 'measured' : 'prior'}">${tier === 'measured' ? '实测' : '先验'}</span>`
 }
 
 function bar(row) {
+  if (row?.unrated === true || row?.evidenceGrade === 'E0') return ''
   const scale = row.scoreScale ?? (row.tier === 'measured' ? 100 : 60)
   const width = Math.max(0, Math.min(100, (Number(row.score) / scale) * 100))
   return `<div class="bar ${row.tier === 'measured' ? 'measured' : 'prior'}"><span style="width:${width.toFixed(1)}%"></span></div>`
@@ -52,7 +59,7 @@ function badgeFor(pluginId) {
   const badge = state.badges.get(pluginId)
   if (badge === undefined) return '<span class="muted">—</span>'
   const src = `./${String(badge.svg).replace(/^badges\//, 'badges/')}`
-  return `<a href="${escapeHtml(src)}" target="_blank" rel="noreferrer"><img class="badge-img" src="${escapeHtml(src)}" alt="DSH Bench badge" loading="lazy" /></a>`
+  return `<a href="${escapeHtml(src)}" target="_blank" rel="noreferrer"><img class="badge-img" src="${escapeHtml(src)}" alt="dsh-score badge" loading="lazy" /></a>`
 }
 
 function copyButton(pluginId) {
@@ -64,13 +71,14 @@ function copyButton(pluginId) {
 function renderHero() {
   const { registry } = state
   const measured = registry.stats.measuredPlugins
+  const unrated = registry.stats.unratedPlugins ?? (registry.stats.plugins - measured)
   const total = registry.stats.plugins
   $('#hero-status').textContent = measured === 0
-    ? `${total} 个插件 · 0 个实测`
-    : `${measured}/${total} 个插件有实测`
+    ? `${total} 个插件 · ${unrated} 个未评级 · 0 个实测`
+    : `${measured}/${total} 个插件有实测 · ${unrated} 个未评级`
   $('#hero-sub').textContent = measured === 0
-    ? '当前是 prior-only：分数只用于同一能力面内的先验排序，不代表任务效果；0–60 是压缩刻度。'
-    : '实测行由成对 bench 决定；先验行单独标注。'
+    ? '全部是 E0 / unrated：metadata 不是 outcome evidence。这里不发布质量 #1，也不把 discovery 顺序当成质量排名。'
+    : '只有 positive measured 才能进入质量槽位；未评级与 provisional 行单独标注。'
   $('#hero-card').classList.toggle('has-measured', measured > 0)
 }
 
@@ -80,7 +88,7 @@ function renderStats() {
     ['插件', registry.stats.plugins],
     ['能力面', registry.stats.surfaces],
     ['实测插件', registry.stats.measuredPlugins],
-    ['贡献者', registry.stats.contributors],
+    ['未评级', registry.stats.unratedPlugins ?? (registry.stats.plugins - registry.stats.measuredPlugins)],
     ['bench 结果', registry.stats.benchResults],
   ]
   $('#stats').innerHTML = items.map(([label, value]) => `
@@ -128,11 +136,15 @@ function filteredRows(rows) {
 
 function renderCards(rows) {
   const top = rows.slice(0, 3)
+  if (top.length === 0) {
+    $('#surface-cards').innerHTML = '<p class="surface-note">No measured evidence yet. Prior rows are candidates, not a quality rank.</p>'
+    return
+  }
   $('#surface-cards').innerHTML = top.map(row => `
     <article class="card">
       <div class="card-top">
-        <span class="card-rank">#${row.rank}</span>
-        ${tierChip(row.tier)}
+        <span class="card-rank">${row.rank === null || row.rank === undefined ? '—' : `#${row.rank}`}</span>
+        ${tierChip(row)}
       </div>
       <div class="card-name">${escapeHtml(row.name)}</div>
       <div class="card-author">${escapeHtml(row.author)} · ${escapeHtml(surfaceLabel(row.surface))}</div>
@@ -140,10 +152,10 @@ function renderCards(rows) {
       ${bar(row)}
       <p class="card-summary">${escapeHtml(row.summary ?? '')}</p>
       <div class="card-foot">
-        <span class="chip">先验 ${Number(row.prior).toFixed(1)}</span>
-        <span class="chip">实测 ${row.bench === null ? '—' : Number(row.bench).toFixed(1)}</span>
+        <span class="chip">GOE ${escapeHtml(row.evidenceGrade ?? 'E0')}</span>
+        <span class="chip">discovery ${Number(row.score).toFixed(1)}/${row.scoreScale ?? 60}</span>
         <span class="chip">覆盖 ${pct(row.coverage)}</span>
-        <span class="chip">置信 ${pct(row.confidence)}</span>
+        <span class="chip">证据完整度 ${pct(row.confidence)}</span>
         <a class="chip" href="${escapeHtml(row.repo)}" target="_blank" rel="noreferrer">repo ↗</a>
       </div>
     </article>`).join('')
@@ -159,7 +171,7 @@ function renderTable(rows) {
   $('#empty').hidden = true
   body.innerHTML = rows.map(row => `
     <tr>
-      <td class="num">${row.rank}</td>
+      <td class="num">${row.rank === null || row.rank === undefined ? '—' : row.rank}</td>
       <td class="plugin-cell">
         <div class="plugin-name"><a href="${escapeHtml(row.repo)}" target="_blank" rel="noreferrer">${escapeHtml(row.name)}</a></div>
         <div class="plugin-meta">${escapeHtml(row.author)} · ${escapeHtml(surfaceLabel(row.surface))} · ${escapeHtml(row.license ?? '')}</div>
@@ -168,7 +180,7 @@ function renderTable(rows) {
         <div class="score-line"><span class="score-value">${scoreText(row)}</span></div>
         ${bar(row)}
       </td>
-      <td>${tierChip(row.tier)}</td>
+      <td>${tierChip(row)}</td>
       <td class="num">${Number(row.prior).toFixed(1)}</td>
       <td class="num">${row.bench === null ? '—' : Number(row.bench).toFixed(1)}</td>
       <td class="num">${pct(row.coverage)}</td>
@@ -189,7 +201,7 @@ function renderSurfaceNote(rows) {
   note.className = `surface-note ${surface?.measured > 0 ? 'measured' : ''}`
   note.textContent = surface?.note ?? ''
   if (measured === 0) {
-    note.textContent += ' 先验分已压缩到 0–60；它不会压过任何有实测的插件。'
+    note.textContent += ' 全部 E0/unrated；不发布质量 #1，discovery 顺序不是质量排名。'
   }
 }
 
@@ -199,7 +211,7 @@ function renderLeaderboard() {
   renderSurfaceNote(rows)
   renderCards(rows)
   renderTable(rows)
-  $('#generated').textContent = `registry ${state.registry.generatedAt} · scoring ${state.registry.scoring.version}`
+  $('#generated').textContent = `registry ${state.registry.generatedAt} · reliability ${state.registry.scoring.reliabilityVersion ?? state.registry.scoring.version} · ${state.registry.stats.unratedPlugins ?? 0} unrated`
 }
 
 function listBlock(title, rows, render) {
@@ -252,6 +264,7 @@ function renderFormula() {
     '',
     `measured weights: bench ${weights.bench} · prior ${weights.prior} · coverage ${weights.coverage} · community ${weights.community}`,
     `prior cap: ${scoring.priorCap} · min samples per arm: ${scoring.minSamples} · scoring ${scoring.version}`,
+    `reliability ${scoring.reliabilityVersion ?? 'soe-goe/v1'} · prior-only ${scoring.priorOnlyFormula ?? '60*prior/100'}`,
     '',
     scoring.note,
   ].join('\n')

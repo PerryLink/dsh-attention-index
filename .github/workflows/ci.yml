@@ -20,6 +20,12 @@ jobs:
         run: node scripts/aggregate.mjs --today 2026-10-18
       - name: Export the dsh-recommend sidecar
         run: node scripts/export-recommend.mjs
+      - name: P0 invariants (unrated, no prior #1, formula)
+        run: node scripts/check-invariants.mjs
+      - name: Syntax-check site and reliability layer
+        run: |
+          node --check site/app.js
+          node --check scripts/reliability.mjs
       - name: Generated files must be committed
         run: git diff --exit-code
       - name: Check generated JSON parses

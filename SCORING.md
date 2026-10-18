@@ -1,41 +1,69 @@
-# Scoring · DSH Community Bench v1
+# Scoring · dsh-score v1.1 (SOE / GOE)
 
-> The score is **public**, **task-conditioned**, **reproducible**, and **deliberately conservative**.
+> The evidence is **public**, **reproducible**, and **deliberately conservative**.
 > A public score that cannot be reproduced is just another popularity metric.
+>
+> **v1.1 reliability update (2026-10-18).** Prior-only rows are **E0 / unrated**.
+> The 0–60 composite is **legacy discovery only**; it is not a quality claim and
+> does not receive a quality rank. The authoritative model is
+> [docs/SOE-GOE.md](docs/SOE-GOE.md); implementation is
+> [`scripts/reliability.mjs`](scripts/reliability.mjs).
 
-## 1. What is being scored
+## 1. What is published
 
-For each plugin `p` and capability surface `s` (memory, vision, Office, browser, …):
+Each row carries four separate things:
+
+| Field | Meaning |
+|---|---|
+| `evidenceGrade` | `E0` unrated · `E1` screened · `E2` provisional · `E3` measured · `E4` replicated · `E5` audited |
+| `soe` | Strength of Evidence vector: design, execution, precision, independence, directness (0–4) |
+| `goe` | Grade of Evidence: grade, certainty, direction, reasons, downgrades |
+| `discovery.score` | legacy 0–60 metadata ranking; **not** quality; kept for compatibility |
+
+A row with no paired result is `E0`, `unrated: true`, `goe.positive: false`.
+`top3`, `featured` and quality badges are only populated by **positive E3+**
+rows. `rank` is `null` for E0/E1.
+
+The legacy formulas below are kept so the historical discovery number remains
+reproducible. They do **not** define quality, and the measured composite is
+deprecated.
 
 ```
-registry_score(p, s) =
+legacy_discovery(p, s) =
   measured(p) ? 0.55·Bench(p,s) + 0.30·Prior(p) + 0.10·Coverage(p,s) + 0.05·Community(p,s)
               : 60 · Prior(p)/100
 ```
 
-- `Prior` is a 0–100 public-evidence score.
-- `Bench` is a 0–100 mapping of the **95% lower bound of lift** on paired tasks.
+- `Prior` is a 0–100 metadata score (discovery only).
+- `Bench` is a legacy 0–100 mapping of the Newcombe lower bound of lift.
 - `Coverage` is the fraction of tasks in `s` with enough paired samples.
 - `Community` is a capped demand signal from contribution receipts.
 
-**The 60-point cap for prior-only is not a cosmetic choice.** It encodes the rule that a plugin without a paired outcome result cannot outrank one with one. The raw `prior` is kept separately (0–100) so ties are not collapsed; the public `score` is compressed to 0–60 and the registry reports `scoreScale: 60`.
+**The 60-point compression is a presentation convention for the legacy
+discovery number.** It does not turn metadata into outcome evidence.
 
 ## 2. Prior (0–100)
 
 ```
-Prior = 0.30·Maintenance + 0.30·Adoption + 0.25·Verification + 0.15·Documentation
+Prior = weighted mean of observed dimensions
+      = Σ(wᵢ · valueᵢ) / Σ(wᵢ)   for dimensions with evidence
 ```
 
 | Component | Input | Mapping |
 |---|---|---|
-| Maintenance | last push | ≤7d 100 · ≤30d 88 · ≤90d 70 · ≤180d 45 · ≤365d 20 · older 5 |
-| Adoption | installs, npm7d, stars | `18·log10(installs+1) + 14·log10(npm7d+1) + 4·log10(stars+1)`, cap 100 |
-| Verification | registry / self-check | `certified` 100 · `doctor` 35 · `none` 0 |
-| Documentation | coarse docs field | `full` 90 · `basic` 65 · default 50 |
+| Maintenance | last push, anchored to that row's `observedAt` | ≤7d 100 · ≤30d 88 · ≤90d 70 · ≤180d 45 · ≤365d 20 · older 5 |
+| Adoption | observed installs/npm7d/stars; npm7d requires an npm identity | weights 18/14/4 renormalized over observed channels, cap 100 |
+| Verification | independent certifier (`certifiedBy`/`verificationSource`) | `certified` 100 · `doctor` 35 · bare string / self / operator-only 0 |
+| Documentation | coarse docs field | `full` 90 · `basic` 65 · absent **null** (excluded; 0/42 rows have docs) |
 
 Status caps: `frozen` ≤ 50; `archived`/`retired` ≤ 30.
 
-**Why these weights?** Maintenance and adoption each get 30% because both matter and both can be gamed alone. Verification gets 25% because an independent certification is the strongest static signal. Documentation is 15% because it is easy to produce but still predictive of usability.
+**Missing is not zero.** A dimension with no observation is excluded and the
+weights are renormalized; a download count without an npm package identity is
+not counted. This changes the discovery order versus the old zero-imputation
+formula, which is intentional.
+
+**Why these weights?** Maintenance and adoption each get 30% because both matter and both can be gamed alone. Verification gets 25% only when it names an independent certifier; a bare `certified`/`doctor` string is 0. Documentation is 15% but is currently unimplemented and excluded. These are **legacy discovery weights**, not quality weights.
 
 **Why three adoption signals?** Install counts are channel-biased (1024Store counts only its own wrapper), npm includes CI/mirrors, stars are attention rather than use. Using all three with small weights is harder to game than any one alone. The registry records each raw value and its observation date.
 
@@ -102,23 +130,32 @@ Confidence is shown as a percentage and used as a tie-breaker. It is **not** a p
 
 ## 6. Attention allocation
 
-For each surface, rows are ordered by:
+Ordering for the **discovery list** (not a quality rank):
 
-1. `measured` before `prior` (hard rule);
-2. `score` descending;
+1. `measured` before `prior` (legacy order, kept for compatibility);
+2. `discovery.score` descending;
 3. `confidence` descending;
 4. `prior` descending;
 5. plugin id for stability.
 
-The registry then publishes:
+The **quality slots** are different:
 
-- `top3` — first three rows under the rule above;
-- `featured` — first row;
-- `newAndPromising` — active, prior-only, low adoption (`installs ≤ 10`, `npm7d ≤ 2000`, `stars ≤ 50`), recent (≤30 days), `prior ≥ 50`;
-- `mostNominated` — nomination counts from contributions, restricted to prior-only or coverage < 50%;
-- `mostReplicated` — measured with `runners ≥ 2`.
+- `top3` — only **positive E3+** rows, at most three; a surface with no positive
+  measured row publishes `top3: []`.
+- `featured` — first positive E3+ row, or `null`.
+- `newAndPromising` — not published while its criteria (active, low adoption,
+  recent, `prior ≥ 50`) are unreachable; a labelled "new arrivals" list is the
+  intended replacement.
+- `mostNominated` — nomination counts from contributions; used to schedule bench
+  runs, never to score.
+- `mostReplicated` — E4+ with ≥2 independent runners.
 
-These are **fixed slots**, not an auction. There is no sponsored slot in the registry. A plugin cannot buy a rank.
+`rank` is `null` for E0/E1. A surface with fewer than 3 entrants does not
+publish a `#1`. Ties share a rank/joint badge; no plugin-id tie-break for
+attention.
+
+These are **fixed slots**, not an auction. There is no sponsored slot in the
+registry. A plugin cannot buy a rank.
 
 ## 7. Anti-gaming
 
@@ -145,10 +182,17 @@ The command reads only `data/plugins.json`, `data/tasks.json`, `data/results/*.j
 
 ## 9. Versioning
 
-- `scoring.version` is `v1`. Any weight, cap, threshold or formula change bumps it.
-- A registry row records the evidence dates; a score is only meaningful with its observation window.
-- Bench results are keyed by `(plugin, version, task, model, harness)`; a plugin version bump starts a new evidence set.
-- The task set is versioned through `data/tasks.json`; changing a prompt or check invalidates old results for that task and must be recorded in the PR.
+- `scoring.version` is `v1` (legacy discovery formula). Any weight, cap,
+  threshold or formula change bumps it.
+- `scoring.reliabilityVersion` is `soe-goe/v1`; any SOE/GOE rule change bumps it.
+- `evidenceGrade`, `soe` and `goe` are authoritative. `score`/`scoreScale` are
+  legacy discovery fields kept for compatibility and must not be read as quality.
+- A registry row records the evidence dates; a score is only meaningful with its
+  observation window.
+- Bench results are keyed by `(plugin, version, task, model, harness)`; a plugin
+  version bump starts a new evidence set.
+- The task set is versioned through `data/tasks.json`; changing a prompt or check
+  invalidates old results for that task and must be recorded in the PR.
 
 ## 10. Open problems
 

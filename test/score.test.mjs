@@ -4,6 +4,7 @@ import {
   aggregateBench,
   aggregateContributions,
   buildRegistry,
+  liftInterval,
   liftLowerBound,
   priorOf,
   scorePlugin,
@@ -55,9 +56,11 @@ test('prior keeps ordering and is capped only in the final prior-only score', ()
   assert.equal(scored.scoreScale, 60)
 })
 
-test('lift lower bound is conservative', () => {
-  assert.equal(liftLowerBound(1, 3, 0, 3), 1)
-  assert.ok(liftLowerBound(1, 3, 1, 3) < 0.1)
+test('Newcombe lift interval does not reward a 3/3 vs 0/3 sweep with 100', () => {
+  const interval = liftInterval(1, 3, 0, 3)
+  assert.ok(interval.lower > 0.1 && interval.lower < 0.4, `lower=${interval.lower}`)
+  assert.ok(interval.upper > interval.lower)
+  assert.ok(liftLowerBound(1, 3, 1, 3) < 0)
 })
 
 test('a task needs both arms and the minimum samples', () => {
@@ -74,11 +77,12 @@ test('a task needs both arms and the minimum samples', () => {
   }
   const bench = aggregateBench(rows, tasks, { minSamples: 3 })
   const entry = bench.get('alice/memory')
-  assert.equal(entry.benchScore, 100)
+  assert.ok(entry.benchScore < 100, `benchScore=${entry.benchScore}`)
+  assert.ok(entry.benchScore > 0)
   assert.equal(entry.coverage, 1)
 })
 
-test('measured tier outranks prior and exposes bench breakdown', () => {
+test('measured provisional is reported but does not occupy a quality slot', () => {
   const rows = []
   for (let index = 0; index < 3; index += 1) {
     rows.push(result('memory-recall', 'with', true))
@@ -95,10 +99,15 @@ test('measured tier outranks prior and exposes bench breakdown', () => {
   })
   const memory = registry.surfaces.find(surface => surface.id === 'memory')
   assert.equal(memory.measured, 1)
-  assert.equal(memory.top3[0].pluginId, 'alice/memory')
-  assert.equal(memory.top3[0].tier, 'measured')
-  assert.equal(memory.top3[0].bench, 100)
-  assert.equal(memory.top3[0].scoreScale, 100)
+  assert.equal(memory.positive, 0)
+  assert.equal(memory.top3.length, 0)
+  assert.equal(memory.featured, null)
+  const row = memory.leaderboard.find(entry => entry.pluginId === 'alice/memory')
+  assert.equal(row.tier, 'measured')
+  assert.equal(row.evidenceGrade, 'E2')
+  assert.equal(row.goe.positive, false)
+  assert.ok(row.bench < 100)
+  assert.equal(row.scoreScale, 100)
 })
 
 test('contributions dedupe and produce contributor credits and nominations', () => {

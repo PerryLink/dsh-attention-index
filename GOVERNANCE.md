@@ -1,12 +1,13 @@
-# Governance · DSH Community Bench
+# Governance · dsh-score
 
 The project allocates attention, so its own rules must be explicit. This is a small, public, data-first project; the governance is deliberately light but not discretionary.
 
 ## 1. Separation of powers
 
 - **Measurement** — bench tasks, fixtures, runners, results. Evidence is signed and versioned.
-- **Scoring** — a deterministic function in `scripts/score.mjs`. Changing it bumps `scoring.version` and requires a PR with a reproducible comparison.
-- **Allocation** — fixed slots derived from the score (`top3`, `featured`, `newAndPromising`, `mostNominated`, `mostReplicated`). Nobody hand-picks a winner.
+- **Reliability** — SOE/GOE rules in `scripts/reliability.mjs`. Changing them bumps `scoring.reliabilityVersion` and requires a PR with a reproducible comparison.
+- **Scoring (legacy)** — the deterministic discovery number in `scripts/score.mjs`; it is not a quality claim.
+- **Allocation** — fixed slots derived from positive measured evidence (`top3`, `featured`, `newAndPromising`, `mostNominated`, `mostReplicated`). Nobody hand-picks a winner.
 
 A maintainer may not edit a result or a score to move a plugin up. Corrections go through the same public data path.
 
@@ -14,14 +15,16 @@ A maintainer may not edit a result or a score to move a plugin up. Corrections g
 
 - There is no sponsored slot, auction, or paid placement in the registry.
 - Credits are non-transferable reputation; they cannot buy score or rank.
+- Prior-only rows are **E0 / unrated**: they receive no `#1`, no featured slot and no quality badge.
 - A future sponsorship format, if any, must be a separate, clearly labelled surface outside the registry, with a quality floor and a cap. It must never displace an organic slot.
 
 ## 3. Author conflict
 
 - Authors may submit evidence for their own plugin, but it is labelled with the runner id and counts as `self`.
-- `replicated` requires at least two independent runner ids, at least one of which is not the author.
+- A self-run result is at most **E2 provisional**; it never enters a quality slot.
+- `replicated` requires at least two independent runner ids/keys, at least one of which is not the author.
 - A maintainer who is also the author of a plugin must recuse from reviewing that plugin's result PR.
-- The registry displays the author and the runner id; readers can judge the conflict.
+- The registry displays the author, `operatorOwned`, and the runner id; readers can judge the conflict.
 
 ## 4. Task and fixture changes
 

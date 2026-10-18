@@ -24,8 +24,10 @@ jobs:
           node-version: 22
       - name: Test scoring
         run: node --test test/*.test.mjs
-      - name: Build registry, badges and site data
-        run: node scripts/aggregate.mjs --today "$(date -u +%F)"
+      - name: Verify committed registry (no wall-clock rebuild)
+        run: node scripts/aggregate.mjs --check --today 2026-10-18
+      - name: P0 invariants
+        run: node scripts/check-invariants.mjs
       - name: Validate JSON
         run: |
           node -e "JSON.parse(require('fs').readFileSync('data/registry.json','utf8')); JSON.parse(require('fs').readFileSync('badges/index.json','utf8')); console.log('registry ok')"

@@ -11,10 +11,10 @@
 > [`dsh-score`](https://github.com/PerryLink/dsh-score) plugin; the in-app consumer
 > is [`dsh-community-bench`](https://github.com/PerryLink/dsh-community-bench).
 >
-> Status: **v0.1 · prior-only**. 42 candidate plugins, 15 capability surfaces,
-> **0 paired bench results**, **0 public contributions**. At v0.1 every public
-> score is `60 × prior / 100`; **prior is a discovery signal, not a task-outcome
-> claim**.
+> Status: **v0.1 · E0 / unrated**. 42 candidate plugins, 15 capability surfaces,
+> **0 paired bench results**, **0 public contributions**. All 42 rows are
+> `E0 / unrated`; there is **no quality #1**. The legacy discovery number is
+> `60 × prior / 100` and is not a task-outcome claim.
 >
 > This is deliberate: the repository does not fake outcome evidence while the
 > bench network is being built.
@@ -24,6 +24,8 @@
 - **Badges:** [`badges/index.json`](badges/index.json)
 - **`dsh-recommend` sidecar:** [`integrations/dsh-recommend/bench-feed.json`](integrations/dsh-recommend/bench-feed.json)
 - **Scoring:** [SCORING.md](SCORING.md)
+- **Reliability (SOE / GOE):** [docs/SOE-GOE.md](docs/SOE-GOE.md)
+- **P0–P3 implementation:** [docs/P0-P3-PLAN.md](docs/P0-P3-PLAN.md)
 - **Contribute:** [CONTRIBUTING.md](CONTRIBUTING.md)
 - **Governance:** [GOVERNANCE.md](GOVERNANCE.md)
 
@@ -47,20 +49,21 @@ with two evidence tiers and one replication label:
 | `measured` | paired `with` / `without` bench results, ≥3 runs per arm | full 0–100 score, with lift lower bound and sample counts |
 | `replicated` (label) | `measured` + ≥2 independent runner ids | enters Most replicated; highest confidence; not a third tier |
 
-At v0.1 every row is `prior`; the measured tier is deliberately empty until the
-bench network produces signed, version-bound results. The registry decides
-attention; there is **no paid ranking** and no sponsored slot.
+At v0.1 every row is `E0 / unrated`; the measured tier is deliberately empty
+until the bench network produces signed, version-bound results. The registry
+publishes evidence; there is **no paid ranking** and no sponsored slot.
 
 ## What the registry contains
 
 `data/registry.json` is the single machine-readable artifact. It contains:
 
-- `surfaces[]` — one leaderboard per capability surface (memory, cost, vision, web, browser, office, orchestration, safety, MCP, remote, dev, voice, research, UI, desktop).
-- `overall[]` — the same entries ordered globally.
-- `attention` — `featuredBySurface`, `newAndPromising`, `mostNominated`, `mostReplicated`.
+- `surfaces[]` — one evidence list per capability surface (memory, cost, vision, web, browser, office, orchestration, safety, MCP, remote, dev, voice, research, UI, desktop).
+- `evidenceGrade`, `soe`, `goe`, `unrated` per row — the SOE/GOE reliability model.
+- `overall[]` — empty while no positive measured row exists; there is no cross-surface quality rank.
+- `attention` — `featuredBySurface`, `newAndPromising`, `mostNominated`, `mostReplicated`; quality slots are only positive measured.
 - `contributors[]` — public contributor reputation from trajectory receipts.
-- `scoring` — formula, weights, prior cap, minimum samples; everything needed to reproduce the numbers.
-- `source` / `stats` — input counts and measured coverage.
+- `scoring` — reliability version, legacy discovery formula, weights, prior cap, minimum samples.
+- `source` / `stats` — input counts, measured coverage and `gradeCounts`.
 
 A consumer (static site, plugin manager, catalog, `dsh-recommend`, an agent tool) can read the same file and get the same answer. The companion DSH plugin `dsh-community-bench` renders this registry as a **Settings → Plugins → Community Bench** tab; it never computes a local score.
 
@@ -121,7 +124,7 @@ be bought, and a plugin author cannot certify their own plugin into
 
 ## Current limitations
 
-- **No measured results yet.** The bench runner is implemented, but no public run has been committed; this is why every row is `prior`.
+- **No measured results yet.** The bench runner is implemented, but no public run has been committed; this is why every row is `E0 / unrated`.
 - The seed plugin list and evidence are a snapshot from `dsh-plugin-guide` (2026-10-06) and the GitHub API (2026-10-18), not a live crawler.
 - Bench tasks are draft prompts/checks; fixtures for image/Office tasks are not committed yet.
 - Contributions are open-loop: the contributor quality score is self-reported unless replayed; `verification` is recorded, but public-key verification is a P1 item.
@@ -129,9 +132,10 @@ be bought, and a plugin author cannot certify their own plugin into
 
 ## Roadmap
 
-- **P1** — commit real paired bench results for 3–5 high-value surfaces; add task fixtures; add contribution schema and replay verification; publish badge endpoint URLs.
-- **P2** — independent runner network; per-task holdouts; `dsh-recommend`/catalog consumption of `registry.json`; in-app Community Bench tab that reads the public registry.
-- **P3** — contributor nominations commission bench runs; public governance of task/fixture changes; cross-harness result format.
+See [docs/P0-P3-PLAN.md](docs/P0-P3-PLAN.md) for the task-level plan and current
+status. P0 (truth) is implemented; P1 (measured evidence) requires executable
+tasks, a sandbox and signed results; P2/P3 require measured coverage, governance
+and an independent audit.
 
 ## License
 
