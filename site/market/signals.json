@@ -3,7 +3,7 @@
   "generatedAt": "2026-10-18T00:00:00.000Z",
   "source": {
     "registry": "data/registry.json",
-    "inputHash": "sha256:fc750cd98131e8acc91d94fe60f3494cb86829f5e22d52ab9112f12f3a41f169",
+    "inputHash": "sha256:78284eddfd6b79ed5b0db172dd454c14a5036d16ac850d879edd781bbcc628c2",
     "reliabilityVersion": "soe-goe/v1"
   },
   "note": "Decoration only: E0/unrated means no outcome evidence. A market must not use this file as its default ranking.",

@@ -163,7 +163,15 @@ export async function buildOutputs({ today } = {}) {
     generatedAt,
   })
   const inputHash = createHash('sha256')
-    .update(JSON.stringify({ plugins: pluginsFile, tasks: tasksFile, results, contributions }))
+    .update(JSON.stringify({
+      plugins: pluginsFile,
+      tasks: tasksFile,
+      results,
+      contributions,
+      runners: readJson('data/runners.json'),
+      audits: readJson('data/audits/index.json'),
+      preregistration: readJson('data/preregistration.json'),
+    }))
     .digest('hex')
   registry.source.inputHash = `sha256:${inputHash}`
 
