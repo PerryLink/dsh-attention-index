@@ -77,10 +77,11 @@ is ready; the measured result is still blocked by the key/sandbox gate.
 
 | Channel | Status |
 |---|---|
-| GitHub `dsh-attention-index` | pushed `4fee04d`; P0 registry, site, docs and badges live |
+| GitHub `dsh-attention-index` | pushed `d8628b5`; P0 registry + P1–P3 pilot/API/signals live; CI and Pages green |
 | GitHub Pages | live at <https://perrylink.github.io/dsh-attention-index/>; title `dsh-score`; 42 E0 unrated; prior top badges return 404 |
 | GitHub `perrylink` / `dsh-kit` / `dsh-score` | pushed brand/docs commits |
 | GitHub release | `dsh-community-bench v0.2.0` published |
 | npm | `dsh-community-bench@0.2.0` live, `latest`, with provenance |
-| Gitee / GitCode | one-way mirror sync triggered; workflow still running at the time of this note |
+| Gitee / GitCode | fresh mirror sync triggered for `d8628b5`; previous GitCode run failed on 4 unrelated divergent mirrors (`dsh-claude-move`, `dsh-memento`, `dsh-plugin-kit`, `dsh-plugin-portal`) |
+| P1–P3 artifacts | 24 pilot tasks, signed ingest, `api/v1`, market signals, matcher/recommender, audit gate, conformance suite; **0 measured** |
 | Repo rename `dsh-score-index` | **not executed**; migration runbook ready, URLs intentionally kept stable until the redirect/mirror/patch release is coordinated |
