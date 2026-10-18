@@ -30,6 +30,15 @@
           "docs-unknown"
         ]
       },
+      "operatorOwned": false,
+      "missing": {
+        "installs": false,
+        "npm7d": false,
+        "stars": true,
+        "docs": true,
+        "npmName": true
+      },
+      "taskReviewed": false,
       "versionBound": false,
       "measured": false,
       "rank": null,
@@ -60,6 +69,15 @@
           "docs-unknown"
         ]
       },
+      "operatorOwned": false,
+      "missing": {
+        "installs": false,
+        "npm7d": false,
+        "stars": true,
+        "docs": true,
+        "npmName": true
+      },
+      "taskReviewed": false,
       "versionBound": false,
       "measured": false,
       "rank": null,
@@ -92,6 +110,15 @@
           "docs-unknown"
         ]
       },
+      "operatorOwned": true,
+      "missing": {
+        "installs": true,
+        "npm7d": true,
+        "stars": false,
+        "docs": true,
+        "npmName": false
+      },
+      "taskReviewed": false,
       "versionBound": false,
       "measured": false,
       "rank": null,
@@ -123,6 +150,15 @@
           "docs-unknown"
         ]
       },
+      "operatorOwned": false,
+      "missing": {
+        "installs": false,
+        "npm7d": false,
+        "stars": true,
+        "docs": true,
+        "npmName": false
+      },
+      "taskReviewed": false,
       "versionBound": false,
       "measured": false,
       "rank": null,
@@ -154,6 +190,15 @@
           "docs-unknown"
         ]
       },
+      "operatorOwned": false,
+      "missing": {
+        "installs": false,
+        "npm7d": false,
+        "stars": true,
+        "docs": true,
+        "npmName": false
+      },
+      "taskReviewed": false,
       "versionBound": false,
       "measured": false,
       "rank": null,
@@ -186,6 +231,15 @@
           "docs-unknown"
         ]
       },
+      "operatorOwned": true,
+      "missing": {
+        "installs": true,
+        "npm7d": true,
+        "stars": false,
+        "docs": true,
+        "npmName": false
+      },
+      "taskReviewed": false,
       "versionBound": false,
       "measured": false,
       "rank": null,
@@ -216,6 +270,15 @@
           "docs-unknown"
         ]
       },
+      "operatorOwned": false,
+      "missing": {
+        "installs": false,
+        "npm7d": false,
+        "stars": true,
+        "docs": true,
+        "npmName": true
+      },
+      "taskReviewed": false,
       "versionBound": false,
       "measured": false,
       "rank": null,
@@ -246,6 +309,15 @@
           "docs-unknown"
         ]
       },
+      "operatorOwned": false,
+      "missing": {
+        "installs": false,
+        "npm7d": false,
+        "stars": true,
+        "docs": true,
+        "npmName": true
+      },
+      "taskReviewed": false,
       "versionBound": false,
       "measured": false,
       "rank": null,
@@ -276,6 +348,15 @@
           "docs-unknown"
         ]
       },
+      "operatorOwned": false,
+      "missing": {
+        "installs": false,
+        "npm7d": false,
+        "stars": true,
+        "docs": true,
+        "npmName": true
+      },
+      "taskReviewed": false,
       "versionBound": false,
       "measured": false,
       "rank": null,
@@ -306,6 +387,15 @@
           "docs-unknown"
         ]
       },
+      "operatorOwned": false,
+      "missing": {
+        "installs": false,
+        "npm7d": false,
+        "stars": true,
+        "docs": true,
+        "npmName": true
+      },
+      "taskReviewed": false,
       "versionBound": false,
       "measured": false,
       "rank": null,
@@ -336,6 +426,15 @@
           "docs-unknown"
         ]
       },
+      "operatorOwned": false,
+      "missing": {
+        "installs": false,
+        "npm7d": false,
+        "stars": true,
+        "docs": true,
+        "npmName": true
+      },
+      "taskReviewed": false,
       "versionBound": false,
       "measured": false,
       "rank": null,
@@ -366,6 +465,15 @@
           "docs-unknown"
         ]
       },
+      "operatorOwned": false,
+      "missing": {
+        "installs": false,
+        "npm7d": false,
+        "stars": true,
+        "docs": true,
+        "npmName": true
+      },
+      "taskReviewed": false,
       "versionBound": false,
       "measured": false,
       "rank": null,
@@ -396,6 +504,15 @@
           "docs-unknown"
         ]
       },
+      "operatorOwned": false,
+      "missing": {
+        "installs": false,
+        "npm7d": false,
+        "stars": true,
+        "docs": true,
+        "npmName": true
+      },
+      "taskReviewed": false,
       "versionBound": false,
       "measured": false,
       "rank": null,
@@ -428,6 +545,15 @@
           "docs-unknown"
         ]
       },
+      "operatorOwned": true,
+      "missing": {
+        "installs": true,
+        "npm7d": true,
+        "stars": false,
+        "docs": true,
+        "npmName": false
+      },
+      "taskReviewed": false,
       "versionBound": false,
       "measured": false,
       "rank": null,
@@ -458,6 +584,15 @@
           "docs-unknown"
         ]
       },
+      "operatorOwned": false,
+      "missing": {
+        "installs": false,
+        "npm7d": true,
+        "stars": true,
+        "docs": true,
+        "npmName": true
+      },
+      "taskReviewed": false,
       "versionBound": false,
       "measured": false,
       "rank": null,
@@ -488,6 +623,15 @@
           "docs-unknown"
         ]
       },
+      "operatorOwned": false,
+      "missing": {
+        "installs": false,
+        "npm7d": false,
+        "stars": true,
+        "docs": true,
+        "npmName": true
+      },
+      "taskReviewed": false,
       "versionBound": false,
       "measured": false,
       "rank": null,
@@ -518,6 +662,15 @@
           "docs-unknown"
         ]
       },
+      "operatorOwned": false,
+      "missing": {
+        "installs": false,
+        "npm7d": false,
+        "stars": true,
+        "docs": true,
+        "npmName": true
+      },
+      "taskReviewed": false,
       "versionBound": false,
       "measured": false,
       "rank": null,
@@ -548,6 +701,15 @@
           "docs-unknown"
         ]
       },
+      "operatorOwned": false,
+      "missing": {
+        "installs": false,
+        "npm7d": false,
+        "stars": true,
+        "docs": true,
+        "npmName": true
+      },
+      "taskReviewed": false,
       "versionBound": false,
       "measured": false,
       "rank": null,
@@ -578,6 +740,15 @@
           "docs-unknown"
         ]
       },
+      "operatorOwned": false,
+      "missing": {
+        "installs": false,
+        "npm7d": false,
+        "stars": true,
+        "docs": true,
+        "npmName": true
+      },
+      "taskReviewed": false,
       "versionBound": false,
       "measured": false,
       "rank": null,
@@ -608,6 +779,15 @@
           "docs-unknown"
         ]
       },
+      "operatorOwned": false,
+      "missing": {
+        "installs": false,
+        "npm7d": true,
+        "stars": true,
+        "docs": true,
+        "npmName": true
+      },
+      "taskReviewed": false,
       "versionBound": false,
       "measured": false,
       "rank": null,
@@ -640,6 +820,15 @@
           "docs-unknown"
         ]
       },
+      "operatorOwned": true,
+      "missing": {
+        "installs": true,
+        "npm7d": true,
+        "stars": false,
+        "docs": true,
+        "npmName": false
+      },
+      "taskReviewed": false,
       "versionBound": false,
       "measured": false,
       "rank": null,
@@ -672,6 +861,15 @@
           "docs-unknown"
         ]
       },
+      "operatorOwned": true,
+      "missing": {
+        "installs": true,
+        "npm7d": true,
+        "stars": false,
+        "docs": true,
+        "npmName": false
+      },
+      "taskReviewed": false,
       "versionBound": false,
       "measured": false,
       "rank": null,
@@ -703,6 +901,15 @@
           "docs-unknown"
         ]
       },
+      "operatorOwned": true,
+      "missing": {
+        "installs": false,
+        "npm7d": false,
+        "stars": false,
+        "docs": true,
+        "npmName": false
+      },
+      "taskReviewed": false,
       "versionBound": false,
       "measured": false,
       "rank": null,
@@ -733,6 +940,15 @@
           "docs-unknown"
         ]
       },
+      "operatorOwned": false,
+      "missing": {
+        "installs": false,
+        "npm7d": false,
+        "stars": true,
+        "docs": true,
+        "npmName": true
+      },
+      "taskReviewed": false,
       "versionBound": false,
       "measured": false,
       "rank": null,
@@ -764,6 +980,15 @@
           "docs-unknown"
         ]
       },
+      "operatorOwned": true,
+      "missing": {
+        "installs": false,
+        "npm7d": false,
+        "stars": false,
+        "docs": true,
+        "npmName": false
+      },
+      "taskReviewed": false,
       "versionBound": false,
       "measured": false,
       "rank": null,
@@ -794,6 +1019,15 @@
           "docs-unknown"
         ]
       },
+      "operatorOwned": false,
+      "missing": {
+        "installs": false,
+        "npm7d": false,
+        "stars": true,
+        "docs": true,
+        "npmName": true
+      },
+      "taskReviewed": false,
       "versionBound": false,
       "measured": false,
       "rank": null,
@@ -825,6 +1059,15 @@
           "docs-unknown"
         ]
       },
+      "operatorOwned": false,
+      "missing": {
+        "installs": false,
+        "npm7d": false,
+        "stars": true,
+        "docs": true,
+        "npmName": false
+      },
+      "taskReviewed": false,
       "versionBound": false,
       "measured": false,
       "rank": null,
@@ -855,6 +1098,15 @@
           "docs-unknown"
         ]
       },
+      "operatorOwned": false,
+      "missing": {
+        "installs": false,
+        "npm7d": false,
+        "stars": true,
+        "docs": true,
+        "npmName": true
+      },
+      "taskReviewed": false,
       "versionBound": false,
       "measured": false,
       "rank": null,
@@ -887,6 +1139,15 @@
           "docs-unknown"
         ]
       },
+      "operatorOwned": true,
+      "missing": {
+        "installs": true,
+        "npm7d": true,
+        "stars": false,
+        "docs": true,
+        "npmName": false
+      },
+      "taskReviewed": false,
       "versionBound": false,
       "measured": false,
       "rank": null,
@@ -918,6 +1179,15 @@
           "docs-unknown"
         ]
       },
+      "operatorOwned": true,
+      "missing": {
+        "installs": false,
+        "npm7d": false,
+        "stars": false,
+        "docs": true,
+        "npmName": false
+      },
+      "taskReviewed": false,
       "versionBound": false,
       "measured": false,
       "rank": null,
@@ -950,6 +1220,15 @@
           "docs-unknown"
         ]
       },
+      "operatorOwned": true,
+      "missing": {
+        "installs": true,
+        "npm7d": true,
+        "stars": false,
+        "docs": true,
+        "npmName": false
+      },
+      "taskReviewed": false,
       "versionBound": false,
       "measured": false,
       "rank": null,
@@ -982,6 +1261,15 @@
           "docs-unknown"
         ]
       },
+      "operatorOwned": true,
+      "missing": {
+        "installs": true,
+        "npm7d": true,
+        "stars": false,
+        "docs": true,
+        "npmName": false
+      },
+      "taskReviewed": false,
       "versionBound": false,
       "measured": false,
       "rank": null,
@@ -1012,6 +1300,15 @@
           "docs-unknown"
         ]
       },
+      "operatorOwned": false,
+      "missing": {
+        "installs": false,
+        "npm7d": false,
+        "stars": true,
+        "docs": true,
+        "npmName": true
+      },
+      "taskReviewed": false,
       "versionBound": false,
       "measured": false,
       "rank": null,
@@ -1044,6 +1341,15 @@
           "docs-unknown"
         ]
       },
+      "operatorOwned": true,
+      "missing": {
+        "installs": true,
+        "npm7d": true,
+        "stars": false,
+        "docs": true,
+        "npmName": false
+      },
+      "taskReviewed": false,
       "versionBound": false,
       "measured": false,
       "rank": null,
@@ -1076,6 +1382,15 @@
           "docs-unknown"
         ]
       },
+      "operatorOwned": true,
+      "missing": {
+        "installs": true,
+        "npm7d": true,
+        "stars": false,
+        "docs": true,
+        "npmName": false
+      },
+      "taskReviewed": false,
       "versionBound": false,
       "measured": false,
       "rank": null,
@@ -1108,6 +1423,15 @@
           "docs-unknown"
         ]
       },
+      "operatorOwned": true,
+      "missing": {
+        "installs": true,
+        "npm7d": true,
+        "stars": false,
+        "docs": true,
+        "npmName": false
+      },
+      "taskReviewed": false,
       "versionBound": false,
       "measured": false,
       "rank": null,
@@ -1140,6 +1464,15 @@
           "docs-unknown"
         ]
       },
+      "operatorOwned": true,
+      "missing": {
+        "installs": true,
+        "npm7d": true,
+        "stars": false,
+        "docs": true,
+        "npmName": false
+      },
+      "taskReviewed": false,
       "versionBound": false,
       "measured": false,
       "rank": null,
@@ -1169,6 +1502,15 @@
           "docs-unknown"
         ]
       },
+      "operatorOwned": false,
+      "missing": {
+        "installs": false,
+        "npm7d": false,
+        "stars": false,
+        "docs": true,
+        "npmName": true
+      },
+      "taskReviewed": false,
       "versionBound": false,
       "measured": false,
       "rank": null,
@@ -1199,6 +1541,15 @@
           "docs-unknown"
         ]
       },
+      "operatorOwned": false,
+      "missing": {
+        "installs": false,
+        "npm7d": false,
+        "stars": true,
+        "docs": true,
+        "npmName": true
+      },
+      "taskReviewed": false,
       "versionBound": false,
       "measured": false,
       "rank": null,
@@ -1231,6 +1582,15 @@
           "docs-unknown"
         ]
       },
+      "operatorOwned": true,
+      "missing": {
+        "installs": true,
+        "npm7d": true,
+        "stars": false,
+        "docs": true,
+        "npmName": false
+      },
+      "taskReviewed": false,
       "versionBound": false,
       "measured": false,
       "rank": null,
@@ -1261,6 +1621,15 @@
           "docs-unknown"
         ]
       },
+      "operatorOwned": false,
+      "missing": {
+        "installs": false,
+        "npm7d": false,
+        "stars": true,
+        "docs": true,
+        "npmName": true
+      },
+      "taskReviewed": false,
       "versionBound": false,
       "measured": false,
       "rank": null,
@@ -1291,6 +1660,15 @@
           "docs-unknown"
         ]
       },
+      "operatorOwned": false,
+      "missing": {
+        "installs": false,
+        "npm7d": true,
+        "stars": true,
+        "docs": true,
+        "npmName": true
+      },
+      "taskReviewed": false,
       "versionBound": false,
       "measured": false,
       "rank": null,
