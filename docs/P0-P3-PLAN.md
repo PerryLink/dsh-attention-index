@@ -18,7 +18,7 @@ no quality #1 from prior-only rows.**
 | P0.6 | Operator flag + independent verification | done | `operatorOwned` published; verification counts only with `certifiedBy`/`verificationSource` |
 | P0.7 | Badge/artifact truth | done | unrated badge; `--check` fails on extra badge files; prior top badges deleted |
 | P0.8 | Formula string and rank namespace | done | `60*prior/100`; `rank` null for unrated; `overall = []` |
-| P0.9 | Site/consumer display | done | site and tab show E2 provisional/unrated, no prior #1; tab 0.2.4 |
+| P0.9 | Site/consumer display | done | site and tab show E2 provisional/unrated, no prior #1; tab 0.2.5 |
 | P0.10 | Pin Pages `--today`; content hash/signature | partial | Pages uses `--check --today 2026-10-18`; `source.inputHash` + signed API snapshot; registry-level signature pending |
 | P0.11 | Schema validation for registry/plugins/tasks | done | result/task schemas aligned and Ajv-validated in CI |
 
@@ -82,8 +82,8 @@ is ready; the measured result is still blocked by the key/sandbox gate.
 | GitHub `dsh-attention-index` | `main` latest; P0 registry + P1–P3 pilot/API/signals live; CI and Pages green |
 | GitHub Pages | live at <https://perrylink.github.io/dsh-attention-index/>; 41 E0 + 1 E2 provisional; 0 positive; prior top badges 404 |
 | GitHub `perrylink` / `dsh-kit` / `dsh-score` | pushed brand/docs commits |
-| GitHub release | `dsh-community-bench v0.2.4` published |
-| npm | `dsh-community-bench@0.2.4` live, `latest`, with provenance |
+| GitHub release | `dsh-community-bench v0.2.5` published |
+| npm | `dsh-community-bench@0.2.5` live, `latest`, with provenance |
 | Gitee | **not mirrored** for `dsh-attention-index` / `dsh-community-bench`; badges removed. `dsh-score`/`dsh-kit` mirrors exist. |
 | GitCode | `dsh-attention-index` at `82911a2` (slightly behind); overall sync fails on 4 unrelated divergent mirrors |
 | P1–P3 artifacts | 24 pilot tasks, 30 signed bwrap-net results, **1 E2 / 41 E0 / 0 positive**, API/signals, matcher/recommender, audit gate, conformance |
