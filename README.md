@@ -107,13 +107,12 @@ The receipt carries hashes and metrics only (no session text). It is written und
 
 ## Attention allocation (not a popularity contest)
 
-Target policy (P0; the current site still shows prior-only `#1` until the truth
-fix lands):
+Implemented policy (P0, live):
 
-- **Measured leaders** — only positive `measured` (CI lower bound > 0).
-- **Replicated** — `measured` + ≥2 independent runners.
-- **Discovery** — prior-only rows in a separate, unnumbered list; no `#1`, no
-  featured badge, no install CTA.
+- **Measured leaders** — only positive `E3+` rows (CI lower bound > 0).
+- **Replicated** — `E4+` with ≥2 independent runners.
+- **Discovery** — prior-only rows are `E0 / unrated`, in a separate, unnumbered
+  list; no `#1`, no featured badge, no install CTA.
 - **New arrivals** — new/under-evaluated plugins, labelled; not a quality rank.
 - **Most nominated** — under-evaluated plugins nominated by receipts; used to
   schedule bench runs, never to score.
