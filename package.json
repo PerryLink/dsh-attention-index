@@ -1,0 +1,20 @@
+{
+  "name": "dsh-attention-index",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Public, reproducible, task-conditioned scores and attention allocation for DeepSeek Harness plugins.",
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "aggregate": "node scripts/aggregate.mjs",
+    "contribution": "node scripts/contribution-from-session.mjs",
+    "bench": "node scripts/bench-run.mjs"
+  },
+  "dependencies": {
+    "fzstd": "^0.1.1"
+  },
+  "engines": {
+    "node": "^22.19.0 || >=24.0.0"
+  },
+  "license": "Apache-2.0"
+}

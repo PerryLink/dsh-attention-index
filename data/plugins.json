@@ -1,0 +1,805 @@
+{
+  "schema": "dsh-attention/plugins/v1",
+  "observedAt": "2026-10-18",
+  "sourceVersion": "2026-10-18.1",
+  "plugins": [
+    {
+      "id": "volcengine/openviking",
+      "name": "OpenViking memory",
+      "author": "volcengine",
+      "surface": "memory",
+      "summary": "Long-term memory, retrieval and skills over a client/server memory service.",
+      "status": "active",
+      "license": "AGPL-3.0",
+      "repo": "https://github.com/volcengine/OpenViking",
+      "npm": null,
+      "evidence": {
+        "installs": 401,
+        "npm7d": 10160,
+        "stars": null,
+        "lastPush": "2026-10-06",
+        "verification": "none",
+        "observedAt": "2026-10-06"
+      }
+    },
+    {
+      "id": "vectorize-io/hindsight",
+      "name": "hindsight",
+      "author": "vectorize-io",
+      "surface": "memory",
+      "summary": "Learnable project memory with automatic recall and per-repo isolation.",
+      "status": "active",
+      "license": "MIT",
+      "repo": "https://github.com/vectorize-io/hindsight",
+      "npm": null,
+      "evidence": {
+        "installs": 169,
+        "npm7d": 19056,
+        "stars": null,
+        "lastPush": "2026-10-05",
+        "verification": "none",
+        "observedAt": "2026-10-06"
+      }
+    },
+    {
+      "id": "perrylink/dsh-memento",
+      "name": "dsh-memento",
+      "author": "PerryLink",
+      "surface": "memory",
+      "summary": "Bounded, approval-gated cross-session memory with a ctx.memory seam and SQLite provider.",
+      "status": "frozen",
+      "license": "Apache-2.0",
+      "repo": "https://github.com/PerryLink/dsh-memento",
+      "npm": "dsh-memento",
+      "evidence": {
+        "installs": null,
+        "npm7d": null,
+        "stars": 136,
+        "lastPush": "2026-10-18",
+        "verification": "doctor",
+        "observedAt": "2026-10-18"
+      }
+    },
+    {
+      "id": "han-1413141/dsh-cost-meter",
+      "name": "dsh-cost-meter",
+      "author": "Han-1413141",
+      "surface": "cost",
+      "summary": "Session and daily cost stats, budget gauge, balance and peak/off-peak pricing.",
+      "status": "active",
+      "license": "MIT",
+      "repo": "https://github.com/Han-1413141/dsh-cost-meter",
+      "npm": "dsh-cost-meter",
+      "evidence": {
+        "installs": 72,
+        "npm7d": 31807,
+        "stars": null,
+        "lastPush": "2026-10-05",
+        "verification": "none",
+        "observedAt": "2026-10-06"
+      }
+    },
+    {
+      "id": "bowenliang123/dsh-context",
+      "name": "dsh-context",
+      "author": "bowenliang123",
+      "surface": "cost",
+      "summary": "Context-window composition, per-request history, compaction and injection events.",
+      "status": "active",
+      "license": "MIT",
+      "repo": "https://github.com/bowenliang123/dsh-context",
+      "npm": "dsh-context",
+      "evidence": {
+        "installs": 50,
+        "npm7d": 38839,
+        "stars": null,
+        "lastPush": "2026-10-05",
+        "verification": "none",
+        "observedAt": "2026-10-06"
+      }
+    },
+    {
+      "id": "perrylink/dsh-budget",
+      "name": "dsh-budget",
+      "author": "PerryLink",
+      "surface": "cost",
+      "summary": "Token and cost governance with caps, alerts, carbon estimates and latency benchmarks.",
+      "status": "frozen",
+      "license": "Apache-2.0",
+      "repo": "https://github.com/PerryLink/dsh-budget",
+      "npm": "dsh-budget",
+      "evidence": {
+        "installs": null,
+        "npm7d": null,
+        "stars": 10,
+        "lastPush": "2026-10-18",
+        "verification": "doctor",
+        "observedAt": "2026-10-18"
+      }
+    },
+    {
+      "id": "liustack/modlens",
+      "name": "modlens",
+      "author": "liustack",
+      "surface": "vision",
+      "summary": "Vision bridge for text-only models: structured JSON evidence from an image.",
+      "status": "active",
+      "license": "MIT",
+      "repo": "https://github.com/liustack/modlens",
+      "npm": null,
+      "evidence": {
+        "installs": 173,
+        "npm7d": 16691,
+        "stars": null,
+        "lastPush": "2026-10-04",
+        "verification": "none",
+        "observedAt": "2026-10-06"
+      }
+    },
+    {
+      "id": "ysr666/dsh-vision-router",
+      "name": "dsh-vision-router",
+      "author": "ysr666",
+      "surface": "vision",
+      "summary": "Keyless vision chain plus pixel-level tools.",
+      "status": "active",
+      "license": "MIT",
+      "repo": "https://github.com/ysr666/dsh-vision-router",
+      "npm": null,
+      "evidence": {
+        "installs": 48,
+        "npm7d": 10168,
+        "stars": null,
+        "lastPush": "2026-10-05",
+        "verification": "none",
+        "observedAt": "2026-10-06"
+      }
+    },
+    {
+      "id": "anionex/dsh-vision-toolkit",
+      "name": "dsh-vision-toolkit",
+      "author": "Anionex",
+      "surface": "vision",
+      "summary": "Image Q&A, multi-image comparison and screenshot OCR.",
+      "status": "active",
+      "license": "MIT",
+      "repo": "https://github.com/Anionex/dsh-vision-toolkit",
+      "npm": null,
+      "evidence": {
+        "installs": 35,
+        "npm7d": 3652,
+        "stars": null,
+        "lastPush": "2026-10-05",
+        "verification": "none",
+        "observedAt": "2026-10-06"
+      }
+    },
+    {
+      "id": "liustack/modsearch",
+      "name": "modsearch",
+      "author": "liustack",
+      "surface": "web",
+      "summary": "Search the web and X, returning structured JSON evidence with citations.",
+      "status": "active",
+      "license": "MIT",
+      "repo": "https://github.com/liustack/modsearch",
+      "npm": null,
+      "evidence": {
+        "installs": 30,
+        "npm7d": 7347,
+        "stars": null,
+        "lastPush": "2026-10-05",
+        "verification": "none",
+        "observedAt": "2026-10-06"
+      }
+    },
+    {
+      "id": "anysearch-team/anysearch-dsh",
+      "name": "anysearch-dsh",
+      "author": "anysearch-team",
+      "surface": "web",
+      "summary": "Web search and advanced search tools.",
+      "status": "active",
+      "license": "MIT",
+      "repo": "https://github.com/anysearch-team/anysearch-dsh",
+      "npm": null,
+      "evidence": {
+        "installs": 30,
+        "npm7d": 1749,
+        "stars": null,
+        "lastPush": "2026-10-05",
+        "verification": "none",
+        "observedAt": "2026-10-06"
+      }
+    },
+    {
+      "id": "dddmuc/dsh-free-search",
+      "name": "dsh-free-search",
+      "author": "DDDMUC",
+      "surface": "web",
+      "summary": "Keyless free web search over DuckDuckGo.",
+      "status": "active",
+      "license": "MIT",
+      "repo": "https://github.com/DDDMUC/dsh-free-search",
+      "npm": null,
+      "evidence": {
+        "installs": 18,
+        "npm7d": 14568,
+        "stars": null,
+        "lastPush": "2026-10-05",
+        "verification": "none",
+        "observedAt": "2026-10-06"
+      }
+    },
+    {
+      "id": "tencent/browserskill",
+      "name": "BrowserSkill",
+      "author": "Tencent",
+      "surface": "browser",
+      "summary": "Drive a real logged-in browser through a CLI plus extension.",
+      "status": "active",
+      "license": "MIT",
+      "repo": "https://github.com/Tencent/BrowserSkill",
+      "npm": null,
+      "evidence": {
+        "installs": 95,
+        "npm7d": 7455,
+        "stars": null,
+        "lastPush": "2026-09-30",
+        "verification": "none",
+        "observedAt": "2026-10-06"
+      }
+    },
+    {
+      "id": "perrylink/dsh-click",
+      "name": "dsh-click",
+      "author": "PerryLink",
+      "surface": "browser",
+      "summary": "Cross-platform native desktop control: screenshot, read, click, type, launch.",
+      "status": "active",
+      "license": "Apache-2.0",
+      "repo": "https://github.com/PerryLink/dsh-click",
+      "npm": "dsh-click",
+      "evidence": {
+        "installs": null,
+        "npm7d": null,
+        "stars": 19,
+        "lastPush": "2026-10-18",
+        "verification": "doctor",
+        "observedAt": "2026-10-18"
+      }
+    },
+    {
+      "id": "lum1104/dsh-browser",
+      "name": "dsh-browser",
+      "author": "Lum1104",
+      "surface": "browser",
+      "summary": "Chrome sidebar extension that needs no vision.",
+      "status": "active",
+      "license": "MIT",
+      "repo": "https://github.com/Lum1104/dsh-browser",
+      "npm": null,
+      "evidence": {
+        "installs": 5,
+        "npm7d": null,
+        "stars": null,
+        "lastPush": "2026-10-05",
+        "verification": "none",
+        "observedAt": "2026-10-06"
+      }
+    },
+    {
+      "id": "dream-num/dsh-univer-office",
+      "name": "dsh-univer-office",
+      "author": "dream-num",
+      "surface": "office",
+      "summary": "Spreadsheets, documents and presentations with live preview.",
+      "status": "active",
+      "license": "MIT",
+      "repo": "https://github.com/dream-num/dsh-univer-office",
+      "npm": null,
+      "evidence": {
+        "installs": 19,
+        "npm7d": 12227,
+        "stars": null,
+        "lastPush": "2026-10-05",
+        "verification": "none",
+        "observedAt": "2026-10-06"
+      }
+    },
+    {
+      "id": "tencent/weknora-dsh",
+      "name": "WeKnora",
+      "author": "Tencent",
+      "surface": "office",
+      "summary": "Document-to-knowledge-base RAG, reasoning agent and self-maintaining wiki.",
+      "status": "active",
+      "license": "MIT",
+      "repo": "https://github.com/Tencent/WeKnora",
+      "npm": null,
+      "evidence": {
+        "installs": 75,
+        "npm7d": 1217,
+        "stars": null,
+        "lastPush": "2026-09-30",
+        "verification": "none",
+        "observedAt": "2026-10-06"
+      }
+    },
+    {
+      "id": "devin-axis/ppt-studio",
+      "name": "ppt-studio",
+      "author": "Devin-AXIS",
+      "surface": "office",
+      "summary": "Presentation authoring and editing.",
+      "status": "active",
+      "license": "MIT",
+      "repo": "https://github.com/Devin-AXIS/iPolloWork",
+      "npm": null,
+      "evidence": {
+        "installs": 24,
+        "npm7d": 443,
+        "stars": null,
+        "lastPush": "2026-10-05",
+        "verification": "none",
+        "observedAt": "2026-10-06"
+      }
+    },
+    {
+      "id": "nanmicoder/dsh-agent-teams",
+      "name": "dsh-agent-teams",
+      "author": "NanmiCoder",
+      "surface": "orchestration",
+      "summary": "Multi-agent teams that split long tasks across cooperating agents.",
+      "status": "active",
+      "license": "MIT",
+      "repo": "https://github.com/NanmiCoder/dsh-agent-teams",
+      "npm": null,
+      "evidence": {
+        "installs": 109,
+        "npm7d": 13890,
+        "stars": null,
+        "lastPush": "2026-10-05",
+        "verification": "none",
+        "observedAt": "2026-10-06"
+      }
+    },
+    {
+      "id": "q00/ouroboros",
+      "name": "ouroboros",
+      "author": "Q00",
+      "surface": "orchestration",
+      "summary": "Staged evaluation with budget control.",
+      "status": "active",
+      "license": "MIT",
+      "repo": "https://github.com/Q00/ouroboros",
+      "npm": null,
+      "evidence": {
+        "installs": 8,
+        "npm7d": null,
+        "stars": null,
+        "lastPush": "2026-10-05",
+        "verification": "none",
+        "observedAt": "2026-10-06"
+      }
+    },
+    {
+      "id": "perrylink/dsh-autotier",
+      "name": "dsh-autotier",
+      "author": "PerryLink",
+      "surface": "orchestration",
+      "summary": "Strong/cheap model-tier routing with plan handoff and risk guards.",
+      "status": "active",
+      "license": "Apache-2.0",
+      "repo": "https://github.com/PerryLink/dsh-autotier",
+      "npm": "dsh-autotier",
+      "evidence": {
+        "installs": null,
+        "npm7d": null,
+        "stars": 1,
+        "lastPush": "2026-10-18",
+        "verification": "doctor",
+        "observedAt": "2026-10-18"
+      }
+    },
+    {
+      "id": "perrylink/dsh-permission-rules",
+      "name": "dsh-permission-rules",
+      "author": "PerryLink",
+      "surface": "safety",
+      "summary": "Declarative allow/deny/ask rules with argument and path matching, plus a network policy.",
+      "status": "active",
+      "license": "Apache-2.0",
+      "repo": "https://github.com/PerryLink/dsh-permission-rules",
+      "npm": "dsh-permission-rules",
+      "evidence": {
+        "installs": 2,
+        "npm7d": 1965,
+        "stars": 126,
+        "lastPush": "2026-10-18",
+        "verification": "doctor",
+        "observedAt": "2026-10-18"
+      }
+    },
+    {
+      "id": "perrylink/dsh-auto-review",
+      "name": "dsh-auto-review",
+      "author": "PerryLink",
+      "surface": "safety",
+      "summary": "Second-model review on the approval chain with fail-closed verdicts.",
+      "status": "active",
+      "license": "Apache-2.0",
+      "repo": "https://github.com/PerryLink/dsh-auto-review",
+      "npm": "dsh-auto-review",
+      "evidence": {
+        "installs": null,
+        "npm7d": null,
+        "stars": 234,
+        "lastPush": "2026-10-18",
+        "verification": "certified",
+        "observedAt": "2026-10-18"
+      }
+    },
+    {
+      "id": "nanmicoder/dsh-auto-mode",
+      "name": "dsh-auto-mode",
+      "author": "NanmiCoder",
+      "surface": "safety",
+      "summary": "Safe automatic permission handling that keeps controls while allowing automation.",
+      "status": "archived",
+      "license": "MIT",
+      "repo": "https://github.com/NanmiCoder/dsh-auto-mode",
+      "npm": null,
+      "evidence": {
+        "installs": 13,
+        "npm7d": 991,
+        "stars": null,
+        "lastPush": "2026-09-01",
+        "verification": "none",
+        "observedAt": "2026-10-06"
+      }
+    },
+    {
+      "id": "duhu2000/dsh-mcp-connector",
+      "name": "dsh-mcp-connector",
+      "author": "duhu2000",
+      "surface": "mcp",
+      "summary": "General-purpose MCP connector, connection manager and extension marketplace.",
+      "status": "active",
+      "license": "MIT",
+      "repo": "https://github.com/duhu2000/dsh-mcp-connector",
+      "npm": null,
+      "evidence": {
+        "installs": 5,
+        "npm7d": 7150,
+        "stars": null,
+        "lastPush": "2026-10-05",
+        "verification": "none",
+        "observedAt": "2026-10-06"
+      }
+    },
+    {
+      "id": "perrylink/dsh-mcp-panel",
+      "name": "dsh-mcp-panel",
+      "author": "PerryLink",
+      "surface": "mcp",
+      "summary": "MCP management console with health diagnostics, CRUD and trial calls.",
+      "status": "active",
+      "license": "Apache-2.0",
+      "repo": "https://github.com/PerryLink/dsh-mcp-panel",
+      "npm": "dsh-mcp-panel",
+      "evidence": {
+        "installs": 13,
+        "npm7d": 2472,
+        "stars": 76,
+        "lastPush": "2026-10-18",
+        "verification": "doctor",
+        "observedAt": "2026-10-18"
+      }
+    },
+    {
+      "id": "xmanrui/dsh-im",
+      "name": "dsh-im",
+      "author": "xmanrui",
+      "surface": "remote",
+      "summary": "Twelve IM channels including Feishu, WeChat, Slack, Telegram and Discord.",
+      "status": "active",
+      "license": "MIT",
+      "repo": "https://github.com/xmanrui/dsh-im",
+      "npm": null,
+      "evidence": {
+        "installs": 73,
+        "npm7d": 17384,
+        "stars": null,
+        "lastPush": "2026-10-05",
+        "verification": "none",
+        "observedAt": "2026-10-06"
+      }
+    },
+    {
+      "id": "shaobeichen/dsh-pocket",
+      "name": "dsh-pocket",
+      "author": "shaobeichen",
+      "surface": "remote",
+      "summary": "Phone access to a desktop DSH over LAN or a public tunnel.",
+      "status": "active",
+      "license": "GPL-2.0",
+      "repo": "https://github.com/shaobeichen/dsh-pocket",
+      "npm": "dsh-pocket",
+      "evidence": {
+        "installs": 30,
+        "npm7d": 3753,
+        "stars": null,
+        "lastPush": "2026-09-16",
+        "verification": "none",
+        "observedAt": "2026-10-06"
+      }
+    },
+    {
+      "id": "perrylink/dsh-reach",
+      "name": "dsh-reach",
+      "author": "PerryLink",
+      "surface": "remote",
+      "summary": "Approval and question bridge to IM channels with a session console.",
+      "status": "frozen",
+      "license": "Apache-2.0",
+      "repo": "https://github.com/PerryLink/dsh-reach",
+      "npm": "dsh-reach",
+      "evidence": {
+        "installs": null,
+        "npm7d": null,
+        "stars": 2,
+        "lastPush": "2026-10-18",
+        "verification": "doctor",
+        "observedAt": "2026-10-18"
+      }
+    },
+    {
+      "id": "perrylink/dsh-plugin-guide",
+      "name": "dsh-plugin-guide",
+      "author": "PerryLink",
+      "surface": "dev",
+      "summary": "Plugin-development knowledge base, agent skill and CLI toolchain.",
+      "status": "active",
+      "license": "Apache-2.0",
+      "repo": "https://github.com/PerryLink/dsh-plugin-guide",
+      "npm": "dsh-plugin-guide",
+      "evidence": {
+        "installs": 6,
+        "npm7d": 1012,
+        "stars": 52,
+        "lastPush": "2026-10-18",
+        "verification": "doctor",
+        "observedAt": "2026-10-18"
+      }
+    },
+    {
+      "id": "perrylink/dsh-test-drive",
+      "name": "dsh-test-drive",
+      "author": "PerryLink",
+      "surface": "dev",
+      "summary": "Isolated install-and-smoke test drives with a structured pass/fail matrix.",
+      "status": "active",
+      "license": "Apache-2.0",
+      "repo": "https://github.com/PerryLink/dsh-test-drive",
+      "npm": "dsh-test-drive",
+      "evidence": {
+        "installs": null,
+        "npm7d": null,
+        "stars": 12,
+        "lastPush": "2026-10-18",
+        "verification": "doctor",
+        "observedAt": "2026-10-18"
+      }
+    },
+    {
+      "id": "perrylink/dsh-score",
+      "name": "dsh-score",
+      "author": "PerryLink",
+      "surface": "dev",
+      "summary": "Five-dimension quality scoring from real gh/npm evidence.",
+      "status": "active",
+      "license": "Apache-2.0",
+      "repo": "https://github.com/PerryLink/dsh-score",
+      "npm": "dsh-score",
+      "evidence": {
+        "installs": null,
+        "npm7d": null,
+        "stars": 12,
+        "lastPush": "2026-10-18",
+        "verification": "doctor",
+        "observedAt": "2026-10-18"
+      }
+    },
+    {
+      "id": "micromilo/upstream-radar",
+      "name": "upstream-radar",
+      "author": "MicroMilo",
+      "surface": "dev",
+      "summary": "Dependency security monitoring for plugin authors.",
+      "status": "active",
+      "license": "MIT",
+      "repo": "https://github.com/MicroMilo/upstream-radar",
+      "npm": null,
+      "evidence": {
+        "installs": 2,
+        "npm7d": 484,
+        "stars": null,
+        "lastPush": "2026-10-05",
+        "verification": "none",
+        "observedAt": "2026-10-06"
+      }
+    },
+    {
+      "id": "perrylink/dsh-talk",
+      "name": "dsh-talk",
+      "author": "PerryLink",
+      "surface": "voice",
+      "summary": "Voice-first loop: browser/local STT, TTS replies, announcements and interrupt.",
+      "status": "active",
+      "license": "Apache-2.0",
+      "repo": "https://github.com/PerryLink/dsh-talk",
+      "npm": "dsh-talk",
+      "evidence": {
+        "installs": null,
+        "npm7d": null,
+        "stars": 15,
+        "lastPush": "2026-10-18",
+        "verification": "doctor",
+        "observedAt": "2026-10-18"
+      }
+    },
+    {
+      "id": "perrylink/dsh-research-report",
+      "name": "dsh-research-report",
+      "author": "PerryLink",
+      "surface": "research",
+      "summary": "Content-addressed evidence ledger and sealed, versioned reports.",
+      "status": "active",
+      "license": "Apache-2.0",
+      "repo": "https://github.com/PerryLink/dsh-research-report",
+      "npm": "dsh-research-report",
+      "evidence": {
+        "installs": null,
+        "npm7d": null,
+        "stars": 213,
+        "lastPush": "2026-10-18",
+        "verification": "doctor",
+        "observedAt": "2026-10-18"
+      }
+    },
+    {
+      "id": "perrylink/dsh-industry-research",
+      "name": "dsh-industry-research",
+      "author": "PerryLink",
+      "surface": "research",
+      "summary": "Industry-chain mapping, policy tracking and auditable research reports.",
+      "status": "active",
+      "license": "Apache-2.0",
+      "repo": "https://github.com/PerryLink/dsh-industry-research",
+      "npm": "dsh-industry-research",
+      "evidence": {
+        "installs": null,
+        "npm7d": null,
+        "stars": 214,
+        "lastPush": "2026-10-18",
+        "verification": "doctor",
+        "observedAt": "2026-10-18"
+      }
+    },
+    {
+      "id": "perrylink/dsh-fund-research",
+      "name": "dsh-fund-research",
+      "author": "PerryLink",
+      "surface": "research",
+      "summary": "Deterministic fund research reports with computed metrics.",
+      "status": "active",
+      "license": "Apache-2.0",
+      "repo": "https://github.com/PerryLink/dsh-fund-research",
+      "npm": "dsh-fund-research",
+      "evidence": {
+        "installs": null,
+        "npm7d": null,
+        "stars": 67,
+        "lastPush": "2026-10-18",
+        "verification": "doctor",
+        "observedAt": "2026-10-18"
+      }
+    },
+    {
+      "id": "omdsh-dev/dsh-better-sidebar",
+      "name": "DSH-better-sidebar",
+      "author": "omdsh-dev",
+      "surface": "ui",
+      "summary": "Full sidebar workbench: files, Git, subagents and third-party tabs.",
+      "status": "active",
+      "license": "MIT",
+      "repo": "https://github.com/omdsh-dev/DSH-better-sidebar",
+      "npm": null,
+      "evidence": {
+        "installs": 127,
+        "npm7d": 57806,
+        "stars": 4006,
+        "lastPush": "2026-10-05",
+        "verification": "none",
+        "observedAt": "2026-10-06"
+      }
+    },
+    {
+      "id": "omdsh-dev/dsh-genui",
+      "name": "dsh-genui",
+      "author": "omdsh-dev",
+      "surface": "ui",
+      "summary": "Interactive UI inside assistant replies: layouts, charts, forms, quizzes, 3D.",
+      "status": "active",
+      "license": "MIT",
+      "repo": "https://github.com/omdsh-dev/dsh-genui",
+      "npm": null,
+      "evidence": {
+        "installs": 26,
+        "npm7d": 9982,
+        "stars": null,
+        "lastPush": "2026-10-05",
+        "verification": "none",
+        "observedAt": "2026-10-06"
+      }
+    },
+    {
+      "id": "perrylink/dsh-composer-history",
+      "name": "dsh-composer-history",
+      "author": "PerryLink",
+      "surface": "ui",
+      "summary": "Terminal-style composer history with Ctrl+R, draft/caret restore and compaction awareness.",
+      "status": "active",
+      "license": "Apache-2.0",
+      "repo": "https://github.com/PerryLink/dsh-composer-history",
+      "npm": "dsh-composer-history",
+      "evidence": {
+        "installs": null,
+        "npm7d": null,
+        "stars": 17,
+        "lastPush": "2026-10-18",
+        "verification": "doctor",
+        "observedAt": "2026-10-18"
+      }
+    },
+    {
+      "id": "anywhere-labs/dsh-desktop",
+      "name": "dsh-plugin-desktop",
+      "author": "anywhere-labs",
+      "surface": "desktop",
+      "summary": "Desktop shell that treats the desktop as a plugin container.",
+      "status": "active",
+      "license": "MIT",
+      "repo": "https://github.com/anywhere-labs/deepseek-harness-desktop",
+      "npm": null,
+      "evidence": {
+        "installs": 79,
+        "npm7d": 129,
+        "stars": null,
+        "lastPush": "2026-10-05",
+        "verification": "none",
+        "observedAt": "2026-10-06"
+      }
+    },
+    {
+      "id": "dsh-tauri-desk/deepseek-harness-desktop",
+      "name": "dsh-tauri",
+      "author": "dsh-tauri-desk",
+      "surface": "desktop",
+      "summary": "Tauri desktop shell for DSH.",
+      "status": "active",
+      "license": "MIT",
+      "repo": "https://github.com/dsh-tauri-desk/deepseek-harness-desktop",
+      "npm": null,
+      "evidence": {
+        "installs": 1,
+        "npm7d": null,
+        "stars": null,
+        "lastPush": "2026-10-05",
+        "verification": "none",
+        "observedAt": "2026-10-06"
+      }
+    }
+  ]
+}

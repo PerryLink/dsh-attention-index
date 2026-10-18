@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://perrylink.github.io/dsh-attention-index/contribution.schema.json",
+  "title": "DSH Community Bench Contribution",
+  "description": "One opt-in trajectory receipt. It carries hashes and aggregate metrics, not the raw session. Contributions produce contributor credits, a small demand signal, and at most one nomination for an under-evaluated plugin; they never substitute for a paired bench result.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "contributionId",
+    "contributor",
+    "createdAt",
+    "surface",
+    "quality",
+    "price",
+    "verification",
+    "sessionHash",
+    "textHash"
+  ],
+  "properties": {
+    "schema": { "const": "dsh-attention/contribution/v1" },
+    "contributionId": { "type": "string", "minLength": 1 },
+    "contributor": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 80,
+      "description": "Public identity, for example github:perrylink. Never an email address."
+    },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "surface": { "type": "string", "minLength": 1 },
+    "plugins": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "description": "Plugin ids installed in the session that produced the trajectory."
+    },
+    "quality": { "type": "number", "minimum": 0, "maximum": 100 },
+    "price": { "type": "integer", "minimum": 0, "maximum": 60 },
+    "verification": { "enum": ["self", "replay", "replicated"] },
+    "sessionHash": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+    "textHash": { "type": "string", "minLength": 8, "maxLength": 128 },
+    "metrics": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "turns": { "type": "integer", "minimum": 0 },
+        "steps": { "type": "integer", "minimum": 0 },
+        "toolCalls": { "type": "integer", "minimum": 0 },
+        "toolErrors": { "type": "integer", "minimum": 0 },
+        "tokens": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "nomination": {
+      "type": "string",
+      "minLength": 1,
+      "description": "One plugin id to nominate for a future bench run. Under-evaluated plugins are prioritised."
+    },
+    "signature": {
+      "type": "string",
+      "description": "Optional Ed25519 signature over the canonical JSON without this field."
+    }
+  }
+}

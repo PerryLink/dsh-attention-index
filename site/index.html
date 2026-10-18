@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DSH Community Bench · 社区基准与注意力榜</title>
+  <meta name="description" content="A public, reproducible, task-conditioned score for DeepSeek Harness plugins. Prior-only rows are labelled; paired bench results decide the measured tier." />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="#top">
+        <span class="brand-mark">◉</span>
+        <span>DSH Community Bench</span>
+      </a>
+      <nav class="nav">
+        <a href="#leaderboard">排行榜</a>
+        <a href="#contributors">贡献者</a>
+        <a href="#how">评分方法</a>
+        <a href="#contribute">参与</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top" class="wrap">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">PUBLIC SCORE · TASK-CONDITIONED · REPRODUCIBLE</p>
+        <h1>让好插件，拿到更多社区注意力。</h1>
+        <p class="lede">
+          一套公开、统一、可复现的分数：先按能力面（记忆、视觉、Office、浏览器、编排……）排名，
+          再用成对 bench（有/无插件）把“先验”升级为“实测”。
+          没有实测的插件不会被假装成实测；贡献者用可复现轨迹换社区信用与提名权。
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="#leaderboard">看排行榜</a>
+          <a class="button" href="#how">读评分公式</a>
+          <a class="button" href="#contribute">提交 bench / 轨迹</a>
+        </div>
+      </div>
+      <div class="hero-card" id="hero-card">
+        <div class="hero-card-label">CURRENT STATUS</div>
+        <div class="hero-card-main" id="hero-status">Loading registry…</div>
+        <div class="hero-card-sub" id="hero-sub"></div>
+      </div>
+    </section>
+
+    <section class="stats" id="stats" aria-label="registry stats"></section>
+
+    <section class="panel" id="attention">
+      <div class="panel-head">
+        <div>
+          <p class="eyebrow">ATTENTION ALLOCATION</p>
+          <h2>注意力给谁</h2>
+        </div>
+        <p class="panel-sub">Featured / New &amp; promising / Most nominated / Most replicated. 由 registry 直接产出，任何目录或应用都可消费。</p>
+      </div>
+      <div id="attention-grid" class="attention-grid"></div>
+    </section>
+
+    <section class="panel" id="leaderboard">
+      <div class="panel-head">
+        <div>
+          <p class="eyebrow">LEADERBOARD</p>
+          <h2>按能力面排名</h2>
+        </div>
+        <p class="panel-sub" id="generated"></p>
+      </div>
+      <div class="tabs" id="surface-tabs" role="tablist" aria-label="capability surfaces"></div>
+      <div class="controls">
+        <label class="search">
+          <span>搜索</span>
+          <input id="search" type="search" placeholder="插件名、作者、能力面…" autocomplete="off" />
+        </label>
+        <label class="select">
+          <span>证据</span>
+          <select id="tier-filter">
+            <option value="all">全部</option>
+            <option value="measured">仅实测</option>
+            <option value="prior">仅先验</option>
+          </select>
+        </label>
+      </div>
+      <p class="surface-note" id="surface-note"></p>
+      <div id="surface-cards" class="cards"></div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th class="num">#</th>
+              <th>插件</th>
+              <th class="num">社区分</th>
+              <th>证据</th>
+              <th class="num">先验</th>
+              <th class="num">实测</th>
+              <th class="num">覆盖</th>
+              <th class="num">置信</th>
+              <th>徽章</th>
+            </tr>
+          </thead>
+          <tbody id="leaderboard-body"></tbody>
+        </table>
+      </div>
+      <p class="empty" id="empty" hidden>没有匹配的行。</p>
+    </section>
+
+    <section class="panel" id="contributors">
+      <div class="panel-head">
+        <div>
+          <p class="eyebrow">CONTRIBUTORS</p>
+          <h2>贡献者声誉</h2>
+        </div>
+        <p class="panel-sub">轨迹质量 × 可复现等级 = credits。credits 不可转让、不能买排名；用于声誉与提名未评测插件。</p>
+      </div>
+      <div id="contributor-body"></div>
+    </section>
+
+    <section class="panel" id="how">
+      <div class="panel-head">
+        <div>
+          <p class="eyebrow">SCORING</p>
+          <h2>分数怎么来</h2>
+        </div>
+        <p class="panel-sub">公式、权重、样本门槛和反博弈规则都在 registry 里，任何人可复算。</p>
+      </div>
+      <div class="how-grid">
+        <article>
+          <h3>1 · 先验（prior）</h3>
+          <p>维护 30% · 采用 30% · 验证 25% · 文档 15%。采用同时看 installs、npm 周下载和 stars，避免单一信号误导。</p>
+          <p class="muted">没有成对 bench 时，最终分压缩到 0–60，并标记 <code>prior</code>；它不能压过有实测的插件。</p>
+        </article>
+        <article>
+          <h3>2 · 实测（bench）</h3>
+          <p>同一任务、同一模型、同一 harness，跑 <code>with</code> 与 <code>without</code> 两臂；每个任务两臂至少 3 次。</p>
+          <p class="muted">lift 的 95% 下界映射到 0–100；低于样本门槛的任务不参与评分。</p>
+        </article>
+        <article>
+          <h3>3 · 社区（community）</h3>
+          <p>贡献者提交可复现轨迹（只发哈希与指标，默认不发原文）；贡献不直接证明插件效果，只作为小权重需求信号。</p>
+          <p class="muted">独立复现 ≥ 2 个 runner 才进入 <code>most replicated</code>。</p>
+        </article>
+        <article>
+          <h3>4 · 注意力分配</h3>
+          <p>每个能力面前 3 名、Featured、New &amp; promising、Most nominated、Most replicated。固定席位，不可购买。</p>
+          <p class="muted">作者不能给自己的插件签发 full credit；赞助位不存在于本 registry。</p>
+        </article>
+      </div>
+      <pre class="formula" id="formula"></pre>
+    </section>
+
+    <section class="panel" id="contribute">
+      <div class="panel-head">
+        <div>
+          <p class="eyebrow">CONTRIBUTE</p>
+          <h2>把证据做厚</h2>
+        </div>
+      </div>
+      <div class="how-grid">
+        <article>
+          <h3>提交 bench 结果</h3>
+          <p>跑一个任务的两臂，产出 <code>bench-result.json</code>，签名后放到 <code>data/results/</code>，开 PR。至少 3 次/臂才会计分。</p>
+          <p><a href="./schemas/bench-result.schema.json">result schema</a></p>
+        </article>
+        <article>
+          <h3>贡献轨迹</h3>
+          <p>用 DSH 会话生成 <code>contribution.json</code>（质量、价格、surface、插件、哈希、签名），放到 <code>data/contributions/</code>。默认不发布原文。</p>
+          <p><a href="./schemas/contribution.schema.json">contribution schema</a>（待补）</p>
+        </article>
+        <article>
+          <h3>提名一个“还没被评测”的插件</h3>
+          <p>每条贡献可带一个 <code>nomination</code>。被提名最多、且 coverage &lt; 50% 的插件进入 Most nominated，优先安排 bench。</p>
+        </article>
+        <article>
+          <h3>独立复现</h3>
+          <p>第二个 runner 复跑同一 <code>(task, plugin, model, harness)</code>，结果一致即 <code>replicated</code>；这是最高等级的 credit。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="error" id="error" hidden></section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <span>DSH Community Bench · public registry <code>dsh-attention/registry/v1</code></span>
+      <span id="footer-generated"></span>
+    </div>
+  </footer>
+
+  <script src="./app.js" type="module"></script>
+</body>
+</html>
