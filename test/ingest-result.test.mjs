@@ -21,8 +21,10 @@ async function signedResult() {
     arm: 'with',
     outcome: { pass: true, checks: [{ id: 'test', pass: true }] },
     sessionHash: 'sha256:session',
-    environment: { fixtureHash, sandbox: 'bwrap' },
+    environment: { fixtureHash, sandbox: 'bwrap-fs', sandboxStrength: 'fs' },
     environmentBound: true,
+    sandbox: 'bwrap-fs',
+    sandboxStrength: 'fs',
     runner: { id: 'bench:test', keyId: 'bench:test' },
   }
   const signature = sign(null, Buffer.from(canonicalJson(result)), privateKey).toString('base64')
@@ -36,7 +38,7 @@ async function signedResult() {
 test('a valid signed result is ingested once', async () => {
   const { result, publicKeys } = await signedResult()
   const outDir = mkdtempSync(join(tmpdir(), 'dsh-ingest-'))
-  const options = { publicKeys, tasks: [{ id: 'p1-dev-add' }], fixturesDir, outDir }
+  const options = { publicKeys, tasks: [{ id: 'p1-dev-add', status: 'pilot' }], fixturesDir, outDir }
   const first = await ingestResult(result, options)
   assert.equal(first.ok, true)
   const again = await ingestResult(result, options)
@@ -50,11 +52,11 @@ test('fixture mismatch and bad signature are rejected', async () => {
   const mismatch = { ...result, environment: { ...result.environment, fixtureHash: 'sha256:wrong' } }
   delete mismatch.signature
   mismatch.signature = sign(null, Buffer.from(canonicalJson(mismatch)), privateKey).toString('base64')
-  const bad = await ingestResult(mismatch, { publicKeys, tasks: [{ id: 'p1-dev-add' }], fixturesDir, outDir })
+  const bad = await ingestResult(mismatch, { publicKeys, tasks: [{ id: 'p1-dev-add', status: 'pilot' }], fixturesDir, outDir })
   assert.equal(bad.reason, 'fixture-hash-mismatch')
 
   const unsigned = { ...result }
   delete unsigned.signature
-  const noSignature = await ingestResult(unsigned, { publicKeys, tasks: [{ id: 'p1-dev-add' }], fixturesDir, outDir })
+  const noSignature = await ingestResult(unsigned, { publicKeys, tasks: [{ id: 'p1-dev-add', status: 'pilot' }], fixturesDir, outDir })
   assert.equal(noSignature.reason, 'unsigned')
 })

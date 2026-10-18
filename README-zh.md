@@ -9,7 +9,6 @@
 [![CI](https://img.shields.io/github/actions/workflow/status/PerryLink/dsh-attention-index/ci.yml?branch=main&label=CI)](https://github.com/PerryLink/dsh-attention-index/actions)
 [![Pages](https://img.shields.io/badge/evidence-live-2f855a)](https://perrylink.github.io/dsh-attention-index/)
 [![API](https://img.shields.io/badge/API-v1-2f6feb)](https://perrylink.github.io/dsh-attention-index/api/v1/index.json)
-[![Gitee](https://img.shields.io/badge/Gitee-mirror-c71d23?logo=gitee)](https://gitee.com/perrylink/dsh-attention-index)
 [![GitCode](https://img.shields.io/badge/GitCode-mirror-2f6feb)](https://gitcode.com/PerryLink/dsh-attention-index)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
 
@@ -84,7 +83,7 @@ v0.1 的答案很直接：**没有质量 #1**。
 | [`api/v1/registry.json`](api/v1/registry.json) | 版本化快照 + `etag` |
 | [`integrations/market/signals.json`](integrations/market/signals.json) | 市场装饰 sidecar；不是排序输入 |
 | [`badges/index.json`](badges/index.json) | 每个插件的徽章；未评级显式标注 |
-| [`data/results/`](data/results) | 30 条签名成对结果（只有哈希，没有会话原文） |
+| [`data/results/`](data/results) | 30 条签名 arm 结果（15 对；只有哈希，没有会话原文） |
 
 ```sh
 curl https://perrylink.github.io/dsh-attention-index/api/v1/registry.json

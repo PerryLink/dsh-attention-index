@@ -19,16 +19,16 @@ export function validateAudits(registry, auditFile) {
     for (const row of surface.leaderboard ?? []) {
       if (row.evidenceGrade !== 'E5') continue
       const matches = audits.filter(audit => {
-        if (audit.independent !== true) return false
+        if (audit.independent !== true || audit.selfReview === true) return false
         if (audit.result !== 'pass' && audit.result !== 'pass-with-findings') return false
-        const scope = String(audit.scope ?? '')
-        return scope.includes(row.pluginId) || scope.includes(surface.id)
+        const scope = String(audit.scope ?? '').toLowerCase()
+        return scope.includes(String(row.pluginId).toLowerCase())
       })
-      if (matches.length === 0) failures.push(`${row.pluginId}: E5 without an independent passing audit`)
-      for (const audit of matches) {
-        if (typeof audit.auditor !== 'string' || audit.auditor.length === 0) failures.push(`${row.pluginId}: audit has no auditor`)
-        if (typeof audit.evidenceUrl !== 'string' || !/^https?:\/\//.test(audit.evidenceUrl)) failures.push(`${row.pluginId}: audit has no public evidence URL`)
-      }
+      const valid = matches.some(audit =>
+        typeof audit.auditor === 'string' && audit.auditor.trim().length > 0
+        && typeof audit.evidenceUrl === 'string' && /^https?:\/\//.test(audit.evidenceUrl)
+        && typeof audit.date === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(audit.date))
+      if (!valid) failures.push(`${row.pluginId}: E5 without a matching independent, dated, public audit`)
     }
   }
   return failures

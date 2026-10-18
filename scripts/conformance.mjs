@@ -43,6 +43,36 @@ if ((signals.stats?.measured ?? 0) !== registry.stats?.measuredPlugins) failures
 const apiSignature = verifyApi()
 if (!apiSignature.valid) failures.push(`api signature: ${apiSignature.reason}`)
 
+// Deployed Pages copies must be byte-identical to the source artifacts.
+for (const [left, right, label] of [
+  ['api/v1/registry.json', 'site/api/v1/registry.json', 'api registry'],
+  ['api/v1/registry.sig', 'site/api/v1/registry.sig', 'api signature'],
+  ['api/v1/registry.sha256', 'site/api/v1/registry.sha256', 'api sha256'],
+  ['api/v1/index.json', 'site/api/v1/index.json', 'api index'],
+  ['integrations/market/signals.json', 'site/market/signals.json', 'market signals'],
+]) {
+  const a = readFileSync(join(ROOT, left))
+  const b = readFileSync(join(ROOT, right))
+  if (!a.equals(b)) failures.push(`${label}: site copy differs from source`)
+}
+const pinned = readFileSync(join(ROOT, 'api/v1/registry.sha256'), 'utf8').trim()
+if (pinned !== etag) failures.push(`registry.sha256 mismatch: ${pinned} != ${etag}`)
+const apiIndex = JSON.parse(readFileSync(join(ROOT, 'api/v1/index.json'), 'utf8'))
+if (apiIndex.etag !== etag) failures.push('api index etag mismatch')
+
+// Every signal entry must agree with its registry row.
+const rows = new Map()
+for (const surface of registry.surfaces ?? []) {
+  for (const row of surface.leaderboard ?? []) rows.set(String(row.pluginId).toLowerCase(), row)
+}
+for (const entry of signals.entries ?? []) {
+  const row = rows.get(String(entry.id).toLowerCase())
+  if (row === undefined) { failures.push(`signals unknown plugin ${entry.id}`); continue }
+  if (entry.evidenceGrade !== row.evidenceGrade) failures.push(`signals grade mismatch ${entry.id}`)
+  if (entry.unrated !== row.unrated) failures.push(`signals unrated mismatch ${entry.id}`)
+  if (entry.rank !== row.rank) failures.push(`signals rank mismatch ${entry.id}`)
+}
+
 const audits = JSON.parse(readFileSync(join(ROOT, 'data/audits/index.json'), 'utf8'))
 for (const failure of validateAudits(registry, audits)) failures.push(failure)
 

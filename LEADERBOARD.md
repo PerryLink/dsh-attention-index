@@ -2,7 +2,7 @@
 
 Generated: 2026-10-18T00:00:00.000Z · reliability `soe-goe/v1` · 1/42 measured · 41 unrated
 
-> Prior-only rows are **E0 / unrated**: metadata is not outcome evidence. No quality rank or #1 is published while every row is E0.
+> Prior-only rows are **E0 / unrated**: metadata is not outcome evidence. Only positive E3+ gets a quality rank; a surface with no positive row publishes no #1.
 
 ## Evidence by capability surface
 
@@ -159,7 +159,7 @@ No contribution receipts yet. See CONTRIBUTING.md.
 
 ## Attention allocation
 
-- **Featured**: the top measured plugin per surface; prior-only only when no measured result exists.
+- **Featured**: the top positive E3+ plugin per surface; null when none exists.
 - **New & promising**: active, low-adoption, recently pushed, prior-only plugins.
 - **Most nominated**: under-evaluated plugins nominated by contribution receipts.
-- **Most replicated**: measured plugins with at least two independent runners.
+- **Most replicated**: E4+ plugins with at least two independent key ids.

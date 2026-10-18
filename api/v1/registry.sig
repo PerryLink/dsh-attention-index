@@ -3,7 +3,7 @@
   "keyId": "release:main",
   "alg": "ed25519",
   "signedFile": "registry.json",
-  "sha256": "sha256:d22ffd10907b5a64cd39e59ef9ae3d94ddc9c80122dfe1ceab3b2944a41a27eb",
-  "signature": "PeoRWhlWIQKLsbrUV49/C5Q+A7QM1cnalK70BBR76tkHR6xzOyn2FYJTjKgdAMK7paORGhKw//L6iMTGywx8AQ==",
+  "sha256": "sha256:2e21fc794a63efb8b05e1ff196e23f7b772431b374160e9cb749e996a916ea90",
+  "signature": "a/noU3iTCqK5lwnQN4TRkkAISZpMGbAHf3fPf2nlFQb5DMH6YgFlgPTWEvpKreVS1fabkShLUj9XHC9NHVlPBA==",
   "signedAt": "2026-10-18T00:00:00.000Z"
 }

@@ -18,7 +18,8 @@ import { createHash } from 'node:crypto'
 import { join, dirname } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import { buildRegistry } from './score.mjs'
-import { loadPublicKeys, verifyResult } from './verify-result.mjs'
+import { loadPublicKeys } from './verify-result.mjs'
+import { validateResult } from './ingest-result.mjs'
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..')
 const BADGE_BASE = process.env.BENCH_BADGE_BASE ?? 'https://perrylink.github.io/dsh-attention-index/badges/'
@@ -97,7 +98,7 @@ function renderMarkdown(registry) {
     '',
     `Generated: ${registry.generatedAt} · reliability \`${registry.scoring.reliabilityVersion}\` · ${registry.stats.measuredPlugins}/${registry.stats.plugins} measured · ${registry.stats.unratedPlugins} unrated`,
     '',
-    '> Prior-only rows are **E0 / unrated**: metadata is not outcome evidence. No quality rank or #1 is published while every row is E0.',
+    '> Prior-only rows are **E0 / unrated**: metadata is not outcome evidence. Only positive E3+ gets a quality rank; a surface with no positive row publishes no #1.',
     '',
     '## Evidence by capability surface',
     '',
@@ -123,25 +124,29 @@ function renderMarkdown(registry) {
     lines.push('')
   }
   lines.push('## Attention allocation', '')
-  lines.push('- **Featured**: the top measured plugin per surface; prior-only only when no measured result exists.')
+  lines.push('- **Featured**: the top positive E3+ plugin per surface; null when none exists.')
   lines.push('- **New & promising**: active, low-adoption, recently pushed, prior-only plugins.')
   lines.push('- **Most nominated**: under-evaluated plugins nominated by contribution receipts.')
-  lines.push('- **Most replicated**: measured plugins with at least two independent runners.')
+  lines.push('- **Most replicated**: E4+ plugins with at least two independent key ids.')
   lines.push('')
   return lines.join('\n')
 }
 
 /** Build the full output set. */
-export function buildOutputs({ today } = {}) {
+export async function buildOutputs({ today } = {}) {
   const pluginsFile = readJson('data/plugins.json')
   const tasksFile = readJson('data/tasks.json')
   const results = readDir('data/results').map(item => item.value)
   const publicKeys = loadPublicKeys(join(ROOT, 'data/runners.json'))
   const verifiedResults = []
   for (const result of results) {
-    const verdict = verifyResult(result, publicKeys)
-    if (verdict.valid) verifiedResults.push({ ...result, verified: true })
-    else console.error(`skip unverified result ${result.runId ?? '?'}: ${verdict.reason}`)
+    const verdict = await validateResult(result, {
+      publicKeys,
+      tasks: tasksFile.tasks,
+      fixturesDir: join(ROOT, 'fixtures'),
+    })
+    if (verdict.ok) verifiedResults.push({ ...result, verified: true })
+    else console.error(`skip invalid result ${result.runId ?? '?'}: ${verdict.reason}`)
   }
   const contributions = readDir('data/contributions').map(item => item.value)
   const day = today ?? new Date().toISOString().slice(0, 10)
@@ -220,11 +225,11 @@ function write(path, content) {
 }
 
 /** CLI entry. */
-function main() {
+async function main() {
   const todayArg = process.argv.indexOf('--today')
   const today = todayArg >= 0 ? process.argv[todayArg + 1] : undefined
   const check = process.argv.includes('--check')
-  const outputs = buildOutputs({ today })
+  const outputs = await buildOutputs({ today })
   const registryText = `${JSON.stringify(outputs.registry, null, 2)}\n`
   const badgeIndexText = `${JSON.stringify(outputs.badgeIndex, null, 2)}\n`
   const files = [
@@ -267,4 +272,4 @@ function main() {
   console.log(`wrote ${files.length} files · ${outputs.registry.stats.plugins} plugins · ${outputs.registry.stats.measuredPlugins} measured · ${outputs.registry.stats.unratedPlugins} unrated · ${outputs.registry.stats.contributors} contributors`)
 }
 
-if (process.argv[1] !== undefined && import.meta.url === pathToFileURL(process.argv[1]).href) main()
+if (process.argv[1] !== undefined && import.meta.url === pathToFileURL(process.argv[1]).href) main().catch((error) => { console.error(`aggregate: ${error.message}`); process.exit(1) })

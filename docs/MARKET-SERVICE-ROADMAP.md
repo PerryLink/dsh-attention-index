@@ -12,7 +12,7 @@ one more leaderboard.
 > `dsh-community-bench`.
 >
 > **P0 status (2026-10-18):** implemented the SOE/GOE layer
-> (`docs/SOE-GOE.md`), all 42 rows are `E0 / unrated`, prior `#1`/top badges and
+> (`docs/SOE-GOE.md`), all 42 rows were `E0 / unrated` at P0 time; the first pilot now has 41 E0 + 1 E2, prior `#1`/top badges and
 > quality slots are removed, and the lift interval is Newcombe. P1–P3 remain
 > blocked on measured runs, signing keys and network; see
 > `docs/P0-P3-PLAN.md`.
@@ -310,7 +310,7 @@ Two gaps deserve emphasis:
 A code/security audit found that the current measured tier is not merely
 unexercised; it is **forgeable**, the runner has **no execution boundary**, and
 the public artifacts already contain **neutrality and injection risks**. Until
-these are fixed, the only honest state is `0 measured`.
+these are fixed, the only honest state is `0 E3+ positive`; the first E2 pilot is provisional.
 
 | Finding | Evidence | Consequence |
 |---|---|---|

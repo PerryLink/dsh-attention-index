@@ -91,13 +91,14 @@
             "design": 3,
             "execution": 4,
             "precision": 1,
-            "independence": 1,
+            "independence": 0,
             "directness": 0,
             "notes": [
               "operator-owned",
               "missing-adoption-channels",
               "docs-unknown",
-              "version-mismatch",
+              "self-run",
+              "version-unbound",
               "task-unreviewed",
               "sandbox-partial"
             ]
@@ -118,6 +119,7 @@
               "small-sample",
               "version-or-environment-mismatch",
               "task-unreviewed",
+              "self-run-cap",
               "sandbox-partial"
             ]
           },

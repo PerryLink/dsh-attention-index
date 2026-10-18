@@ -89,7 +89,8 @@ function measuredSoe(entry, missing, operatorOwned) {
   if (missing.docs) notes.push('docs-unknown')
   if (!entry.signatureVerified) notes.push('signature-unverified')
   if (entry.selfRun) notes.push('self-run')
-  if (entry.versionMatch !== 'exact') notes.push('version-mismatch')
+  if (entry.versionMatch === 'unknown') notes.push('version-unbound')
+  else if (entry.versionMatch !== 'exact') notes.push('version-mismatch')
   if (!entry.taskReviewed) notes.push('task-unreviewed')
   if (entry.sandboxStrength === 'fs') notes.push('sandbox-partial')
 
@@ -104,7 +105,7 @@ function measuredSoe(entry, missing, operatorOwned) {
 }
 
 /** Ordinal grade from SOE and bias checks. */
-function gradeFromSoe(soe, { measured, operatorOwned, missing, taskReviewed, audited, environmentBound, sandboxStrength }) {
+function gradeFromSoe(soe, { measured, operatorOwned, missing, taskReviewed, audited, environmentBound, sandboxStrength, selfRun, holdout }) {
   if (!measured) {
     return {
       grade: 'E0',
@@ -139,6 +140,11 @@ function gradeFromSoe(soe, { measured, operatorOwned, missing, taskReviewed, aud
     certainty = certainty === 'very-low' ? 'very-low' : 'low'
     downgrades.push('task-unreviewed')
   }
+  if (selfRun) {
+    grade = 'E2'
+    certainty = certainty === 'very-low' ? 'very-low' : 'low'
+    downgrades.push('self-run-cap')
+  }
   if (!environmentBound) {
     grade = 'E2'
     certainty = certainty === 'very-low' ? 'very-low' : 'low'
@@ -169,12 +175,20 @@ export function evaluateReliability(entry) {
   const missing = missingOf(entry)
   const taskReviewed = entry?.taskReviewed === true
   const audited = entry?.audited === true
+  const selfRun = entry?.selfRun === true
+  const holdout = entry?.holdout === true
   const environmentBound = entry?.environmentBound === true
   const sandboxStrength = entry?.sandboxStrength ?? 'none'
   const soe = measured ? measuredSoe(entry, missing, operatorOwned) : priorSoe(entry, missing, operatorOwned)
-  const goe = gradeFromSoe(soe, { measured, operatorOwned, missing, taskReviewed, audited, environmentBound, sandboxStrength })
-  const positive = measured && goe.grade !== 'E2' && Array.isArray(entry.benchTasks)
+  const goe = gradeFromSoe(soe, { measured, operatorOwned, missing, taskReviewed, audited, environmentBound, sandboxStrength, selfRun, holdout })
+  const hasPositiveTask = Array.isArray(entry.benchTasks)
     && entry.benchTasks.some(task => Number(task.liftLowerBound) > 0)
+  if (measured && /^E[3-5]$/.test(goe.grade) && !hasPositiveTask) {
+    goe.grade = 'E2'
+    goe.certainty = 'low'
+    goe.downgrades.push('no-positive-lower-bound')
+  }
+  const positive = measured && /^E[3-5]$/.test(goe.grade) && hasPositiveTask
   if (measured) goe.positive = positive
   return {
     evidenceGrade: goe.grade,

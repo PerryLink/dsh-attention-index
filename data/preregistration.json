@@ -1,7 +1,6 @@
 {
   "schema": "dsh-score/preregistration/v1",
   "pack": "p1-pilot-1",
-  "createdAt": "2026-10-18T11:10:16.852Z",
   "taskHash": "sha256:509db5fa8165242f0b8acca131d0b707717e3bce2466d9c075dfa90f801039f0",
   "tasks": [
     {
@@ -157,5 +156,12 @@
   "analysis": "Newcombe difference interval; FDR across plugins within a surface",
   "independentReview": false,
   "reviewedBy": null,
+  "deviation": {
+    "actualRunsPerArm": 3,
+    "reason": "first smoke pilot used 3 runs/arm, below the pre-registered 5",
+    "approved": false
+  },
+  "createdAt": "2026-10-18T12:41:28.420Z",
+  "manifestHash": "sha256:4d52cc0fb4a4ee468a7546fc1cdc3469eb9711b35b21edf670c88870990b49c1",
   "note": "Unreviewed pilot pack. E2 provisional at most until independent review and results publication."
 }

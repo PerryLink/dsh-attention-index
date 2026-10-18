@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>dsh-score · public evidence for DSH plugins</title>
-  <meta name="description" content="Public, prior-only evidence and scores for DeepSeek Harness plugins. Prior rows are labelled; paired with/without bench results are the only path to measured." />
+  <meta name="description" content="Public evidence and grades for DeepSeek Harness plugins: 1 E2 provisional pilot, 41 E0 unrated, 0 positive measured, no quality #1." />
   <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
@@ -26,15 +26,15 @@
   <main id="top" class="wrap">
     <section class="hero">
       <div class="hero-copy">
-        <p class="eyebrow">PUBLIC EVIDENCE · E0 UNRATED · REPRODUCIBLE</p>
+        <p class="eyebrow">PUBLIC EVIDENCE · E2 PROVISIONAL · 0 POSITIVE</p>
         <h1>让好插件，拿到更多社区注意力。</h1>
         <p class="lede">
           一套公开、统一、可复现的证据与分数：先按能力面（记忆、视觉、Office、浏览器、编排……）整理，
           再用成对 bench（有/无插件）把“先验”升级为“实测”。
-          目前全部是先验（prior），0 条实测；先验是发现信号，不是任务效果结论。
+          目前 1 条 E2 暂定实测（null pilot），41 条 E0/未评级；没有 positive measured，也没有质量 #1。先验是发现信号，不是任务效果结论。
         </p>
         <div class="hero-actions">
-          <a class="button primary" href="#leaderboard">看排行榜</a>
+          <a class="button primary" href="#leaderboard">看证据</a>
           <a class="button" href="#how">读评分公式</a>
           <a class="button" href="#contribute">提交 bench / 轨迹</a>
         </div>
@@ -142,7 +142,7 @@
         </article>
         <article>
           <h3>4 · 注意力分配</h3>
-          <p>每个能力面前 3 名、Featured、New &amp; promising、Most nominated、Most replicated。固定席位，不可购买。</p>
+          <p>只有 positive E3+ 才进入质量槽位；当前 0 条 positive，因此没有 top3、Featured 或质量 #1。固定席位，不可购买。</p>
           <p class="muted">作者不能给自己的插件签发 full credit；赞助位不存在于本 registry。</p>
         </article>
       </div>
@@ -165,7 +165,7 @@
         <article>
           <h3>贡献轨迹</h3>
           <p>用 DSH 会话生成 <code>contribution.json</code>（质量、价格、surface、插件、哈希、签名），放到 <code>data/contributions/</code>。默认不发布原文。</p>
-          <p><a href="./schemas/contribution.schema.json">contribution schema</a>（待补）</p>
+          <p><a href="./schemas/contribution.schema.json">contribution schema</a>（已发布）</p>
         </article>
         <article>
           <h3>提名一个“还没被评测”的插件</h3>

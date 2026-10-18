@@ -26,7 +26,7 @@ const index = {
   sha256: 'registry.sha256',
   signature: 'registry.sig',
   etag,
-  note: 'Static, cacheable snapshot. Scores are evidence grades, not a quality guarantee.',
+  note: 'Static, cacheable snapshot. registry.sha256 is the canonical-object etag; registry.sig.sha256 is the file digest.',
 }
 for (const dir of [join(ROOT, 'api/v1'), join(ROOT, 'site/api/v1')]) {
   mkdirSync(dir, { recursive: true })

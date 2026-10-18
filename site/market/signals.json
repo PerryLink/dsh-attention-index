@@ -10,6 +10,7 @@
   "entries": [
     {
       "id": "perrylink/dsh-memento",
+      "canonicalId": "perrylink/dsh-memento",
       "aliases": [
         "perrylink/dsh-memento",
         "dsh-memento",
@@ -34,6 +35,7 @@
           "small-sample",
           "version-or-environment-mismatch",
           "task-unreviewed",
+          "self-run-cap",
           "sandbox-partial"
         ]
       },
@@ -56,6 +58,7 @@
     },
     {
       "id": "volcengine/openviking",
+      "canonicalId": "volcengine/openviking",
       "aliases": [
         "volcengine/openviking",
         "https://github.com/volcengine/OpenViking"
@@ -95,6 +98,7 @@
     },
     {
       "id": "vectorize-io/hindsight",
+      "canonicalId": "vectorize-io/hindsight",
       "aliases": [
         "vectorize-io/hindsight",
         "https://github.com/vectorize-io/hindsight"
@@ -134,6 +138,7 @@
     },
     {
       "id": "bowenliang123/dsh-context",
+      "canonicalId": "bowenliang123/dsh-context",
       "aliases": [
         "bowenliang123/dsh-context",
         "dsh-context",
@@ -174,6 +179,7 @@
     },
     {
       "id": "han-1413141/dsh-cost-meter",
+      "canonicalId": "han-1413141/dsh-cost-meter",
       "aliases": [
         "han-1413141/dsh-cost-meter",
         "dsh-cost-meter",
@@ -214,6 +220,7 @@
     },
     {
       "id": "perrylink/dsh-budget",
+      "canonicalId": "perrylink/dsh-budget",
       "aliases": [
         "perrylink/dsh-budget",
         "dsh-budget",
@@ -255,6 +262,7 @@
     },
     {
       "id": "liustack/modlens",
+      "canonicalId": "liustack/modlens",
       "aliases": [
         "liustack/modlens",
         "https://github.com/liustack/modlens"
@@ -294,6 +302,7 @@
     },
     {
       "id": "ysr666/dsh-vision-router",
+      "canonicalId": "ysr666/dsh-vision-router",
       "aliases": [
         "ysr666/dsh-vision-router",
         "https://github.com/ysr666/dsh-vision-router"
@@ -333,6 +342,7 @@
     },
     {
       "id": "anionex/dsh-vision-toolkit",
+      "canonicalId": "anionex/dsh-vision-toolkit",
       "aliases": [
         "anionex/dsh-vision-toolkit",
         "https://github.com/Anionex/dsh-vision-toolkit"
@@ -372,6 +382,7 @@
     },
     {
       "id": "anysearch-team/anysearch-dsh",
+      "canonicalId": "anysearch-team/anysearch-dsh",
       "aliases": [
         "anysearch-team/anysearch-dsh",
         "https://github.com/anysearch-team/anysearch-dsh"
@@ -411,6 +422,7 @@
     },
     {
       "id": "liustack/modsearch",
+      "canonicalId": "liustack/modsearch",
       "aliases": [
         "liustack/modsearch",
         "https://github.com/liustack/modsearch"
@@ -450,6 +462,7 @@
     },
     {
       "id": "dddmuc/dsh-free-search",
+      "canonicalId": "dddmuc/dsh-free-search",
       "aliases": [
         "dddmuc/dsh-free-search",
         "https://github.com/DDDMUC/dsh-free-search"
@@ -489,6 +502,7 @@
     },
     {
       "id": "tencent/browserskill",
+      "canonicalId": "tencent/browserskill",
       "aliases": [
         "tencent/browserskill",
         "https://github.com/Tencent/BrowserSkill"
@@ -528,6 +542,7 @@
     },
     {
       "id": "perrylink/dsh-click",
+      "canonicalId": "perrylink/dsh-click",
       "aliases": [
         "perrylink/dsh-click",
         "dsh-click",
@@ -569,6 +584,7 @@
     },
     {
       "id": "lum1104/dsh-browser",
+      "canonicalId": "lum1104/dsh-browser",
       "aliases": [
         "lum1104/dsh-browser",
         "https://github.com/Lum1104/dsh-browser"
@@ -607,7 +623,8 @@
       "badge": "badges/lum1104-dsh-browser.svg"
     },
     {
-      "id": "tencent/weknora",
+      "id": "tencent/weknora-dsh",
+      "canonicalId": "tencent/weknora",
       "aliases": [
         "tencent/weknora-dsh",
         "https://github.com/Tencent/WeKnora"
@@ -646,7 +663,8 @@
       "badge": "badges/tencent-weknora-dsh.svg"
     },
     {
-      "id": "devin-axis/ipollowork",
+      "id": "devin-axis/ppt-studio",
+      "canonicalId": "devin-axis/ipollowork",
       "aliases": [
         "devin-axis/ppt-studio",
         "https://github.com/Devin-AXIS/iPolloWork"
@@ -686,6 +704,7 @@
     },
     {
       "id": "dream-num/dsh-univer-office",
+      "canonicalId": "dream-num/dsh-univer-office",
       "aliases": [
         "dream-num/dsh-univer-office",
         "https://github.com/dream-num/dsh-univer-office"
@@ -725,6 +744,7 @@
     },
     {
       "id": "nanmicoder/dsh-agent-teams",
+      "canonicalId": "nanmicoder/dsh-agent-teams",
       "aliases": [
         "nanmicoder/dsh-agent-teams",
         "https://github.com/NanmiCoder/dsh-agent-teams"
@@ -764,6 +784,7 @@
     },
     {
       "id": "q00/ouroboros",
+      "canonicalId": "q00/ouroboros",
       "aliases": [
         "q00/ouroboros",
         "https://github.com/Q00/ouroboros"
@@ -803,6 +824,7 @@
     },
     {
       "id": "perrylink/dsh-autotier",
+      "canonicalId": "perrylink/dsh-autotier",
       "aliases": [
         "perrylink/dsh-autotier",
         "dsh-autotier",
@@ -844,6 +866,7 @@
     },
     {
       "id": "perrylink/dsh-auto-review",
+      "canonicalId": "perrylink/dsh-auto-review",
       "aliases": [
         "perrylink/dsh-auto-review",
         "dsh-auto-review",
@@ -885,6 +908,7 @@
     },
     {
       "id": "perrylink/dsh-permission-rules",
+      "canonicalId": "perrylink/dsh-permission-rules",
       "aliases": [
         "perrylink/dsh-permission-rules",
         "dsh-permission-rules",
@@ -925,6 +949,7 @@
     },
     {
       "id": "nanmicoder/dsh-auto-mode",
+      "canonicalId": "nanmicoder/dsh-auto-mode",
       "aliases": [
         "nanmicoder/dsh-auto-mode",
         "https://github.com/NanmiCoder/dsh-auto-mode"
@@ -964,6 +989,7 @@
     },
     {
       "id": "perrylink/dsh-mcp-panel",
+      "canonicalId": "perrylink/dsh-mcp-panel",
       "aliases": [
         "perrylink/dsh-mcp-panel",
         "dsh-mcp-panel",
@@ -1004,6 +1030,7 @@
     },
     {
       "id": "duhu2000/dsh-mcp-connector",
+      "canonicalId": "duhu2000/dsh-mcp-connector",
       "aliases": [
         "duhu2000/dsh-mcp-connector",
         "https://github.com/duhu2000/dsh-mcp-connector"
@@ -1043,6 +1070,7 @@
     },
     {
       "id": "shaobeichen/dsh-pocket",
+      "canonicalId": "shaobeichen/dsh-pocket",
       "aliases": [
         "shaobeichen/dsh-pocket",
         "dsh-pocket",
@@ -1083,6 +1111,7 @@
     },
     {
       "id": "xmanrui/dsh-im",
+      "canonicalId": "xmanrui/dsh-im",
       "aliases": [
         "xmanrui/dsh-im",
         "https://github.com/xmanrui/dsh-im"
@@ -1122,6 +1151,7 @@
     },
     {
       "id": "perrylink/dsh-reach",
+      "canonicalId": "perrylink/dsh-reach",
       "aliases": [
         "perrylink/dsh-reach",
         "dsh-reach",
@@ -1163,6 +1193,7 @@
     },
     {
       "id": "perrylink/dsh-plugin-guide",
+      "canonicalId": "perrylink/dsh-plugin-guide",
       "aliases": [
         "perrylink/dsh-plugin-guide",
         "dsh-plugin-guide",
@@ -1203,6 +1234,7 @@
     },
     {
       "id": "perrylink/dsh-score",
+      "canonicalId": "perrylink/dsh-score",
       "aliases": [
         "perrylink/dsh-score",
         "dsh-score",
@@ -1244,6 +1276,7 @@
     },
     {
       "id": "perrylink/dsh-test-drive",
+      "canonicalId": "perrylink/dsh-test-drive",
       "aliases": [
         "perrylink/dsh-test-drive",
         "dsh-test-drive",
@@ -1285,6 +1318,7 @@
     },
     {
       "id": "micromilo/upstream-radar",
+      "canonicalId": "micromilo/upstream-radar",
       "aliases": [
         "micromilo/upstream-radar",
         "https://github.com/MicroMilo/upstream-radar"
@@ -1324,6 +1358,7 @@
     },
     {
       "id": "perrylink/dsh-talk",
+      "canonicalId": "perrylink/dsh-talk",
       "aliases": [
         "perrylink/dsh-talk",
         "dsh-talk",
@@ -1365,6 +1400,7 @@
     },
     {
       "id": "perrylink/dsh-industry-research",
+      "canonicalId": "perrylink/dsh-industry-research",
       "aliases": [
         "perrylink/dsh-industry-research",
         "dsh-industry-research",
@@ -1406,6 +1442,7 @@
     },
     {
       "id": "perrylink/dsh-research-report",
+      "canonicalId": "perrylink/dsh-research-report",
       "aliases": [
         "perrylink/dsh-research-report",
         "dsh-research-report",
@@ -1447,6 +1484,7 @@
     },
     {
       "id": "perrylink/dsh-fund-research",
+      "canonicalId": "perrylink/dsh-fund-research",
       "aliases": [
         "perrylink/dsh-fund-research",
         "dsh-fund-research",
@@ -1488,6 +1526,7 @@
     },
     {
       "id": "omdsh-dev/dsh-better-sidebar",
+      "canonicalId": "omdsh-dev/dsh-better-sidebar",
       "aliases": [
         "omdsh-dev/dsh-better-sidebar",
         "https://github.com/omdsh-dev/DSH-better-sidebar"
@@ -1526,6 +1565,7 @@
     },
     {
       "id": "omdsh-dev/dsh-genui",
+      "canonicalId": "omdsh-dev/dsh-genui",
       "aliases": [
         "omdsh-dev/dsh-genui",
         "https://github.com/omdsh-dev/dsh-genui"
@@ -1565,6 +1605,7 @@
     },
     {
       "id": "perrylink/dsh-composer-history",
+      "canonicalId": "perrylink/dsh-composer-history",
       "aliases": [
         "perrylink/dsh-composer-history",
         "dsh-composer-history",
@@ -1605,7 +1646,8 @@
       "badge": "badges/perrylink-dsh-composer-history.svg"
     },
     {
-      "id": "anywhere-labs/deepseek-harness-desktop",
+      "id": "anywhere-labs/dsh-desktop",
+      "canonicalId": "anywhere-labs/deepseek-harness-desktop",
       "aliases": [
         "anywhere-labs/dsh-desktop",
         "https://github.com/anywhere-labs/deepseek-harness-desktop"
@@ -1645,6 +1687,7 @@
     },
     {
       "id": "dsh-tauri-desk/deepseek-harness-desktop",
+      "canonicalId": "dsh-tauri-desk/deepseek-harness-desktop",
       "aliases": [
         "dsh-tauri-desk/deepseek-harness-desktop",
         "https://github.com/dsh-tauri-desk/deepseek-harness-desktop"

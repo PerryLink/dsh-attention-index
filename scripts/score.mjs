@@ -206,8 +206,11 @@ export function aggregateBench(results, tasks, options = {}) {
     if (typeof result.plugin?.id !== 'string' || typeof result.taskId !== 'string') continue
     if (result.arm !== 'with' && result.arm !== 'without') continue
     if (typeof result.outcome?.pass !== 'boolean') continue
-    const key = `${result.plugin.id}\u0000${result.taskId}`
-    const entry = byPluginTask.get(key) ?? { pluginId: result.plugin.id, taskId: result.taskId, with: [], without: [] }
+    const version = String(result.plugin.version ?? 'unknown')
+    const model = String(result.model ?? 'unknown')
+    const harness = String(result.harness ?? 'unknown')
+    const key = `${result.plugin.id}\u0000${version}\u0000${model}\u0000${harness}\u0000${result.taskId}`
+    const entry = byPluginTask.get(key) ?? { pluginId: result.plugin.id, version, model, harness, taskId: result.taskId, with: [], without: [] }
     entry[result.arm].push(result)
     byPluginTask.set(key, entry)
   }
@@ -238,13 +241,14 @@ export function aggregateBench(results, tasks, options = {}) {
       ciLower: round(interval.lower, 3),
       ciUpper: round(interval.upper, 3),
       score: round(((lcb + 1) / 2) * 100, 1),
-      runners: unique(entry.with.map(row => row.runner?.id).filter(Boolean)).length,
+      runners: unique([...entry.with, ...entry.without].map(row => row.runner?.keyId ?? row.runner?.id).filter(Boolean)).length,
       runs: entry.with.length + entry.without.length,
       signatureVerified,
       environmentBound,
       sandboxStrength,
     }
-    const aggregate = perPlugin.get(entry.pluginId) ?? { tasks: [], runners: new Set(), runs: 0, signatureVerified: true, environmentBound: true, sandboxStrength: 'full' }
+    const identity = `${entry.pluginId}\u0000${entry.version}\u0000${entry.model}\u0000${entry.harness}`
+    const aggregate = perPlugin.get(identity) ?? { pluginId: entry.pluginId, version: entry.version, model: entry.model, harness: entry.harness, tasks: [], runners: new Set(), runs: 0, signatureVerified: true, environmentBound: true, sandboxStrength: 'full' }
     aggregate.signatureVerified = aggregate.signatureVerified && signatureVerified
     aggregate.environmentBound = aggregate.environmentBound && environmentBound
     if (sandboxStrength === 'none') aggregate.sandboxStrength = 'none'
@@ -252,10 +256,12 @@ export function aggregateBench(results, tasks, options = {}) {
     aggregate.tasks.push(row)
     for (const value of entry.with.map(item => item.runner?.id).filter(Boolean)) aggregate.runners.add(value)
     aggregate.runs += row.runs
-    perPlugin.set(entry.pluginId, aggregate)
+    perPlugin.set(identity, aggregate)
   }
   const output = new Map()
-  for (const [pluginId, aggregate] of perPlugin) {
+  for (const aggregate of perPlugin.values()) {
+    const pluginId = aggregate.pluginId
+    if (output.has(pluginId)) throw new Error(`multiple result identities for ${pluginId}; bind version/model/harness before publishing`)
     const totalWeight = aggregate.tasks.reduce((sum, task) => sum + task.weight, 0)
     const benchScore = totalWeight > 0
       ? aggregate.tasks.reduce((sum, task) => sum + task.score * task.weight, 0) / totalWeight
@@ -275,6 +281,9 @@ export function aggregateBench(results, tasks, options = {}) {
       signatureVerified: aggregate.signatureVerified === true,
       environmentBound: aggregate.environmentBound === true,
       sandboxStrength: aggregate.sandboxStrength,
+      version: aggregate.version,
+      model: aggregate.model,
+      harness: aggregate.harness,
       tasks: aggregate.tasks.sort((left, right) => left.taskId.localeCompare(right.taskId)),
     })
   }
@@ -528,7 +537,7 @@ export function scorePlugin(plugin, bench, contribution, today) {
     signatureVerified: bench?.signatureVerified === true,
     environmentBound: bench?.environmentBound === true,
     sandboxStrength: bench?.sandboxStrength ?? 'none',
-    selfRun: false,
+    selfRun: /^perrylink\//i.test(plugin.id) || String(plugin.author ?? '').toLowerCase() === 'perrylink',
     versionMatch: 'unknown',
     holdout: false,
     taskReviewed: bench?.taskReviewed === true,

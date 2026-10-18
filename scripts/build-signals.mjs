@@ -23,7 +23,8 @@ for (const surface of registry.surfaces) {
     const id = canonicalId({ id: row.pluginId, repo: row.repo })
     const aliases = [row.pluginId, row.npm, row.repo].filter(value => typeof value === 'string' && value.length > 0)
     entries.push({
-      id,
+      id: row.pluginId,
+      canonicalId: id,
       aliases,
       surface: surface.id,
       evidenceGrade: row.evidenceGrade,

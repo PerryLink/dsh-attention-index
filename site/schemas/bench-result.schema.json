@@ -5,41 +5,106 @@
   "description": "One signed run of one task with one arm (with or without a plugin). Results with different harness/model/version tuples are not comparable and must not be merged.",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schema", "runId", "taskId", "plugin", "arm", "model", "harness", "startedAt", "outcome", "metrics", "sessionHash", "runner", "signature"],
+  "required": [
+    "schema",
+    "runId",
+    "taskId",
+    "plugin",
+    "arm",
+    "model",
+    "harness",
+    "startedAt",
+    "outcome",
+    "metrics",
+    "sessionHash",
+    "runner",
+    "environment",
+    "environmentBound",
+    "sandbox",
+    "sandboxStrength"
+  ],
   "properties": {
-    "schema": { "const": "dsh-attention/bench-result/v1" },
-    "runId": { "type": "string", "minLength": 1 },
-    "taskId": { "type": "string", "minLength": 1 },
+    "schema": {
+      "const": "dsh-attention/bench-result/v1"
+    },
+    "runId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "taskId": {
+      "type": "string",
+      "minLength": 1
+    },
     "plugin": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["id", "version"],
+      "required": [
+        "id",
+        "version"
+      ],
       "properties": {
-        "id": { "type": "string", "minLength": 1 },
-        "version": { "type": "string", "minLength": 1 }
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        }
       }
     },
-    "arm": { "enum": ["with", "without"] },
-    "model": { "type": "string", "minLength": 1 },
-    "harness": { "type": "string", "minLength": 1 },
-    "startedAt": { "type": "string", "format": "date-time" },
-    "finishedAt": { "type": "string", "format": "date-time" },
+    "arm": {
+      "enum": [
+        "with",
+        "without"
+      ]
+    },
+    "model": {
+      "type": "string",
+      "minLength": 1
+    },
+    "harness": {
+      "type": "string",
+      "minLength": 1
+    },
+    "startedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "finishedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
     "outcome": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["pass", "checks"],
+      "required": [
+        "pass",
+        "checks"
+      ],
       "properties": {
-        "pass": { "type": "boolean" },
+        "pass": {
+          "type": "boolean"
+        },
         "checks": {
           "type": "array",
           "items": {
             "type": "object",
             "additionalProperties": false,
-            "required": ["id", "pass"],
+            "required": [
+              "id",
+              "pass"
+            ],
             "properties": {
-              "id": { "type": "string" },
-              "pass": { "type": "boolean" },
-              "detail": { "type": "string" }
+              "id": {
+                "type": "string"
+              },
+              "pass": {
+                "type": "boolean"
+              },
+              "detail": {
+                "type": "string"
+              }
             }
           }
         }
@@ -48,36 +113,146 @@
     "metrics": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["tokens", "durationMs", "toolErrors"],
+      "required": [
+        "tokens",
+        "durationMs",
+        "toolErrors"
+      ],
       "properties": {
-        "tokens": { "type": "integer", "minimum": 0 },
-        "durationMs": { "type": "integer", "minimum": 0 },
-        "toolErrors": { "type": "integer", "minimum": 0 }
+        "tokens": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "durationMs": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "toolErrors": {
+          "type": "integer",
+          "minimum": 0
+        }
       }
     },
-    "sessionHash": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+    "sessionHash": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
     "artifacts": {
       "type": "array",
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["path", "sha256"],
+        "required": [
+          "path",
+          "sha256"
+        ],
         "properties": {
-          "path": { "type": "string" },
-          "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+          "path": {
+            "type": "string"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          }
         }
       }
     },
     "runner": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["id"],
+      "required": [
+        "id"
+      ],
       "properties": {
-        "id": { "type": "string", "minLength": 1 },
-        "keyId": { "type": "string" },
-        "replicated": { "type": "boolean" }
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "keyId": {
+          "type": "string"
+        },
+        "replicated": {
+          "type": "boolean"
+        }
       }
     },
-    "signature": { "type": "string", "minLength": 1 }
+    "signature": {
+      "type": "string",
+      "minLength": 1
+    },
+    "environment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "node",
+        "platform",
+        "arch",
+        "dsh",
+        "model",
+        "harness",
+        "profile",
+        "sandbox",
+        "sandboxStrength",
+        "fixtureHash"
+      ],
+      "properties": {
+        "node": {
+          "type": "string"
+        },
+        "platform": {
+          "type": "string"
+        },
+        "arch": {
+          "type": "string"
+        },
+        "dsh": {
+          "type": "string"
+        },
+        "model": {
+          "type": "string"
+        },
+        "harness": {
+          "type": "string"
+        },
+        "profile": {
+          "type": "string"
+        },
+        "sandbox": {
+          "enum": [
+            "none",
+            "bwrap-fs"
+          ]
+        },
+        "sandboxStrength": {
+          "enum": [
+            "none",
+            "fs",
+            "full"
+          ]
+        },
+        "fixtureHash": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "environmentBound": {
+      "type": "boolean"
+    },
+    "sandbox": {
+      "enum": [
+        "none",
+        "bwrap-fs"
+      ]
+    },
+    "sandboxStrength": {
+      "enum": [
+        "none",
+        "fs",
+        "full"
+      ]
+    }
   }
 }

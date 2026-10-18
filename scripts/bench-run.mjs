@@ -26,7 +26,7 @@ import { createHash, createPrivateKey, sign } from 'node:crypto'
 import { cp, mkdir, mkdtemp, readdir, readFile, rm, stat, writeFile } from 'node:fs/promises'
 import { existsSync, readFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
-import { dirname, join, relative, resolve } from 'node:path'
+import { dirname, join, relative, resolve, sep } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..')
@@ -62,15 +62,17 @@ function sha256(bytes) {
 }
 
 /** Minimal environment for child runs: no ambient tokens, SSH agents or npm credentials. */
-export function minimalEnv(extra = {}) {
+export function minimalEnv(extra = {}, options = {}) {
   const env = {
     PATH: process.env.PATH ?? '',
     HOME: process.env.HOME ?? '',
     LANG: process.env.LANG ?? 'C.UTF-8',
     TMPDIR: process.env.TMPDIR ?? tmpdir(),
   }
-  for (const key of ['DEEPSEEK_API_KEY', 'DEEPSEEK_BASE_URL']) {
-    if (process.env[key] !== undefined) env[key] = process.env[key]
+  if (options.includeKey !== false) {
+    for (const key of ['DEEPSEEK_API_KEY', 'DEEPSEEK_BASE_URL']) {
+      if (process.env[key] !== undefined) env[key] = process.env[key]
+    }
   }
   return { ...env, ...extra }
 }
@@ -98,12 +100,19 @@ export async function hashDir(dir) {
   return `sha256:${hash.digest('hex')}`
 }
 
+/** Resolve a path and require it to be inside root; null escapes. */
+export function safeChild(root, value) {
+  const base = resolve(root)
+  const target = resolve(base, String(value ?? ''))
+  return target === base || target.startsWith(base + sep) ? target : null
+}
+
 /** Run one child process and capture stdout/stderr with a timeout. */
 function run(command, args, options = {}) {
   return new Promise((resolvePromise) => {
     const child = spawn(command, args, {
       cwd: options.cwd,
-      env: minimalEnv(options.env),
+      env: minimalEnv(options.env, { includeKey: options.includeKey !== false }),
       windowsHide: true,
       stdio: ['ignore', 'pipe', 'pipe'],
     })
@@ -182,28 +191,39 @@ async function evaluateCheck(check, context) {
     return { id, pass, detail: pass ? 'answer does not end in a question' : 'answer ends in a question' }
   }
   if (check.kind === 'file-exists') {
-    const pass = existsSync(join(context.workspace, check.path ?? ''))
+    const path = safeChild(context.workspace, check.path)
+    const pass = path !== null && existsSync(path)
     return { id, pass, detail: `file ${check.path} exists=${pass}` }
   }
   if (check.kind === 'file-equals') {
-    const path = join(context.workspace, check.path ?? '')
-    const pass = existsSync(path) && (await readFile(path, 'utf8')) === String(check.value ?? '')
+    const path = safeChild(context.workspace, check.path)
+    const pass = path !== null && existsSync(path) && (await readFile(path, 'utf8')) === String(check.value ?? '')
     return { id, pass, detail: `file ${check.path} equals expected=${pass}` }
   }
   if (check.kind === 'file-contains') {
-    const path = join(context.workspace, check.path ?? '')
-    const pass = existsSync(path) && (await readFile(path, 'utf8')).includes(String(check.value ?? ''))
+    const path = safeChild(context.workspace, check.path)
+    const pass = path !== null && existsSync(path) && (await readFile(path, 'utf8')).includes(String(check.value ?? ''))
     return { id, pass, detail: `file ${check.path} contains expected=${pass}` }
   }
   if (check.kind === 'file-not-contains') {
-    const path = join(context.workspace, check.path ?? '')
-    const pass = existsSync(path) && !(await readFile(path, 'utf8')).includes(String(check.value ?? ''))
+    const path = safeChild(context.workspace, check.path)
+    const pass = path !== null && existsSync(path) && !(await readFile(path, 'utf8')).includes(String(check.value ?? ''))
     return { id, pass, detail: `file ${check.path} excludes ${JSON.stringify(check.value)}=${pass}` }
   }
   if (check.kind === 'command-exit-zero') {
     if (context.allowCommands !== true) return { id, pass: false, detail: 'command checks require --allow-commands' }
-    const result = await run('/bin/sh', ['-lc', String(check.command ?? '')], { cwd: context.workspace, env: { HOME: context.home ?? process.env.HOME, DEEPSEEK_API_KEY: '' }, timeoutMs: 120000 })
-    return { id, pass: result.code === 0, detail: `command exit ${result.code}` }
+    if (typeof context.nodeRoot !== 'string') return { id, pass: false, detail: 'command checks need a node root for the bwrap check sandbox' }
+    const bwrap = context.bwrap ?? 'bwrap'
+    const result = await run(bwrap, [
+      '--die-with-parent', '--unshare-user', '--unshare-pid', '--unshare-uts', '--unshare-ipc', '--share-net',
+      '--ro-bind', '/usr', '/usr', '--ro-bind', '/bin', '/bin', '--ro-bind', '/lib', '/lib', '--ro-bind', '/lib64', '/lib64', '--ro-bind', '/etc', '/etc',
+      '--ro-bind', context.nodeRoot, '/opt/node',
+      '--bind', context.workspace, '/workspace', '--tmpfs', '/tmp', '--dev', '/dev', '--proc', '/proc',
+      '--chdir', '/workspace', '--setenv', 'HOME', '/tmp', '--setenv', 'DSH_HOME', '/tmp',
+      '--setenv', 'PATH', '/opt/node/bin:/usr/bin:/bin',
+      '--', '/bin/sh', '-lc', String(check.command ?? ''),
+    ], { timeoutMs: 120000, includeKey: false })
+    return { id, pass: result.code === 0, detail: `command exit ${result.code} (bwrap)` }
   }
   return { id, pass: false, detail: `unknown check kind ${check.kind}` }
 }
@@ -222,10 +242,12 @@ async function main() {
   if (typeof taskId !== 'string') throw new Error('--task is required')
   const arm = args.arm ?? 'with'
   if (arm !== 'with' && arm !== 'without') throw new Error('--arm must be with or without')
-  const repeat = Math.max(1, Number(args.repeat ?? 3))
+  const repeat = Number(args.repeat ?? 3)
+  if (!Number.isInteger(repeat) || repeat < 1) throw new Error('--repeat must be a positive integer')
   const tasksFile = JSON.parse(await readFile(resolve(ROOT, args.pack ?? 'data/tasks.json'), 'utf8'))
   const task = tasksFile.tasks.find(item => item.id === taskId)
   if (task === undefined) throw new Error(`unknown task ${taskId}`)
+  if (!/^[a-z0-9][a-z0-9-]{2,63}$/.test(task.id)) throw new Error(`unsafe task id ${task.id}`)
   if (task.status === 'draft') throw new Error(`task ${taskId} is a draft: add executable checks and a fixture before running it`)
   if (!Array.isArray(task.checks) || task.checks.length === 0 || task.checks.some(check => typeof check.kind !== 'string')) {
     throw new Error(`task ${taskId} has no executable checks (each check needs a kind)`)
@@ -240,6 +262,7 @@ async function main() {
   const model = args.model ?? task.model ?? 'deepseek-flash'
   const harness = args.harness ?? task.harness ?? 'unknown'
   const timeoutMs = Number(args.timeoutMs ?? 300000)
+  if (!Number.isFinite(timeoutMs) || timeoutMs < 1000) throw new Error('--timeoutMs must be >= 1000')
   const dryRun = args['dry-run'] === true
   const keep = args.keep === true
   const allowCommands = args['allow-commands'] === true
@@ -288,14 +311,15 @@ async function main() {
     const workspace = join(temp, 'workspace')
     await mkdir(home, { recursive: true })
     await mkdir(workspace, { recursive: true })
-    const fixture = join(fixtures, task.id)
+    const fixture = safeChild(fixtures, task.id)
+    if (fixture === null) throw new Error(`fixture escapes fixtures/: ${task.id}`)
     if (existsSync(fixture)) await cp(fixture, workspace, { recursive: true })
     else await writeFile(join(workspace, 'README.md'), `# Bench workspace for ${task.id}\n`)
 
     let install = { code: 0, stdout: '', stderr: '' }
     if (arm === 'with') {
       install = await run(dshCommand, ['plugin', '--profile', profile, 'add', args.spec], {
-        cwd: workspace, env: { DSH_HOME: home, HOME: home, ...sandboxEnv }, timeoutMs: 600000,
+        cwd: workspace, env: { DSH_HOME: home, HOME: home, ...sandboxEnv }, timeoutMs: 600000, includeKey: false,
       })
       if (install.code !== 0) {
         console.error(`install failed for ${pluginId}: ${install.code}`)
@@ -315,7 +339,7 @@ async function main() {
     const durationMs = Date.now() - started
     const parsed = parseHeadlessJson(runResult.stdout)
     const checks = []
-    for (const check of task.checks ?? []) checks.push(await evaluateCheck(check, { workspace, home, answer: parsed.text, allowCommands }))
+    for (const check of task.checks ?? []) checks.push(await evaluateCheck(check, { workspace, home, answer: parsed.text, allowCommands, bwrap, nodeRoot }))
     const pass = runResult.code === 0 && checks.length > 0 && checks.every(check => check.pass)
     const sessionFile = await newestSessionFile(home)
     const sessionBytes = sessionFile === undefined ? Buffer.alloc(0) : await readFile(sessionFile)

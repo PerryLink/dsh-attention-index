@@ -182,9 +182,20 @@
         "status": {
           "enum": [
             "draft",
+            "pilot",
             "ready",
             "retired"
           ]
+        },
+        "brief": {
+          "type": "string"
+        },
+        "reviewed": {
+          "type": "boolean"
+        },
+        "weight": {
+          "type": "number",
+          "minimum": 0
         }
       }
     },

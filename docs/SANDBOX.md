@@ -44,4 +44,4 @@ E3+ result may be published.
 - Do not run untrusted plugins against the real `~/.dsh` or a personal API key.
 - Do not call an unsandboxed run "measured" or E3.
 - Do not copy `.credentials.yaml` into the throwaway home.
-- Do not hide a failed sandbox check; publish `0 measured`.
+- Do not hide a failed sandbox check; publish `0 E3+` (the first E2 pilot is provisional).

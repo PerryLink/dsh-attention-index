@@ -14,7 +14,7 @@ npm names to one canonical `owner/repo`. Unknown is `undefined`; ambiguous is
 `scripts/build-api.mjs` writes:
 
 - `api/v1/registry.json` — the public registry plus `apiVersion` and `etag`.
-- `api/v1/registry.sha256` — the pinned content hash.
+- `api/v1/registry.sha256` — the canonical-object etag (hash of the API object without `etag`). It is **not** the file digest; `registry.sig.sha256` carries the file digest.
 - `api/v1/registry.sig` — Ed25519 signature by `release:main` (operator attestation, not an independent audit).
 - `api/v1/index.json` — endpoint metadata.
 - `site/api/v1/*` — the Pages copy.

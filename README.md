@@ -9,7 +9,6 @@
 [![CI](https://img.shields.io/github/actions/workflow/status/PerryLink/dsh-attention-index/ci.yml?branch=main&label=CI)](https://github.com/PerryLink/dsh-attention-index/actions)
 [![Pages](https://img.shields.io/badge/evidence-live-2f855a)](https://perrylink.github.io/dsh-attention-index/)
 [![API](https://img.shields.io/badge/API-v1-2f6feb)](https://perrylink.github.io/dsh-attention-index/api/v1/index.json)
-[![Gitee](https://img.shields.io/badge/Gitee-mirror-c71d23?logo=gitee)](https://gitee.com/perrylink/dsh-attention-index)
 [![GitCode](https://img.shields.io/badge/GitCode-mirror-2f6feb)](https://gitcode.com/PerryLink/dsh-attention-index)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
 [![DSH plugin](https://img.shields.io/badge/dsh--plugin-✅-green)](https://github.com/topics/dsh-plugin)
@@ -94,7 +93,7 @@ Full model: [docs/SOE-GOE.md](docs/SOE-GOE.md) · [SCORING.md](SCORING.md).
 | [`integrations/market/signals.json`](integrations/market/signals.json) | Decoration sidecar for markets; not a ranking input |
 | [`badges/index.json`](badges/index.json) | Per-plugin badge; unrated is explicit |
 | [`integrations/dsh-recommend/bench-feed.json`](integrations/dsh-recommend/bench-feed.json) | Sidecar for `dsh-recommend` |
-| [`data/results/`](data/results) | 30 signed paired results (hashes, no session text) |
+| [`data/results/`](data/results) | 30 signed arm results (15 pairs; hashes, no session text) |
 
 ```sh
 curl https://perrylink.github.io/dsh-attention-index/api/v1/registry.json
@@ -136,7 +135,7 @@ task pack (pilot, unreviewed)
 
 - A **full** sandbox (egress allowlist + seccomp); current `bwrap-fs` is partial.
 - Task review and an **independent runner** for E3+.
-- FDR/bootstrap/holdouts, version binding, token accounting.
+- FDR/bootstrap are implemented but not wired; holdouts, version binding and token accounting remain.
 - Signed snapshot history and a third-party market pilot.
 - E5 (independent audit) — a self-review is published, but it is not E5.
 - Repository rename to `dsh-score-index`; URLs are intentionally stable.

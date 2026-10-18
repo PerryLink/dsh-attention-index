@@ -31,12 +31,22 @@ export const BRIEFS = {
  * @param {{text?:string, tools?:string[]}} session - user-visible summary + tool names.
  * @returns {{brief:string|null, surface:string|null, confidence:number, matched:string[], abstain:boolean, reason:string}}
  */
+function matchesTerm(text, term) {
+  const needle = term.toLowerCase()
+  if (/^[\x00-\x7f]+$/.test(needle)) {
+    const escaped = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+    return new RegExp(`(^|[^a-z0-9])${escaped}([^a-z0-9]|$)`, 'i').test(text)
+  }
+  return text.includes(needle)
+}
+
 export function matchBrief(session) {
   const text = String(session?.text ?? '').toLowerCase()
-  const tools = new Set((session?.tools ?? []).map(tool => String(tool).toLowerCase()))
+  const toolList = Array.isArray(session?.tools) ? session.tools : String(session?.tools ?? '').split(',')
+  const tools = new Set(toolList.map(tool => String(tool).trim().toLowerCase()).filter(Boolean))
   const scores = []
   for (const [brief, spec] of Object.entries(BRIEFS)) {
-    const matched = spec.terms.filter(term => text.includes(term.toLowerCase()))
+    const matched = spec.terms.filter(term => matchesTerm(text, term))
     const toolHits = spec.tools.filter(tool => tools.has(tool.toLowerCase()))
     const score = matched.length + toolHits.length * 2
     scores.push({ brief, surface: spec.surface, score, matched: [...matched, ...toolHits.map(tool => `tool:${tool}`)] })

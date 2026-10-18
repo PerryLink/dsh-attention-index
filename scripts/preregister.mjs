@@ -43,10 +43,9 @@ export async function buildPreregistration() {
     })
   }
   const taskHash = `sha256:${sha256(canonicalJson(entries))}`
-  return {
+  const core = {
     schema: 'dsh-score/preregistration/v1',
     pack: pack.id,
-    createdAt: new Date().toISOString(),
     taskHash,
     tasks: entries,
     model: 'deepseek-flash',
@@ -57,6 +56,12 @@ export async function buildPreregistration() {
     analysis: 'Newcombe difference interval; FDR across plugins within a surface',
     independentReview: false,
     reviewedBy: null,
+    deviation: { actualRunsPerArm: 3, reason: 'first smoke pilot used 3 runs/arm, below the pre-registered 5', approved: false },
+  }
+  return {
+    ...core,
+    createdAt: new Date().toISOString(),
+    manifestHash: `sha256:${sha256(canonicalJson(core))}`,
     note: 'Unreviewed pilot pack. E2 provisional at most until independent review and results publication.',
   }
 }
@@ -68,9 +73,12 @@ async function main() {
     if (!existsSync(OUTPUT)) throw new Error('data/preregistration.json missing')
     const existing = JSON.parse(readFileSync(OUTPUT, 'utf8'))
     if (existing.taskHash !== payload.taskHash) {
-      throw new Error(`preregistration drift: ${existing.taskHash} != ${payload.taskHash}`)
+      throw new Error(`preregistration task drift: ${existing.taskHash} != ${payload.taskHash}`)
     }
-    console.log(`preregistration ok · ${existing.pack} · ${existing.taskHash}`)
+    if (existing.manifestHash !== payload.manifestHash) {
+      throw new Error(`preregistration manifest drift: ${existing.manifestHash} != ${payload.manifestHash}`)
+    }
+    console.log(`preregistration ok · ${existing.pack} · ${existing.taskHash} · ${existing.manifestHash}`)
     return
   }
   writeFileSync(OUTPUT, `${JSON.stringify(payload, null, 2)}\n`)

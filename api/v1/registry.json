@@ -91,13 +91,14 @@
             "design": 3,
             "execution": 4,
             "precision": 1,
-            "independence": 1,
+            "independence": 0,
             "directness": 0,
             "notes": [
               "operator-owned",
               "missing-adoption-channels",
               "docs-unknown",
-              "version-mismatch",
+              "self-run",
+              "version-unbound",
               "task-unreviewed",
               "sandbox-partial"
             ]
@@ -118,6 +119,7 @@
               "small-sample",
               "version-or-environment-mismatch",
               "task-unreviewed",
+              "self-run-cap",
               "sandbox-partial"
             ]
           },
@@ -4511,5 +4513,5 @@
   "contributors": [],
   "nominations": [],
   "apiVersion": "v1",
-  "etag": "sha256:40b13978c1063380703bdb86bbfd73e465660dbfab733ab5f9eb4e4701c5f71c"
+  "etag": "sha256:262b91f91c7c84e7a08530fd2cbb9b69909916b209a9a4293662e35da51c9e16"
 }

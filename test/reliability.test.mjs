@@ -155,6 +155,33 @@ test('a filesystem-only sandbox is capped at E2', () => {
   assert.ok(result.goe.downgrades.includes('sandbox-partial'))
 })
 
+
+test('E3+ requires a positive lower bound and rejects self-run', () => {
+  const benchTasks = Array.from({ length: 5 }, (_, index) => ({
+    taskId: `task-${index}`,
+    withRuns: 5,
+    withoutRuns: 5,
+    liftLowerBound: -0.5,
+  }))
+  const strong = {
+    tier: 'measured',
+    benchTasks,
+    runners: 2,
+    signatureVerified: true,
+    environmentBound: true,
+    sandboxStrength: 'full',
+    versionMatch: 'exact',
+    holdout: true,
+    taskReviewed: true,
+  }
+  assert.equal(evaluateReliability(base(strong)).evidenceGrade, 'E2')
+  assert.ok(evaluateReliability(base(strong)).goe.downgrades.includes('no-positive-lower-bound'))
+
+  const positive = { ...strong, benchTasks: benchTasks.map(task => ({ ...task, liftLowerBound: 0.2 })) }
+  assert.equal(evaluateReliability(base({ ...positive, selfRun: true })).evidenceGrade, 'E2')
+  assert.ok(evaluateReliability(base({ ...positive, selfRun: true })).goe.downgrades.includes('self-run-cap'))
+})
+
 test('operator-owned and missing channels are downgrades', () => {
   const result = evaluateReliability(base({
     pluginId: 'perrylink/dsh-auto-review',

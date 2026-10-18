@@ -23,6 +23,7 @@ test('a matching independent passing audit is accepted', () => {
       independent: true,
       result: 'pass',
       scope: 'alice/memory',
+      date: '2026-10-18',
       evidenceUrl: 'https://example.test/audit',
     }],
   })
@@ -36,6 +37,7 @@ test('a non-independent audit cannot support E5', () => {
       independent: false,
       result: 'pass',
       scope: 'alice/memory',
+      date: '2026-10-18',
       evidenceUrl: 'https://example.test/audit',
     }],
   })

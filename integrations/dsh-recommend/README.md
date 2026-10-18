@@ -5,9 +5,9 @@
 ## Principle
 
 - Keep `dsh-recommend`'s global score and rank. It answers “what is popular/maintained?”.
-- Add a **sidecar** label: “Community Bench: memory #1 · 38.3/60 · prior”.
+- Add a **sidecar** label: `dsh-score: memory · E0 unrated`; never a prior `#1`.
 - Never overwrite the host score; never use the sidecar to hide a row.
-- The sidecar is **prior-only** until paired bench results exist. Say so.
+- The sidecar reports E0/unrated by default; the first E2 provisional pilot is labelled, never a quality rank.
 
 ## Feed
 
@@ -27,7 +27,9 @@ Output: [`bench-feed.json`](./bench-feed.json)
       "pluginId": "perrylink/dsh-plugin-guide",
       "surface": "dev",
       "surfaceLabel": "Plugin development and verification",
-      "rank": 1,
+      "rank": null,
+      "evidenceGrade": "E0",
+      "unrated": true,
       "score": 39.3,
       "scoreScale": 60,
       "tier": "prior",
@@ -35,7 +37,7 @@ Output: [`bench-feed.json`](./bench-feed.json)
       "bench": null,
       "coverage": 0,
       "confidence": 0.8,
-      "badge": "![DSH Bench 39.3 · prior](./badges/perrylink-dsh-plugin-guide.svg)"
+      "badge": "![dsh-score E0 · unrated](./badges/perrylink-dsh-plugin-guide.svg)"
     }
   },
   "bySurface": { "dev": { "top3": [] } }

@@ -97,8 +97,8 @@ ranked.
 - Use **Newcombe/Wilson** intervals for a difference of proportions, not Wald.
 - A 3/3 vs 0/3 sweep must not become 100; with Newcombe its lower bound is
   ≈0.205.
-- Minimum evidence for E3: ≥5 tasks, ≥5 runs/arm, ≥2 independent runners for a
-  quality slot; target 10–20 tasks and ≥10 runs/arm for confidence.
+- Minimum evidence for E3: ≥5 reviewed tasks, ≥5 runs/arm, ≥1 independent
+  runner; E4 needs ≥2 independent keys. Target 10–20 tasks and ≥10 runs/arm.
 - Control multiplicity (FDR) across plugins within a surface.
 - Pre-register tasks and sample sizes; publish all results, including negative.
 - Report baseline `p0`, `p1`, `n`, lift, CI and between-task heterogeneity.
@@ -125,7 +125,7 @@ A measured row replaces `E0` with E2–E5 and carries the task/CI/runner fields.
 
 ## 8. P0–P3
 
-- **P0** (now): implement E0/GOE/SOE; mark all 42 rows unrated; stop prior `#1`
+- **P0** (at the time): implement E0/GOE/SOE; mark all 42 rows unrated; stop prior `#1`
   and top badges; Newcombe; missing data and operator flags; no quality slot.
 - **P1**: executable tasks, sandbox, signed results, first measured pilot;
   E2/E3 with CI and independent runners.

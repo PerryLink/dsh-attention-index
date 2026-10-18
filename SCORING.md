@@ -27,7 +27,7 @@ Each row carries four separate things:
 
 A row with no paired result is `E0`, `unrated: true`, `goe.positive: false`.
 `top3`, `featured` and quality badges are only populated by **positive E3+**
-rows. `rank` is `null` for E0/E1.
+rows. `rank` is `null` for E0/E1/E2.
 
 The legacy formulas below are kept so the historical discovery number remains
 reproducible. They do **not** define quality, and the measured composite is
@@ -160,7 +160,7 @@ The **quality slots** are different:
   runs, never to score.
 - `mostReplicated` — E4+ with ≥2 independent runners.
 
-`rank` is `null` for E0/E1. A surface with fewer than 3 entrants does not
+`rank` is `null` for E0/E1/E2. A surface with fewer than 3 entrants does not
 publish a `#1`. Ties share a rank/joint badge; no plugin-id tie-break for
 attention.
 

@@ -64,6 +64,8 @@ export function identityIndex(plugins) {
 /** Resolve one alias; `undefined` means unknown, `null` means ambiguous. */
 export function resolveId(index, value) {
   if (typeof value !== 'string') return undefined
+  const full = githubFullName(value)
+  if (full !== null && index.has(full)) return index.get(full)
   const key = value.trim().toLowerCase()
   return index.has(key) ? index.get(key) : undefined
 }

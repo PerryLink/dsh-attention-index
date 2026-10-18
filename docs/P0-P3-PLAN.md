@@ -11,16 +11,16 @@ no quality #1 from prior-only rows.**
 | # | Task | Status | Acceptance |
 |---|---|---|---|
 | P0.1 | SOE/GOE model (`scripts/reliability.mjs`) | done | every row has `evidenceGrade`, `soe`, `goe`, `unrated` |
-| P0.2 | Prior-only rows are E0/unrated | done | 42/42 `E0`; `stats.gradeCounts.E0 = 42` |
+| P0.2 | Prior-only rows are E0/unrated at P0 time | done | at P0 time 42/42 `E0`; now 41 E0 + 1 E2 pilot |
 | P0.3 | No prior `#1`, featured or top badge | done | `top3 = []`, `featured = null`, no `*-top.svg`; stale badges removed |
 | P0.4 | Newcombe lift interval | done | 3/3 vs 0/3 lower bound ≈0.205, not 1.0; test updated |
 | P0.5 | Missing data is not zero | done | missing dimensions excluded and weights renormalized; `missing` flags published |
 | P0.6 | Operator flag + independent verification | done | `operatorOwned` published; verification counts only with `certifiedBy`/`verificationSource` |
 | P0.7 | Badge/artifact truth | done | unrated badge; `--check` fails on extra badge files; prior top badges deleted |
 | P0.8 | Formula string and rank namespace | done | `60*prior/100`; `rank` null for unrated; `overall = []` |
-| P0.9 | Site/consumer display | done | site and tab show GOE/unrated, no prior #1; tab 0.2.3 rebuilt |
-| P0.10 | Pin Pages `--today`; content hash/signature | partial | Pages uses `--check --today 2026-10-18`; `source.inputHash` added; signature pending |
-| P0.11 | Schema validation for registry/plugins/tasks | partial | invariant script + CI added; JSON Schema pending |
+| P0.9 | Site/consumer display | done | site and tab show E2 provisional/unrated, no prior #1; tab 0.2.4 |
+| P0.10 | Pin Pages `--today`; content hash/signature | partial | Pages uses `--check --today 2026-10-18`; `source.inputHash` + signed API snapshot; registry-level signature pending |
+| P0.11 | Schema validation for registry/plugins/tasks | partial | result/pack schemas aligned; invariant script + CI; validator not wired |
 
 P0 is a **truth fix**, not a measurement. It does not create measured evidence.
 
@@ -79,11 +79,12 @@ is ready; the measured result is still blocked by the key/sandbox gate.
 
 | Channel | Status |
 |---|---|
-| GitHub `dsh-attention-index` | pushed `d8628b5`; P0 registry + P1–P3 pilot/API/signals live; CI and Pages green |
-| GitHub Pages | live at <https://perrylink.github.io/dsh-attention-index/>; title `dsh-score`; 42 E0 unrated; prior top badges return 404 |
+| GitHub `dsh-attention-index` | `main` latest; P0 registry + P1–P3 pilot/API/signals live; CI and Pages green |
+| GitHub Pages | live at <https://perrylink.github.io/dsh-attention-index/>; 41 E0 + 1 E2 provisional; 0 positive; prior top badges 404 |
 | GitHub `perrylink` / `dsh-kit` / `dsh-score` | pushed brand/docs commits |
-| GitHub release | `dsh-community-bench v0.2.3` published |
-| npm | `dsh-community-bench@0.2.3` live, `latest`, with provenance |
-| Gitee / GitCode | fresh mirror sync triggered for `d8628b5`; previous GitCode run failed on 4 unrelated divergent mirrors (`dsh-claude-move`, `dsh-memento`, `dsh-plugin-kit`, `dsh-plugin-portal`) |
-| P1–P3 artifacts | 24 pilot tasks, signed ingest, `api/v1`, market signals, matcher/recommender, audit gate, conformance suite; **0 measured** |
+| GitHub release | `dsh-community-bench v0.2.4` published |
+| npm | `dsh-community-bench@0.2.4` live, `latest`, with provenance |
+| Gitee | **not mirrored** for `dsh-attention-index` / `dsh-community-bench`; badges removed. `dsh-score`/`dsh-kit` mirrors exist. |
+| GitCode | `dsh-attention-index` at `82911a2` (slightly behind); overall sync fails on 4 unrelated divergent mirrors |
+| P1–P3 artifacts | 24 pilot tasks, 30 signed bwrap-fs results, **1 E2 / 41 E0 / 0 positive**, API/signals, matcher/recommender, audit gate, conformance |
 | Repo rename `dsh-score-index` | **not executed**; migration runbook ready, URLs intentionally kept stable until the redirect/mirror/patch release is coordinated |

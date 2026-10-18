@@ -14,13 +14,14 @@ import { BRIEFS } from './match-brief.mjs'
  * @returns {object}
  */
 export function recommend({ brief, registry, limit = 3 }) {
+  if (!Object.hasOwn(BRIEFS, brief)) return { status: 'unknown-brief', brief, recommendation: null, candidates: [] }
   const spec = BRIEFS[brief]
-  if (spec === undefined) return { status: 'unknown-brief', brief, recommendation: null, candidates: [] }
+  if (!Number.isInteger(limit) || limit < 1) return { status: 'bad-limit', brief, recommendation: null, candidates: [] }
   const surface = registry?.surfaces?.find(item => item.id === spec.surface)
   if (surface === undefined) return { status: 'unknown-surface', brief, surface: spec.surface, recommendation: null, candidates: [] }
 
   const measured = (surface.leaderboard ?? [])
-    .filter(row => row.tier === 'measured' && row.goe?.positive === true && /^E[3-5]$/.test(row.evidenceGrade))
+    .filter(row => row.tier === 'measured' && row.unrated !== true && row.goe?.positive === true && /^E[3-5]$/.test(row.evidenceGrade))
     .sort((left, right) => (left.rank ?? 999) - (right.rank ?? 999))
   if (measured.length > 0) {
     return {
